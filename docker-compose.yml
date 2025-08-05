@@ -1,0 +1,71 @@
+
+# Deployment configuration
+# docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - DATABASE_URL=postgres://user:pass@db:5432/runpace_pro
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app
+    command: gunicorn runpace_pro.wsgi:application --bind 0.0.0.0:8000
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: runpace_pro
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  redis:
+    image: redis:7-alpine
+    
+  celery:
+    build: .
+    command: celery -A runpace_pro worker -l info
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/runpace_pro
+
+volumes:
+  postgres_data: uses a modified Riegel formula with different exponents
+        base_time_per_meter = time_seconds / distance_meters
+        
+        distances = {
+            '5K': 5000,
+            '10K': 10000,
+            'half_marathon': 21097,
+            'marathon': 42195
+        }
+        
+        equivalent_times = {}
+        for race, meters in distances.items():
+            # McMillan adjustment factors
+            if meters < distance_meters:
+                exponent = 1.06
+            else:
+                exponent = 1.07
+                
+            predicted_time = base_time_per_meter * (meters / distance_meters) ** exponent
+            equivalent_times[race] = predicted_time
+            
+        return equivalent_times
+    
+    @staticmethod
+    def get_training_paces(time_seconds, distance_meters):
+        """Calculate McMillan training paces"""
+        pace_per_mile = (time_seconds / (distance_meters * 0.000621371)) # seconds per mile
+        
+        # McMillan

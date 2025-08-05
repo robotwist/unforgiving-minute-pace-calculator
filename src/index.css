@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Munich 1972 Olympic Design System - Global Styles */
+:root {
+  /* Official Munich 1972 Color Palette */
+  --munich-light-blue: #4A90E2;    /* Pantone 285 C - Official Bavaria color */
+  --munich-light-green: #7ED321;   /* Pantone 7487 C - Press/media color */
+  --munich-silver: #9CA3AF;        /* Pantone Silver C - Official events */
+  --munich-violet: #6366F1;        /* Pantone 2135 C - Dark blue/violet */
+  --munich-dark-green: #059669;    /* Pantone 347 C - Supporting green */
+  --munich-orange: #F97316;        /* Pantone 2013 C - Technology/timekeeping */
+  --munich-yellow: #EAB308;        /* Pantone 123 C - Supporting yellow */
+  --munich-white: #FFFFFF;         /* Symbol of lightness */
+  --munich-black: #1F2937;         /* Text color */
+  --munich-gray: #F8FAFC;          /* Light background */
+  --munich-border: #E2E8F0;        /* Subtle border */
+  
+  /* Typography - Inspired by Munich 1972 clean, geometric fonts */
+  --font-geometric: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  
+  /* Spacing - Geometric grid system */
+  --spacing-geometric: 0.25rem;
+  --border-radius-geometric: 0;
+  --shadow-geometric: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Base styles with Munich 1972 principles */
+body {
+  margin: 0;
+  font-family: var(--font-geometric);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--munich-white);
+  color: var(--munich-black);
+  line-height: 1.6;
+  font-size: 16px; /* Ensure readable base font size */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+/* High Contrast Focus Styles */
+*:focus {
+  outline: 3px solid var(--munich-light-blue);
+  outline-offset: 2px;
+}
+
+/* Geometric design utilities */
+.geometric-border {
+  border-radius: var(--border-radius-geometric);
+}
+
+.geometric-shadow {
+  box-shadow: var(--shadow-geometric);
+}
+
+/* Munich 1972 inspired geometric shapes */
+.geometric-diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.geometric-octagon {
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+}
+
+.geometric-square {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
+}
+
+/* Track and Stopwatch Animations */
+@keyframes track-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes stopwatch-tick {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(47deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+.track-rotate {
+  animation: track-rotate 20s linear infinite;
+}
+
+.stopwatch-tick {
+  animation: stopwatch-tick 2s ease-in-out infinite;
+}
+
+/* Track and Stopwatch Animations */
+@keyframes track-rotate-counterclockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes stopwatch-tick-counterclockwise {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(43deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+.track-rotate-counterclockwise {
+  animation: track-rotate-counterclockwise 20s linear infinite;
+}
+
+.stopwatch-tick-counterclockwise {
+  animation: stopwatch-tick-counterclockwise 2s ease-in-out infinite;
+}
+
+/* Progressive Melange Animation */
+@keyframes progressive-melange {
+  0% {
+    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
+    background-size: 400% 400%;
+  }
+  25% {
+    background: linear-gradient(45deg, var(--munich-green) 0%, var(--munich-white) 25%, var(--munich-blue) 50%, var(--munich-green) 75%, var(--munich-white) 100%);
+    background-size: 400% 400%;
+  }
+  50% {
+    background: linear-gradient(45deg, var(--munich-white) 0%, var(--munich-blue) 25%, var(--munich-green) 50%, var(--munich-white) 75%, var(--munich-blue) 100%);
+    background-size: 400% 400%;
+  }
+  75% {
+    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
+    background-size: 400% 400%;
+  }
+  100% {
+    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
+    background-size: 400% 400%;
+  }
+}
+
+.progressive-melange {
+  animation: progressive-melange 8s ease-in-out infinite;
+}
+
+/* Running Pictogram Animation */
+@keyframes running-motion {
+  0% {
+    transform: translateX(0) rotateY(0deg);
+  }
+  25% {
+    transform: translateX(2px) rotateY(5deg);
+  }
+  50% {
+    transform: translateX(0) rotateY(0deg);
+  }
+  75% {
+    transform: translateX(-2px) rotateY(-5deg);
+  }
+  100% {
+    transform: translateX(0) rotateY(0deg);
+  }
+}
+
+.running-pictogram {
+  animation: running-motion 2s ease-in-out infinite;
+}
+
+/* Geometric Pattern Animation */
+@keyframes geometric-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+    opacity: 0.7;
+  }
+}
+
+.geometric-float {
+  animation: geometric-float 6s ease-in-out infinite;
+}
+
+/* Geometric Pattern Animation */
+@keyframes geometric-float-counterclockwise {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-8px) rotate(-45deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px) rotate(-90deg);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateY(-8px) rotate(-45deg);
+    opacity: 0.5;
+  }
+}
+
+.geometric-float-counterclockwise {
+  animation: geometric-float-counterclockwise 6s ease-in-out infinite;
+}
+
+/* High Contrast Button Hover Effects */
+.btn-high-contrast {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-high-contrast:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.btn-high-contrast:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design Utilities */
+@media (max-width: 640px) {
+  .responsive-text {
+    font-size: 0.875rem;
+  }
+  
+  .responsive-padding {
+    padding: 1rem;
+  }
+  
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .responsive-text {
+    font-size: 1rem;
+  }
+  
+  .responsive-padding {
+    padding: 1.5rem;
+  }
+  
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .responsive-text {
+    font-size: 1.125rem;
+  }
+  
+  .responsive-padding {
+    padding: 2rem;
+  }
+  
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* High Contrast Form Elements */
+input, select, textarea {
+  font-family: inherit;
+  border: 2px solid var(--munich-border);
+  border-radius: var(--border-radius-geometric);
+  background-color: var(--munich-white);
+  color: var(--munich-black);
+  font-size: 1rem;
+  padding: 0.75rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--munich-light-blue);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+
+
+/* High Contrast Link Styles */
+a {
+  color: var(--munich-light-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--munich-violet);
+  text-decoration-thickness: 2px;
+}
+
+/* Ensure local styles take precedence */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove default button styles to allow custom geometric styling */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  background-color: var(--munich-gray);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: var(--munich-black);
+} 
