@@ -9,12 +9,6 @@
   SKIP_CACHE_INVALIDATION = "true"
 
 [[redirects]]
-  from = "/api/*"
-  to = "https://your-backend-url.railway.app/api/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200 

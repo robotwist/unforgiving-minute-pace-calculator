@@ -1212,10 +1212,10 @@ const RunningTrainingApp = () => {
                 {/* Training Paces Grid - Munich 1972 Geometric Style */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {[
-                    { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray },
+                    { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.lightBlue },
                     { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen },
                     { name: 'Interval', pace: trainingPaces.interval, icon: Clock, color: colors.darkGreen },
-                    { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.lightBlue }
+                    { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.violet }
                   ].map(({ name, pace, icon: Icon, color }, index) => (
                     <div key={name} className="bg-white shadow-sm border p-3 sm:p-4 text-center relative overflow-hidden" style={{ borderColor: colors.border }}>
                       {/* Progressive Melange Background */}
@@ -1242,6 +1242,28 @@ const RunningTrainingApp = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+                
+                {/* Get Training Programs Button */}
+                <div className="text-center mt-6 sm:mt-8">
+                  <button
+                    onClick={() => setActiveTab('plans')}
+                    className="inline-flex items-center px-6 py-3 font-bold text-white text-lg sm:text-xl relative overflow-hidden group transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg"
+                    style={{ 
+                      backgroundColor: colors.lightGreen,
+                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                      border: `2px solid ${colors.darkGreen}`
+                    }}
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    <span className="relative z-10 flex items-center justify-center">
+                      <Target className="w-5 h-5 sm:w-6 sm:h-6 mr-3" />
+                      Get Personalized Training Programs
+                    </span>
+                  </button>
+                  <p className="text-sm text-gray-600 mt-3">
+                    Access 12-week training plans tailored to your GoldenPace {goldenPace}
+                  </p>
                 </div>
               </div>
             )}
