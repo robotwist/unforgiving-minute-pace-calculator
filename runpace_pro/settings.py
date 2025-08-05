@@ -40,6 +40,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'runpace_pro.urls'
 
+WSGI_APPLICATION = 'runpace_pro.wsgi.application'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -104,8 +106,8 @@ if not DEBUG:
     
     # CORS settings for production
     CORS_ALLOWED_ORIGINS = [
-        "https://your-frontend-domain.netlify.app",
-        "https://runpace-pro.netlify.app",
+        "https://unforgiving-minute-pace-calculator.netlify.app",
+        "https://web-production-bb66e.up.railway.app",
     ]
     
     # Database settings for production
