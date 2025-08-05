@@ -16,6 +16,14 @@ __pycache__/
 migrations/
 *.sqlite3
 
+# Python Version Files
+.python-version
+runtime.txt
+Pipfile
+Pipfile.lock
+poetry.lock
+pyproject.toml
+
 # Design Elements
 design elements/
 
@@ -24,6 +32,7 @@ VDOT_CALCULATIONS.md
 VDOT_CHART.md
 DEPLOYMENT.md
 MONETIZATION_PLAN.md
+README.md
 
 # CSV Data
 *.csv
@@ -35,4 +44,6 @@ MONETIZATION_PLAN.md
 !package-lock.json
 !tailwind.config.js
 !postcss.config.js
-!.gitignore 
+!.gitignore
+!.netlifyignore
+!netlify.toml 
