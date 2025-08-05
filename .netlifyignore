@@ -1,0 +1,38 @@
+# Django Backend Files (exclude from Netlify build)
+accounts/
+calculator/
+training/
+plans/
+runpace_pro/
+manage.py
+requirements.txt
+db.sqlite3
+docker-compose.yml
+Procfile
+runtime.txt
+.venv/
+*.pyc
+__pycache__/
+migrations/
+*.sqlite3
+
+# Design Elements
+design elements/
+
+# Documentation
+VDOT_CALCULATIONS.md
+VDOT_CHART.md
+DEPLOYMENT.md
+MONETIZATION_PLAN.md
+
+# CSV Data
+*.csv
+
+# Keep only React frontend files
+!src/
+!public/
+!package.json
+!package-lock.json
+!tailwind.config.js
+!postcss.config.js
+!.gitignore 
