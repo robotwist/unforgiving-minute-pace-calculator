@@ -7,7 +7,20 @@ const RunningTrainingApp = () => {
   const [raceDistance, setRaceDistance] = useState('5K');
   const [goldenPace, setGoldenPace] = useState(null);
   const [trainingPaces, setTrainingPaces] = useState(null);
-  const [userProfile, setUserProfile] = useState({ name: '', email: '', experience: 'beginner' });
+  const [userProfile, setUserProfile] = useState({ 
+    name: '', 
+    email: '', 
+    experience: 'beginner',
+    goalRaceDistance: '5K',
+    goalRaceTime: '',
+    weeklyMileage: '',
+    injuryHistory: '',
+    preferredUnits: 'imperial'
+  });
+  const [profileSaved, setProfileSaved] = useState(false);
+  const [profileError, setProfileError] = useState('');
+  const [showProfileDashboard, setShowProfileDashboard] = useState(false);
+  const [savedProfileData, setSavedProfileData] = useState(null);
 
   // Use global Munich 1972 CSS variables for consistent design system
   const colors = {
@@ -504,6 +517,107 @@ const RunningTrainingApp = () => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
+  const saveProfile = async () => {
+    try {
+      setProfileError('');
+      setProfileSaved(false);
+      
+      const response = await fetch('/api/auth/profile/create/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: userProfile.name,
+          email: userProfile.email,
+          experience: userProfile.experience,
+          current_vdot: goldenPace || null,
+          weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
+          goal_race_distance: userProfile.goalRaceDistance,
+          goal_race_time: userProfile.goalRaceTime,
+          injury_history: userProfile.injuryHistory
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setProfileSaved(true);
+        setSavedProfileData(data);
+        setShowProfileDashboard(true);
+        console.log('Profile saved successfully:', data);
+      } else {
+        const errorData = await response.json();
+        setProfileError(errorData.error || 'Failed to save profile');
+      }
+    } catch (error) {
+      console.error('Error saving profile:', error);
+      setProfileError('Network error. Please try again.');
+    }
+  };
+
+  const loadProfile = async (email) => {
+    try {
+      const response = await fetch(`/api/auth/profile/${email}/`);
+      if (response.ok) {
+        const data = await response.json();
+        setSavedProfileData(data);
+        setShowProfileDashboard(true);
+        
+        // Update the form with existing data
+        setUserProfile({
+          name: data.user_name || '',
+          email: data.user_email || '',
+          experience: data.user_experience || 'beginner',
+          goalRaceDistance: data.goal_race_distance || '5K',
+          goalRaceTime: data.goal_race_time || '',
+          weeklyMileage: data.weekly_mileage?.toString() || '',
+          injuryHistory: data.injury_history || '',
+          preferredUnits: 'imperial'
+        });
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  };
+
+  const updateProfile = async () => {
+    try {
+      setProfileError('');
+      setProfileSaved(false);
+      
+      const response = await fetch(`/api/auth/profile/${userProfile.email}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: userProfile.name,
+          email: userProfile.email,
+          experience: userProfile.experience,
+          current_vdot: goldenPace || null,
+          weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
+          goal_race_distance: userProfile.goalRaceDistance,
+          goal_race_time: userProfile.goalRaceTime,
+          injury_history: userProfile.injuryHistory
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setProfileSaved(true);
+        setSavedProfileData(data);
+        setShowProfileDashboard(true);
+        console.log('Profile updated successfully:', data);
+      } else {
+        const errorData = await response.json();
+        setProfileError(errorData.error || 'Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      setProfileError('Network error. Please try again.');
+    }
   };
 
   const handleCalculate = () => {
@@ -1212,10 +1326,10 @@ const RunningTrainingApp = () => {
                 {/* Training Paces Grid - Munich 1972 Geometric Style */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {[
-                    { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.lightBlue },
+                    { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray },
                     { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen },
                     { name: 'Interval', pace: trainingPaces.interval, icon: Clock, color: colors.darkGreen },
-                    { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.violet }
+                    { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.lightBlue }
                   ].map(({ name, pace, icon: Icon, color }, index) => (
                     <div key={name} className="bg-white shadow-sm border p-3 sm:p-4 text-center relative overflow-hidden" style={{ borderColor: colors.border }}>
                       {/* Progressive Melange Background */}
@@ -1242,28 +1356,6 @@ const RunningTrainingApp = () => {
                       </div>
                     </div>
                   ))}
-                </div>
-                
-                {/* Get Training Programs Button */}
-                <div className="text-center mt-6 sm:mt-8">
-                  <button
-                    onClick={() => setActiveTab('plans')}
-                    className="inline-flex items-center px-6 py-3 font-bold text-white text-lg sm:text-xl relative overflow-hidden group transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg"
-                    style={{ 
-                      backgroundColor: colors.lightGreen,
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                      border: `2px solid ${colors.darkGreen}`
-                    }}
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                    <span className="relative z-10 flex items-center justify-center">
-                      <Target className="w-5 h-5 sm:w-6 sm:h-6 mr-3" />
-                      Get Personalized Training Programs
-                    </span>
-                  </button>
-                  <p className="text-sm text-gray-600 mt-3">
-                    Access 12-week training plans tailored to your GoldenPace {goldenPace}
-                  </p>
                 </div>
               </div>
             )}
@@ -1467,56 +1559,193 @@ const RunningTrainingApp = () => {
               <p className="text-xl text-gray-600">Customize your training experience</p>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden max-w-2xl mx-auto">
-              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
-                <h3 className="text-2xl font-bold text-white flex items-center">
-                  <User className="w-6 h-6 mr-3" />
-                  Profile Settings
-                </h3>
-              </div>
-              
-              <div className="p-8 space-y-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    value={userProfile.name}
-                    onChange={(e) => setUserProfile({...userProfile, name: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="Enter your name"
-                  />
+            {!showProfileDashboard ? (
+              // Profile Creation Form
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden max-w-3xl mx-auto">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
+                  <h3 className="text-2xl font-bold text-white flex items-center">
+                    <User className="w-6 h-6 mr-3" />
+                    Create Your Running Profile
+                  </h3>
                 </div>
                 
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    value={userProfile.email}
-                    onChange={(e) => setUserProfile({...userProfile, email: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Experience Level</label>
-                  <select
-                    value={userProfile.experience}
-                    onChange={(e) => setUserProfile({...userProfile, experience: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                  >
-                    <option value="beginner">Beginner (0-1 years)</option>
-                    <option value="intermediate">Intermediate (1-3 years)</option>
-                    <option value="advanced">Advanced (3+ years)</option>
-                    <option value="elite">Elite/Competitive</option>
-                  </select>
-                </div>
+                <div className="p-8 space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">Name</label>
+                      <input
+                        type="text"
+                        value={userProfile.name}
+                        onChange={(e) => setUserProfile({...userProfile, name: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        placeholder="Enter your name"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">Email</label>
+                      <input
+                        type="email"
+                        value={userProfile.email}
+                        onChange={(e) => setUserProfile({...userProfile, email: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                  </div>
 
-                <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold shadow-lg hover:shadow-xl">
-                  Save Profile
-                </button>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">Experience Level</label>
+                      <select
+                        value={userProfile.experience}
+                        onChange={(e) => setUserProfile({...userProfile, experience: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      >
+                        <option value="beginner">Beginner (0-1 years)</option>
+                        <option value="intermediate">Intermediate (1-3 years)</option>
+                        <option value="advanced">Advanced (3+ years)</option>
+                        <option value="elite">Elite/Competitive</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">Goal Race Distance</label>
+                      <select
+                        value={userProfile.goalRaceDistance}
+                        onChange={(e) => setUserProfile({...userProfile, goalRaceDistance: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      >
+                        <option value="5K">5K</option>
+                        <option value="10K">10K</option>
+                        <option value="Half Marathon">Half Marathon</option>
+                        <option value="Marathon">Marathon</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">Goal Race Time (optional)</label>
+                      <input
+                        type="text"
+                        value={userProfile.goalRaceTime}
+                        onChange={(e) => setUserProfile({...userProfile, goalRaceTime: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        placeholder="e.g., 20:00 for 5K"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-700">Current Weekly Mileage</label>
+                      <input
+                        type="number"
+                        value={userProfile.weeklyMileage}
+                        onChange={(e) => setUserProfile({...userProfile, weeklyMileage: e.target.value})}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        placeholder="e.g., 25"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-gray-700">Injury History (optional)</label>
+                    <textarea
+                      value={userProfile.injuryHistory}
+                      onChange={(e) => setUserProfile({...userProfile, injuryHistory: e.target.value})}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      placeholder="Any injuries or health considerations we should know about?"
+                      rows="3"
+                    />
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button 
+                      onClick={savedProfileData ? updateProfile : saveProfile}
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold shadow-lg hover:shadow-xl"
+                    >
+                      {savedProfileData ? 'Update Profile' : 'Create Profile'}
+                    </button>
+                    
+                    {!savedProfileData && (
+                      <button 
+                        onClick={() => userProfile.email && loadProfile(userProfile.email)}
+                        disabled={!userProfile.email}
+                        className="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Check Existing
+                      </button>
+                    )}
+                  </div>
+                  
+                  {profileError && (
+                    <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                      {profileError}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            ) : (
+              // Profile Dashboard
+              <div className="space-y-6">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                  <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-6">
+                    <h3 className="text-2xl font-bold text-white flex items-center">
+                      <User className="w-6 h-6 mr-3" />
+                      Welcome, {savedProfileData?.user_name || userProfile.name}!
+                    </h3>
+                    <p className="text-green-100 mt-2">Your profile has been created successfully</p>
+                  </div>
+                  
+                  <div className="p-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="font-semibold text-gray-900 mb-2">Personal Info</h4>
+                        <p className="text-sm text-gray-600">Name: {savedProfileData?.user_name}</p>
+                        <p className="text-sm text-gray-600">Email: {savedProfileData?.user_email}</p>
+                        <p className="text-sm text-gray-600">Experience: {savedProfileData?.user_experience}</p>
+                      </div>
+                      
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="font-semibold text-gray-900 mb-2">Running Goals</h4>
+                        <p className="text-sm text-gray-600">Goal Race: {savedProfileData?.goal_race_distance || userProfile.goalRaceDistance}</p>
+                        <p className="text-sm text-gray-600">Goal Time: {savedProfileData?.goal_race_time || userProfile.goalRaceTime || 'Not set'}</p>
+                        <p className="text-sm text-gray-600">Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage || 'Not set'} miles</p>
+                      </div>
+                      
+                      <div className="bg-gray-50 rounded-xl p-6">
+                        <h4 className="font-semibold text-gray-900 mb-2">Current Status</h4>
+                        <p className="text-sm text-gray-600">GoldenPace: {savedProfileData?.current_vdot || goldenPace || 'Not calculated'}</p>
+                        <p className="text-sm text-gray-600">Profile Created: {new Date().toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-8 flex flex-wrap gap-4">
+                      <button
+                        onClick={() => setActiveTab('calculator')}
+                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold"
+                      >
+                        Calculate GoldenPace
+                      </button>
+                      
+                      <button
+                        onClick={() => setActiveTab('plans')}
+                        className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all font-semibold"
+                      >
+                        Get Training Plans
+                      </button>
+                      
+                      <button
+                        onClick={() => setShowProfileDashboard(false)}
+                        className="border border-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-50 transition-all font-semibold"
+                      >
+                        Edit Profile
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </main>
