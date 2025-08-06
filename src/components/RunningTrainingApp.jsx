@@ -17,7 +17,6 @@ const RunningTrainingApp = () => {
     injuryHistory: '',
     preferredUnits: 'imperial'
   });
-  const [profileSaved, setProfileSaved] = useState(false);
   const [profileError, setProfileError] = useState('');
   const [showProfileDashboard, setShowProfileDashboard] = useState(false);
   const [savedProfileData, setSavedProfileData] = useState(null);
@@ -522,7 +521,6 @@ const RunningTrainingApp = () => {
   const saveProfile = async () => {
     try {
       setProfileError('');
-      setProfileSaved(false);
       
       const response = await fetch('/api/auth/profile/create/', {
         method: 'POST',
@@ -543,7 +541,6 @@ const RunningTrainingApp = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setProfileSaved(true);
         setSavedProfileData(data);
         setShowProfileDashboard(true);
         console.log('Profile saved successfully:', data);
@@ -585,7 +582,6 @@ const RunningTrainingApp = () => {
   const updateProfile = async () => {
     try {
       setProfileError('');
-      setProfileSaved(false);
       
       const response = await fetch(`/api/auth/profile/${userProfile.email}/`, {
         method: 'PUT',
@@ -606,7 +602,6 @@ const RunningTrainingApp = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setProfileSaved(true);
         setSavedProfileData(data);
         setShowProfileDashboard(true);
         console.log('Profile updated successfully:', data);
