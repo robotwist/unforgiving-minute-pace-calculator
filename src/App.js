@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './index.css';
 import RunningTrainingApp from './components/RunningTrainingApp';
+import RunningDesignApp from './RunningDesignApp';
 
 function App() {
+  const [currentView, setCurrentView] = useState('calculator'); // Start with calculator as landing page
+
   return (
     <div className="App">
-      <RunningTrainingApp />
+      {/* Main Content */}
+      {currentView === 'design' ? (
+        <RunningDesignApp />
+      ) : (
+        <RunningTrainingApp />
+      )}
     </div>
   );
 }
