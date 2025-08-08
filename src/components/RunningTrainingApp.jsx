@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, Download, Target, Clock, TrendingUp, User, BookOpen, Star, Calendar, Activity, Trophy, CheckCircle } from 'lucide-react';
-import ArticleCard from './blog/ArticleCard';
-import ArticleModal from './blog/ArticleModal';
-import { articles, getFeaturedArticles } from '../content/articles';
-import { trainingPlans } from '../content/trainingPlans';
+// import ArticleCard from './blog/ArticleCard';
+// import ArticleModal from './blog/ArticleModal';
+// import { articles, getFeaturedArticles } from '../content/articles';
+// import { trainingPlans } from '../content/trainingPlans';
 
 const RunningTrainingApp = () => {
   const [activeTab, setActiveTab] = useState('calculator');
   const [showAdminPanel, setShowAdminPanel] = useState(false);
-  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+  // const [selectedArticle, setSelectedArticle] = useState(null);
   const [raceTime, setRaceTime] = useState('');
   const [raceDistance, setRaceDistance] = useState('5K');
   const [goldenPace, setGoldenPace] = useState(null);
@@ -117,17 +118,17 @@ const RunningTrainingApp = () => {
 
   // Use global Munich 1972 CSS variables for consistent design system
   const colors = {
-    lightBlue: 'var(--munich-light-blue)',
-    lightGreen: 'var(--munich-light-green)',
-    silver: 'var(--munich-silver)',
-    violet: 'var(--munich-violet)',
-    darkGreen: 'var(--munich-dark-green)',
-    orange: 'var(--munich-orange)',
-    yellow: 'var(--munich-yellow)',
-    white: 'var(--munich-white)',
-    black: 'var(--munich-black)',
-    gray: 'var(--munich-gray)',
-    border: 'var(--munich-border)'
+    lightBlue: '#1E6B96',      // Munich light blue (primary)
+    lightGreen: '#2E8B57',     // Munich green 
+    silver: '#C0C0C0',         // Munich silver
+    violet: '#8B7FC7',         // Munich violet
+    darkGreen: '#004225',      // Munich dark green
+    orange: '#FF6B35',         // Munich orange (energy)
+    yellow: '#F7931E',         // Munich yellow
+    white: darkMode ? '#1A1A1A' : '#FFFFFF',          // Adaptive white/dark
+    black: darkMode ? '#E5E5E5' : '#1A1A1A',          // Adaptive black/light
+    gray: darkMode ? '#2D2D2D' : '#F5F5F5',           // Adaptive background
+    border: darkMode ? '#404040' : '#E1E5E9'          // Adaptive border
   };
 
   // GoldenPace calculation based on Daniels Running Formula
@@ -1171,30 +1172,45 @@ const RunningTrainingApp = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col sm:flex-row justify-between items-center py-4 sm:py-6 space-y-4 sm:space-y-0">
-            {/* Logo */}
+            {/* Brand Logo - Enhanced Prominence */}
             <div className="flex items-center space-x-3">
               <div className="relative">
                 {/* Geometric logo background */}
-                <div className="w-10 h-10 sm:w-12 sm:h-12 geometric-octagon flex items-center justify-center" style={{ 
+                <div className="w-12 h-12 sm:w-16 sm:h-16 geometric-octagon flex items-center justify-center" style={{ 
                   backgroundColor: colors.lightBlue,
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                  boxShadow: '0 6px 12px rgba(30,107,150,0.3)'
                 }}>
                   {/* Olympic Runner Icon */}
                   <img 
                     src="/olympicrunner72icon.png" 
                     alt="Olympic Runner" 
-                    className="w-6 h-6 sm:w-8 sm:h-8 object-contain running-pictogram"
+                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain running-pictogram"
                     style={{ filter: 'brightness(0) invert(1)' }}
                   />
                 </div>
+                {/* Geometric accent */}
+                <div className="absolute -top-1 -right-1 w-4 h-4 geometric-diamond" style={{ 
+                  backgroundColor: colors.orange
+                }}></div>
               </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl font-bold tracking-tight" style={{ color: colors.black }}>
-                  Unforgiving Minute
+              <div className="text-left">
+                <h1 className="text-xl sm:text-3xl font-black tracking-wide leading-tight" style={{ 
+                  color: colors.black,
+                  textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                  UNFORGIVING MINUTE
                 </h1>
-                <p className="text-xs sm:text-sm font-medium" style={{ color: colors.lightBlue }}>
-                  Distance Running
+                <p className="text-sm sm:text-lg font-bold tracking-wider" style={{ 
+                  color: colors.lightBlue,
+                  letterSpacing: '0.15em'
+                }}>
+                  DISTANCE RUNNING
                 </p>
+                <div className="hidden sm:block mt-1">
+                  <div className="h-0.5 w-20 bg-gradient-to-r" style={{ 
+                    backgroundImage: `linear-gradient(90deg, ${colors.lightBlue} 0%, ${colors.orange} 50%, ${colors.lightGreen} 100%)`
+                  }}></div>
+                </div>
               </div>
             </div>
             
@@ -1232,6 +1248,24 @@ const RunningTrainingApp = () => {
                   <span className="sm:hidden">{label.split(' ')[0]}</span>
                 </button>
               ))}
+              
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
+                style={{
+                  backgroundColor: darkMode ? colors.yellow : colors.gray,
+                  color: darkMode ? colors.black : colors.lightBlue,
+                  border: `2px solid ${darkMode ? colors.yellow : colors.lightBlue}`
+                }}
+                title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {darkMode ? (
+                  <span className="text-lg">☀️</span>
+                ) : (
+                  <span className="text-lg">🌙</span>
+                )}
+              </button>
               
 
             </nav>
@@ -1324,12 +1358,40 @@ const RunningTrainingApp = () => {
                 
               </div>
               
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: colors.black }}>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
                 GoldenPace Calculator
               </h2>
-              <p className="text-base sm:text-lg max-w-2xl mx-auto px-4" style={{ color: colors.black }}>
-                Enter a recent race time to get an effort-tested training paces using the GoldenPace system
+              <p className="text-lg sm:text-xl max-w-3xl mx-auto px-4 leading-relaxed" style={{ color: colors.black }}>
+                Enter a recent race time to unlock your personalized training paces—used by elite athletes worldwide
               </p>
+              
+              {/* Value proposition badges */}
+              <div className="flex flex-wrap justify-center gap-3 mt-6 px-4">
+                <div className="flex items-center gap-2 px-3 py-2 rounded-full border" style={{ 
+                  borderColor: colors.lightBlue, 
+                  backgroundColor: colors.lightBlue + '10',
+                  color: colors.black 
+                }}>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                  <span className="text-sm font-medium">Elite-Tested</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 rounded-full border" style={{ 
+                  borderColor: colors.lightGreen, 
+                  backgroundColor: colors.lightGreen + '10',
+                  color: colors.black 
+                }}>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                  <span className="text-sm font-medium">Instant Results</span>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-2 rounded-full border" style={{ 
+                  borderColor: colors.orange, 
+                  backgroundColor: colors.orange + '10',
+                  color: colors.black 
+                }}>
+                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.orange }}></div>
+                  <span className="text-sm font-medium">Free Training Sample</span>
+                </div>
+              </div>
             </div>
 
             {/* Calculator Card - Munich 1972 Geometric Style */}
@@ -1470,6 +1532,204 @@ const RunningTrainingApp = () => {
                     </div>
                   ))}
                 </div>
+
+                {/* Freemium Flow - Post-Calculation User Journey */}
+                <div className="mt-8 space-y-6">
+                  {/* Free Training Week Sample */}
+                  <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 border-2 rounded-lg p-6 relative overflow-hidden" style={{ 
+                    borderColor: colors.lightBlue,
+                    boxShadow: '0 10px 25px rgba(30, 107, 150, 0.15)'
+                  }}>
+                    <div className="absolute top-0 right-0 w-24 h-24 geometric-diamond" style={{ 
+                      backgroundColor: colors.orange,
+                      opacity: 0.08
+                    }}></div>
+                    
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold mb-2" style={{ color: colors.black }}>
+                            Your Personalized Training Week
+                          </h3>
+                          <p className="text-sm" style={{ color: colors.darkGreen }}>
+                            Based on your {goldenPace} GoldenPace • Elite-tested training system
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="px-4 py-2 rounded-full text-sm font-bold border-2" style={{ 
+                            backgroundColor: colors.lightGreen,
+                            borderColor: colors.darkGreen,
+                            color: 'white'
+                          }}>
+                            FREE SAMPLE
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                            <div className="flex items-center gap-3">
+                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                              <span className="font-medium" style={{ color: colors.black }}>Monday - Recovery Run</span>
+                            </div>
+                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                              color: colors.lightBlue,
+                              backgroundColor: colors.lightBlue + '15'
+                            }}>{trainingPaces.easy}</span>
+                          </div>
+                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
+                            <div className="flex items-center gap-3">
+                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                              <span className="font-medium" style={{ color: colors.black }}>Wednesday - Threshold Run</span>
+                            </div>
+                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                              color: colors.lightGreen,
+                              backgroundColor: colors.lightGreen + '15'
+                            }}>{trainingPaces.threshold}</span>
+                          </div>
+                        </div>
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
+                            <div className="flex items-center gap-3">
+                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
+                              <span className="font-medium" style={{ color: colors.black }}>Friday - Interval Session</span>
+                            </div>
+                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                              color: colors.darkGreen,
+                              backgroundColor: colors.darkGreen + '15'
+                            }}>{trainingPaces.interval}</span>
+                          </div>
+                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                            <div className="flex items-center gap-3">
+                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                              <span className="font-medium" style={{ color: colors.black }}>Sunday - Long Run</span>
+                            </div>
+                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                              color: colors.lightBlue,
+                              backgroundColor: colors.lightBlue + '15'
+                            }}>{trainingPaces.easy}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Value proposition with urgency */}
+                      <div className="bg-white rounded-lg p-4 mb-6 border" style={{ borderColor: colors.orange + '30' }}>
+                        <div className="flex items-start gap-3">
+                          <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.orange }}>
+                            <Star className="w-3 h-3 text-white" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium mb-1" style={{ color: colors.black }}>
+                              This is just week 1 of a 12-week journey to your race goal
+                            </p>
+                            <p className="text-xs" style={{ color: colors.darkGreen }}>
+                              Full programs include progressive build phases, peak training, and race-specific workouts
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <button 
+                          onClick={() => setActiveTab('premium')}
+                          className="flex-1 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                          style={{ 
+                            backgroundColor: colors.orange,
+                            color: 'white'
+                          }}
+                        >
+                          <TrendingUp className="w-6 h-6 mr-3" />
+                          Get Complete 12-Week Program
+                        </button>
+                        <button 
+                          onClick={() => setActiveTab('plans')}
+                          className="flex-1 px-6 py-4 rounded-lg font-medium border-2 transition-all duration-200 flex items-center justify-center"
+                          style={{ 
+                            borderColor: colors.lightBlue,
+                            color: colors.lightBlue,
+                            backgroundColor: 'white'
+                          }}
+                        >
+                          <Target className="w-5 h-5 mr-2" />
+                          Browse All Programs
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Profile Creation Prompt */}
+                  {!savedProfileData && (
+                    <div className="border-2 rounded-lg p-6 relative overflow-hidden" style={{ 
+                      borderColor: colors.lightGreen + '60',
+                      backgroundColor: 'white',
+                      boxShadow: '0 8px 25px rgba(46, 139, 87, 0.12)'
+                    }}>
+                      <div className="absolute top-0 left-0 w-32 h-32 geometric-octagon" style={{ 
+                        backgroundColor: colors.lightGreen,
+                        opacity: 0.06
+                      }}></div>
+                      
+                      <div className="relative z-10">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ 
+                            backgroundColor: colors.lightGreen + '20'
+                          }}>
+                            <User className="w-6 h-6" style={{ color: colors.lightGreen }} />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>
+                              Save Your Progress & Get Personalized Coaching
+                            </h3>
+                            <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                              Create a free profile to unlock AI-powered training recommendations, track your progress, and get access to our community of elite runners.
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* Benefits list */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
+                            <span className="text-sm" style={{ color: colors.black }}>Save your GoldenPace & training paces</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
+                            <span className="text-sm" style={{ color: colors.black }}>Personal training log & progress tracking</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
+                            <span className="text-sm" style={{ color: colors.black }}>AI-powered workout recommendations</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
+                            <span className="text-sm" style={{ color: colors.black }}>Access to elite coaching insights</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-col sm:flex-row gap-3 items-center">
+                          <button 
+                            onClick={() => setActiveTab('profile')}
+                            className="flex-1 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                            style={{ 
+                              backgroundColor: colors.lightGreen,
+                              color: 'white'
+                            }}
+                          >
+                            <User className="w-6 h-6 mr-3" />
+                            Create Free Profile Now
+                          </button>
+                          <div className="flex items-center gap-2 text-sm" style={{ color: colors.darkGreen }}>
+                            <div className="w-4 h-4 rounded-full border-2" style={{ borderColor: colors.lightGreen }}>
+                              <CheckCircle className="w-3 h-3 text-green-600" />
+                            </div>
+                            No credit card • Always free
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -1503,7 +1763,7 @@ const RunningTrainingApp = () => {
                           opacity: 0.6
                         }}></div>
                         <p className="font-medium" style={{ color: colors.black }}>
-                          🎯 Personalized for GoldenPace {plan.goldenPaceLevel}
+                          Personalized for GoldenPace {plan.goldenPaceLevel}
                         </p>
                         <p className="mt-1" style={{ 
                           color: colors.lightBlue,
@@ -2087,8 +2347,8 @@ const RunningTrainingApp = () => {
                                       fontSize: 'var(--text-xs)',
                                       opacity: 0.8
                                     }}>
-                                      📍 {session.location}
-                                      {session.weather && ` • 🌤️ ${session.weather}`}
+                                      {session.location}
+                                      {session.weather && ` • ${session.weather}`}
                                     </div>
                                   )}
                                   {session.goldenPace && (
@@ -2529,21 +2789,11 @@ const RunningTrainingApp = () => {
               </div>
               <div className="munich-card-body">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {**Why Personalized, Race-Specific Training Beats One-Size-Fits-All VDOT**
+                  {/* Featured articles will be rendered here */}
 
-*By Unforgiving Minute Distance Running*
 
----
 
-**Introduction: Breaking the VDOT Myth**
 
-The VDOT training model, popularized by legendary coach Jack Daniels, has become a staple for runners seeking structured training plans. It promises a simple, data-driven approach: input a recent race time, and out come your prescribed paces for every workout type. But simplicity can be misleading. New research shows that VDOT often fails to reflect what athletes can actually do, especially at the extremes of Interval (I) and Repetition (R) paces. A 2018 study published in the *Journal of Strength and Conditioning Research* found that VDOT **underestimated VO2max** in recreational runners and miscalculated optimal training paces for both elite and amateur athletes.
-
-At Unforgiving Minute, we challenge the idea that a formula can predict the effort, capability, and nuance of a runner's journey. Instead, we root our coaching in the principles of **adaptive training** and **race-specific preparation** as championed by Brad Hudson, Bill Dellinger, and Bill Bowerman. The evidence—and the experience of thousands of runners—supports a better way.
-
----
-
-**The Scientific Undercurrent: Where VDOT Falls Short**
 
 In the Scudamore et al. (2018) study, researchers evaluated how well VDOT predicted VO2max and training paces. Here’s what they found:
 
@@ -2597,7 +2847,7 @@ Here’s how we do it differently:
 
 1. **Race-Based Calibration**: We anchor workouts to your actual race data, not just recent time trials.
 2. **Adjustable Pace Targets**: Interval and Repetition paces are tailored based on your strengths and goals.
-3. **Adaptation > Prescription**: We update your plan weekly based on performance, feedback, and life events.
+3. **Adaptation {"> "} Prescription**: We update your plan weekly based on performance, feedback, and life events.
 4. **Intelligent Periodization**: We mirror the Oregon system's alternating load cycles and progression structure.
 
 The result? You train for the runner you are today—and become the runner you want to be tomorrow.
@@ -2619,7 +2869,6 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
 3. Phillips Running. "Learning from the Greats: Bill Dellinger." 22 Feb. 2018. [Read](https://phillipsrunning.com/2018/02/22/learning-from-the-greats-bill-dellinger/)
 4. High Performance West. "Understand the Balance of Training: Hard/Easy, Speed/Endurance." 19 Oct. 2020. [Read](https://www.highperformancewest.com/on-coaching-blog/2020/10/19/understand-the-balance-of-training-hardeasy-speedendurance)
 5. Magness, Steve. "The Fallacy of VO2max and VO2max Workouts." *Science of Running*, 2009. [Read](https://www.scienceofrunning.com/2009/12/fallacy-of-vo2max-and-vo2max.html)
-}
                   <div className="munich-card relative overflow-hidden group">
                     <div className="absolute top-2 right-2 w-6 h-6 geometric-diamond" style={{ 
                       backgroundColor: colors.lightBlue,
@@ -3175,7 +3424,7 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
                     <h4 className="font-bold mb-4" style={{ 
                       color: colors.black,
                       fontSize: 'var(--text-xl)'
-                    }}>📝 Blog Posts & Articles</h4>
+                    }}>Articles & Training Insights</h4>
                     
                     <div className="space-y-4">
                       <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
@@ -3315,7 +3564,7 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
                     <h4 className="font-bold mb-4" style={{ 
                       color: colors.black,
                       fontSize: 'var(--text-xl)'
-                    }}>🏃‍♂️ Personal Coaching Services</h4>
+                    }}>Personal Coaching Services</h4>
                     
                     <div className="space-y-4">
                       <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
@@ -3347,7 +3596,7 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
                     <h4 className="font-bold mb-4" style={{ 
                       color: colors.black,
                       fontSize: 'var(--text-xl)'
-                    }}>🚀 Quick Actions</h4>
+                    }}>Quick Actions</h4>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-3">
