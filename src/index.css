@@ -339,9 +339,21 @@ body {
   overflow: hidden;
 }
 
+/* Dark mode support for Munich Card */
+.dark .munich-card {
+  background-color: #1F2937;
+  border-color: #374151;
+  color: #F9FAFB;
+}
+
 .munich-card-header {
   padding: var(--space-6);
   border-bottom: 1px solid var(--munich-border);
+}
+
+/* Dark mode support for Munich Card Header */
+.dark .munich-card-header {
+  border-bottom-color: #374151;
 }
 
 .munich-card-body {
@@ -352,6 +364,12 @@ body {
   padding: var(--space-6);
   border-top: 1px solid var(--munich-border);
   background-color: var(--munich-gray);
+}
+
+/* Dark mode support for Munich Card Footer */
+.dark .munich-card-footer {
+  border-top-color: #374151;
+  background-color: #111827;
 }
 
 /* Responsive Design Utilities */
