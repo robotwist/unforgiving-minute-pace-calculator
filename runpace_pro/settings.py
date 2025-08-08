@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'training',
     'calculator',
     'plans',
+    'blog',
+    'premium',
 ]
 
 MIDDLEWARE = [

@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { Calculator, Download, Target, Clock, TrendingUp, User } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calculator, Download, Target, Clock, TrendingUp, User, BookOpen, Star, Calendar, Activity, Trophy, CheckCircle } from 'lucide-react';
+import ArticleCard from './blog/ArticleCard';
+import ArticleModal from './blog/ArticleModal';
+import { articles, getFeaturedArticles } from '../content/articles';
+import { trainingPlans } from '../content/trainingPlans';
 
 const RunningTrainingApp = () => {
   const [activeTab, setActiveTab] = useState('calculator');
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [raceTime, setRaceTime] = useState('');
   const [raceDistance, setRaceDistance] = useState('5K');
   const [goldenPace, setGoldenPace] = useState(null);
@@ -17,10 +23,97 @@ const RunningTrainingApp = () => {
     injuryHistory: '',
     preferredUnits: 'imperial'
   });
-  const [profileSaved, setProfileSaved] = useState(false);
   const [profileError, setProfileError] = useState('');
   const [showProfileDashboard, setShowProfileDashboard] = useState(false);
   const [savedProfileData, setSavedProfileData] = useState(null);
+  const [trainingHistory, setTrainingHistory] = useState([]);
+  const [personalBests, setPersonalBests] = useState({});
+  const [trainingPlansCompleted, setTrainingPlansCompleted] = useState([]);
+  
+  // Training log form state
+  const [showTrainingLogForm, setShowTrainingLogForm] = useState(false);
+  const [trainingLogData, setTrainingLogData] = useState({
+    type: 'Easy Run',
+    distance: '',
+    time: '',
+    feeling: 'Good',
+    effort: 'Easy',
+    notes: '',
+    weather: '',
+    location: ''
+  });
+
+  // Load saved data from localStorage on component mount
+  useEffect(() => {
+    const savedProfile = localStorage.getItem('runningProfile');
+    const savedHistory = localStorage.getItem('trainingHistory');
+    const savedPBs = localStorage.getItem('personalBests');
+    const savedPlans = localStorage.getItem('completedPlans');
+    
+    if (savedProfile) {
+      const profileData = JSON.parse(savedProfile);
+      setSavedProfileData(profileData);
+      setUserProfile(profileData);
+      
+      // If profile exists, show dashboard by default
+      setShowProfileDashboard(true);
+    }
+    
+    if (savedHistory) {
+      setTrainingHistory(JSON.parse(savedHistory));
+    }
+    
+    if (savedPBs) {
+      setPersonalBests(JSON.parse(savedPBs));
+    }
+    
+    if (savedPlans) {
+      setTrainingPlansCompleted(JSON.parse(savedPlans));
+    }
+  }, []);
+
+  // Save profile data to localStorage
+  const saveProfileData = (profileData) => {
+    localStorage.setItem('runningProfile', JSON.stringify(profileData));
+    setSavedProfileData(profileData);
+  };
+
+  // Add training session to history
+  const addTrainingSession = (session) => {
+    const newSession = {
+      ...session,
+      id: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      goldenPace: goldenPace
+    };
+    
+    const updatedHistory = [...trainingHistory, newSession];
+    setTrainingHistory(updatedHistory);
+    localStorage.setItem('trainingHistory', JSON.stringify(updatedHistory));
+  };
+
+  // Update personal best
+  const updatePersonalBest = (distance, time) => {
+    const updatedPBs = {
+      ...personalBests,
+      [distance]: time
+    };
+    setPersonalBests(updatedPBs);
+    localStorage.setItem('personalBests', JSON.stringify(updatedPBs));
+  };
+
+  // Mark training plan as completed
+  const completeTrainingPlan = (planName) => {
+    const completedPlan = {
+      name: planName,
+      completedDate: new Date().toISOString().split('T')[0],
+      goldenPaceAtCompletion: goldenPace
+    };
+    
+    const updatedPlans = [...trainingPlansCompleted, completedPlan];
+    setTrainingPlansCompleted(updatedPlans);
+    localStorage.setItem('completedPlans', JSON.stringify(updatedPlans));
+  };
 
   // Use global Munich 1972 CSS variables for consistent design system
   const colors = {
@@ -519,104 +612,115 @@ const RunningTrainingApp = () => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
-  const saveProfile = async () => {
+  const saveProfile = () => {
     try {
       setProfileError('');
-      setProfileSaved(false);
       
-      const response = await fetch('/api/auth/profile/create/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: userProfile.name,
-          email: userProfile.email,
-          experience: userProfile.experience,
-          current_vdot: goldenPace || null,
-          weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
-          goal_race_distance: userProfile.goalRaceDistance,
-          goal_race_time: userProfile.goalRaceTime,
-          injury_history: userProfile.injuryHistory
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setProfileSaved(true);
-        setSavedProfileData(data);
-        setShowProfileDashboard(true);
-        console.log('Profile saved successfully:', data);
-      } else {
-        const errorData = await response.json();
-        setProfileError(errorData.error || 'Failed to save profile');
+      // Validation
+      if (!userProfile.name || !userProfile.email) {
+        setProfileError('Please fill in your name and email');
+        return;
       }
+      
+      // Create profile data with current GoldenPace
+      const profileData = {
+        ...userProfile,
+        current_vdot: goldenPace || null,
+        weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
+        created_date: new Date().toISOString().split('T')[0],
+        last_updated: new Date().toISOString().split('T')[0]
+      };
+      
+      // Save to localStorage
+      saveProfileData(profileData);
+      setShowProfileDashboard(true);
+      
+      // Add this calculation to training history
+      if (goldenPace && raceTime && raceDistance) {
+        addTrainingSession({
+          type: 'GoldenPace Calculation',
+          distance: raceDistance,
+          time: raceTime,
+          goldenPace: goldenPace,
+          notes: `Calculated GoldenPace of ${goldenPace}`
+        });
+        
+        // Update personal best if this is better
+        const currentPB = personalBests[raceDistance];
+        if (!currentPB || parseTimeToSeconds(raceTime) < parseTimeToSeconds(currentPB)) {
+          updatePersonalBest(raceDistance, raceTime);
+        }
+      }
+      
+      console.log('Profile saved successfully to localStorage');
     } catch (error) {
       console.error('Error saving profile:', error);
-      setProfileError('Network error. Please try again.');
+      setProfileError('Error saving profile. Please try again.');
     }
   };
 
-  const loadProfile = async (email) => {
+  const loadProfile = (email) => {
     try {
-      const response = await fetch(`/api/auth/profile/${email}/`);
-      if (response.ok) {
-        const data = await response.json();
-        setSavedProfileData(data);
-        setShowProfileDashboard(true);
-        
-        // Update the form with existing data
-        setUserProfile({
-          name: data.user_name || '',
-          email: data.user_email || '',
-          experience: data.user_experience || 'beginner',
-          goalRaceDistance: data.goal_race_distance || '5K',
-          goalRaceTime: data.goal_race_time || '',
-          weeklyMileage: data.weekly_mileage?.toString() || '',
-          injuryHistory: data.injury_history || '',
-          preferredUnits: 'imperial'
-        });
+      // Since we're using localStorage, just load the saved data
+      const savedProfile = localStorage.getItem('runningProfile');
+      if (savedProfile) {
+        const data = JSON.parse(savedProfile);
+        if (data.email === email) {
+          setSavedProfileData(data);
+          setShowProfileDashboard(true);
+          
+          // Update the form with existing data
+          setUserProfile({
+            name: data.name || '',
+            email: data.email || '',
+            experience: data.experience || 'beginner',
+            goalRaceDistance: data.goalRaceDistance || '5K',
+            goalRaceTime: data.goalRaceTime || '',
+            weeklyMileage: data.weekly_mileage?.toString() || '',
+            injuryHistory: data.injuryHistory || '',
+            preferredUnits: 'imperial'
+          });
+          
+          if (data.current_vdot) {
+            setGoldenPace(data.current_vdot);
+          }
+          
+          console.log('Profile loaded successfully from localStorage');
+        } else {
+          console.log('No saved profile found for this email');
+        }
       }
     } catch (error) {
       console.error('Error loading profile:', error);
     }
   };
 
-  const updateProfile = async () => {
+  const updateProfile = () => {
     try {
       setProfileError('');
-      setProfileSaved(false);
       
-      const response = await fetch(`/api/auth/profile/${userProfile.email}/`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: userProfile.name,
-          email: userProfile.email,
-          experience: userProfile.experience,
-          current_vdot: goldenPace || null,
-          weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
-          goal_race_distance: userProfile.goalRaceDistance,
-          goal_race_time: userProfile.goalRaceTime,
-          injury_history: userProfile.injuryHistory
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setProfileSaved(true);
-        setSavedProfileData(data);
-        setShowProfileDashboard(true);
-        console.log('Profile updated successfully:', data);
-      } else {
-        const errorData = await response.json();
-        setProfileError(errorData.error || 'Failed to update profile');
+      // Validation
+      if (!userProfile.name || !userProfile.email) {
+        setProfileError('Please fill in your name and email');
+        return;
       }
+      
+      // Create updated profile data
+      const updatedProfileData = {
+        ...userProfile,
+        current_vdot: goldenPace || null,
+        weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
+        last_updated: new Date().toISOString().split('T')[0]
+      };
+      
+      // Save to localStorage
+      saveProfileData(updatedProfileData);
+      setSavedProfileData(updatedProfileData);
+      
+      console.log('Profile updated successfully in localStorage');
     } catch (error) {
       console.error('Error updating profile:', error);
-      setProfileError('Network error. Please try again.');
+      setProfileError('Error updating profile. Please try again.');
     }
   };
 
@@ -1099,11 +1203,20 @@ const RunningTrainingApp = () => {
               {[
                 { id: 'calculator', label: 'GoldenPace Calculator', icon: Calculator },
                 { id: 'plans', label: 'Training Plans', icon: Target },
+                { id: 'blog', label: 'Articles', icon: BookOpen },
+                { id: 'premium', label: 'Premium Plans', icon: Star },
                 { id: 'profile', label: 'Profile', icon: User }
               ].map(({ id, label, icon: Icon }) => (
                 <button
                   key={id}
-                  onClick={() => setActiveTab(id)}
+                  onClick={(e) => {
+                    // Secret admin access: Shift + Click on Articles
+                    if (id === 'blog' && e.shiftKey) {
+                      setShowAdminPanel(true);
+                    } else {
+                      setActiveTab(id);
+                    }
+                  }}
                   className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all duration-200 ${
                     activeTab === id
                       ? 'text-white shadow-sm'
@@ -1383,11 +1496,19 @@ const RunningTrainingApp = () => {
                     <p className="text-gray-600 mb-2">Focus: {plan.phase}</p>
                     <p className="text-sm text-gray-500 mb-4">{plan.description}</p>
                     {plan.goldenPaceLevel && (
-                      <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                        <p className="text-sm font-medium text-blue-800">
+                      <div className="munich-alert munich-alert-info mb-4 relative">
+                        {/* Geometric accent */}
+                        <div className="absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
+                          backgroundColor: colors.lightBlue,
+                          opacity: 0.6
+                        }}></div>
+                        <p className="font-medium" style={{ color: colors.black }}>
                           🎯 Personalized for GoldenPace {plan.goldenPaceLevel}
                         </p>
-                        <p className="text-xs text-blue-600 mt-1">
+                        <p className="mt-1" style={{ 
+                          color: colors.lightBlue,
+                          fontSize: 'var(--text-xs)'
+                        }}>
                           Easy: {plan.trainingPaces?.easy} | Threshold: {plan.trainingPaces?.threshold}
                         </p>
                       </div>
@@ -1398,9 +1519,9 @@ const RunningTrainingApp = () => {
                           setSelectedPlan(plan);
                           setShowPlanDetails(true);
                         }}
-                        className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold"
+                        className="munich-btn munich-btn-primary flex-1"
                       >
-                        <Download className="w-4 h-4 inline mr-2" />
+                        <Download className="w-4 h-4 mr-2" />
                         Download Plan
                       </button>
                       <button 
@@ -1408,7 +1529,7 @@ const RunningTrainingApp = () => {
                           setSelectedPlan(plan);
                           setShowPlanDetails(true);
                         }}
-                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
+                        className="munich-btn munich-btn-outline"
                       >
                         Preview
                       </button>
@@ -1534,14 +1655,14 @@ const RunningTrainingApp = () => {
                         a.click();
                         URL.revokeObjectURL(url);
                       }}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold"
+                      className="munich-btn munich-btn-primary flex-1"
                     >
-                      <Download className="w-4 h-4 inline mr-2" />
+                      <Download className="w-4 h-4 mr-2" />
                       Download Plan
                     </button>
                     <button 
                       onClick={() => setShowPlanDetails(false)}
-                      className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all"
+                      className="munich-btn munich-btn-outline"
                     >
                       Close
                     </button>
@@ -1554,41 +1675,74 @@ const RunningTrainingApp = () => {
 
         {activeTab === 'profile' && (
           <div className="space-y-8">
-            <div className="text-center space-y-4">
-              <h2 className="text-4xl font-bold text-gray-900">Your Profile</h2>
-              <p className="text-xl text-gray-600">Customize your training experience</p>
+            <div className="text-center space-y-4 relative">
+              {/* Geometric background elements */}
+              <div className="absolute inset-0 progressive-melange opacity-5"></div>
+              
+              <div className="relative z-10">
+                <h2 className="font-bold" style={{ 
+                  color: colors.black,
+                  fontSize: 'var(--text-4xl)'
+                }}>Your Profile</h2>
+                <p style={{ 
+                  color: colors.black,
+                  fontSize: 'var(--text-xl)'
+                }}>Customize your training experience</p>
+              </div>
             </div>
 
             {!showProfileDashboard ? (
               // Profile Creation Form
-              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden max-w-3xl mx-auto">
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6">
-                  <h3 className="text-2xl font-bold text-white flex items-center">
-                    <User className="w-6 h-6 mr-3" />
-                    Create Your Running Profile
-                  </h3>
+              <div className="munich-card max-w-3xl mx-auto">
+                <div className="munich-card-header relative overflow-hidden" style={{ 
+                  backgroundColor: colors.lightBlue 
+                }}>
+                  {/* Progressive Melange Background */}
+                  <div className="absolute inset-0 progressive-melange opacity-20"></div>
+                  
+                  {/* Geometric corner accent */}
+                  <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+                    backgroundColor: colors.lightGreen,
+                    opacity: 0.8
+                  }}></div>
+                  
+                  <div className="relative z-10">
+                    <h3 className="font-bold flex items-center" style={{ 
+                      color: colors.white,
+                      fontSize: 'var(--text-2xl)'
+                    }}>
+                      <User className="w-6 h-6 mr-3" />
+                      Create Your Running Profile
+                    </h3>
+                  </div>
                 </div>
                 
-                <div className="p-8 space-y-6">
+                <div className="munich-card-body space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-gray-700">Name</label>
+                      <label className="block font-medium" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>Name</label>
                       <input
                         type="text"
                         value={userProfile.name}
                         onChange={(e) => setUserProfile({...userProfile, name: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="munich-input"
                         placeholder="Enter your name"
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-gray-700">Email</label>
+                      <label className="block font-medium" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>Email</label>
                       <input
                         type="email"
                         value={userProfile.email}
                         onChange={(e) => setUserProfile({...userProfile, email: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="munich-input"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -1596,11 +1750,14 @@ const RunningTrainingApp = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-gray-700">Experience Level</label>
+                      <label className="block font-medium" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>Experience Level</label>
                       <select
                         value={userProfile.experience}
                         onChange={(e) => setUserProfile({...userProfile, experience: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="munich-input"
                       >
                         <option value="beginner">Beginner (0-1 years)</option>
                         <option value="intermediate">Intermediate (1-3 years)</option>
@@ -1610,11 +1767,14 @@ const RunningTrainingApp = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-gray-700">Goal Race Distance</label>
+                      <label className="block font-medium" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>Goal Race Distance</label>
                       <select
                         value={userProfile.goalRaceDistance}
                         onChange={(e) => setUserProfile({...userProfile, goalRaceDistance: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="munich-input"
                       >
                         <option value="5K">5K</option>
                         <option value="10K">10K</option>
@@ -1626,34 +1786,43 @@ const RunningTrainingApp = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-gray-700">Goal Race Time (optional)</label>
+                      <label className="block font-medium" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>Goal Race Time (optional)</label>
                       <input
                         type="text"
                         value={userProfile.goalRaceTime}
                         onChange={(e) => setUserProfile({...userProfile, goalRaceTime: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="munich-input"
                         placeholder="e.g., 20:00 for 5K"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-gray-700">Current Weekly Mileage</label>
+                      <label className="block font-medium" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>Current Weekly Mileage</label>
                       <input
                         type="number"
                         value={userProfile.weeklyMileage}
                         onChange={(e) => setUserProfile({...userProfile, weeklyMileage: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        className="munich-input"
                         placeholder="e.g., 25"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-gray-700">Injury History (optional)</label>
+                    <label className="block font-medium" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-sm)'
+                    }}>Injury History (optional)</label>
                     <textarea
                       value={userProfile.injuryHistory}
                       onChange={(e) => setUserProfile({...userProfile, injuryHistory: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="munich-input"
                       placeholder="Any injuries or health considerations we should know about?"
                       rows="3"
                     />
@@ -1662,16 +1831,20 @@ const RunningTrainingApp = () => {
                   <div className="flex gap-4">
                     <button 
                       onClick={savedProfileData ? updateProfile : saveProfile}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold shadow-lg hover:shadow-xl"
+                      className="munich-btn munich-btn-primary flex-1 relative"
                     >
                       {savedProfileData ? 'Update Profile' : 'Create Profile'}
+                      {/* Geometric accent on button */}
+                      <div className="absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
+                        backgroundColor: colors.lightGreen
+                      }}></div>
                     </button>
                     
                     {!savedProfileData && (
                       <button 
                         onClick={() => userProfile.email && loadProfile(userProfile.email)}
                         disabled={!userProfile.email}
-                        className="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="munich-btn munich-btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Check Existing
                       </button>
@@ -1679,7 +1852,7 @@ const RunningTrainingApp = () => {
                   </div>
                   
                   {profileError && (
-                    <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                    <div className="munich-alert munich-alert-error">
                       {profileError}
                     </div>
                   )}
@@ -1688,64 +1861,1178 @@ const RunningTrainingApp = () => {
             ) : (
               // Profile Dashboard
               <div className="space-y-6">
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                  <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-6">
-                    <h3 className="text-2xl font-bold text-white flex items-center">
-                      <User className="w-6 h-6 mr-3" />
-                      Welcome, {savedProfileData?.user_name || userProfile.name}!
-                    </h3>
-                    <p className="text-green-100 mt-2">Your profile has been created successfully</p>
+                <div className="munich-card">
+                  <div className="munich-card-header relative overflow-hidden" style={{ 
+                    backgroundColor: colors.lightGreen 
+                  }}>
+                    {/* Progressive Melange Background */}
+                    <div className="absolute inset-0 progressive-melange opacity-20"></div>
+                    
+                    {/* Geometric corner accent */}
+                    <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                      backgroundColor: colors.violet,
+                      opacity: 0.8
+                    }}></div>
+                    
+                    <div className="relative z-10">
+                      <h3 className="font-bold flex items-center" style={{ 
+                        color: colors.white,
+                        fontSize: 'var(--text-2xl)'
+                      }}>
+                        <User className="w-6 h-6 mr-3" />
+                        Welcome, {savedProfileData?.name || userProfile.name}!
+                      </h3>
+                      <p className="mt-2" style={{ 
+                        color: colors.white,
+                        opacity: 0.9,
+                        fontSize: 'var(--text-base)'
+                      }}>Your profile has been created successfully</p>
+                    </div>
                   </div>
                   
                   <div className="p-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div className="bg-gray-50 rounded-xl p-6">
-                        <h4 className="font-semibold text-gray-900 mb-2">Personal Info</h4>
-                        <p className="text-sm text-gray-600">Name: {savedProfileData?.user_name}</p>
-                        <p className="text-sm text-gray-600">Email: {savedProfileData?.user_email}</p>
-                        <p className="text-sm text-gray-600">Experience: {savedProfileData?.user_experience}</p>
+                      <div className="munich-card relative overflow-hidden">
+                        {/* Progressive Melange Background */}
+                        <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                        
+                        {/* Geometric corner accent */}
+                        <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
+                          backgroundColor: colors.lightBlue,
+                          opacity: 0.3
+                        }}></div>
+                        
+                        <div className="munich-card-body relative z-10">
+                          <h4 className="font-medium mb-4" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-lg)'
+                          }}>Personal Info</h4>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Name: {savedProfileData?.name || userProfile.name}</p>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Email: {savedProfileData?.email || userProfile.email}</p>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Experience: {savedProfileData?.experience || userProfile.experience}</p>
+                          <p style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Member since: {savedProfileData?.created_date || new Date().toISOString().split('T')[0]}</p>
+                        </div>
                       </div>
                       
-                      <div className="bg-gray-50 rounded-xl p-6">
-                        <h4 className="font-semibold text-gray-900 mb-2">Running Goals</h4>
-                        <p className="text-sm text-gray-600">Goal Race: {savedProfileData?.goal_race_distance || userProfile.goalRaceDistance}</p>
-                        <p className="text-sm text-gray-600">Goal Time: {savedProfileData?.goal_race_time || userProfile.goalRaceTime || 'Not set'}</p>
-                        <p className="text-sm text-gray-600">Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage || 'Not set'} miles</p>
+                      <div className="munich-card relative overflow-hidden">
+                        {/* Progressive Melange Background */}
+                        <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                        
+                        {/* Geometric corner accent */}
+                        <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
+                          backgroundColor: colors.lightGreen,
+                          opacity: 0.3,
+                          animationDelay: '1s'
+                        }}></div>
+                        
+                        <div className="munich-card-body relative z-10">
+                          <h4 className="font-medium mb-4" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-lg)'
+                          }}>Running Goals</h4>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Goal Race: {savedProfileData?.goalRaceDistance || userProfile.goalRaceDistance}</p>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Goal Time: {savedProfileData?.goalRaceTime || userProfile.goalRaceTime || 'Not set'}</p>
+                          <p style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage || 'Not set'} miles</p>
+                        </div>
                       </div>
                       
-                      <div className="bg-gray-50 rounded-xl p-6">
-                        <h4 className="font-semibold text-gray-900 mb-2">Current Status</h4>
-                        <p className="text-sm text-gray-600">GoldenPace: {savedProfileData?.current_vdot || goldenPace || 'Not calculated'}</p>
-                        <p className="text-sm text-gray-600">Profile Created: {new Date().toLocaleDateString()}</p>
+                      <div className="munich-card relative overflow-hidden">
+                        {/* Progressive Melange Background */}
+                        <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                        
+                        {/* Geometric corner accent */}
+                        <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
+                          backgroundColor: colors.violet,
+                          opacity: 0.3,
+                          animationDelay: '2s'
+                        }}></div>
+                        
+                        <div className="munich-card-body relative z-10">
+                          <h4 className="font-medium mb-4 flex items-center" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-lg)'
+                          }}>
+                            <Activity className="w-4 h-4 mr-2" />
+                            Current Status
+                          </h4>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Current GoldenPace: {savedProfileData?.current_vdot || goldenPace || 'Not calculated'}</p>
+                          <p className="mb-2" style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Training Sessions: {trainingHistory.length}</p>
+                          <p style={{ 
+                            color: colors.black,
+                            fontSize: 'var(--text-sm)'
+                          }}>Personal Bests: {Object.keys(personalBests).length}</p>
+                        </div>
                       </div>
+                    </div>
+
+                    {/* Enhanced Training Data Section */}
+                    <div className="mt-8 space-y-6">
+                      {/* Personal Bests Section */}
+                      {Object.keys(personalBests).length > 0 && (
+                        <div className="munich-card relative overflow-hidden">
+                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                          <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                            backgroundColor: colors.orange,
+                            opacity: 0.4
+                          }}></div>
+                          
+                          <div className="munich-card-body relative z-10">
+                            <h4 className="font-medium mb-4 flex items-center" style={{ 
+                              color: colors.black,
+                              fontSize: 'var(--text-lg)'
+                            }}>
+                              <Trophy className="w-5 h-5 mr-2" style={{ color: colors.orange }} />
+                              Personal Bests
+                            </h4>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                              {Object.entries(personalBests).map(([distance, time]) => (
+                                <div key={distance} className="text-center p-3 rounded" style={{ 
+                                  backgroundColor: colors.lightGray,
+                                  border: `1px solid ${colors.gray}`
+                                }}>
+                                  <div className="font-medium" style={{ 
+                                    color: colors.black,
+                                    fontSize: 'var(--text-sm)'
+                                  }}>{distance}</div>
+                                  <div className="font-bold" style={{ 
+                                    color: colors.orange,
+                                    fontSize: 'var(--text-lg)'
+                                  }}>{time}</div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Recent Training History */}
+                      {trainingHistory.length > 0 && (
+                        <div className="munich-card relative overflow-hidden">
+                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                          <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+                            backgroundColor: colors.lightBlue,
+                            opacity: 0.4
+                          }}></div>
+                          
+                          <div className="munich-card-body relative z-10">
+                            <h4 className="font-medium mb-4 flex items-center" style={{ 
+                              color: colors.black,
+                              fontSize: 'var(--text-lg)'
+                            }}>
+                              <Calendar className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
+                              Recent Training History
+                            </h4>
+                            <div className="space-y-3">
+                              {trainingHistory.slice(-5).reverse().map((session, index) => (
+                                <div key={index} className="p-4 rounded" style={{ 
+                                  backgroundColor: colors.lightGray,
+                                  border: `1px solid ${colors.gray}`
+                                }}>
+                                  <div className="flex justify-between items-start mb-2">
+                                    <span className="font-medium" style={{ 
+                                      color: colors.black,
+                                      fontSize: 'var(--text-sm)'
+                                    }}>{session.type}</span>
+                                    <span style={{ 
+                                      color: colors.gray,
+                                      fontSize: 'var(--text-xs)'
+                                    }}>{session.date}</span>
+                                  </div>
+                                  {session.distance && (
+                                    <div style={{ 
+                                      color: colors.black,
+                                      fontSize: 'var(--text-sm)'
+                                    }}>
+                                      Distance: {session.distance} • Time: {session.time}
+                                    </div>
+                                  )}
+                                  {(session.feeling || session.effort) && (
+                                    <div style={{ 
+                                      color: colors.lightBlue,
+                                      fontSize: 'var(--text-sm)'
+                                    }}>
+                                      Felt: {session.feeling} • Effort: {session.effort}
+                                    </div>
+                                  )}
+                                  {session.location && (
+                                    <div style={{ 
+                                      color: colors.black,
+                                      fontSize: 'var(--text-xs)',
+                                      opacity: 0.8
+                                    }}>
+                                      📍 {session.location}
+                                      {session.weather && ` • 🌤️ ${session.weather}`}
+                                    </div>
+                                  )}
+                                  {session.goldenPace && (
+                                    <div style={{ 
+                                      color: colors.orange,
+                                      fontSize: 'var(--text-sm)',
+                                      fontWeight: '500'
+                                    }}>
+                                      GoldenPace: {session.goldenPace}
+                                    </div>
+                                  )}
+                                  {session.notes && (
+                                    <div className="mt-2" style={{ 
+                                      color: colors.gray,
+                                      fontSize: 'var(--text-xs)',
+                                      fontStyle: 'italic'
+                                    }}>
+                                      "{session.notes}"
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Completed Training Plans */}
+                      {trainingPlansCompleted.length > 0 && (
+                        <div className="munich-card relative overflow-hidden">
+                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                          <div className="absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
+                            backgroundColor: colors.violet,
+                            opacity: 0.4
+                          }}></div>
+                          
+                          <div className="munich-card-body relative z-10">
+                            <h4 className="font-medium mb-4 flex items-center" style={{ 
+                              color: colors.black,
+                              fontSize: 'var(--text-lg)'
+                            }}>
+                              <CheckCircle className="w-5 h-5 mr-2" style={{ color: colors.violet }} />
+                              Completed Training Plans
+                            </h4>
+                            <div className="space-y-2">
+                              {trainingPlansCompleted.map((plan, index) => (
+                                <div key={index} className="flex justify-between items-center p-3 rounded" style={{ 
+                                  backgroundColor: colors.lightGray,
+                                  border: `1px solid ${colors.gray}`
+                                }}>
+                                  <span style={{ 
+                                    color: colors.black,
+                                    fontSize: 'var(--text-sm)'
+                                  }}>{plan.name}</span>
+                                  <span style={{ 
+                                    color: colors.gray,
+                                    fontSize: 'var(--text-xs)'
+                                  }}>{plan.completedDate}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                     
                     <div className="mt-8 flex flex-wrap gap-4">
                       <button
                         onClick={() => setActiveTab('calculator')}
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-semibold"
+                        className="munich-btn munich-btn-primary relative"
                       >
                         Calculate GoldenPace
+                        {/* Geometric accent on button */}
+                        <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
+                          backgroundColor: colors.lightGreen
+                        }}></div>
                       </button>
                       
                       <button
                         onClick={() => setActiveTab('plans')}
-                        className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all font-semibold"
+                        className="munich-btn munich-btn-secondary relative"
                       >
                         Get Training Plans
+                        {/* Geometric accent on button */}
+                        <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-octagon" style={{ 
+                          backgroundColor: colors.violet
+                        }}></div>
                       </button>
                       
                       <button
                         onClick={() => setShowProfileDashboard(false)}
-                        className="border border-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-50 transition-all font-semibold"
+                        className="munich-btn munich-btn-outline"
                       >
                         Edit Profile
+                      </button>
+                      
+                      <button
+                        onClick={() => {
+                          setShowTrainingLogForm(true);
+                        }}
+                        className="munich-btn munich-btn-outline relative"
+                        style={{ color: colors.lightBlue, borderColor: colors.lightBlue }}
+                      >
+                        Log Training Session
+                        <div className="absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
+                          backgroundColor: colors.lightBlue,
+                          opacity: 0.3
+                        }}></div>
+                      </button>
+                      
+                      <button
+                        onClick={() => {
+                          // Add demo data to showcase the full profile functionality
+                          updatePersonalBest('5K', '24:30');
+                          updatePersonalBest('10K', '51:45');
+                          updatePersonalBest('Half Marathon', '1:54:20');
+                          
+                          addTrainingSession({
+                            type: 'Tempo Run',
+                            distance: '6 miles',
+                            time: '42:00',
+                            notes: 'Comfortably hard pace, felt strong'
+                          });
+                          
+                          addTrainingSession({
+                            type: 'Long Run',
+                            distance: '12 miles',
+                            time: '1:32:00',
+                            notes: 'Progressive long run, negative split'
+                          });
+                          
+                          completeTrainingPlan('5K Training Plan - Beginner');
+                        }}
+                        className="munich-btn munich-btn-outline relative"
+                        style={{ color: colors.orange, borderColor: colors.orange }}
+                      >
+                        Add Demo Data
+                        <div className="absolute top-0 right-0 w-3 h-3 geometric-octagon" style={{ 
+                          backgroundColor: colors.orange,
+                          opacity: 0.3
+                        }}></div>
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Training Log Form Modal */}
+        {showTrainingLogForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="munich-card max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="munich-card-header relative overflow-hidden" style={{ 
+                backgroundColor: colors.lightBlue 
+              }}>
+                <div className="absolute inset-0 progressive-melange opacity-20"></div>
+                <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                  backgroundColor: colors.orange,
+                  opacity: 0.8
+                }}></div>
+                
+                <div className="relative z-10">
+                  <h3 className="font-bold flex items-center" style={{ 
+                    color: colors.white,
+                    fontSize: 'var(--text-2xl)'
+                  }}>
+                    <Activity className="w-6 h-6 mr-3" />
+                    Log Training Session
+                  </h3>
+                  <p className="mt-2" style={{ 
+                    color: colors.white,
+                    opacity: 0.9,
+                    fontSize: 'var(--text-base)'
+                  }}>Track your workout details and how you felt</p>
+                </div>
+              </div>
+              
+              <div className="p-8">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  
+                  // Add the training session
+                  addTrainingSession({
+                    type: trainingLogData.type,
+                    distance: trainingLogData.distance,
+                    time: trainingLogData.time,
+                    feeling: trainingLogData.feeling,
+                    effort: trainingLogData.effort,
+                    notes: trainingLogData.notes,
+                    weather: trainingLogData.weather,
+                    location: trainingLogData.location
+                  });
+                  
+                  // Check if this is a race/PR
+                  if (trainingLogData.type.includes('Race') && trainingLogData.distance && trainingLogData.time) {
+                    const currentPB = personalBests[trainingLogData.distance];
+                    if (!currentPB || parseTimeToSeconds(trainingLogData.time) < parseTimeToSeconds(currentPB)) {
+                      updatePersonalBest(trainingLogData.distance, trainingLogData.time);
+                    }
+                  }
+                  
+                  // Reset form and close
+                  setTrainingLogData({
+                    type: 'Easy Run',
+                    distance: '',
+                    time: '',
+                    feeling: 'Good',
+                    effort: 'Easy',
+                    notes: '',
+                    weather: '',
+                    location: ''
+                  });
+                  setShowTrainingLogForm(false);
+                }}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Workout Type
+                      </label>
+                      <select
+                        value={trainingLogData.type}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, type: e.target.value})}
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      >
+                        <option value="Easy Run">Easy Run</option>
+                        <option value="Tempo Run">Tempo Run</option>
+                        <option value="Interval Training">Interval Training</option>
+                        <option value="Long Run">Long Run</option>
+                        <option value="Recovery Run">Recovery Run</option>
+                        <option value="Race">Race</option>
+                        <option value="Cross Training">Cross Training</option>
+                        <option value="Strength Training">Strength Training</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Distance
+                      </label>
+                      <input
+                        type="text"
+                        value={trainingLogData.distance}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, distance: e.target.value})}
+                        placeholder="e.g., 5K, 6 miles, 10K"
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Time
+                      </label>
+                      <input
+                        type="text"
+                        value={trainingLogData.time}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, time: e.target.value})}
+                        placeholder="e.g., 25:00, 1:30:45"
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        How did you feel?
+                      </label>
+                      <select
+                        value={trainingLogData.feeling}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, feeling: e.target.value})}
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      >
+                        <option value="Excellent">Excellent</option>
+                        <option value="Good">Good</option>
+                        <option value="Average">Average</option>
+                        <option value="Tired">Tired</option>
+                        <option value="Struggled">Struggled</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Effort Level
+                      </label>
+                      <select
+                        value={trainingLogData.effort}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, effort: e.target.value})}
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      >
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Comfortably Hard">Comfortably Hard</option>
+                        <option value="Hard">Hard</option>
+                        <option value="Very Hard">Very Hard</option>
+                        <option value="Max Effort">Max Effort</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Location
+                      </label>
+                      <input
+                        type="text"
+                        value={trainingLogData.location}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, location: e.target.value})}
+                        placeholder="e.g., Local park, Track, Treadmill"
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <label className="block font-medium mb-3" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-sm)'
+                    }}>
+                      Weather
+                    </label>
+                    <input
+                      type="text"
+                      value={trainingLogData.weather}
+                      onChange={(e) => setTrainingLogData({...trainingLogData, weather: e.target.value})}
+                      placeholder="e.g., Sunny 70°F, Rainy, Hot and humid"
+                      className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                      style={{ 
+                        borderColor: colors.gray,
+                        fontSize: 'var(--text-base)'
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="mt-6">
+                    <label className="block font-medium mb-3" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-sm)'
+                    }}>
+                      Notes
+                    </label>
+                    <textarea
+                      value={trainingLogData.notes}
+                      onChange={(e) => setTrainingLogData({...trainingLogData, notes: e.target.value})}
+                      placeholder="How did the workout go? Any observations, goals achieved, etc."
+                      rows={4}
+                      className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                      style={{ 
+                        borderColor: colors.gray,
+                        fontSize: 'var(--text-base)'
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <button
+                      type="submit"
+                      className="munich-btn munich-btn-primary relative"
+                    >
+                      Save Training Session
+                      <div className="absolute top-0 right-0 w-4 h-4 geometric-diamond" style={{ 
+                        backgroundColor: colors.lightGreen
+                      }}></div>
+                    </button>
+                    
+                    <button
+                      type="button"
+                      onClick={() => setShowTrainingLogForm(false)}
+                      className="munich-btn munich-btn-outline"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Blog/Articles Section - Munich 1972 Design */}
+        {activeTab === 'blog' && (
+          <div className="space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-4xl font-bold" style={{ color: colors.black }}>
+                Running Insights & Articles
+              </h2>
+              <p className="text-xl" style={{ color: colors.darkGreen }}>
+                Evidence-based training articles and VDOT insights from professional coaches
+              </p>
+            </div>
+
+            {/* Featured Articles */}
+            <div className="munich-card">
+              <div className="munich-card-header">
+                <h3 className="text-2xl font-bold" style={{ color: colors.black }}>
+                  Featured Articles
+                </h3>
+              </div>
+              <div className="munich-card-body">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {**Why Personalized, Race-Specific Training Beats One-Size-Fits-All VDOT**
+
+*By Unforgiving Minute Distance Running*
+
+---
+
+**Introduction: Breaking the VDOT Myth**
+
+The VDOT training model, popularized by legendary coach Jack Daniels, has become a staple for runners seeking structured training plans. It promises a simple, data-driven approach: input a recent race time, and out come your prescribed paces for every workout type. But simplicity can be misleading. New research shows that VDOT often fails to reflect what athletes can actually do, especially at the extremes of Interval (I) and Repetition (R) paces. A 2018 study published in the *Journal of Strength and Conditioning Research* found that VDOT **underestimated VO2max** in recreational runners and miscalculated optimal training paces for both elite and amateur athletes.
+
+At Unforgiving Minute, we challenge the idea that a formula can predict the effort, capability, and nuance of a runner's journey. Instead, we root our coaching in the principles of **adaptive training** and **race-specific preparation** as championed by Brad Hudson, Bill Dellinger, and Bill Bowerman. The evidence—and the experience of thousands of runners—supports a better way.
+
+---
+
+**The Scientific Undercurrent: Where VDOT Falls Short**
+
+In the Scudamore et al. (2018) study, researchers evaluated how well VDOT predicted VO2max and training paces. Here’s what they found:
+
+* **VDOT underestimated VO2max** in recreational runners.
+* **Interval paces** derived from VDOT (pIN) were often slower than actual VO2max pace.
+* **Threshold paces** (pTH) were frequently overestimated, especially in trained athletes.
+
+This misalignment can lead to real-world consequences: workouts that are too easy to stimulate adaptation or too hard to recover from. For the recreational runner, VDOT may suggest interval sessions that fail to elicit peak aerobic demand. For the competitive runner, it may push threshold sessions into anaerobic territory, sabotaging endurance development.
+
+---
+
+**Enter Brad Hudson: Adaptive and Specific Beats Prescriptive**
+
+Brad Hudson’s training philosophy revolves around the simple idea that no one-size-fits-all training plan can capture the variability of real athletes. In his book *Run Faster*, Hudson outlines an adaptive model that:
+
+* Divides training into **general preparation** and **race-specific phases**.
+* Emphasizes **responsiveness to athlete feedback**, not adherence to static paces.
+* Encourages **goal-pace specificity** in the final 4-6 weeks before a target race.
+
+He writes, “Anything more than 10% off pace lacks specific endurance.” In other words, if you're running your reps 30 seconds faster or slower than race pace, you're not training for your race—you're just training.
+
+This is a key insight for our philosophy. Rather than relying on a generic Interval pace calculated by VDOT, we tailor reps to align with each athlete's actual race performance, recent data, and physiological response.
+
+---
+
+**Lessons from the Oregon System: Balance, Variation, Intelligence**
+
+Bill Dellinger and Bill Bowerman, architects of the famed Oregon system, knew that running success wasn't just about grinding out miles. Their method emphasized:
+
+* **Alternating hard and easy days** to optimize recovery.
+* **Progressive overload** with ample room for adaptation.
+* **Race-pace integration**, especially during peak periods.
+
+Bowerman once said, “The idea that the harder you work, the better you get is just garbage. The greatest improvement is made by the man who works most intelligently.”
+
+This wisdom speaks to the heart of our approach. Smart training doesn’t just avoid burnout—it accelerates progress.
+
+---
+
+**Modern Voices and Community Insights**
+
+Even outside academic circles, runners are calling for change. In Reddit forums like r/AdvancedRunning and r/Running, athletes express skepticism about VDOT’s one-size-fits-all model. Comments like “VDOT doesn’t account for weight, economy, or mental strength” and “It predicts times but lacks nuance” are common.
+
+As GPS watches become more advanced, many runners notice discrepancies between VDOT predictions and actual performance. These observations confirm what science already suggests: formulas are helpful, but incomplete.
+
+---
+
+**How Unforgiving Minute Trains Smarter**
+
+Here’s how we do it differently:
+
+1. **Race-Based Calibration**: We anchor workouts to your actual race data, not just recent time trials.
+2. **Adjustable Pace Targets**: Interval and Repetition paces are tailored based on your strengths and goals.
+3. **Adaptation > Prescription**: We update your plan weekly based on performance, feedback, and life events.
+4. **Intelligent Periodization**: We mirror the Oregon system's alternating load cycles and progression structure.
+
+The result? You train for the runner you are today—and become the runner you want to be tomorrow.
+
+---
+
+**Conclusion: The New Standard**
+
+VDOT was revolutionary in its time. But training science and athlete needs have evolved. With mounting evidence from physiology labs, elite coaches, and the runners themselves, it’s clear: **the future is personalized, adaptive, and race-specific**.
+
+At Unforgiving Minute, we don’t just crunch your numbers. We understand your story. We guide you through your most unforgiving minutes and help you emerge stronger—with training that fits your life, not a table.
+
+---
+
+**Works Cited**
+
+1. Scudamore, E. M., et al. "An Evaluation of Time-Trial Based Predictions of VO2max and Recommended Training Paces for Collegiate and Recreational Runners." *Journal of Strength and Conditioning Research*, vol. 32, no. 3, 2018, pp. 763–771. [Read](https://pubmed.ncbi.nlm.nih.gov/28426511/)
+2. Hudson, Brad, and Matt Fitzgerald. *Run Faster: From the 5K to the Marathon*. Penguin Group, 2008. [Read](https://www.runnersworld.com/advanced/a20824856/brad-hudsons-targeted-training/)
+3. Phillips Running. "Learning from the Greats: Bill Dellinger." 22 Feb. 2018. [Read](https://phillipsrunning.com/2018/02/22/learning-from-the-greats-bill-dellinger/)
+4. High Performance West. "Understand the Balance of Training: Hard/Easy, Speed/Endurance." 19 Oct. 2020. [Read](https://www.highperformancewest.com/on-coaching-blog/2020/10/19/understand-the-balance-of-training-hardeasy-speedendurance)
+5. Magness, Steve. "The Fallacy of VO2max and VO2max Workouts." *Science of Running*, 2009. [Read](https://www.scienceofrunning.com/2009/12/fallacy-of-vo2max-and-vo2max.html)
+}
+                  <div className="munich-card relative overflow-hidden group">
+                    <div className="absolute top-2 right-2 w-6 h-6 geometric-diamond" style={{ 
+                      backgroundColor: colors.lightBlue,
+                      opacity: 0.7
+                    }}></div>
+                    
+                    <div className="munich-card-body">
+                      <div className="mb-4">
+                        <span className="text-xs font-medium px-3 py-1" style={{ 
+                          backgroundColor: colors.lightBlue,
+                          color: colors.white 
+                        }}>
+                          TRAINING SCIENCE
+                        </span>
+                      </div>
+                      
+                      <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+                        Why Your Running Paces Don't Match VDOT Charts
+                      </h4>
+                      
+                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                        Discover the individual factors that VDOT completely ignores and how they affect your training paces. Learn why many runners struggle with Daniels' recommendations.
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs" style={{ color: colors.silver }}>
+                          5 min read
+                        </span>
+                        <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
+                          Read Article
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Article 2 - Individual Factors */}
+                  <div className="munich-card relative overflow-hidden group">
+                    <div className="absolute top-2 right-2 w-6 h-6 geometric-octagon" style={{ 
+                      backgroundColor: colors.lightGreen,
+                      opacity: 0.7
+                    }}></div>
+                    
+                    <div className="munich-card-body">
+                      <div className="mb-4">
+                        <span className="text-xs font-medium px-3 py-1" style={{ 
+                          backgroundColor: colors.lightGreen,
+                          color: colors.white 
+                        }}>
+                          PERSONALIZATION
+                        </span>
+                      </div>
+                      
+                      <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+                        The Individual Factors VDOT Completely Ignores
+                      </h4>
+                      
+                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                        Age, experience, biomechanics, and recovery capacity all affect your training paces. Here's how to account for what makes you unique.
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs" style={{ color: colors.silver }}>
+                          7 min read
+                        </span>
+                        <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
+                          Read Article
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Article 3 - GoldenPace Success */}
+                  <div className="munich-card relative overflow-hidden group">
+                    <div className="absolute top-2 right-2 w-6 h-6 geometric-square" style={{ 
+                      backgroundColor: colors.violet,
+                      opacity: 0.7
+                    }}></div>
+                    
+                    <div className="munich-card-body">
+                      <div className="mb-4">
+                        <span className="text-xs font-medium px-3 py-1" style={{ 
+                          backgroundColor: colors.violet,
+                          color: colors.white 
+                        }}>
+                          SUCCESS STORY
+                        </span>
+                      </div>
+                      
+                      <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+                        From VDOT to GoldenPace: Real Success Stories
+                      </h4>
+                      
+                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                        Case studies of athletes who improved their performance by switching from generic VDOT to personalized GoldenPace training.
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs" style={{ color: colors.silver }}>
+                          6 min read
+                        </span>
+                        <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
+                          Read Article
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Newsletter Signup */}
+            <div className="munich-card text-center">
+              <div className="munich-card-body">
+                <h3 className="text-2xl font-bold mb-4" style={{ color: colors.black }}>
+                  Get Weekly Training Insights
+                </h3>
+                <p className="text-lg mb-6" style={{ color: colors.darkGreen }}>
+                  Subscribe to our newsletter for evidence-based training tips and VDOT alternatives
+                </p>
+                <div className="max-w-md mx-auto flex space-x-3">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email"
+                    className="munich-input flex-1"
+                  />
+                  <button className="munich-btn munich-btn-primary">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Premium Training Plans Section - Munich 1972 Design */}
+        {activeTab === 'premium' && (
+          <div className="space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-4xl font-bold" style={{ color: colors.black }}>
+                Premium Training Plans
+              </h2>
+              <p className="text-xl" style={{ color: colors.darkGreen }}>
+                Comprehensive, professionally-designed training programs for serious athletes
+              </p>
+            </div>
+
+            {/* Value Proposition */}
+            <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
+              <div className="munich-card-body text-center">
+                <h3 className="text-2xl font-bold mb-4" style={{ color: colors.black }}>
+                  Why Premium Plans?
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <div className="w-12 h-12 geometric-diamond mx-auto mb-3" style={{ backgroundColor: colors.lightBlue }}></div>
+                    <h4 className="font-bold mb-2" style={{ color: colors.black }}>Individual Factor Integration</h4>
+                    <p className="text-sm" style={{ color: colors.darkGreen }}>
+                      Plans adjusted for your age, experience, and recovery capacity
+                    </p>
+                  </div>
+                  <div>
+                    <div className="w-12 h-12 geometric-octagon mx-auto mb-3" style={{ backgroundColor: colors.lightGreen }}></div>
+                    <h4 className="font-bold mb-2" style={{ color: colors.black }}>Race-Specific Training</h4>
+                    <p className="text-sm" style={{ color: colors.darkGreen }}>
+                      Goal and current pace integration for optimal training stimulus
+                    </p>
+                  </div>
+                  <div>
+                    <div className="w-12 h-12 geometric-square mx-auto mb-3" style={{ backgroundColor: colors.violet }}></div>
+                    <h4 className="font-bold mb-2" style={{ color: colors.black }}>Professional Coaching</h4>
+                    <p className="text-sm" style={{ color: colors.darkGreen }}>
+                      Designed by certified coaches with proven track records
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Premium Plans Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* 5K Mastery Plan */}
+              <div className="munich-card relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-8 h-8 geometric-diamond" style={{ 
+                  backgroundColor: colors.orange,
+                  opacity: 0.8
+                }}></div>
+                
+                <div className="munich-card-header">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+                      5K Mastery Program
+                    </h4>
+                    <span className="text-xs font-medium px-2 py-1" style={{ 
+                      backgroundColor: colors.orange,
+                      color: colors.white 
+                    }}>
+                      BESTSELLER
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="munich-card-body">
+                  <div className="mb-4">
+                    <div className="flex items-baseline">
+                      <span className="text-3xl font-bold" style={{ color: colors.black }}>$49</span>
+                      <span className="text-lg line-through ml-2" style={{ color: colors.silver }}>$69</span>
+                      <span className="text-sm ml-2 px-2 py-1" style={{ 
+                        backgroundColor: colors.lightGreen,
+                        color: colors.white 
+                      }}>
+                        30% OFF
+                      </span>
+                    </div>
+                    <p className="text-sm" style={{ color: colors.darkGreen }}>12-week complete program</p>
+                  </div>
+                  
+                  <ul className="space-y-2 mb-6 text-sm">
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Individual factor assessment</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Progressive base building (4 weeks)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Build phase with VO2max work (4 weeks)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Peak/taper phase (4 weeks)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Downloadable training log</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Pacing strategy guide</span>
+                    </li>
+                  </ul>
+                  
+                  <button className="munich-btn munich-btn-primary w-full">
+                    Get 5K Mastery Plan
+                  </button>
+                  
+                  <p className="text-xs text-center mt-2" style={{ color: colors.silver }}>
+                    Instant download • 30-day money back guarantee
+                  </p>
+                </div>
+              </div>
+
+              {/* Marathon Breakthrough Plan */}
+              <div className="munich-card relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-8 h-8 geometric-octagon" style={{ 
+                  backgroundColor: colors.violet,
+                  opacity: 0.8
+                }}></div>
+                
+                <div className="munich-card-header">
+                  <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+                    Marathon Breakthrough
+                  </h4>
+                </div>
+                
+                <div className="munich-card-body">
+                  <div className="mb-4">
+                    <div className="flex items-baseline">
+                      <span className="text-3xl font-bold" style={{ color: colors.black }}>$97</span>
+                    </div>
+                    <p className="text-sm" style={{ color: colors.darkGreen }}>18-week complete program</p>
+                  </div>
+                  
+                  <ul className="space-y-2 mb-6 text-sm">
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Base building phase (8 weeks)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Build phase with marathon pace (6 weeks)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Peak and taper (4 weeks)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Nutrition and hydration guide</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Race day execution plan</span>
+                    </li>
+                  </ul>
+                  
+                  <button className="munich-btn munich-btn-secondary w-full">
+                    Get Marathon Plan
+                  </button>
+                </div>
+              </div>
+
+              {/* Custom Coaching Plan */}
+              <div className="munich-card relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-8 h-8 geometric-square" style={{ 
+                  backgroundColor: colors.yellow,
+                  opacity: 0.8
+                }}></div>
+                
+                <div className="munich-card-header">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+                      Personal Coaching
+                    </h4>
+                    <span className="text-xs font-medium px-2 py-1" style={{ 
+                      backgroundColor: colors.yellow,
+                      color: colors.black 
+                    }}>
+                      PREMIUM
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="munich-card-body">
+                  <div className="mb-4">
+                    <div className="flex items-baseline">
+                      <span className="text-3xl font-bold" style={{ color: colors.black }}>$297</span>
+                      <span className="text-sm ml-1" style={{ color: colors.darkGreen }}>/month</span>
+                    </div>
+                    <p className="text-sm" style={{ color: colors.darkGreen }}>One-on-one coaching</p>
+                  </div>
+                  
+                  <ul className="space-y-2 mb-6 text-sm">
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Weekly one-on-one sessions</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Fully customized training plans</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Real-time adjustments</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>24/7 text support</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span style={{ color: colors.lightBlue }}>✓</span>
+                      <span className="ml-2" style={{ color: colors.black }}>Race strategy consultation</span>
+                    </li>
+                  </ul>
+                  
+                  <button className="munich-btn munich-btn-outline w-full">
+                    Schedule Consultation
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonials */}
+            <div className="munich-card">
+              <div className="munich-card-header">
+                <h3 className="text-2xl font-bold" style={{ color: colors.black }}>
+                  Success Stories
+                </h3>
+              </div>
+              <div className="munich-card-body">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="w-16 h-16 geometric-diamond mx-auto" style={{ backgroundColor: colors.lightBlue }}></div>
+                    </div>
+                    <blockquote className="text-sm mb-4" style={{ color: colors.black }}>
+                      "The 5K Mastery Program helped me break 20 minutes for the first time in my running career. The individual factor assessment was a game-changer."
+                    </blockquote>
+                    <div>
+                      <div className="font-bold" style={{ color: colors.black }}>Sarah M.</div>
+                      <div className="text-sm" style={{ color: colors.darkGreen }}>Boston, MA • 19:47 5K PR</div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="w-16 h-16 geometric-octagon mx-auto" style={{ backgroundColor: colors.lightGreen }}></div>
+                    </div>
+                    <blockquote className="text-sm mb-4" style={{ color: colors.black }}>
+                      "After struggling with VDOT for years, the Marathon Breakthrough plan got me to Boston with a 2:58 finish. The pacing strategy was perfect."
+                    </blockquote>
+                    <div>
+                      <div className="font-bold" style={{ color: colors.black }}>Mike T.</div>
+                      <div className="text-sm" style={{ color: colors.darkGreen }}>Denver, CO • 2:58:23 Boston Qualifier</div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <div className="w-16 h-16 geometric-square mx-auto" style={{ backgroundColor: colors.violet }}></div>
+                    </div>
+                    <blockquote className="text-sm mb-4" style={{ color: colors.black }}>
+                      "Personal coaching transformed my running. Understanding my individual factors made all the difference in my training."
+                    </blockquote>
+                    <div>
+                      <div className="font-bold" style={{ color: colors.black }}>Lisa K.</div>
+                      <div className="text-sm" style={{ color: colors.darkGreen }}>Portland, OR • Multiple PR athlete</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </main>
@@ -1790,6 +3077,24 @@ const RunningTrainingApp = () => {
                 </li>
                 <li>
                   <button 
+                    onClick={() => setActiveTab('blog')} 
+                    className="transition-colors duration-200 hover:text-blue-600"
+                    style={{ color: colors.darkGreen }}
+                  >
+                    Articles
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => setActiveTab('premium')} 
+                    className="transition-colors duration-200 hover:text-blue-600"
+                    style={{ color: colors.darkGreen }}
+                  >
+                    Premium Plans
+                  </button>
+                </li>
+                <li>
+                  <button 
                     onClick={() => setActiveTab('profile')} 
                     className="transition-colors duration-200 hover:text-blue-600"
                     style={{ color: colors.darkGreen }}
@@ -1805,11 +3110,7 @@ const RunningTrainingApp = () => {
               </h4>
               <button
                 onClick={() => setActiveTab('calculator')}
-                className="px-3 sm:px-4 py-2 font-medium transition-all duration-200 hover:shadow-sm btn-high-contrast"
-                style={{ 
-                  backgroundColor: colors.lightBlue,
-                  color: colors.white
-                }}
+                className="munich-btn munich-btn-primary"
               >
                 Calculate Your GoldenPace
               </button>
@@ -1822,6 +3123,269 @@ const RunningTrainingApp = () => {
           </div>
         </div>
       </footer>
+
+      {/* Admin Panel Modal */}
+      {showAdminPanel && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+          <div className="munich-card max-w-6xl w-full max-h-[95vh] overflow-y-auto">
+            <div className="munich-card-header relative overflow-hidden" style={{ 
+              backgroundColor: colors.violet 
+            }}>
+              <div className="absolute inset-0 progressive-melange opacity-20"></div>
+              <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                backgroundColor: colors.orange,
+                opacity: 0.8
+              }}></div>
+              
+              <div className="relative z-10">
+                <h3 className="font-bold flex items-center justify-between" style={{ 
+                  color: colors.white,
+                  fontSize: 'var(--text-2xl)'
+                }}>
+                  <span className="flex items-center">
+                    <BookOpen className="w-6 h-6 mr-3" />
+                    Content Management Admin Panel
+                  </span>
+                  <button
+                    onClick={() => setShowAdminPanel(false)}
+                    className="text-white hover:text-gray-200"
+                  >
+                    ✕
+                  </button>
+                </h3>
+                <p className="mt-2" style={{ 
+                  color: colors.white,
+                  opacity: 0.9,
+                  fontSize: 'var(--text-base)'
+                }}>Manage blog posts, premium training plans, and coaching services</p>
+              </div>
+            </div>
+            
+            <div className="p-8">
+              <div className="space-y-8">
+                {/* Blog Posts Management */}
+                <div className="munich-card relative overflow-hidden">
+                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                  <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+                    backgroundColor: colors.lightBlue,
+                    opacity: 0.4
+                  }}></div>
+                  
+                  <div className="munich-card-body relative z-10">
+                    <h4 className="font-bold mb-4" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-xl)'
+                    }}>📝 Blog Posts & Articles</h4>
+                    
+                    <div className="space-y-4">
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
+                        <strong>Current Location:</strong> Lines 2500-2650 in RunningTrainingApp.jsx
+                      </p>
+                      
+                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGray }}>
+                        <h5 className="font-medium mb-2" style={{ color: colors.black }}>How to Add Blog Posts:</h5>
+                        <ol className="list-decimal list-inside space-y-2 text-sm" style={{ color: colors.black }}>
+                          <li>Find the "Featured Articles" section around line 2510</li>
+                          <li>Copy the existing article card structure</li>
+                          <li>Replace the content with your article details:</li>
+                        </ol>
+                        
+                        <div className="mt-4 p-3 bg-gray-800 rounded text-green-400 font-mono text-xs overflow-x-auto">
+{`<div className="munich-card relative overflow-hidden group">
+  <div className="munich-card-body">
+    <div className="mb-4">
+      <span className="text-xs font-medium px-3 py-1" style={{ 
+        backgroundColor: colors.lightBlue,
+        color: colors.white 
+      }}>
+        YOUR_CATEGORY
+      </span>
+    </div>
+    
+    <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+      Your Article Title
+    </h4>
+    
+    <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+      Your article description and preview text...
+    </p>
+    
+    <div className="flex items-center justify-between">
+      <span className="text-xs" style={{ color: colors.silver }}>
+        X min read
+      </span>
+      <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
+        Read Article
+      </button>
+    </div>
+  </div>
+</div>`}
+                        </div>
+                      </div>
+                      
+                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGreen, color: colors.white }}>
+                        <h5 className="font-medium mb-2">💡 Pro Tip:</h5>
+                        <p className="text-sm">Use categories like: TRAINING SCIENCE, NUTRITION, RACE STRATEGY, INJURY PREVENTION</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Premium Training Plans Management */}
+                <div className="munich-card relative overflow-hidden">
+                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                  <div className="absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
+                    backgroundColor: colors.orange,
+                    opacity: 0.4
+                  }}></div>
+                  
+                  <div className="munich-card-body relative z-10">
+                    <h4 className="font-bold mb-4" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-xl)'
+                    }}>⭐ Premium Training Plans</h4>
+                    
+                    <div className="space-y-4">
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
+                        <strong>Current Location:</strong> Lines 2700-2850 in RunningTrainingApp.jsx
+                      </p>
+                      
+                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGray }}>
+                        <h5 className="font-medium mb-2" style={{ color: colors.black }}>How to Add Premium Plans:</h5>
+                        <ol className="list-decimal list-inside space-y-2 text-sm" style={{ color: colors.black }}>
+                          <li>Find the "Premium Plans Grid" section around line 2700</li>
+                          <li>Copy an existing plan card (like the "5K Mastery Program")</li>
+                          <li>Customize the pricing, features, and benefits</li>
+                          <li>Add payment integration to the button</li>
+                        </ol>
+                        
+                        <div className="mt-4 p-3 bg-gray-800 rounded text-green-400 font-mono text-xs overflow-x-auto">
+{`<div className="munich-card relative overflow-hidden group">
+  <div className="munich-card-header">
+    <div className="flex items-center justify-between">
+      <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+        Your Plan Name
+      </h4>
+      <span className="text-xs font-medium px-2 py-1" style={{ 
+        backgroundColor: colors.orange,
+        color: colors.white 
+      }}>
+        BESTSELLER
+      </span>
+    </div>
+  </div>
+  
+  <div className="munich-card-body">
+    <div className="mb-4">
+      <div className="flex items-baseline">
+        <span className="text-3xl font-bold" style={{ color: colors.black }}>$XX</span>
+        <span className="text-lg line-through ml-2" style={{ color: colors.silver }}>$XX</span>
+      </div>
+      <p className="text-sm" style={{ color: colors.darkGreen }}>XX-week program</p>
+    </div>
+    
+    <ul className="space-y-2 mb-6 text-sm">
+      <li className="flex items-start">
+        <span style={{ color: colors.lightBlue }}>✓</span>
+        <span className="ml-2" style={{ color: colors.black }}>Feature 1</span>
+      </li>
+      <!-- Add more features -->
+    </ul>
+    
+    <button className="munich-btn munich-btn-primary w-full">
+      Get Plan Name
+    </button>
+  </div>
+</div>`}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Personal Coaching Management */}
+                <div className="munich-card relative overflow-hidden">
+                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                  <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                    backgroundColor: colors.yellow,
+                    opacity: 0.4
+                  }}></div>
+                  
+                  <div className="munich-card-body relative z-10">
+                    <h4 className="font-bold mb-4" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-xl)'
+                    }}>🏃‍♂️ Personal Coaching Services</h4>
+                    
+                    <div className="space-y-4">
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
+                        <strong>Current Location:</strong> Lines 2825-2870 in RunningTrainingApp.jsx
+                      </p>
+                      
+                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGray }}>
+                        <h5 className="font-medium mb-2" style={{ color: colors.black }}>Personal Coaching Features:</h5>
+                        <ul className="list-disc list-inside space-y-1 text-sm" style={{ color: colors.black }}>
+                          <li>Monthly pricing: $297/month (currently set)</li>
+                          <li>Features: Weekly sessions, custom plans, 24/7 support</li>
+                          <li>Call-to-action: "Schedule Consultation" button</li>
+                        </ul>
+                        
+                        <div className="mt-3 p-3" style={{ backgroundColor: colors.yellow, color: colors.black }}>
+                          <h6 className="font-medium">💰 Payment Integration Needed:</h6>
+                          <p className="text-sm mt-1">Add Stripe/PayPal integration to the coaching consultation button</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="munich-card relative overflow-hidden">
+                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                  
+                  <div className="munich-card-body relative z-10">
+                    <h4 className="font-bold mb-4" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-xl)'
+                    }}>🚀 Quick Actions</h4>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <h5 className="font-medium" style={{ color: colors.black }}>Development Tasks:</h5>
+                        <ul className="space-y-2 text-sm" style={{ color: colors.darkGreen }}>
+                          <li>• Set up Django backend for dynamic content</li>
+                          <li>• Add Stripe payment integration</li>
+                          <li>• Create content upload interface</li>
+                          <li>• Add user authentication system</li>
+                        </ul>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <h5 className="font-medium" style={{ color: colors.black }}>Content Strategy:</h5>
+                        <ul className="space-y-2 text-sm" style={{ color: colors.darkGreen }}>
+                          <li>• Write 5-10 foundational articles</li>
+                          <li>• Create 3-5 premium training plans</li>
+                          <li>• Set up coaching intake form</li>
+                          <li>• Add testimonials and success stories</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-8 flex justify-center">
+                <button
+                  onClick={() => setShowAdminPanel(false)}
+                  className="munich-btn munich-btn-primary"
+                >
+                  Close Admin Panel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
