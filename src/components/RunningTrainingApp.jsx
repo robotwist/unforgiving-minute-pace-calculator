@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, Download, Target, Clock, TrendingUp, User, BookOpen, Star, Calendar, Activity, Trophy, CheckCircle } from 'lucide-react';
+import { Elements } from '@stripe/react-stripe-js';
+import stripePromise from '../config/stripe';
+import StripePaymentForm from './StripePaymentForm';
 // import ArticleCard from './blog/ArticleCard';
 // import ArticleModal from './blog/ArticleModal';
 // import { articles, getFeaturedArticles } from '../content/articles';
@@ -1449,33 +1452,36 @@ Remember: Your gut is trainable. Practice your race-day strategy during every lo
     setShowPurchaseModal(true);
   };
 
-  const processPurchase = async () => {
+  const handlePaymentSuccess = (paymentResult) => {
     if (!selectedPlanForPurchase) return;
     
-    setPurchaseLoading(true);
+    const newPurchase = {
+      id: selectedPlanForPurchase.id,
+      name: selectedPlanForPurchase.name,
+      price: selectedPlanForPurchase.price,
+      purchaseDate: new Date().toISOString(),
+      status: 'active',
+      stripePaymentId: paymentResult.paymentIntent?.id || 'mock_payment_' + Date.now(),
+      transactionId: paymentResult.paymentIntent?.id || 'mock_' + Date.now()
+    };
     
-    // Simulate payment processing
-    setTimeout(() => {
-      const newPurchase = {
-        id: selectedPlanForPurchase.id,
-        name: selectedPlanForPurchase.name,
-        price: selectedPlanForPurchase.price,
-        purchaseDate: new Date().toISOString(),
-        status: 'active'
-      };
-      
-      const updatedPurchases = [...purchasedPlans, newPurchase];
-      setPurchasedPlans(updatedPurchases);
-      localStorage.setItem('purchasedPlans', JSON.stringify(updatedPurchases));
-      
-      setPurchaseLoading(false);
-      setPurchaseSuccess(true);
-      setShowPurchaseModal(false);
-      setSelectedPlanForPurchase(null);
-      
-      // Reset success state after 3 seconds
-      setTimeout(() => setPurchaseSuccess(false), 3000);
-    }, 2000);
+    const updatedPurchases = [...purchasedPlans, newPurchase];
+    setPurchasedPlans(updatedPurchases);
+    localStorage.setItem('purchasedPlans', JSON.stringify(updatedPurchases));
+    
+    setPurchaseLoading(false);
+    setPurchaseSuccess(true);
+    setShowPurchaseModal(false);
+    setSelectedPlanForPurchase(null);
+    
+    // Reset success state after 3 seconds
+    setTimeout(() => setPurchaseSuccess(false), 3000);
+  };
+
+  const handlePaymentError = (error) => {
+    console.error('Payment error:', error);
+    setPurchaseLoading(false);
+    // Could add error state here for user feedback
   };
 
   const closePurchaseModal = () => {
@@ -4123,13 +4129,13 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
       )}
 
       {/* Purchase Modal */}
-      {showPurchaseModal && (
+      {showPurchaseModal && selectedPlanForPurchase && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="munich-card w-full max-w-md relative">
-            <div className="absolute top-4 right-4">
+          <div className="munich-card w-full max-w-lg relative max-h-[90vh] overflow-y-auto">
+            <div className="absolute top-4 right-4 z-10">
               <button
                 onClick={closePurchaseModal}
-                className="text-2xl font-bold leading-none"
+                className="text-2xl font-bold leading-none hover:opacity-70 transition-opacity"
                 style={{ color: colors.silver }}
                 disabled={purchaseLoading}
               >
@@ -4139,64 +4145,31 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
             
             <div className="munich-card-header">
               <h3 className="text-xl font-bold pr-8" style={{ color: colors.black }}>
-                Purchase {selectedPlanForPurchase?.name}
+                Purchase {selectedPlanForPurchase.name}
               </h3>
             </div>
             
             <div className="munich-card-body">
-              <div className="mb-6">
-                <div className="flex items-baseline mb-2">
-                  <span className="text-3xl font-bold" style={{ color: colors.black }}>
-                    ${selectedPlanForPurchase?.price}
-                  </span>
-                  {selectedPlanForPurchase?.id === 'personal-coaching' && (
-                    <span className="ml-1 text-sm" style={{ color: colors.darkGreen }}>
-                      /month
-                    </span>
-                  )}
-                </div>
-                <p className="text-sm" style={{ color: colors.silver }}>
-                  {selectedPlanForPurchase?.id === 'personal-coaching' 
-                    ? 'Monthly subscription - cancel anytime'
-                    : 'One-time purchase - instant access'
-                  }
-                </p>
-              </div>
+              <Elements stripe={stripePromise}>
+                <StripePaymentForm
+                  selectedPlan={selectedPlanForPurchase}
+                  onSuccess={handlePaymentSuccess}
+                  onError={handlePaymentError}
+                  loading={purchaseLoading}
+                  userProfile={userProfile}
+                  colors={colors}
+                />
+              </Elements>
               
-              <div className="space-y-4 mb-6">
-                <div className="p-3 rounded" style={{ backgroundColor: colors.lightBlue + '20' }}>
-                  <p className="text-sm" style={{ color: colors.black }}>
-                    ✓ Instant access after payment
-                  </p>
-                  <p className="text-sm" style={{ color: colors.black }}>
-                    ✓ 30-day money back guarantee
-                  </p>
-                  <p className="text-sm" style={{ color: colors.black }}>
-                    ✓ Access from your profile dashboard
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex space-x-3">
+              <div className="mt-6 pt-4 border-t" style={{ borderColor: colors.gray }}>
                 <button
                   onClick={closePurchaseModal}
-                  className="munich-btn munich-btn-outline flex-1"
+                  className="munich-btn munich-btn-outline w-full"
                   disabled={purchaseLoading}
                 >
                   Cancel
                 </button>
-                <button
-                  onClick={processPurchase}
-                  className="munich-btn munich-btn-primary flex-1"
-                  disabled={purchaseLoading}
-                >
-                  {purchaseLoading ? 'Processing...' : 'Purchase Now'}
-                </button>
               </div>
-              
-              <p className="text-xs text-center mt-3" style={{ color: colors.silver }}>
-                Secure payment processing • SSL encrypted
-              </p>
             </div>
           </div>
         </div>
@@ -4204,13 +4177,14 @@ At Unforgiving Minute, we don’t just crunch your numbers. We understand your s
 
       {/* Purchase Success Message */}
       {purchaseSuccess && (
-        <div className="fixed top-4 right-4 z-50">
+        <div className="fixed top-4 right-4 z-50 animate-fade-in">
           <div className="munich-card" style={{ backgroundColor: colors.darkGreen }}>
             <div className="p-4 text-center">
-              <p className="font-bold text-white">
-                ✓ Purchase Successful!
+              <p className="font-bold text-white flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 mr-2" />
+                Purchase Successful!
               </p>
-              <p className="text-sm text-white opacity-90">
+              <p className="text-sm text-white opacity-90 mt-1">
                 Check your profile for access
               </p>
             </div>
