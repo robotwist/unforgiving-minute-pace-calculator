@@ -9,7 +9,7 @@ const RunningTrainingApp = () => {
   const [activeTab, setActiveTab] = useState('calculator');
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  // const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [raceTime, setRaceTime] = useState('');
   const [raceDistance, setRaceDistance] = useState('5K');
   const [goldenPace, setGoldenPace] = useState(null);
@@ -22,7 +22,11 @@ const RunningTrainingApp = () => {
     goalRaceTime: '',
     weeklyMileage: '',
     injuryHistory: '',
-    preferredUnits: 'imperial'
+    preferredUnits: 'imperial',
+    currentGoldenPace: null,
+    goldenPaceHistory: [],
+    projectedGoldenPace: null,
+    trainingStartDate: null
   });
   const [profileError, setProfileError] = useState('');
   const [showProfileDashboard, setShowProfileDashboard] = useState(false);
@@ -131,6 +135,177 @@ const RunningTrainingApp = () => {
     border: darkMode ? '#404040' : '#E1E5E9'          // Adaptive border
   };
 
+  // Articles data structure
+  const articles = [
+    {
+      id: 1,
+      title: "Why VDOT Doesn't Work: The Science Behind Better Training",
+      excerpt: "Research shows VDOT underestimates VO2max and mispredicts training paces for most runners. Here's what elite coaches do instead.",
+      readTime: "8 min read",
+      category: "Training Science",
+      featured: true,
+      content: `
+# Why VDOT Doesn't Work: The Science Behind Better Training
+
+        {/* Premium Training Plans Section - Munich 1972 Design */}
+
+This misalignment can lead to real-world consequences: workouts that are too easy to stimulate adaptation or too hard to recover from. For the recreational runner, VDOT may suggest interval sessions that fail to elicit peak aerobic demand. For the competitive runner, it may push threshold sessions into anaerobic territory, sabotaging endurance development.
+
+## Enter Brad Hudson: Adaptive and Specific Beats Prescriptive
+
+Brad Hudson's training philosophy revolves around the simple idea that no one-size-fits-all training plan can capture the variability of real athletes. In his book *Run Faster*, Hudson outlines an adaptive model that:
+
+* Divides training into **general preparation** and **race-specific phases**.
+* Emphasizes **responsiveness to athlete feedback**, not adherence to static paces.
+* Encourages **goal-pace specificity** in the final 4-6 weeks before a target race.
+
+He writes, "Anything more than 10% off pace lacks specific endurance." In other words, if you're running your reps 30 seconds faster or slower than race pace, you're not training for your race—you're just training.
+
+This is a key insight for our philosophy. Rather than relying on a generic Interval pace calculated by VDOT, we tailor reps to align with each athlete's actual race performance, recent data, and physiological response.
+
+## Lessons from the Oregon System: Balance, Variation, Intelligence
+
+Bill Dellinger and Bill Bowerman, architects of the famed Oregon system, knew that running success wasn't just about grinding out miles. Their method emphasized:
+
+* **Alternating hard and easy days** to optimize recovery.
+* **Progressive overload** with ample room for adaptation.
+* **Race-pace integration**, especially during peak periods.
+
+Bowerman once said, "The idea that the harder you work, the better you get is just garbage. The greatest improvement is made by the man who works most intelligently."
+
+This wisdom speaks to the heart of our approach. Smart training doesn't just avoid burnout—it accelerates progress.
+
+## Modern Voices and Community Insights
+
+Even outside academic circles, runners are calling for change. In Reddit forums like r/AdvancedRunning and r/Running, athletes express skepticism about VDOT's one-size-fits-all model. Comments like "VDOT doesn't account for weight, economy, or mental strength" and "It predicts times but lacks nuance" are common.
+
+As GPS watches become more advanced, many runners notice discrepancies between VDOT predictions and actual performance. These observations confirm what science already suggests: formulas are helpful, but incomplete.
+
+## How Unforgiving Minute Trains Smarter
+
+Here's how we do it differently:
+
+1. **Race-Based Calibration**: We anchor workouts to your actual race data, not just recent time trials.
+2. **Adjustable Pace Targets**: Interval and Repetition paces are tailored based on your strengths and goals.
+3. **Adaptation > Prescription**: We update your plan weekly based on performance, feedback, and life events.
+      `
+    },
+    {
+      id: 2,
+      title: "The Art of Recovery: Why Easy Days Make Hard Days Possible",
+      excerpt: "Elite athletes spend 80% of their time running easy. Learn the physiological and psychological benefits of proper recovery running.",
+      readTime: "6 min read",
+      category: "Recovery",
+      featured: true,
+      content: `
+# The Art of Recovery: Why Easy Days Make Hard Days Possible
+
+Recovery is not the absence of training—it's training at its most fundamental level. When elite athletes run easy, they're developing the aerobic engine that powers breakthrough performances.
+
+## The 80/20 Rule in Action
+
+Research consistently shows that world-class endurance athletes train approximately 80% of their volume at low intensity and 20% at moderate to high intensity. This isn't arbitrary—it's physiologically optimal.
+
+### Aerobic Base Development
+
+Easy running:
+* Increases mitochondrial density
+* Improves capillarization
+* Enhances fat oxidation
+* Builds cardiac stroke volume
+
+### Active Recovery Benefits
+
+Beyond adaptation, easy running provides:
+* Enhanced blood flow to aid muscle repair
+* Mental restoration from high-intensity stress
+* Movement quality maintenance
+* Habit reinforcement
+
+## How to Run Easy (Really Easy)
+
+Most runners run their easy days too hard. Here's how to nail the right effort:
+
+1. **Conversational pace** - You should be able to speak in full sentences
+2. **Nasal breathing** - If you're mouth breathing, you're going too fast  
+3. **RPE 3-4/10** - Should feel genuinely easy, almost effortless
+4. **Heart rate guidance** - Generally 65-75% of max HR for most athletes
+
+Remember: The purpose is to enhance recovery while maintaining fitness, not to squeeze in extra training stress.
+      `
+    },
+    {
+      id: 3,
+      title: "Marathon Fueling Strategy: Beyond Gels and Sports Drinks",
+      excerpt: "Train your gut like you train your legs. A comprehensive guide to race-day nutrition that actually works for 26.2 miles.",
+      readTime: "12 min read",
+      category: "Nutrition",
+      featured: false,
+      content: `
+# Marathon Fueling Strategy: Beyond Gels and Sports Drinks
+
+Your marathon performance depends as much on your fueling strategy as your fitness. Here's how to develop a bulletproof nutrition plan.
+
+## The Science of Marathon Fueling
+
+During a marathon, you'll burn approximately:
+- 100-120 calories per mile
+- 60-70% from carbohydrates at marathon pace
+- Glycogen stores last roughly 90-120 minutes
+
+This means every marathoner hits the glycogen depletion point around mile 18-22. Your fueling strategy determines whether you'll finish strong or hit the wall.
+
+## Pre-Race Fueling
+
+**3-4 Days Before:**
+- Increase carbohydrate intake to 7-10g per kg body weight
+- Maintain normal protein and fat intake
+- Stay well hydrated
+
+**Night Before:**
+- Familiar, easily digestible dinner
+- Avoid excess fiber, fat, or new foods
+- Go to bed well-hydrated
+
+**Morning Of:**
+- Eat 3-4 hours before start time
+- Target 1-4g carbs per kg body weight
+- Include some protein for satiety
+- Stop eating 2-3 hours before race start
+
+## During the Race
+
+**Carbohydrate Strategy:**
+- Start fueling early (mile 4-6)
+- Target 30-60g carbs per hour
+- Use multiple carbohydrate sources (glucose + fructose)
+- Practice your exact race strategy during long runs
+
+**Hydration Guidelines:**
+- Drink to thirst, don't over-hydrate
+- Include electrolytes for runs over 90 minutes
+- Weigh yourself before/after long training runs to understand sweat rate
+
+## Post-Race Recovery
+
+**First 30 minutes:**
+- 1.2g carbs per kg body weight
+- 0.3g protein per kg body weight
+- Rehydrate with 150% of fluid lost
+
+**Next 24-48 hours:**
+- Continue high-carb intake
+- Include anti-inflammatory foods
+- Prioritize sleep for adaptation
+
+Remember: Your gut is trainable. Practice your race-day strategy during every long run to avoid surprises on marathon morning.
+      `
+    }
+  ];
+
+  // Get featured articles
+  const featuredArticles = articles.filter(article => article.featured);
+
   // GoldenPace calculation based on Daniels Running Formula
   const calculateGoldenPace = (time, distance) => {
     const timeInSeconds = parseTimeToSeconds(time);
@@ -234,6 +409,60 @@ const RunningTrainingApp = () => {
     const interpolatedGoldenPace = lowerGoldenPace + (upperGoldenPace - lowerGoldenPace) * interpolationFactor;
     
     return Math.round(interpolatedGoldenPace * 10) / 10; // Round to 1 decimal place
+  };
+
+  // Calculate projected GoldenPace improvement (1 VDOT point per 6 weeks average)
+  const calculateProjectedGoldenPace = (currentGoldenPace, trainingStartDate, weeklyMileage = 20) => {
+    if (!currentGoldenPace || !trainingStartDate) return null;
+    
+    const startDate = new Date(trainingStartDate);
+    const currentDate = new Date();
+    const weeksTraining = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24 * 7));
+    
+    // Base improvement rate: 1 VDOT point per 6 weeks
+    // Adjusted by training volume and consistency
+    const baseImprovementRate = 1 / 6; // VDOT points per week
+    
+    // Mileage factor (optimal around 30-50 mpw for most runners)
+    const mileageFactor = Math.min(1.2, Math.max(0.7, weeklyMileage / 40));
+    
+    // Diminishing returns factor (improvement slows at higher VDOT levels)
+    const diminishingFactor = Math.max(0.5, 1 - (currentGoldenPace - 40) * 0.01);
+    
+    const adjustedImprovementRate = baseImprovementRate * mileageFactor * diminishingFactor;
+    const projectedImprovement = weeksTraining * adjustedImprovementRate;
+    
+    return Math.round((currentGoldenPace + projectedImprovement) * 10) / 10;
+  };
+
+  // Generate GoldenPace progression graph data
+  const generateGoldenPaceProgression = (startingGoldenPace, trainingStartDate, weeklyMileage = 20, weeksToProject = 52) => {
+    if (!startingGoldenPace || !trainingStartDate) return [];
+    
+    const progression = [];
+    const startDate = new Date(trainingStartDate);
+    
+    for (let week = 0; week <= weeksToProject; week += 2) {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + (week * 7));
+      
+      // Calculate projected VDOT for this week
+      const baseImprovementRate = 1 / 6; // 1 VDOT per 6 weeks
+      const mileageFactor = Math.min(1.2, Math.max(0.7, weeklyMileage / 40));
+      const diminishingFactor = Math.max(0.5, 1 - (startingGoldenPace - 40) * 0.01);
+      const adjustedImprovementRate = baseImprovementRate * mileageFactor * diminishingFactor;
+      
+      const projectedGoldenPace = startingGoldenPace + (week * adjustedImprovementRate);
+      
+      progression.push({
+        week,
+        date: currentDate.toISOString().split('T')[0],
+        goldenPace: Math.round(projectedGoldenPace * 10) / 10,
+        weeklyMileage: weeklyMileage
+      });
+    }
+    
+    return progression;
   };
 
   const parseTimeToSeconds = (timeStr) => {
@@ -623,13 +852,37 @@ const RunningTrainingApp = () => {
         return;
       }
       
-      // Create profile data with current GoldenPace
+      const currentDate = new Date().toISOString().split('T')[0];
+      const currentGoldenPace = goldenPace || null;
+      
+      // Initialize GoldenPace history if first time
+      let goldenPaceHistory = [];
+      if (currentGoldenPace) {
+        goldenPaceHistory = [{
+          date: currentDate,
+          goldenPace: currentGoldenPace,
+          raceDistance: raceDistance,
+          raceTime: raceTime,
+          weeklyMileage: parseInt(userProfile.weeklyMileage) || 20
+        }];
+      }
+      
+      // Calculate projected GoldenPace
+      const projectedGoldenPace = currentGoldenPace 
+        ? calculateProjectedGoldenPace(currentGoldenPace, currentDate, parseInt(userProfile.weeklyMileage) || 20)
+        : null;
+      
+      // Create profile data with GoldenPace tracking
       const profileData = {
         ...userProfile,
-        current_vdot: goldenPace || null,
-        weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
-        created_date: new Date().toISOString().split('T')[0],
-        last_updated: new Date().toISOString().split('T')[0]
+        current_vdot: currentGoldenPace,
+        currentGoldenPace: currentGoldenPace,
+        goldenPaceHistory: goldenPaceHistory,
+        projectedGoldenPace: projectedGoldenPace,
+        trainingStartDate: currentDate,
+        weekly_mileage: parseInt(userProfile.weeklyMileage) || null,
+        created_date: currentDate,
+        last_updated: currentDate
       };
       
       // Save to localStorage
@@ -637,13 +890,13 @@ const RunningTrainingApp = () => {
       setShowProfileDashboard(true);
       
       // Add this calculation to training history
-      if (goldenPace && raceTime && raceDistance) {
+      if (currentGoldenPace && raceTime && raceDistance) {
         addTrainingSession({
           type: 'GoldenPace Calculation',
           distance: raceDistance,
           time: raceTime,
-          goldenPace: goldenPace,
-          notes: `Calculated GoldenPace of ${goldenPace}`
+          goldenPace: currentGoldenPace,
+          notes: `Initial GoldenPace calculation: ${currentGoldenPace}. Projected in 6 weeks: ${projectedGoldenPace || 'N/A'}`
         });
         
         // Update personal best if this is better
@@ -653,7 +906,7 @@ const RunningTrainingApp = () => {
         }
       }
       
-      console.log('Profile saved successfully to localStorage');
+      console.log('Profile saved successfully with GoldenPace tracking');
     } catch (error) {
       console.error('Error saving profile:', error);
       setProfileError('Error saving profile. Please try again.');
@@ -706,19 +959,49 @@ const RunningTrainingApp = () => {
         return;
       }
       
-      // Create updated profile data
+      const currentDate = new Date().toISOString().split('T')[0];
+      const currentGoldenPace = goldenPace || savedProfileData?.currentGoldenPace || null;
+      
+      // Update GoldenPace history if there's a new GoldenPace
+      let updatedGoldenPaceHistory = savedProfileData?.goldenPaceHistory || [];
+      if (currentGoldenPace && goldenPace && goldenPace !== savedProfileData?.currentGoldenPace) {
+        const newEntry = {
+          date: currentDate,
+          goldenPace: currentGoldenPace,
+          raceDistance: raceDistance,
+          raceTime: raceTime,
+          weeklyMileage: parseInt(userProfile.weeklyMileage) || 20
+        };
+        updatedGoldenPaceHistory = [...updatedGoldenPaceHistory, newEntry];
+      }
+      
+      // Recalculate projected GoldenPace
+      const projectedGoldenPace = currentGoldenPace 
+        ? calculateProjectedGoldenPace(
+            currentGoldenPace, 
+            savedProfileData?.trainingStartDate || currentDate, 
+            parseInt(userProfile.weeklyMileage) || 20
+          )
+        : null;
+      
+      // Create updated profile data with enhanced GoldenPace tracking
       const updatedProfileData = {
+        ...savedProfileData,
         ...userProfile,
-        current_vdot: goldenPace || null,
-        weekly_mileage: userProfile.weeklyMileage ? parseInt(userProfile.weeklyMileage) : null,
-        last_updated: new Date().toISOString().split('T')[0]
+        current_vdot: currentGoldenPace,
+        currentGoldenPace: currentGoldenPace,
+        goldenPaceHistory: updatedGoldenPaceHistory,
+        projectedGoldenPace: projectedGoldenPace,
+        trainingStartDate: savedProfileData?.trainingStartDate || currentDate,
+        weekly_mileage: parseInt(userProfile.weeklyMileage) || null,
+        last_updated: currentDate
       };
       
       // Save to localStorage
       saveProfileData(updatedProfileData);
       setSavedProfileData(updatedProfileData);
       
-      console.log('Profile updated successfully in localStorage');
+      console.log('Profile updated successfully with GoldenPace tracking');
     } catch (error) {
       console.error('Error updating profile:', error);
       setProfileError('Error updating profile. Please try again.');
@@ -2234,23 +2517,138 @@ const RunningTrainingApp = () => {
                             fontSize: 'var(--text-lg)'
                           }}>
                             <Activity className="w-4 h-4 mr-2" />
-                            Current Status
+                            GoldenPace Progress
                           </h4>
-                          <p className="mb-2" style={{ 
-                            color: colors.black,
-                            fontSize: 'var(--text-sm)'
-                          }}>Current GoldenPace: {savedProfileData?.current_vdot || goldenPace || 'Not calculated'}</p>
-                          <p className="mb-2" style={{ 
-                            color: colors.black,
-                            fontSize: 'var(--text-sm)'
-                          }}>Training Sessions: {trainingHistory.length}</p>
-                          <p style={{ 
-                            color: colors.black,
-                            fontSize: 'var(--text-sm)'
-                          }}>Personal Bests: {Object.keys(personalBests).length}</p>
+                          <div className="space-y-3">
+                            <div className="flex justify-between items-center">
+                              <span style={{ 
+                                color: colors.black,
+                                fontSize: 'var(--text-sm)'
+                              }}>Current GoldenPace:</span>
+                              <span className="font-bold" style={{ 
+                                color: colors.violet,
+                                fontSize: 'var(--text-lg)'
+                              }}>
+                                {savedProfileData?.currentGoldenPace || goldenPace || 'Not calculated'}
+                              </span>
+                            </div>
+                            
+                            {savedProfileData?.projectedGoldenPace && (
+                              <div className="flex justify-between items-center">
+                                <span style={{ 
+                                  color: colors.black,
+                                  fontSize: 'var(--text-sm)'
+                                }}>6-Week Projection:</span>
+                                <span className="font-bold" style={{ 
+                                  color: colors.lightGreen,
+                                  fontSize: 'var(--text-lg)'
+                                }}>
+                                  {savedProfileData.projectedGoldenPace}
+                                </span>
+                              </div>
+                            )}
+                            
+                            <div className="mt-4 pt-3" style={{ borderTop: `1px solid ${colors.gray}` }}>
+                              <div className="flex justify-between text-xs">
+                                <span style={{ color: colors.black }}>Training Sessions: {trainingHistory.length}</span>
+                                <span style={{ color: colors.black }}>Personal Bests: {Object.keys(personalBests).length}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+
+                    {/* GoldenPace Progression Chart */}
+                    {savedProfileData?.currentGoldenPace && savedProfileData?.trainingStartDate && (
+                      <div className="mt-8">
+                        <div className="munich-card relative overflow-hidden">
+                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                          <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                            backgroundColor: colors.lightBlue,
+                            opacity: 0.4
+                          }}></div>
+                          
+                          <div className="munich-card-body relative z-10">
+                            <h4 className="font-medium mb-6 flex items-center" style={{ 
+                              color: colors.black,
+                              fontSize: 'var(--text-xl)'
+                            }}>
+                              <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
+                              GoldenPace Progression Forecast
+                            </h4>
+                            
+                            <div className="mb-4 text-sm" style={{ color: colors.darkGreen }}>
+                              <p>Projected improvement: +1 VDOT point every 6 weeks (average training consistency)</p>
+                              <p>Based on {savedProfileData.weekly_mileage || 20} miles/week at your experience level</p>
+                            </div>
+                            
+                            {/* Simple ASCII-style progression chart */}
+                            <div className="bg-white p-6 rounded-lg border" style={{ borderColor: colors.gray }}>
+                              <div className="space-y-2">
+                                {(() => {
+                                  const progression = generateGoldenPaceProgression(
+                                    savedProfileData.currentGoldenPace, 
+                                    savedProfileData.trainingStartDate, 
+                                    savedProfileData.weekly_mileage || 20,
+                                    26 // 6 months
+                                  );
+                                  
+                                  return progression.filter((_, index) => index % 2 === 0).slice(0, 7).map((point, index) => {
+                                    const isCurrentWeek = point.week === 0;
+                                    const barWidth = Math.min(100, ((point.goldenPace - savedProfileData.currentGoldenPace) / 6) * 100 + 20);
+                                    
+                                    return (
+                                      <div key={point.week} className="flex items-center space-x-3">
+                                        <div className="w-20 text-xs font-medium" style={{ color: colors.black }}>
+                                          {point.week === 0 ? 'Current' : `Week ${point.week}`}
+                                        </div>
+                                        <div className="flex-1 relative">
+                                          <div className="h-6 rounded" style={{ 
+                                            backgroundColor: colors.lightGray,
+                                            border: `1px solid ${colors.gray}`
+                                          }}>
+                                            <div 
+                                              className="h-full rounded transition-all duration-500"
+                                              style={{ 
+                                                width: `${barWidth}%`,
+                                                backgroundColor: isCurrentWeek ? colors.violet : colors.lightBlue,
+                                                backgroundImage: isCurrentWeek ? 'linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent)' : 'none'
+                                              }}
+                                            />
+                                          </div>
+                                          <div className="absolute right-2 top-0 h-6 flex items-center">
+                                            <span className="text-xs font-bold" style={{ 
+                                              color: colors.black,
+                                              textShadow: '0 0 3px white'
+                                            }}>
+                                              {point.goldenPace}
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <div className="w-16 text-xs" style={{ color: colors.darkGreen }}>
+                                          {point.week === 0 ? 'Current' : 
+                                            point.goldenPace > savedProfileData.currentGoldenPace ? 
+                                            `+${(point.goldenPace - savedProfileData.currentGoldenPace).toFixed(1)}` : '---'}
+                                        </div>
+                                      </div>
+                                    );
+                                  });
+                                })()}
+                              </div>
+                              
+                              <div className="mt-4 pt-4 text-xs" style={{ 
+                                borderTop: `1px solid ${colors.gray}`,
+                                color: colors.darkGreen
+                              }}>
+                                <p>💡 <strong>Pro Tip:</strong> Consistency is key! Maintain your weekly mileage and training intensity for steady progression.</p>
+                                <p>📈 Your projected GoldenPace in 6 months: <strong>{savedProfileData.projectedGoldenPace || 'N/A'}</strong></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Enhanced Training Data Section */}
                     <div className="mt-8 space-y-6">
@@ -2769,7 +3167,7 @@ const RunningTrainingApp = () => {
         )}
 
         {/* Blog/Articles Section - Munich 1972 Design */}
-        {activeTab === 'blog' && (
+        {activeTab === 'blog' && !selectedArticle && (
           <div className="space-y-8">
             <div className="text-center space-y-4">
               <h2 className="text-4xl font-bold" style={{ color: colors.black }}>
@@ -2781,15 +3179,181 @@ const RunningTrainingApp = () => {
             </div>
 
             {/* Featured Articles */}
-            <div className="munich-card">
-              <div className="munich-card-header">
-                <h3 className="text-2xl font-bold" style={{ color: colors.black }}>
-                  Featured Articles
-                </h3>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold" style={{ color: colors.black }}>
+                Featured Articles
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {featuredArticles.map((article) => (
+                  <div key={article.id} className="munich-card relative overflow-hidden group cursor-pointer transition-all hover:shadow-xl" 
+                       onClick={() => setSelectedArticle(article)}>
+                    <div className="absolute top-2 right-2 w-6 h-6 geometric-diamond" style={{ 
+                      backgroundColor: colors.lightBlue,
+                      opacity: 0.7
+                    }}></div>
+                    
+                    <div className="munich-card-body">
+                      <div className="mb-4">
+                        <span className="text-xs font-bold px-3 py-1 rounded-full" style={{ 
+                          backgroundColor: colors.lightBlue + '20',
+                          color: colors.lightBlue
+                        }}>
+                          {article.category.toUpperCase()}
+                        </span>
+                      </div>
+                      
+                      <h4 className="text-lg font-bold mb-3 group-hover:text-blue-600 transition-colors" style={{ color: colors.black }}>
+                        {article.title}
+                      </h4>
+                      
+                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                        {article.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs" style={{ color: colors.silver }}>
+                          {article.readTime}
+                        </span>
+                        <button className="text-xs font-medium px-4 py-2 rounded-full transition-all hover:shadow-md" style={{
+                          backgroundColor: colors.lightBlue,
+                          color: colors.white
+                        }}>
+                          Read Article
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="munich-card-body">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {/* Featured articles will be rendered here */}
+            </div>
+
+            {/* All Articles */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold" style={{ color: colors.black }}>
+                All Articles
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {articles.map((article) => (
+                  <div key={article.id} className="munich-card relative overflow-hidden group cursor-pointer transition-all hover:shadow-lg border-l-4" 
+                       style={{ borderLeftColor: article.featured ? colors.orange : colors.lightGreen }}
+                       onClick={() => setSelectedArticle(article)}>
+                    
+                    <div className="munich-card-body">
+                      <div className="flex items-start justify-between mb-3">
+                        <span className="text-xs font-medium px-2 py-1 rounded" style={{ 
+                          backgroundColor: article.featured ? colors.orange + '20' : colors.lightGreen + '20',
+                          color: article.featured ? colors.orange : colors.lightGreen
+                        }}>
+                          {article.category}
+                        </span>
+                        {article.featured && (
+                          <Star className="w-4 h-4" style={{ color: colors.orange }} />
+                        )}
+                      </div>
+                      
+                      <h4 className="text-base font-bold mb-2 group-hover:text-blue-600 transition-colors" style={{ color: colors.black }}>
+                        {article.title}
+                      </h4>
+                      
+                      <p className="text-sm mb-3" style={{ color: colors.darkGreen }}>
+                        {article.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center justify-between text-xs">
+                        <span style={{ color: colors.silver }}>
+                          {article.readTime}
+                        </span>
+                        <span className="font-medium group-hover:underline" style={{ color: colors.lightBlue }}>
+                          Read more →
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Article Reader Modal */}
+        {activeTab === 'blog' && selectedArticle && (
+          <div className="space-y-6">
+            {/* Article Header */}
+            <div className="flex items-center gap-4 mb-6">
+              <button 
+                onClick={() => setSelectedArticle(null)}
+                className="munich-btn munich-btn-outline"
+              >
+                ← Back to Articles
+              </button>
+            </div>
+
+            {/* Article Content */}
+            <div className="max-w-4xl mx-auto">
+              <div className="munich-card">
+                <div className="munich-card-body space-y-6">
+                  <div className="border-b pb-6" style={{ borderColor: colors.border }}>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-sm font-medium px-3 py-1 rounded-full" style={{ 
+                        backgroundColor: colors.lightBlue + '20',
+                        color: colors.lightBlue
+                      }}>
+                        {selectedArticle.category}
+                      </span>
+                      <span className="text-sm" style={{ color: colors.silver }}>
+                        {selectedArticle.readTime}
+                      </span>
+                    </div>
+                    <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: colors.black }}>
+                      {selectedArticle.title}
+                    </h1>
+                    <p className="text-lg" style={{ color: colors.darkGreen }}>
+                      {selectedArticle.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none" style={{ color: colors.black }}>
+                    <div 
+                      className="article-content"
+                      style={{ 
+                        lineHeight: '1.8',
+                        fontSize: '1.1rem'
+                      }}
+                      dangerouslySetInnerHTML={{ 
+                        __html: selectedArticle.content
+                          .replace(/\n\n/g, '</p><p>')
+                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                          .replace(/^# (.*?)$/gm, '<h2 style="font-size: 1.8rem; font-weight: bold; margin: 2rem 0 1rem 0; color: ' + colors.black + ';">$1</h2>')
+                          .replace(/^## (.*?)$/gm, '<h3 style="font-size: 1.4rem; font-weight: bold; margin: 1.5rem 0 1rem 0; color: ' + colors.darkGreen + ';">$1</h3>')
+                          .replace(/^\* (.*?)$/gm, '<li>$1</li>')
+                          .replace(/(<li>.*<\/li>)/gs, '<ul style="margin: 1rem 0; padding-left: 1.5rem; list-style: disc;">$1</ul>')
+                          .replace(/^(?!<[hul])/gm, '<p>')
+                          .replace(/$(?!<\/)/gm, '</p>')
+                      }} 
+                    />
+                  </div>
+
+                  {/* Article Actions */}
+                  <div className="border-t pt-6 flex justify-between items-center" style={{ borderColor: colors.border }}>
+                    <button 
+                      onClick={() => setSelectedArticle(null)}
+                      className="munich-btn munich-btn-outline"
+                    >
+                      ← Back to Articles
+                    </button>
+                    <div className="flex gap-2">
+                      <button className="munich-btn munich-btn-primary">
+                        Share Article
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
 
 
@@ -2859,149 +3423,6 @@ The result? You train for the runner you are today—and become the runner you w
 VDOT was revolutionary in its time. But training science and athlete needs have evolved. With mounting evidence from physiology labs, elite coaches, and the runners themselves, it’s clear: **the future is personalized, adaptive, and race-specific**.
 
 At Unforgiving Minute, we don’t just crunch your numbers. We understand your story. We guide you through your most unforgiving minutes and help you emerge stronger—with training that fits your life, not a table.
-
----
-
-**Works Cited**
-
-1. Scudamore, E. M., et al. "An Evaluation of Time-Trial Based Predictions of VO2max and Recommended Training Paces for Collegiate and Recreational Runners." *Journal of Strength and Conditioning Research*, vol. 32, no. 3, 2018, pp. 763–771. [Read](https://pubmed.ncbi.nlm.nih.gov/28426511/)
-2. Hudson, Brad, and Matt Fitzgerald. *Run Faster: From the 5K to the Marathon*. Penguin Group, 2008. [Read](https://www.runnersworld.com/advanced/a20824856/brad-hudsons-targeted-training/)
-3. Phillips Running. "Learning from the Greats: Bill Dellinger." 22 Feb. 2018. [Read](https://phillipsrunning.com/2018/02/22/learning-from-the-greats-bill-dellinger/)
-4. High Performance West. "Understand the Balance of Training: Hard/Easy, Speed/Endurance." 19 Oct. 2020. [Read](https://www.highperformancewest.com/on-coaching-blog/2020/10/19/understand-the-balance-of-training-hardeasy-speedendurance)
-5. Magness, Steve. "The Fallacy of VO2max and VO2max Workouts." *Science of Running*, 2009. [Read](https://www.scienceofrunning.com/2009/12/fallacy-of-vo2max-and-vo2max.html)
-                  <div className="munich-card relative overflow-hidden group">
-                    <div className="absolute top-2 right-2 w-6 h-6 geometric-diamond" style={{ 
-                      backgroundColor: colors.lightBlue,
-                      opacity: 0.7
-                    }}></div>
-                    
-                    <div className="munich-card-body">
-                      <div className="mb-4">
-                        <span className="text-xs font-medium px-3 py-1" style={{ 
-                          backgroundColor: colors.lightBlue,
-                          color: colors.white 
-                        }}>
-                          TRAINING SCIENCE
-                        </span>
-                      </div>
-                      
-                      <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
-                        Why Your Running Paces Don't Match VDOT Charts
-                      </h4>
-                      
-                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
-                        Discover the individual factors that VDOT completely ignores and how they affect your training paces. Learn why many runners struggle with Daniels' recommendations.
-                      </p>
-                      
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs" style={{ color: colors.silver }}>
-                          5 min read
-                        </span>
-                        <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
-                          Read Article
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Article 2 - Individual Factors */}
-                  <div className="munich-card relative overflow-hidden group">
-                    <div className="absolute top-2 right-2 w-6 h-6 geometric-octagon" style={{ 
-                      backgroundColor: colors.lightGreen,
-                      opacity: 0.7
-                    }}></div>
-                    
-                    <div className="munich-card-body">
-                      <div className="mb-4">
-                        <span className="text-xs font-medium px-3 py-1" style={{ 
-                          backgroundColor: colors.lightGreen,
-                          color: colors.white 
-                        }}>
-                          PERSONALIZATION
-                        </span>
-                      </div>
-                      
-                      <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
-                        The Individual Factors VDOT Completely Ignores
-                      </h4>
-                      
-                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
-                        Age, experience, biomechanics, and recovery capacity all affect your training paces. Here's how to account for what makes you unique.
-                      </p>
-                      
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs" style={{ color: colors.silver }}>
-                          7 min read
-                        </span>
-                        <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
-                          Read Article
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Article 3 - GoldenPace Success */}
-                  <div className="munich-card relative overflow-hidden group">
-                    <div className="absolute top-2 right-2 w-6 h-6 geometric-square" style={{ 
-                      backgroundColor: colors.violet,
-                      opacity: 0.7
-                    }}></div>
-                    
-                    <div className="munich-card-body">
-                      <div className="mb-4">
-                        <span className="text-xs font-medium px-3 py-1" style={{ 
-                          backgroundColor: colors.violet,
-                          color: colors.white 
-                        }}>
-                          SUCCESS STORY
-                        </span>
-                      </div>
-                      
-                      <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
-                        From VDOT to GoldenPace: Real Success Stories
-                      </h4>
-                      
-                      <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
-                        Case studies of athletes who improved their performance by switching from generic VDOT to personalized GoldenPace training.
-                      </p>
-                      
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs" style={{ color: colors.silver }}>
-                          6 min read
-                        </span>
-                        <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
-                          Read Article
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Newsletter Signup */}
-            <div className="munich-card text-center">
-              <div className="munich-card-body">
-                <h3 className="text-2xl font-bold mb-4" style={{ color: colors.black }}>
-                  Get Weekly Training Insights
-                </h3>
-                <p className="text-lg mb-6" style={{ color: colors.darkGreen }}>
-                  Subscribe to our newsletter for evidence-based training tips and VDOT alternatives
-                </p>
-                <div className="max-w-md mx-auto flex space-x-3">
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email"
-                    className="munich-input flex-1"
-                  />
-                  <button className="munich-btn munich-btn-primary">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Premium Training Plans Section - Munich 1972 Design */}
         {activeTab === 'premium' && (
