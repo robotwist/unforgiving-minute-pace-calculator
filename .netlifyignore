@@ -6,6 +6,7 @@ plans/
 runpace_pro/
 manage.py
 requirements.txt
+runtime.txt
 db.sqlite3
 docker-compose.yml
 Procfile

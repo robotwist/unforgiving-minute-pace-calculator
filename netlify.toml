@@ -14,6 +14,8 @@
   # Force fresh builds with timestamp
   NETLIFY_CACHE_ID = "v20250809110630"
   FORCE_BUILD = "true"
+  # Disable Python installation
+  PYTHON_VERSION = ""
 
 # Site configuration
 [context.production]
