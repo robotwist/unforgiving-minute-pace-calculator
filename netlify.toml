@@ -1,25 +1,26 @@
 [build]
   base = "."
   publish = "build"
-  command = "./build.sh"
+  command = "npm install --legacy-peer-deps && npm run build"
   ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [build.processing]
   skip_processing = false
 
 [build.environment]
-  PYTHON_VERSION = "3.11.9"
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
   CI = "true"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
   NODE_ENV = "production"
+  # Explicitly disable Python detection
+  NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250809114000"
+  NETLIFY_CACHE_ID = "v20250809115000"
 
 # Site configuration
 [context.production]
-  command = "./build.sh"
+  command = "npm install --legacy-peer-deps && npm run build"
 
 [[redirects]]
   from = "/api/*"

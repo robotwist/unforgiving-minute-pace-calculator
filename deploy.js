@@ -26,10 +26,14 @@ function checkBuildConfiguration() {
     const buildCommand = netlifyConfig.match(/command\s*=\s*"([^"]+)"/);
     const publishDir = netlifyConfig.match(/publish\s*=\s*"([^"]+)"/);
     const nodeVersion = netlifyConfig.match(/NODE_VERSION\s*=\s*"([^"]+)"/);
+    const pythonVersion = netlifyConfig.match(/PYTHON_VERSION\s*=\s*"([^"]+)"/);
+    const cacheId = netlifyConfig.match(/NETLIFY_CACHE_ID\s*=\s*"([^"]+)"/);
     
     console.log(`   📦 Build Command: ${buildCommand ? buildCommand[1] : 'Not found'}`);
     console.log(`   📁 Publish Directory: ${publishDir ? publishDir[1] : 'Not found'}`);
     console.log(`   ⚙️  Node Version: ${nodeVersion ? nodeVersion[1] : 'Not specified'}`);
+    console.log(`   🐍 Python Version: ${pythonVersion ? pythonVersion[1] : 'Not specified'}`);
+    console.log(`   🗂️  Cache ID: ${cacheId ? cacheId[1] : 'Not specified'}`);
     
     // Check if build folder exists locally
     const buildExists = fs.existsSync(path.join(__dirname, 'build'));
@@ -48,6 +52,19 @@ function checkBuildConfiguration() {
     
   } catch (error) {
     console.log('❌ Error reading netlify.toml:', error.message);
+  }
+  
+  // Check runtime.txt for Python version
+  try {
+    const runtimePath = path.join(__dirname, 'runtime.txt');
+    if (fs.existsSync(runtimePath)) {
+      const runtimeContent = fs.readFileSync(runtimePath, 'utf8').trim();
+      console.log(`   🐍 runtime.txt: ${runtimeContent}`);
+    } else {
+      console.log('   🐍 runtime.txt: Not found');
+    }
+  } catch (error) {
+    console.log('❌ Error reading runtime.txt:', error.message);
   }
   
   // Check package.json
