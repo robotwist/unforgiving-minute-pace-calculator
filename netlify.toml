@@ -3,10 +3,12 @@
   publish = "build"
   command = "npm install --legacy-peer-deps && npm run build"
 
+[build.processing]
+  skip_processing = false
+
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
-  SKIP_CACHE_INVALIDATION = "true"
   CI = "false"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
 
