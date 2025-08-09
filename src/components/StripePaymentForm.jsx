@@ -48,21 +48,45 @@ const StripePaymentForm = ({
     setPaymentError('');
 
     try {
-      // For now, simulate a successful payment
-      // In production, this would integrate with your backend
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Create payment intent with backend
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://unforgiving-moment-production.up.railway.app/api';
       
-      // Mock successful payment
-      const mockPaymentResult = {
-        paymentIntent: {
-          id: 'pi_mock_' + Date.now(),
-          status: 'succeeded',
-          amount: selectedPlan.price * 100,
-          currency: 'usd'
-        }
-      };
+      const response = await fetch(`${apiUrl}/create-payment-intent`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId: selectedPlan.id,
+          amount: selectedPlan.price * 100, // Convert to cents
+          planName: selectedPlan.name,
+        }),
+      });
 
-      onSuccess(mockPaymentResult);
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const { clientSecret } = await response.json();
+
+      // Confirm payment with Stripe
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: userProfile?.name || 'Anonymous',
+            email: userProfile?.email || '',
+          },
+        }
+      });
+
+      if (result.error) {
+        setPaymentError(result.error.message);
+        onError(result.error);
+      } else {
+        // Payment succeeded
+        onSuccess(result);
+      }
 
     } catch (error) {
       setPaymentError(error.message || 'An error occurred processing your payment.');
