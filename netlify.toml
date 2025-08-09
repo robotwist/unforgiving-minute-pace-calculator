@@ -8,22 +8,18 @@
   skip_processing = false
 
 [build.environment]
-  # Only Node.js - no Python at all
-  NODE_VERSION = "18"
+  PYTHON_VERSION = "3.11.9"
+  NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
   CI = "true"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
   NODE_ENV = "production"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250809113700"
+  NETLIFY_CACHE_ID = "v20250809114000"
 
 # Site configuration
 [context.production]
   command = "./build.sh"
-
-# Site configuration
-[context.production]
-  command = "npm install --legacy-peer-deps && npm run build"
 
 [[redirects]]
   from = "/api/*"
