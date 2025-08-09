@@ -1,7 +1,7 @@
 [build]
   base = "."
   publish = "build"
-  command = "npm ci --legacy-peer-deps && npm run build"
+  command = "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && npm run build"
 
 [build.processing]
   skip_processing = false
@@ -11,8 +11,9 @@
   NPM_FLAGS = "--legacy-peer-deps"
   CI = "true"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
-  # Force fresh builds
-  NETLIFY_CACHE_ID = "v2025080911"
+  # Force fresh builds with timestamp
+  NETLIFY_CACHE_ID = "v20250809110630"
+  FORCE_BUILD = "true"
 
 # Site configuration
 [context.production]
