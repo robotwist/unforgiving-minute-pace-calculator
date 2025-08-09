@@ -57,14 +57,28 @@ function checkBuildConfiguration() {
   // Check runtime.txt for Python version
   try {
     const runtimePath = path.join(__dirname, 'runtime.txt');
+    const backendRuntimePath = path.join(__dirname, 'backend', 'runtime.txt');
     if (fs.existsSync(runtimePath)) {
       const runtimeContent = fs.readFileSync(runtimePath, 'utf8').trim();
       console.log(`   🐍 runtime.txt: ${runtimeContent}`);
+    } else if (fs.existsSync(backendRuntimePath)) {
+      console.log('   🐍 runtime.txt: Moved to backend/ directory (✅ Hidden from Netlify)');
     } else {
-      console.log('   🐍 runtime.txt: Not found');
+      console.log('   🐍 runtime.txt: Not found (✅ Python detection disabled)');
+    }
+    
+    // Check requirements.txt
+    const requirementsPath = path.join(__dirname, 'requirements.txt');
+    const backendRequirementsPath = path.join(__dirname, 'backend', 'requirements.txt');
+    if (fs.existsSync(requirementsPath)) {
+      console.log('   ⚠️  requirements.txt: Found in root (Netlify will detect Python!)');
+    } else if (fs.existsSync(backendRequirementsPath)) {
+      console.log('   📦 requirements.txt: Moved to backend/ directory (✅ Hidden from Netlify)');
+    } else {
+      console.log('   📦 requirements.txt: Not found (✅ Python detection disabled)');
     }
   } catch (error) {
-    console.log('❌ Error reading runtime.txt:', error.message);
+    console.log('❌ Error checking Python files:', error.message);
   }
   
   // Check package.json

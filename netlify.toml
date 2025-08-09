@@ -18,7 +18,7 @@
   SKIP_PYTHON_INSTALL = "true"
   PYTHON_VERSION = ""
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250809120000"
+  NETLIFY_CACHE_ID = "v20250809170000"
 
 # Site configuration
 [context.production]
