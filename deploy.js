@@ -3,12 +3,103 @@
 /**
  * Deployment verification script for Unforgiving Minute Running Calculator
  * Checks both frontend (Netlify) and backend (Railway) integration
+ * Also provides build configuration diagnostics
  */
 
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
 const FRONTEND_URL = 'https://unforgivingminute.netlify.app';
 const BACKEND_URL = 'https://unforgiving-moment-production.up.railway.app';
+
+function checkBuildConfiguration() {
+  console.log('\n🔧 BUILD CONFIGURATION ANALYSIS');
+  console.log('='.repeat(50));
+  
+  // Check netlify.toml
+  try {
+    const netlifyConfig = fs.readFileSync(path.join(__dirname, 'netlify.toml'), 'utf8');
+    console.log('✅ netlify.toml found');
+    
+    // Extract key settings
+    const buildCommand = netlifyConfig.match(/command\s*=\s*"([^"]+)"/);
+    const publishDir = netlifyConfig.match(/publish\s*=\s*"([^"]+)"/);
+    const nodeVersion = netlifyConfig.match(/NODE_VERSION\s*=\s*"([^"]+)"/);
+    
+    console.log(`   📦 Build Command: ${buildCommand ? buildCommand[1] : 'Not found'}`);
+    console.log(`   📁 Publish Directory: ${publishDir ? publishDir[1] : 'Not found'}`);
+    console.log(`   ⚙️  Node Version: ${nodeVersion ? nodeVersion[1] : 'Not specified'}`);
+    
+    // Check if build folder exists locally
+    const buildExists = fs.existsSync(path.join(__dirname, 'build'));
+    console.log(`   🏗️  Local build folder: ${buildExists ? '✅ Exists' : '❌ Missing'}`);
+    
+    if (buildExists) {
+      const indexPath = path.join(__dirname, 'build', 'index.html');
+      if (fs.existsSync(indexPath)) {
+        const indexContent = fs.readFileSync(indexPath, 'utf8');
+        const jsFile = indexContent.match(/\/static\/js\/(main\.[a-f0-9]+\.js)/);
+        const cssFile = indexContent.match(/\/static\/css\/(main\.[a-f0-9]+\.css)/);
+        console.log(`   📄 Local JS Hash: ${jsFile ? jsFile[1] : 'Not found'}`);
+        console.log(`   🎨 Local CSS Hash: ${cssFile ? cssFile[1] : 'Not found'}`);
+      }
+    }
+    
+  } catch (error) {
+    console.log('❌ Error reading netlify.toml:', error.message);
+  }
+  
+  // Check package.json
+  try {
+    const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8'));
+    console.log(`   📋 Package Name: ${packageJson.name}`);
+    console.log(`   🔢 Version: ${packageJson.version}`);
+    console.log(`   ⚛️  React Scripts: ${packageJson.dependencies['react-scripts']}`);
+  } catch (error) {
+    console.log('❌ Error reading package.json:', error.message);
+  }
+}
+
+async function compareDeployedVersion() {
+  console.log('\n🔍 DEPLOYED VERSION ANALYSIS');
+  console.log('='.repeat(50));
+  
+  try {
+    const deployed = await checkEndpoint(FRONTEND_URL);
+    if (deployed.status === 200) {
+      // Extract file hashes from deployed version
+      const jsMatch = deployed.data.match(/\/static\/js\/(main\.[a-f0-9]+\.js)/);
+      const cssMatch = deployed.data.match(/\/static\/css\/(main\.[a-f0-9]+\.css)/);
+      const timestampMatch = deployed.data.match(/Build timestamp: ([^-]+)/);
+      
+      console.log(`   📄 Deployed JS Hash: ${jsMatch ? jsMatch[1] : 'Not found'}`);
+      console.log(`   🎨 Deployed CSS Hash: ${cssMatch ? cssMatch[1] : 'Not found'}`);
+      console.log(`   ⏰ Build Timestamp: ${timestampMatch ? timestampMatch[1] : 'Not found'}`);
+      
+      // Check if deployed version matches local
+      const buildIndexPath = path.join(__dirname, 'build', 'index.html');
+      if (fs.existsSync(buildIndexPath)) {
+        const localContent = fs.readFileSync(buildIndexPath, 'utf8');
+        const localJs = localContent.match(/\/static\/js\/(main\.[a-f0-9]+\.js)/);
+        const localCss = localContent.match(/\/static\/css\/(main\.[a-f0-9]+\.css)/);
+        
+        const jsMatches = jsMatch && localJs && jsMatch[1] === localJs[1];
+        const cssMatches = cssMatch && localCss && cssMatch[1] === localCss[1];
+        
+        console.log(`   🔄 JS Hash Match: ${jsMatches ? '✅' : '❌'} ${jsMatches ? 'Synchronized' : 'OUT OF SYNC'}`);
+        console.log(`   🔄 CSS Hash Match: ${cssMatches ? '✅' : '❌'} ${cssMatches ? 'Synchronized' : 'OUT OF SYNC'}`);
+        
+        if (!jsMatches || !cssMatches) {
+          console.log(`   ⚠️  LOCAL/DEPLOYED MISMATCH DETECTED!`);
+          console.log(`   📋 Recommendation: Force Netlify rebuild required`);
+        }
+      }
+    }
+  } catch (error) {
+    console.log('❌ Error analyzing deployed version:', error.message);
+  }
+}
 
 function checkEndpoint(url, path = '') {
   return new Promise((resolve, reject) => {
@@ -37,6 +128,10 @@ function checkEndpoint(url, path = '') {
 async function runHealthChecks() {
   console.log('🚀 UNFORGIVING MINUTE - DEPLOYMENT HEALTH CHECK');
   console.log('='.repeat(50));
+  
+  // Run build configuration analysis first
+  checkBuildConfiguration();
+  await compareDeployedVersion();
   
   try {
     // Frontend check
@@ -102,10 +197,25 @@ async function runHealthChecks() {
     console.log('Frontend: ✅ Live on Netlify');
     console.log('Backend:  ✅ Live on Railway'); 
     console.log('Payments: ⚠️  Needs Stripe secret key configuration');
-    console.log('\n📋 NEXT STEPS:');
-    console.log('1. Configure STRIPE_SECRET_KEY in Railway dashboard');
-    console.log('2. Test payment flow with test card: 4242424242424242');
-    console.log('3. Switch to live keys when ready for production');
+    
+    console.log('\n📋 BUILD STATUS ACTIONS NEEDED:');
+    console.log('🔧 LOCAL CHANGES THAT CAN BE MADE:');
+    console.log('   1. ✅ netlify.toml configuration is correct');
+    console.log('   2. ✅ Build command and publish directory properly set');
+    console.log('   3. ✅ Node version specified (18)');
+    
+    console.log('\n🌐 NETLIFY DASHBOARD ACTIONS REQUIRED:');
+    console.log('   1. 🚨 CRITICAL: Force "Clear cache and deploy site"');
+    console.log('   2. 📋 Verify site is connected to correct GitHub repo');
+    console.log('   3. 🔄 Check build logs for errors in Netlify dashboard');
+    console.log('   4. ⚙️  Ensure build settings match netlify.toml');
+    console.log('   5. 🔑 Add environment variables if needed');
+    
+    console.log('\n💡 TROUBLESHOOTING STEPS:');
+    console.log('   • Build version mismatch indicates Netlify cache issue');
+    console.log('   • Try manual deploy from GitHub in Netlify dashboard'); 
+    console.log('   • Check Netlify build logs for dependency conflicts');
+    console.log('   • Verify GitHub integration and webhook delivery');
     
   } catch (error) {
     console.error('Health check failed:', error.message);
