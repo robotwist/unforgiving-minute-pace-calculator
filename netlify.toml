@@ -1,7 +1,7 @@
 [build]
   base = "."
   publish = "build"
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "./build.sh"
   ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [build.processing]
@@ -13,13 +13,15 @@
   CI = "true"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
   # Force fresh builds with timestamp
-  NETLIFY_CACHE_ID = "v20250809112800"
+  NETLIFY_CACHE_ID = "v20250809113100"
   FORCE_BUILD = "true"
-  # Explicitly disable Python
+  # Aggressively disable Python and mise
   PYTHON_VERSION = ""
   MISE_PYTHON_DISABLE = "true"
-  # Tell Netlify this is Node.js only
+  MISE_DISABLE = "true"
   NODE_ENV = "production"
+  # Override mise completely
+  PATH = "/usr/local/bin:/usr/bin:/bin"
 
 # Site configuration
 [context.production]
