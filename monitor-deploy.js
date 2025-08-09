@@ -8,7 +8,7 @@
 const https = require('https');
 
 const FRONTEND_URL = 'https://unforgivingminute.netlify.app';
-const TARGET_JS_HASH = 'main.12f6aea1.js';
+const TARGET_JS_HASH = 'main.c54b6bba.js';
 const TARGET_CSS_HASH = 'main.33d76f1d.css';
 const TARGET_TIMESTAMP = '2025-08-09T17:10:00Z';
 

@@ -1236,6 +1236,8 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                       setActiveTab(id);
                     }
                   }}
+                  aria-label={`Switch to ${label} tab`}
+                  aria-current={activeTab === id ? 'page' : undefined}
                   className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all duration-200 ${
                     activeTab === id
                       ? 'text-white shadow-sm'
@@ -1262,6 +1264,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                   border: `2px solid ${darkMode ? colors.yellow : colors.lightBlue}`
                 }}
                 title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {darkMode ? (
                   <span className="text-lg">‚òÄÔ∏è</span>
@@ -1425,6 +1428,8 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                         placeholder="MM:SS or HH:MM:SS"
                         value={raceTime}
                         onChange={(e) => setRaceTime(e.target.value)}
+                        aria-label="Race time in minutes and seconds"
+                        aria-describedby="race-time-help"
                         className="w-full px-3 sm:px-4 py-3 border-2 font-mono text-base sm:text-lg text-center"
                         style={{ 
                           borderColor: colors.border,
@@ -1432,6 +1437,9 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                           backgroundColor: colors.white
                         }}
                       />
+                      <div id="race-time-help" className="sr-only">
+                        Enter your race time in MM:SS format for shorter races or HH:MM:SS for longer races
+                      </div>
                     </div>
                     
                     <div>
@@ -1441,6 +1449,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                       <select
                         value={raceDistance}
                         onChange={(e) => setRaceDistance(e.target.value)}
+                        aria-label="Select race distance"
                         className="w-full px-3 sm:px-4 py-3 border-2 font-medium text-center"
                         style={{ 
                           borderColor: colors.border,
@@ -1459,6 +1468,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                   
                   <button
                     onClick={handleCalculate}
+                    aria-label="Calculate training paces from race time"
                     className="w-full py-3 px-6 font-medium text-base sm:text-lg transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg relative btn-high-contrast"
                     style={{ 
                       backgroundColor: colors.lightBlue,
@@ -1641,6 +1651,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                             backgroundColor: colors.orange,
                             color: 'white'
                           }}
+                          aria-label="View premium 12-week training programs"
                         >
                           <TrendingUp className="w-6 h-6 mr-3" />
                           Get Complete 12-Week Program
@@ -1653,6 +1664,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                             color: colors.lightBlue,
                             backgroundColor: 'white'
                           }}
+                          aria-label="Browse all training programs"
                         >
                           <Target className="w-5 h-5 mr-2" />
                           Browse All Programs
@@ -1993,6 +2005,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                         onChange={(e) => setUserProfile({...userProfile, name: e.target.value})}
                         className="munich-input"
                         placeholder="Enter your name"
+                        aria-label="Your full name"
                       />
                     </div>
                     
@@ -2007,6 +2020,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                         onChange={(e) => setUserProfile({...userProfile, email: e.target.value})}
                         className="munich-input"
                         placeholder="your@email.com"
+                        aria-label="Your email address"
                       />
                     </div>
                   </div>
@@ -2059,6 +2073,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                         onChange={(e) => setUserProfile({...userProfile, goalRaceTime: e.target.value})}
                         className="munich-input"
                         placeholder="e.g., 20:00 for 5K"
+                        aria-label="Goal race time in minutes and seconds"
                       />
                     </div>
 
@@ -2073,6 +2088,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                         onChange={(e) => setUserProfile({...userProfile, weeklyMileage: e.target.value})}
                         className="munich-input"
                         placeholder="e.g., 25"
+                        aria-label="Current weekly mileage in miles or kilometers"
                       />
                     </div>
                   </div>
@@ -2088,6 +2104,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                       className="munich-input"
                       placeholder="Any injuries or health considerations we should know about?"
                       rows="3"
+                      aria-label="Injury history and health considerations"
                     />
                   </div>
 
@@ -2095,6 +2112,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                     <button 
                       onClick={savedProfileData ? updateProfile : saveProfile}
                       className="munich-btn munich-btn-primary flex-1 relative"
+                      aria-label={savedProfileData ? 'Update your training profile' : 'Create your training profile'}
                     >
                       {savedProfileData ? 'Update Profile' : 'Create Profile'}
                       {/* Geometric accent on button */}
@@ -2108,6 +2126,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                         onClick={() => userProfile.email && loadProfile(userProfile.email)}
                         disabled={!userProfile.email}
                         className="munich-btn munich-btn-outline disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-label="Check for existing profile with this email"
                       >
                         Check Existing
                       </button>
@@ -2537,6 +2556,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                       <button
                         onClick={() => setActiveTab('calculator')}
                         className="munich-btn munich-btn-primary relative"
+                        aria-label="Go to pace calculator"
                       >
                         Calculate GoldenPace
                         {/* Geometric accent on button */}
@@ -2548,6 +2568,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                       <button
                         onClick={() => setActiveTab('plans')}
                         className="munich-btn munich-btn-secondary relative"
+                        aria-label="View training plans"
                       >
                         Get Training Plans
                         {/* Geometric accent on button */}
@@ -2559,6 +2580,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeks‚
                       <button
                         onClick={() => setShowProfileDashboard(false)}
                         className="munich-btn munich-btn-outline"
+                        aria-label="Close profile dashboard"
                       >
                         Edit Profile
                       </button>

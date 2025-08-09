@@ -95,28 +95,34 @@ const StripePaymentForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="space-y-3">
-        <label className="block font-medium" style={{ color: colors.black }}>
-          Payment Information
-        </label>
-        
-        <div 
-          className="p-4 border-2 rounded-lg transition-colors focus-within:border-blue-500"
-          style={{ borderColor: colors.gray }}
-        >
-          <CardElement options={cardElementOptions} />
-        </div>
-
-        {paymentError && (
+    <section aria-labelledby="payment-form-heading">
+      <h2 id="payment-form-heading" className="sr-only">Payment Information</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-3">
+          <label className="block font-medium" style={{ color: colors.black }}>
+            Payment Information
+          </label>
+          
           <div 
-            className="p-3 rounded-lg text-sm"
-            style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}
+            className="p-4 border-2 rounded-lg transition-colors focus-within:border-blue-500"
+            style={{ borderColor: colors.gray }}
+            role="textbox"
+            aria-label="Credit card information"
           >
-            {paymentError}
+            <CardElement options={cardElementOptions} />
           </div>
-        )}
-      </div>
+
+          {paymentError && (
+            <div 
+              className="p-3 rounded-lg text-sm"
+              style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}
+              role="alert"
+              aria-live="polite"
+            >
+              {paymentError}
+            </div>
+          )}
+        </div>
 
       <div 
         className="p-4 rounded-lg"
@@ -155,6 +161,7 @@ const StripePaymentForm = ({
             opacity: (!stripe || loading) ? 0.6 : 1,
             cursor: (!stripe || loading) ? 'not-allowed' : 'pointer'
           }}
+          aria-label={`Pay ${selectedPlan.price} dollars for ${selectedPlan.name}${selectedPlan.id === 'personal-coaching' ? ' per month' : ''}`}
         >
           {loading ? (
             <span className="flex items-center justify-center">
@@ -176,6 +183,7 @@ const StripePaymentForm = ({
         </div>
       </div>
     </form>
+    </section>
   );
 };
 
