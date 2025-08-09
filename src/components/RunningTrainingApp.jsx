@@ -7,9 +7,7 @@ import {
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
   baseTrainingPlans,
-  getTrainingPacesForLevel,
-  generatePersonalizedPlan,
-  convertTimeToVDOT
+  generatePersonalizedPlan
 } from '../data/trainingPlans';
 // import ArticleCard from './blog/ArticleCard';
 // import ArticleModal from './blog/ArticleModal';

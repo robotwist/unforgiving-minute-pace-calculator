@@ -67,7 +67,7 @@ const RunningDesignApp = () => {
       setCurrentFeature(prev => (prev + 1) % trainingPlans.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [trainingPlans.length]);
 
   useEffect(() => {
     // Handle keyboard navigation for accessibility
@@ -78,7 +78,7 @@ const RunningDesignApp = () => {
     };
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
+  }, [trainingPlans.length]);
 
   const currentPlan = trainingPlans[currentFeature];
 

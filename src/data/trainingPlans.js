@@ -754,7 +754,7 @@ export const convertTimeToVDOT = (timeInSeconds) => {
   return goldenPaceFrom5K[closestTime];
 };
 
-export default {
+const trainingPlansExport = {
   goldenPaceFrom5K,
   trainingPacesByVDOT,
   baseTrainingPlans,
@@ -762,3 +762,5 @@ export default {
   generatePersonalizedPlan,
   convertTimeToVDOT
 };
+
+export default trainingPlansExport;
