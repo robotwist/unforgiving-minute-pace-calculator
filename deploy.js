@@ -7,7 +7,7 @@
 
 const https = require('https');
 
-const FRONTEND_URL = 'https://unforgiving-minute.netlify.app';
+const FRONTEND_URL = 'https://unforgivingminute.netlify.app';
 const BACKEND_URL = 'https://unforgiving-moment-production.up.railway.app';
 
 function checkEndpoint(url, path = '') {
