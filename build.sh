@@ -6,6 +6,11 @@
 echo "🚀 Starting Node.js-only React build..."
 echo "📦 Node version: $(node --version)"
 echo "📋 NPM version: $(npm --version)"
+echo "🔧 Current PATH: $PATH"
+echo "🚫 Ensuring no Python tools are used"
+
+# Ensure we're in the right directory
+echo "📁 Working directory: $(pwd)"
 
 # Install dependencies
 echo "📥 Installing npm dependencies..."

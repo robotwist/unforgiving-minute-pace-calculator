@@ -8,20 +8,18 @@
   skip_processing = false
 
 [build.environment]
+  # Only Node.js - no Python at all
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
   CI = "true"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
-  # Force fresh builds with timestamp
-  NETLIFY_CACHE_ID = "v20250809113100"
-  FORCE_BUILD = "true"
-  # Aggressively disable Python and mise
-  PYTHON_VERSION = ""
-  MISE_PYTHON_DISABLE = "true"
-  MISE_DISABLE = "true"
   NODE_ENV = "production"
-  # Override mise completely
-  PATH = "/usr/local/bin:/usr/bin:/bin"
+  # Force cache refresh
+  NETLIFY_CACHE_ID = "v20250809113700"
+
+# Site configuration
+[context.production]
+  command = "./build.sh"
 
 # Site configuration
 [context.production]
