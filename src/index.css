@@ -1,27 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Munich 1972 Olympic Design System - Pure CSS Implementation */
+/* Removing Tailwind for complete creative control */
 
-/* Munich 1972 Olympic Design System - Global Styles */
+/* Munich 1972 Olympic Color Palette */
 :root {
-  /* Official Munich 1972 Color Palette */
-  --munich-light-blue: #4A90E2;    /* Pantone 285 C - Official Bavaria color */
-  --munich-light-green: #7ED321;   /* Pantone 7487 C - Press/media color */
-  --munich-silver: #9CA3AF;        /* Pantone Silver C - Official events */
-  --munich-violet: #6366F1;        /* Pantone 2135 C - Dark blue/violet */
-  --munich-dark-green: #059669;    /* Pantone 347 C - Supporting green */
-  --munich-orange: #F97316;        /* Pantone 2013 C - Technology/timekeeping */
-  --munich-yellow: #EAB308;        /* Pantone 123 C - Supporting yellow */
-  --munich-white: #FFFFFF;         /* Symbol of lightness */
-  --munich-black: #1F2937;         /* Text color */
-  --munich-gray: #F8FAFC;          /* Light background */
-  --munich-border: #E2E8F0;        /* Subtle border */
+  /* Official Munich 1972 Colors - Exact Pantone Matches */
+  --munich-light-blue: #4A90E2;    /* Pantone 285 C - Bavaria Blue */
+  --munich-light-green: #7ED321;   /* Pantone 7487 C - Olympic Green */
+  --munich-silver: #9CA3AF;        /* Pantone Silver C - Medal Silver */
+  --munich-violet: #6366F1;        /* Pantone 2135 C - Deep Violet */
+  --munich-dark-green: #059669;    /* Pantone 347 C - Forest Green */
+  --munich-orange: #F97316;        /* Pantone 2013 C - Flame Orange */
+  --munich-yellow: #EAB308;        /* Pantone 123 C - Sun Yellow */
+  --munich-white: #FFFFFF;         /* Pure White - Symbol of Light */
+  --munich-black: #1F2937;         /* Rich Black - Typography */
+  --munich-gray: #F8FAFC;          /* Soft Gray - Backgrounds */
+  --munich-border: #E2E8F0;        /* Subtle Border */
   
-  /* Typography - Munich 1972 Systematic Scale */
-  --font-geometric: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  /* Dark Mode Color Variants */
+  --munich-dark-bg: #0F172A;       /* Deep Dark Background */
+  --munich-dark-card: #1E293B;     /* Dark Card Background */
+  --munich-dark-border: #334155;   /* Dark Border */
+  --munich-dark-text: #F1F5F9;     /* Light Text */
   
-  /* Munich Typography Scale - Based on geometric progression */
+  /* Munich Typography System - Geometric Precision */
+  --font-geometric: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  
+  /* Munich Typography Scale - Fibonacci-based */
   --text-xs: 0.75rem;      /* 12px */
   --text-sm: 0.875rem;     /* 14px */
   --text-base: 1rem;       /* 16px */
@@ -30,8 +35,10 @@
   --text-2xl: 1.5rem;      /* 24px */
   --text-3xl: 1.875rem;    /* 30px */
   --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
   
-  /* Munich Spacing System - Geometric Grid */
+  /* Munich Spacing System - Golden Ratio Inspired */
   --space-1: 0.25rem;      /* 4px */
   --space-2: 0.5rem;       /* 8px */
   --space-3: 0.75rem;      /* 12px */
@@ -42,318 +49,191 @@
   --space-10: 2.5rem;      /* 40px */
   --space-12: 3rem;        /* 48px */
   --space-16: 4rem;        /* 64px */
+  --space-20: 5rem;        /* 80px */
+  --space-24: 6rem;        /* 96px */
   
-  /* Munich Design Tokens */
-  --border-radius-geometric: 0;
-  --shadow-geometric: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-geometric-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* Munich Design Tokens - Pure Geometric */
+  --border-radius: 0;               /* Sharp, geometric edges */
+  --border-width: 2px;              /* Bold, confident lines */
+  --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-olympic: 0 20px 25px -5px rgba(74, 144, 226, 0.1);
   
-  /* Munich Button Styles */
-  --button-padding: var(--space-4) var(--space-6);
-  --button-font-size: var(--text-base);
-  --button-font-weight: 500;
+  /* Munich Animation Timing */
+  --timing-fast: 0.2s;
+  --timing-medium: 0.3s;
+  --timing-slow: 0.5s;
+  --timing-olympic: 0.8s;
+  --ease-olympic: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Base styles with Munich 1972 principles */
-body {
+/* Munich Base Styles - Pure and Clean */
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
   font-family: var(--font-geometric);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--munich-black);
+  background-color: var(--munich-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--munich-white);
-  color: var(--munich-black);
-  line-height: 1.6;
-  font-size: 16px; /* Ensure readable base font size */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--timing-medium) var(--ease-olympic),
+              color var(--timing-medium) var(--ease-olympic);
 }
 
-
-
-/* High Contrast Focus Styles */
-*:focus {
-  outline: 3px solid var(--munich-light-blue);
-  outline-offset: 2px;
+/* Dark Mode Implementation */
+body.dark {
+  background-color: var(--munich-dark-bg);
+  color: var(--munich-dark-text);
 }
 
-/* Geometric design utilities */
-.geometric-border {
-  border-radius: var(--border-radius-geometric);
+/* Munich Typography System */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  color: inherit;
+  margin-bottom: var(--space-4);
 }
 
-.geometric-shadow {
-  box-shadow: var(--shadow-geometric);
+h1 { font-size: var(--text-6xl); }
+h2 { font-size: var(--text-5xl); }
+h3 { font-size: var(--text-4xl); }
+h4 { font-size: var(--text-3xl); }
+h5 { font-size: var(--text-2xl); }
+h6 { font-size: var(--text-xl); }
+
+p {
+  margin-bottom: var(--space-4);
 }
 
-/* Munich 1972 inspired geometric shapes */
-.geometric-diamond {
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
-.geometric-octagon {
-  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-}
-
-.geometric-square {
-  clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);
-}
-
-/* Track and Stopwatch Animations */
-@keyframes track-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes stopwatch-tick {
-  0% {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(47deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-}
-
-.track-rotate {
-  animation: track-rotate 20s linear infinite;
-}
-
-.stopwatch-tick {
-  animation: stopwatch-tick 2s ease-in-out infinite;
-}
-
-/* Track and Stopwatch Animations */
-@keyframes track-rotate-counterclockwise {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes stopwatch-tick-counterclockwise {
-  0% {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(43deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-}
-
-.track-rotate-counterclockwise {
-  animation: track-rotate-counterclockwise 20s linear infinite;
-}
-
-.stopwatch-tick-counterclockwise {
-  animation: stopwatch-tick-counterclockwise 2s ease-in-out infinite;
-}
-
-/* Progressive Melange Animation */
-@keyframes progressive-melange {
-  0% {
-    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
-    background-size: 400% 400%;
-  }
-  25% {
-    background: linear-gradient(45deg, var(--munich-green) 0%, var(--munich-white) 25%, var(--munich-blue) 50%, var(--munich-green) 75%, var(--munich-white) 100%);
-    background-size: 400% 400%;
-  }
-  50% {
-    background: linear-gradient(45deg, var(--munich-white) 0%, var(--munich-blue) 25%, var(--munich-green) 50%, var(--munich-white) 75%, var(--munich-blue) 100%);
-    background-size: 400% 400%;
-  }
-  75% {
-    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
-    background-size: 400% 400%;
-  }
-  100% {
-    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
-    background-size: 400% 400%;
-  }
-}
-
-.progressive-melange {
-  animation: progressive-melange 8s ease-in-out infinite;
-}
-
-/* Running Pictogram Animation */
-@keyframes running-motion {
-  0% {
-    transform: translateX(0) rotateY(0deg);
-  }
-  25% {
-    transform: translateX(2px) rotateY(5deg);
-  }
-  50% {
-    transform: translateX(0) rotateY(0deg);
-  }
-  75% {
-    transform: translateX(-2px) rotateY(-5deg);
-  }
-  100% {
-    transform: translateX(0) rotateY(0deg);
-  }
-}
-
-.running-pictogram {
-  animation: running-motion 2s ease-in-out infinite;
-}
-
-/* Geometric Pattern Animation */
-@keyframes geometric-float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translateY(-10px) rotate(180deg);
-    opacity: 0.7;
-  }
-}
-
-.geometric-float {
-  animation: geometric-float 6s ease-in-out infinite;
-}
-
-/* Geometric Pattern Animation */
-@keyframes geometric-float-counterclockwise {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translateY(-8px) rotate(-45deg);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translateY(-10px) rotate(-90deg);
-    opacity: 0.7;
-  }
-  75% {
-    transform: translateY(-8px) rotate(-45deg);
-    opacity: 0.5;
-  }
-}
-
-.geometric-float-counterclockwise {
-  animation: geometric-float-counterclockwise 6s ease-in-out infinite;
-}
-
-/* High Contrast Button Hover Effects */
-.btn-high-contrast {
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.btn-high-contrast:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.btn-high-contrast:active {
-  transform: translateY(0);
-}
-
-/* Munich 1972 Standard Button Components */
+/* Munich Button System - Olympic Precision */
 .munich-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--button-padding);
+  padding: var(--space-4) var(--space-8);
   font-family: var(--font-geometric);
-  font-size: var(--button-font-size);
-  font-weight: var(--button-font-weight);
-  border-radius: var(--border-radius-geometric);
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  font-size: var(--text-base);
+  font-weight: 600;
   text-decoration: none;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--timing-medium) var(--ease-olympic);
   position: relative;
   overflow: hidden;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.munich-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--timing-slow) var(--ease-olympic);
+}
+
+.munich-btn:hover::before {
+  left: 100%;
 }
 
 .munich-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-geometric-hover);
+  box-shadow: var(--shadow-olympic);
 }
 
 .munich-btn:active {
   transform: translateY(0);
 }
 
-.munich-btn:focus {
-  outline: 3px solid var(--munich-light-blue);
-  outline-offset: 2px;
-}
-
 /* Munich Button Variants */
 .munich-btn-primary {
-  background-color: var(--munich-light-blue);
+  background: linear-gradient(135deg, var(--munich-light-blue), var(--munich-violet));
   color: var(--munich-white);
-  border-color: var(--munich-dark-green);
-}
-
-.munich-btn-primary:hover {
-  background-color: var(--munich-violet);
-  border-color: var(--munich-light-green);
+  border-color: var(--munich-light-blue);
 }
 
 .munich-btn-secondary {
-  background-color: var(--munich-light-green);
+  background: linear-gradient(135deg, var(--munich-light-green), var(--munich-dark-green));
   color: var(--munich-white);
-  border-color: var(--munich-light-blue);
-}
-
-.munich-btn-secondary:hover {
-  background-color: var(--munich-dark-green);
-  border-color: var(--munich-violet);
+  border-color: var(--munich-light-green);
 }
 
 .munich-btn-outline {
-  background-color: transparent;
-  color: var(--munich-black);
-  border-color: var(--munich-border);
-}
-
-.munich-btn-outline:hover {
-  background-color: var(--munich-gray);
+  background: transparent;
+  color: var(--munich-light-blue);
   border-color: var(--munich-light-blue);
 }
 
-/* Munich Card Component */
-.munich-card {
-  background-color: var(--munich-white);
-  border: 1px solid var(--munich-border);
-  border-radius: var(--border-radius-geometric);
-  box-shadow: var(--shadow-geometric);
-  position: relative;
-  overflow: hidden;
+.munich-btn-outline:hover {
+  background: var(--munich-light-blue);
+  color: var(--munich-white);
 }
 
-/* Dark mode support for Munich Card */
-.dark .munich-card {
-  background-color: #1F2937;
-  border-color: #374151;
-  color: #F9FAFB;
+/* Munich Card System - Geometric Excellence */
+.munich-card {
+  background: var(--munich-white);
+  border: var(--border-width) solid var(--munich-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+  position: relative;
+  transition: all var(--timing-medium) var(--ease-olympic);
+}
+
+.munich-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--munich-light-blue), var(--munich-light-green), var(--munich-orange));
+  opacity: 0;
+  transition: opacity var(--timing-medium) var(--ease-olympic);
+}
+
+.munich-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-large);
+}
+
+.munich-card:hover::before {
+  opacity: 1;
+}
+
+/* Dark mode card support */
+body.dark .munich-card {
+  background: var(--munich-dark-card);
+  border-color: var(--munich-dark-border);
 }
 
 .munich-card-header {
   padding: var(--space-6);
-  border-bottom: 1px solid var(--munich-border);
+  border-bottom: var(--border-width) solid var(--munich-border);
+  background: linear-gradient(135deg, var(--munich-gray), var(--munich-white));
 }
 
-/* Dark mode support for Munich Card Header */
-.dark .munich-card-header {
-  border-bottom-color: #374151;
+body.dark .munich-card-header {
+  background: linear-gradient(135deg, var(--munich-dark-card), var(--munich-dark-bg));
+  border-bottom-color: var(--munich-dark-border);
 }
 
 .munich-card-body {
@@ -362,167 +242,327 @@ body {
 
 .munich-card-footer {
   padding: var(--space-6);
-  border-top: 1px solid var(--munich-border);
-  background-color: var(--munich-gray);
+  border-top: var(--border-width) solid var(--munich-border);
+  background: var(--munich-gray);
 }
 
-/* Dark mode support for Munich Card Footer */
-.dark .munich-card-footer {
-  border-top-color: #374151;
-  background-color: #111827;
+body.dark .munich-card-footer {
+  background: var(--munich-dark-bg);
+  border-top-color: var(--munich-dark-border);
 }
 
-/* Responsive Design Utilities */
-@media (max-width: 640px) {
-  .responsive-text {
-    font-size: 0.875rem;
-  }
-  
-  .responsive-padding {
-    padding: 1rem;
-  }
-  
-  .responsive-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .responsive-text {
-    font-size: 1rem;
-  }
-  
-  .responsive-padding {
-    padding: 1.5rem;
-  }
-  
-  .responsive-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1025px) {
-  .responsive-text {
-    font-size: 1.125rem;
-  }
-  
-  .responsive-padding {
-    padding: 2rem;
-  }
-  
-  .responsive-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* High Contrast Form Elements */
-input, select, textarea {
-  font-family: inherit;
-  border: 2px solid var(--munich-border);
-  border-radius: var(--border-radius-geometric);
-  background-color: var(--munich-white);
-  color: var(--munich-black);
-  font-size: 1rem;
-  padding: 0.75rem;
-  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--munich-light-blue);
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-}
-
-/* Munich Form Input Classes */
+/* Munich Form System */
 .munich-input {
-  font-family: var(--font-geometric);
-  border: 2px solid var(--munich-border);
-  border-radius: var(--border-radius-geometric);
-  background-color: var(--munich-white);
-  color: var(--munich-black);
-  font-size: var(--text-base);
-  padding: var(--space-4);
-  transition: all 0.3s ease;
   width: 100%;
+  padding: var(--space-4);
+  font-family: var(--font-geometric);
+  font-size: var(--text-base);
+  color: var(--munich-black);
+  background: var(--munich-white);
+  border: var(--border-width) solid var(--munich-border);
+  border-radius: var(--border-radius);
+  transition: all var(--timing-medium) var(--ease-olympic);
 }
 
 .munich-input:focus {
+  outline: none;
   border-color: var(--munich-light-blue);
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-  outline: none;
 }
 
-.munich-input::placeholder {
-  color: var(--munich-silver);
+body.dark .munich-input {
+  background: var(--munich-dark-card);
+  border-color: var(--munich-dark-border);
+  color: var(--munich-dark-text);
 }
 
-/* Munich Alert Components */
-.munich-alert {
-  padding: var(--space-4);
-  border-radius: var(--border-radius-geometric);
-  border: 2px solid;
-  font-size: var(--text-sm);
-  position: relative;
-  overflow: hidden;
+/* Munich Layout System */
+.munich-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
 }
 
-.munich-alert-info {
-  background-color: rgba(74, 144, 226, 0.1);
-  border-color: var(--munich-light-blue);
-  color: var(--munich-black);
+.munich-grid {
+  display: grid;
+  gap: var(--space-6);
 }
 
-.munich-alert-success {
-  background-color: rgba(126, 211, 33, 0.1);
-  border-color: var(--munich-light-green);
-  color: var(--munich-black);
+.munich-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.munich-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.munich-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Munich Geometric Shapes - Olympic Inspired */
+.geometric-diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  background: linear-gradient(45deg, var(--munich-light-blue), var(--munich-light-green));
 }
 
-.munich-alert-warning {
-  background-color: rgba(249, 115, 22, 0.1);
-  border-color: var(--munich-orange);
-  color: var(--munich-black);
+.geometric-hexagon {
+  clip-path: polygon(20% 0%, 80% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
+  background: linear-gradient(60deg, var(--munich-orange), var(--munich-yellow));
 }
 
-.munich-alert-error {
-  background-color: rgba(239, 68, 68, 0.1);
-  border-color: #ef4444;
-  color: var(--munich-black);
+.geometric-octagon {
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+  background: linear-gradient(135deg, var(--munich-violet), var(--munich-light-blue));
 }
 
-
-
-/* High Contrast Link Styles */
-a {
-  color: var(--munich-light-blue);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+/* Munich Olympic Rings Animation */
+.olympic-rings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
 }
 
-a:hover {
-  color: var(--munich-violet);
-  text-decoration-thickness: 2px;
+.olympic-ring {
+  width: 60px;
+  height: 60px;
+  border: 6px solid;
+  border-radius: 50%;
+  animation: ring-pulse 3s ease-in-out infinite;
 }
 
-/* Ensure local styles take precedence */
-* {
-  box-sizing: border-box;
+.ring-blue { border-color: var(--munich-light-blue); }
+.ring-yellow { border-color: var(--munich-yellow); }
+.ring-black { border-color: var(--munich-black); }
+.ring-green { border-color: var(--munich-light-green); }
+.ring-red { border-color: var(--munich-orange); }
+
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
 }
 
-/* Remove default button styles to allow custom geometric styling */
-button {
-  background: none;
+/* Munich Progressive Enhancement Animations */
+@keyframes olympic-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.olympic-gradient {
+  background: linear-gradient(45deg, 
+    var(--munich-light-blue), 
+    var(--munich-light-green), 
+    var(--munich-orange), 
+    var(--munich-yellow), 
+    var(--munich-violet)
+  );
+  background-size: 300% 300%;
+  animation: olympic-gradient 8s ease infinite;
+}
+
+/* Munich Athletic Motion */
+@keyframes athletic-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.athletic-motion {
+  animation: athletic-bounce 2s ease-in-out infinite;
+}
+
+/* Munich Focus States - Accessibility First */
+*:focus {
+  outline: 3px solid var(--munich-light-blue);
+  outline-offset: 2px;
+}
+
+/* Munich Responsive System */
+@media (max-width: 768px) {
+  :root {
+    --text-6xl: 2.5rem;
+    --text-5xl: 2rem;
+    --text-4xl: 1.75rem;
+    --space-6: 1rem;
+    --space-8: 1.5rem;
+  }
+  
+  .munich-grid-2,
+  .munich-grid-3,
+  .munich-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .munich-container {
+    padding: 0 var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .munich-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .olympic-rings {
+    flex-wrap: wrap;
+  }
+  
+  .olympic-ring {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+}
+
+/* Munich Dark Mode Toggle */
+.dark-mode-toggle {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: var(--munich-light-blue);
+  color: var(--munich-white);
   border: none;
-  padding: 0;
-  margin: 0;
-  font-family: inherit;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
-  font-size: inherit;
+  transition: all var(--timing-medium) var(--ease-olympic);
+  z-index: 1000;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  background-color: var(--munich-gray);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  color: var(--munich-black);
+.dark-mode-toggle:hover {
+  transform: scale(1.1);
+  background: var(--munich-violet);
+}
+
+/* Munich Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.mt-4 { margin-top: var(--space-4); }
+.mb-4 { margin-bottom: var(--space-4); }
+.ml-4 { margin-left: var(--space-4); }
+.mr-4 { margin-right: var(--space-4); }
+
+.p-4 { padding: var(--space-4); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.hidden { display: none; }
+.block { display: block; }
+
+/* Munich Color Utilities */
+.text-blue { color: var(--munich-light-blue); }
+.text-green { color: var(--munich-light-green); }
+.text-orange { color: var(--munich-orange); }
+.text-violet { color: var(--munich-violet); }
+
+.bg-blue { background-color: var(--munich-light-blue); }
+.bg-green { background-color: var(--munich-light-green); }
+.bg-orange { background-color: var(--munich-orange); }
+.bg-violet { background-color: var(--munich-violet); }
+
+
+.bg-violet { background-color: var(--munich-violet); }
+
+/* Munich Animation Library - Olympic Spirit */
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  25% { transform: scale(1.05) rotate(1deg); opacity: 0.9; }
+  50% { transform: scale(1.1) rotate(-1deg); opacity: 0.95; }
+  75% { transform: scale(1.05) rotate(1deg); opacity: 0.9; }
+}
+
+.olympic-flame {
+  animation: flame-flicker 3s ease-in-out infinite;
+}
+
+@keyframes victory-glow {
+  0% { box-shadow: 0 0 5px var(--munich-light-blue); }
+  50% { box-shadow: 0 0 20px var(--munich-light-blue), 0 0 30px var(--munich-light-green); }
+  100% { box-shadow: 0 0 5px var(--munich-light-blue); }
+}
+
+.victory-glow {
+  animation: victory-glow 2s ease-in-out infinite;
+}
+
+@keyframes medal-shine {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+.medal-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: medal-shine 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Munich Performance Optimizations */
+.munich-gpu-accelerated {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Munich Print Styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .munich-btn {
+    border: 1px solid black;
+  }
+  
+  .olympic-rings,
+  .geometric-diamond,
+  .geometric-hexagon,
+  .geometric-octagon {
+    display: none;
+  }
+}
+
+/* Munich High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --munich-light-blue: #0066CC;
+    --munich-light-green: #008800;
+    --munich-orange: #FF4400;
+    --munich-black: #000000;
+    --munich-white: #FFFFFF;
+  }
+  
+  .munich-card {
+    border-width: 3px;
+  }
+  
+  .munich-btn {
+    border-width: 3px;
+    font-weight: 700;
+  }
+}
+
+/* Munich Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 } 
