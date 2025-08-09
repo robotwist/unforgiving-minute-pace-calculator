@@ -144,12 +144,14 @@ const RunningTrainingApp = () => {
   // Use global Munich 1972 CSS variables for consistent design system
   const colors = {
     lightBlue: '#1E6B96',      // Munich light blue (primary)
+    darkBlue: '#0F3460',       // Darker blue for text/accents
     lightGreen: '#2E8B57',     // Munich green 
     silver: '#C0C0C0',         // Munich silver
     violet: '#8B7FC7',         // Munich violet
     darkGreen: '#004225',      // Munich dark green
     orange: '#FF6B35',         // Munich orange (energy)
     yellow: '#F7931E',         // Munich yellow
+    darkGray: '#666666',       // For muted text
     white: darkMode ? '#1A1A1A' : '#FFFFFF',          // Adaptive white/dark
     black: darkMode ? '#E5E5E5' : '#1A1A1A',          // Adaptive black/light
     gray: darkMode ? '#2D2D2D' : '#F5F5F5',           // Adaptive background
@@ -1097,6 +1099,18 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
     const calculatedGoldenPace = calculateGoldenPace(raceTime, raceDistance);
     setGoldenPace(calculatedGoldenPace);
     setTrainingPaces(calculateTrainingPaces(calculatedGoldenPace));
+    
+    // Auto-save to profile if profile exists
+    if (savedProfileData && calculatedGoldenPace) {
+      const updatedProfile = {
+        ...savedProfileData,
+        currentGoldenPace: calculatedGoldenPace,
+        goalRaceTime: raceTime,
+        goalRaceDistance: raceDistance,
+        lastCalculated: new Date().toISOString()
+      };
+      saveProfileData(updatedProfile);
+    }
   };
 
   // Generate personalized training plans based on user's GoldenPace
@@ -1367,6 +1381,17 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
                 GoldenPace Calculator
               </h2>
+              
+              {/* Show helpful message if race data is pre-populated from profile */}
+              {savedProfileData && (raceTime || raceDistance !== '5K') && (
+                <div className="inline-flex items-center px-4 py-2 bg-opacity-10 rounded-lg mb-4" style={{ 
+                  backgroundColor: colors.lightBlue,
+                  color: colors.darkBlue 
+                }}>
+                  <Target className="w-4 h-4 mr-2" />
+                  <span className="text-sm">Using your goal race from profile: {raceDistance}{raceTime ? ` in ${raceTime}` : ''}</span>
+                </div>
+              )}
               <p className="text-lg sm:text-xl max-w-3xl mx-auto px-4 leading-relaxed" style={{ color: colors.black }}>
                 Enter a recent race time to unlock your personalized training pacesâ€”used by elite athletes worldwide
               </p>
@@ -2264,12 +2289,38 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                                 color: colors.black,
                                 fontSize: 'var(--text-sm)'
                               }}>Current GoldenPace:</span>
-                              <span className="font-bold" style={{ 
-                                color: colors.violet,
-                                fontSize: 'var(--text-lg)'
-                              }}>
-                                {savedProfileData?.currentGoldenPace || goldenPace || 'Not calculated'}
-                              </span>
+                              {savedProfileData?.currentGoldenPace || goldenPace ? (
+                                <span className="font-bold" style={{ 
+                                  color: colors.violet,
+                                  fontSize: 'var(--text-lg)'
+                                }}>
+                                  {savedProfileData?.currentGoldenPace || goldenPace}
+                                </span>
+                              ) : (
+                                <div className="flex items-center gap-2">
+                                  <span style={{ 
+                                    color: colors.darkGray,
+                                    fontSize: 'var(--text-sm)'
+                                  }}>Not calculated</span>
+                                  {savedProfileData?.goalRaceTime && savedProfileData?.goalRaceDistance && (
+                                    <button
+                                      onClick={() => {
+                                        setRaceTime(savedProfileData.goalRaceTime);
+                                        setRaceDistance(savedProfileData.goalRaceDistance);
+                                        setActiveTab('calculator');
+                                      }}
+                                      className="px-2 py-1 text-xs rounded-md hover:opacity-80 transition-opacity"
+                                      style={{ 
+                                        backgroundColor: colors.lightBlue,
+                                        color: colors.white
+                                      }}
+                                      title="Calculate using your goal race"
+                                    >
+                                      Calculate
+                                    </button>
+                                  )}
+                                </div>
+                              )}
                             </div>
                             
                             {savedProfileData?.projectedGoldenPace && (
@@ -2554,9 +2605,18 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                     
                     <div className="mt-8 flex flex-wrap gap-4">
                       <button
-                        onClick={() => setActiveTab('calculator')}
+                        onClick={() => {
+                          // Transfer profile data to calculator
+                          if (savedProfileData?.goalRaceTime) {
+                            setRaceTime(savedProfileData.goalRaceTime);
+                          }
+                          if (savedProfileData?.goalRaceDistance) {
+                            setRaceDistance(savedProfileData.goalRaceDistance);
+                          }
+                          setActiveTab('calculator');
+                        }}
                         className="munich-btn munich-btn-primary relative"
-                        aria-label="Go to pace calculator"
+                        aria-label="Go to pace calculator with your goal race"
                       >
                         Calculate GoldenPace
                         {/* Geometric accent on button */}
