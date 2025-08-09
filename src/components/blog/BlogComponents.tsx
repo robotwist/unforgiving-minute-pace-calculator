@@ -1,6 +1,5 @@
 import React from 'react';
 import * as blogStyles from '../../styles/blog.css';
-import { ShareButton, InlineShareButtons } from './ShareButton';
 
 const BlogPost = ({
   title,
@@ -8,21 +7,12 @@ const BlogPost = ({
   author,
   publishDate,
   readingTime,
-  excerpt,
-  url
+  excerpt
 }) => {
   // Parse content and apply appropriate styles
   const parseContent = (htmlContent) => {
     // This is a simplified parser - in production, you'd use a proper HTML parser or markdown renderer
     return { __html: htmlContent };
-  };
-
-  const article = {
-    title,
-    excerpt,
-    author,
-    publishDate,
-    readingTime
   };
 
   return (
@@ -52,30 +42,17 @@ const BlogPost = ({
         className={blogStyles.articleContent}
         dangerouslySetInnerHTML={parseContent(content)}
       />
-      
-      {/* Share buttons at the end of the article */}
-      <InlineShareButtons 
-        article={article}
-        url={url}
-      />
     </article>
   );
 };
 
 // Blog Card Component for article listings
 const BlogCard = ({ article, index, onClick }) => {
-  const handleCardClick = (e) => {
-    // Prevent card click when share button is clicked
-    if (!e.target.closest('button')) {
-      onClick(article.slug);
-    }
-  };
-
   return (
     <article 
       className={blogStyles.articleCard}
       style={{ '--card-index': index }}
-      onClick={handleCardClick}
+      onClick={() => onClick(article.slug)}
       role="button"
       tabIndex={0}
       onKeyPress={(e) => {
@@ -87,15 +64,8 @@ const BlogCard = ({ article, index, onClick }) => {
       <h2 className={blogStyles.cardTitle}>{article.title}</h2>
       <p className={blogStyles.cardExcerpt}>{article.excerpt}</p>
       <div className={blogStyles.cardMeta}>
-        <div>
-          <span>By {article.author}</span>
-          <span>{article.readingTime}</span>
-        </div>
-        <ShareButton 
-          article={article}
-          variant="secondary"
-          url={article.url}
-        />
+        <span>By {article.author}</span>
+        <span>{article.readingTime}</span>
       </div>
     </article>
   );
