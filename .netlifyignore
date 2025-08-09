@@ -1,32 +1,34 @@
-# Django Backend Files (exclude from Netlify build)
-accounts/
-calculator/
-training/
-plans/
-runpace_pro/
-premium/
-blog/
-manage.py
-requirements.txt
+# FRONTEND ONLY: Exclude ALL Python/Django files
+backend/
+*.py
+__pycache__/
+*.pyc
+.python-version
 runtime.txt
+requirements.txt
+manage.py
 db.sqlite3
 docker-compose.yml
 Procfile
-*.pyc
-__pycache__/
-*.sqlite3
-.python-version
-.mise.toml
-pyproject.toml
-Pipfile
-Pipfile.lock
-Procfile
-runtime.txt
+run_django.py
+start_django.sh
 .venv/
-*.pyc
-__pycache__/
-migrations/
+.env
+.env.*
+
+# Django apps (all backend code)
+accounts/
+blog/
+calculator/
+plans/
+premium/
+training/
+runpace_pro/
+
+# Build artifacts
+*.log
 *.sqlite3
+migrations/
 
 # Python Version Files
 .python-version

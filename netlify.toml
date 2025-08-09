@@ -13,10 +13,12 @@
   CI = "true"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
   NODE_ENV = "production"
-  # Explicitly disable Python detection
+  # CRITICAL: Force Netlify to ignore Python completely
   NETLIFY_SKIP_PYTHON_BUILD = "true"
+  SKIP_PYTHON_INSTALL = "true"
+  PYTHON_VERSION = ""
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250809115000"
+  NETLIFY_CACHE_ID = "v20250809120000"
 
 # Site configuration
 [context.production]
