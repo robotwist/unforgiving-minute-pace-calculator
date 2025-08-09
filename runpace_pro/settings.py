@@ -108,7 +108,7 @@ if not DEBUG:
     
     # CORS settings for production
     CORS_ALLOWED_ORIGINS = [
-        "https://unforgiving-minute-pace-calculator.netlify.app",
+        "https://unforgivingminute.netlify.app",
         "https://web-production-bb66e.up.railway.app",
     ]
     

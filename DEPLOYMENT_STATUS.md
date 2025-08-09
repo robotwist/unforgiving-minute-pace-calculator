@@ -104,7 +104,7 @@ Where:
 
 ---
 
-**Deployment URL**: https://unforgiving-minute-pace-calculator.netlify.app
+**Deployment URL**: https://unforgivingminute.netlify.app
 **Repository**: https://github.com/robotwist/unforgiving-minute-pace-calculator
 **Last Updated**: August 8, 2025
 **Status**: ✅ DEPLOYED & LIVE

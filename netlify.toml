@@ -12,6 +12,10 @@
   CI = "false"
   REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
 
+# Site configuration
+[context.production]
+  command = "npm install --legacy-peer-deps && npm run build"
+
 [[redirects]]
   from = "/api/*"
   to = "https://unforgiving-moment-production.up.railway.app/api/:splat"

@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://unforgiving-minute-pace-calculator.netlify.app/sitemap.xml
+Sitemap: https://unforgivingminute.netlify.app/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1 
