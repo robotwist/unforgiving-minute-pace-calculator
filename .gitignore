@@ -66,12 +66,30 @@ dist/
 *.tgz
 *.tar.gz
 
-# Environment variables
+# Environment variables and secrets
 .env
 .env.local
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# API Keys and Secrets
+secrets.json
+config/secrets.yml
+.secrets
+*secret*
+*key*
+*token*
+
+# Stripe and payment processing
+stripe_*
+payment_*
 
 # Coverage reports
 htmlcov/
