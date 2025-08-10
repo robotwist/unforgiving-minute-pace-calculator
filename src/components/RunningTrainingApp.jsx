@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, Download, Target, Clock, TrendingUp, User, BookOpen, Star, Calendar, Activity, Trophy, CheckCircle } from 'lucide-react';
+import { Calculator, Target, Clock, TrendingUp, User, BookOpen, Star, Calendar, Activity, Trophy, CheckCircle } from 'lucide-react';
 import { Elements } from '@stripe/react-stripe-js';
 import stripePromise from '../config/stripe';
 import StripePaymentForm from './StripePaymentForm';
