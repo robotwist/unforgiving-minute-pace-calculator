@@ -1,13 +1,19 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import PremiumPaywall from './PremiumPaywall';
+import { premiumArticleExample } from '../../data/premiumContent';
 
 const BlogTabSection = ({ 
   colors, 
   selectedArticle, 
   setSelectedArticle,
   featuredArticles,
-  articles
+  articles,
+  userSubscription,
+  onSubscribe
 }) => {
+  // Combine free and premium articles
+  const allArticles = [...articles, premiumArticleExample];
   return (
     <>
       {/* Blog Articles List */}
@@ -79,10 +85,20 @@ const BlogTabSection = ({
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {articles.map((article) => (
+              {allArticles.map((article) => (
                 <div key={article.id} className="munich-card relative overflow-hidden group cursor-pointer transition-all hover:shadow-lg border-l-4" 
                      style={{ borderLeftColor: article.featured ? colors.orange : colors.lightGreen }}
                      onClick={() => setSelectedArticle(article)}>
+                  
+                  {/* Premium Badge */}
+                  {article.isPremium && (
+                    <div className="absolute top-2 right-2 text-xs font-bold px-2 py-1 rounded-full" style={{
+                      backgroundColor: colors.orange,
+                      color: colors.white
+                    }}>
+                      PREMIUM
+                    </div>
+                  )}
                   
                   <div className="munich-card-body">
                     <div className="flex items-start justify-between mb-3">
@@ -146,6 +162,14 @@ const BlogTabSection = ({
                     }}>
                       {selectedArticle.category}
                     </span>
+                    {selectedArticle.isPremium && (
+                      <span className="text-sm font-bold px-3 py-1 rounded-full" style={{
+                        backgroundColor: colors.orange,
+                        color: colors.white
+                      }}>
+                        PREMIUM
+                      </span>
+                    )}
                     <span className="text-sm" style={{ color: colors.silver }}>
                       {selectedArticle.readTime}
                     </span>
@@ -159,24 +183,33 @@ const BlogTabSection = ({
                 </div>
 
                 <div className="prose prose-lg max-w-none" style={{ color: colors.black }}>
-                  <div 
-                    className="article-content"
-                    style={{ 
-                      lineHeight: '1.8',
-                      fontSize: '1.1rem'
-                    }}
-                    dangerouslySetInnerHTML={{ 
-                      __html: selectedArticle.content
-                        .replace(/\n\n/g, '</p><p>')
-                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                        .replace(/^# (.*?)$/gm, '<h2 style="font-size: 1.8rem; font-weight: bold; margin: 2rem 0 1rem 0; color: ' + colors.black + ';">$1</h2>')
-                        .replace(/^## (.*?)$/gm, '<h3 style="font-size: 1.4rem; font-weight: bold; margin: 1.5rem 0 1rem 0; color: ' + colors.darkGreen + ';">$1</h3>')
-                        .replace(/^\* (.*?)$/gm, '<li>$1</li>')
-                        .replace(/(<li>.*<\/li>)/gs, '<ul style="margin: 1rem 0; padding-left: 1.5rem; list-style: disc;">$1</ul>')
-                        .replace(/^(?!<[hul])/gm, '<p>')
-                        .replace(/$(?!<\/)/gm, '</p>')
-                    }} 
-                  />
+                  {/* Premium Content Check */}
+                  {selectedArticle.isPremium && (!userSubscription || userSubscription.tier !== selectedArticle.subscriptionTier) ? (
+                    <PremiumPaywall 
+                      article={selectedArticle}
+                      colors={colors}
+                      onSubscribe={onSubscribe}
+                    />
+                  ) : (
+                    <div 
+                      className="article-content"
+                      style={{ 
+                        lineHeight: '1.8',
+                        fontSize: '1.1rem'
+                      }}
+                      dangerouslySetInnerHTML={{ 
+                        __html: (selectedArticle.fullContent || selectedArticle.content)
+                          .replace(/\n\n/g, '</p><p>')
+                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                          .replace(/^# (.*?)$/gm, '<h2 style="font-size: 1.8rem; font-weight: bold; margin: 2rem 0 1rem 0; color: ' + colors.black + ';">$1</h2>')
+                          .replace(/^## (.*?)$/gm, '<h3 style="font-size: 1.4rem; font-weight: bold; margin: 1.5rem 0 1rem 0; color: ' + colors.darkGreen + ';">$1</h3>')
+                          .replace(/^\* (.*?)$/gm, '<li>$1</li>')
+                          .replace(/(<li>.*<\/li>)/gs, '<ul style="margin: 1rem 0; padding-left: 1.5rem; list-style: disc;">$1</ul>')
+                          .replace(/^(?!<[hul])/gm, '<p>')
+                          .replace(/$(?!<\/)/gm, '</p>')
+                      }} 
+                    />
+                  )}
                 </div>
 
                 {/* Article Actions */}

@@ -668,29 +668,63 @@ const RunningTrainingApp = () => {
     trackPurchaseAttempt(planId, planName, price);
   };
 
+  // Subscription purchase handler
+  const handleSubscriptionPurchase = (tier, tierDetails) => {
+    const subscriptionProduct = {
+      id: `blog-subscription-${tier}`,
+      name: `Blog Subscription - ${tierDetails.name}`,
+      price: tierDetails.price
+    };
+    
+    setSelectedPlanForPurchase(subscriptionProduct);
+    setShowPurchaseModal(true);
+    
+    // Track subscription attempt
+    trackPurchaseAttempt(subscriptionProduct.id, subscriptionProduct.name, subscriptionProduct.price);
+  };
+
   const handlePaymentSuccess = (paymentResult) => {
     if (!selectedPlanForPurchase) return;
     
-    const newPurchase = {
-      id: selectedPlanForPurchase.id,
-      name: selectedPlanForPurchase.name,
-      price: selectedPlanForPurchase.price,
-      purchaseDate: new Date().toISOString(),
-      status: 'active',
-      stripePaymentId: paymentResult.paymentIntent?.id || 'mock_payment_' + Date.now(),
-      transactionId: paymentResult.paymentIntent?.id || 'mock_' + Date.now()
-    };
-    
-    const updatedPurchases = [...purchasedPlans, newPurchase];
-    setPurchasedPlans(updatedPurchases);
-    localStorage.setItem('purchasedPlans', JSON.stringify(updatedPurchases));
+    // Handle subscription vs one-time purchase
+    if (selectedPlanForPurchase.id.includes('blog-subscription')) {
+      // Update user profile with subscription
+      const subscriptionTier = selectedPlanForPurchase.id.replace('blog-subscription-', '');
+      const updatedProfile = {
+        ...userProfile,
+        subscription: {
+          tier: subscriptionTier,
+          status: 'active',
+          startDate: new Date().toISOString(),
+          nextBilling: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days
+          stripeSubscriptionId: paymentResult.subscription?.id || 'mock_sub_' + Date.now()
+        }
+      };
+      setUserProfile(updatedProfile);
+      localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
+    } else {
+      // Handle training plan purchase
+      const newPurchase = {
+        id: selectedPlanForPurchase.id,
+        name: selectedPlanForPurchase.name,
+        price: selectedPlanForPurchase.price,
+        purchaseDate: new Date().toISOString(),
+        status: 'active',
+        stripePaymentId: paymentResult.paymentIntent?.id || 'mock_payment_' + Date.now(),
+        transactionId: paymentResult.paymentIntent?.id || 'mock_' + Date.now()
+      };
+      
+      const updatedPurchases = [...purchasedPlans, newPurchase];
+      setPurchasedPlans(updatedPurchases);
+      localStorage.setItem('purchasedPlans', JSON.stringify(updatedPurchases));
+    }
     
     // Track successful purchase
     trackPurchaseSuccess(
       selectedPlanForPurchase.id,
       selectedPlanForPurchase.name,
       selectedPlanForPurchase.price,
-      newPurchase.transactionId
+      paymentResult.paymentIntent?.id || paymentResult.subscription?.id || 'mock_' + Date.now()
     );
     
     setPurchaseLoading(false);
@@ -2375,6 +2409,8 @@ const RunningTrainingApp = () => {
             setSelectedArticle={setSelectedArticle}
             articles={articles}
             featuredArticles={featuredArticles}
+            userSubscription={userProfile.subscription}
+            onSubscribe={handleSubscriptionPurchase}
           />
         )}
 
