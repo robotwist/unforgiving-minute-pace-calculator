@@ -1,6 +1,6 @@
 // Mobile-First Bottom Navigation
 import React from 'react';
-import { Calculator, Target, BookOpen, Star, User, BarChart3 } from 'lucide-react';
+import { Calculator, Target, BookOpen, Star, BarChart3 } from 'lucide-react';
 
 const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures = false }) => {
   const tabs = [

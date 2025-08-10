@@ -1,6 +1,6 @@
 // Progress Dashboard Integration
 import React, { useState, useEffect } from 'react';
-import { Activity, Calendar, Target, TrendingUp, Award, Clock, MapPin, Heart } from 'lucide-react';
+import { Activity, Calendar, Target, Award, Clock, MapPin } from 'lucide-react';
 
 const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities }) => {
   const [activeMetric, setActiveMetric] = useState('overview');

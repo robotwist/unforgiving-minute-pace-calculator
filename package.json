@@ -25,10 +25,12 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && npm run build:sitemap",
+    "build:sitemap": "node generate-sitemap.js",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "serve": "serve -s build -l $PORT"
+    "serve": "serve -s build -l $PORT",
+    "analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js"
   },
   "eslintConfig": {
     "extends": [

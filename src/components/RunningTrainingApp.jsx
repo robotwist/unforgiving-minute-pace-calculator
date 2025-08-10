@@ -23,9 +23,7 @@ import {
   trackProfileCreation,
   trackPurchaseAttempt,
   trackPurchaseSuccess,
-  trackTabNavigation,
-  trackPlanPreview,
-  trackPlanDownload
+  trackTabNavigation
 } from '../utils/analytics';
 
 const RunningTrainingApp = () => {
@@ -72,10 +70,11 @@ const RunningTrainingApp = () => {
   const [personalBests, setPersonalBests] = useState({});
   const [trainingPlansCompleted, setTrainingPlansCompleted] = useState([]);
   
-  // User activities for progress dashboard
-  const [userActivities, setUserActivities] = useState(
+  // User activities for progress dashboard (ready for future enhancements)
+  const [userActivities] = useState(
     JSON.parse(localStorage.getItem('user_activities') || '[]')
   );
+  // const setUserActivities - available for future activity tracking
   
   // Purchase and premium plan state
   const [purchasedPlans, setPurchasedPlans] = useState([]);
