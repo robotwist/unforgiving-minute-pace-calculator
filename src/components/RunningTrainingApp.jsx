@@ -1884,6 +1884,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                               backgroundColor: colors.lightGreen,
                               color: 'white'
                             }}
+                            aria-label="Create free running profile to track progress"
                           >
                             <User className="w-6 h-6 mr-3" />
                             Create Free Profile Now
@@ -1949,6 +1950,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                           setShowPlanDetails(true);
                         }}
                         className="munich-btn munich-btn-primary flex-1"
+                        aria-label={`Download ${plan.name} training plan`}
                       >
                         <Download className="w-4 h-4 mr-2" />
                         Download Plan
@@ -1959,6 +1961,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                           setShowPlanDetails(true);
                         }}
                         className="munich-btn munich-btn-outline"
+                        aria-label={`Preview ${plan.name} training plan details`}
                       >
                         Preview
                       </button>
@@ -2085,6 +2088,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                         URL.revokeObjectURL(url);
                       }}
                       className="munich-btn munich-btn-primary flex-1"
+                      aria-label={`Download ${selectedPlan.name} as text file`}
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Download Plan
@@ -2092,6 +2096,7 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                     <button 
                       onClick={() => setShowPlanDetails(false)}
                       className="munich-btn munich-btn-outline"
+                      aria-label="Close training plan details"
                     >
                       Close
                     </button>
