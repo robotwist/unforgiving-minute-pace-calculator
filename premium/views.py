@@ -1,10 +1,15 @@
 # premium/views.py
 from django.shortcuts import get_object_or_404
 from django.db.models import Q, F
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
+import stripe
+import json
 from .models import PremiumTrainingPlan, PlanTestimonial, PurchasedPlan, PlanCategory
 from .serializers import (PremiumTrainingPlanListSerializer, PremiumTrainingPlanDetailSerializer,
                          PlanTestimonialSerializer, PurchasedPlanSerializer, PlanCategorySerializer)
@@ -155,3 +160,60 @@ class PlanTestimonialViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = PlanTestimonial.objects.filter(is_featured=True)
     serializer_class = PlanTestimonialSerializer
     permission_classes = [AllowAny]
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def create_payment_intent(request):
+    """Create a Stripe payment intent for plan purchases"""
+    try:
+        # Set Stripe API key
+        stripe.api_key = getattr(settings, 'STRIPE_SECRET_KEY', None)
+        
+        if not stripe.api_key:
+            return JsonResponse({
+                'error': 'Payment system not configured. Please contact support.'
+            }, status=500)
+        
+        # Parse request data
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+        else:
+            data = request.POST
+        
+        plan_id = data.get('planId')
+        amount = data.get('amount')  # Should be in cents
+        plan_name = data.get('planName')
+        
+        if not all([plan_id, amount, plan_name]):
+            return JsonResponse({
+                'error': 'Missing required fields: planId, amount, planName'
+            }, status=400)
+        
+        # Create payment intent
+        intent = stripe.PaymentIntent.create(
+            amount=int(amount),
+            currency='usd',
+            automatic_payment_methods={
+                'enabled': True,
+            },
+            metadata={
+                'plan_id': plan_id,
+                'plan_name': plan_name,
+            },
+            description=f'Purchase: {plan_name}'
+        )
+        
+        return JsonResponse({
+            'clientSecret': intent.client_secret
+        })
+        
+    except stripe.error.StripeError as e:
+        return JsonResponse({
+            'error': f'Payment error: {str(e)}'
+        }, status=400)
+    except Exception as e:
+        return JsonResponse({
+            'error': f'Server error: {str(e)}'
+        }, status=500)

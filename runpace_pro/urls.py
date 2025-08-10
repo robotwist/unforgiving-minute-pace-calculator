@@ -2,6 +2,7 @@
 # runpace_pro/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from premium.views import create_payment_intent
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,4 +12,6 @@ urlpatterns = [
     path('api/plans/', include('plans.urls')),
     path('api/blog/', include('blog.urls')),
     path('api/premium/', include('premium.urls')),
+    # Payment processing
+    path('api/create-payment-intent/', create_payment_intent, name='create-payment-intent'),
 ]

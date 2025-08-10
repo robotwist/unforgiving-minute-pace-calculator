@@ -13,4 +13,6 @@ router.register(r'testimonials', views.PlanTestimonialViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    # Payment processing endpoints
+    path('create-payment-intent/', views.create_payment_intent, name='create-payment-intent'),
 ]

@@ -13,6 +13,16 @@ import {
   generatePersonalizedPlan
 } from '../data/trainingPlans';
 import { articles, getFeaturedArticles } from '../content/articles';
+import { 
+  trackEvent, 
+  trackCalculatorUsage, 
+  trackProfileCreation,
+  trackPurchaseAttempt,
+  trackPurchaseSuccess,
+  trackTabNavigation,
+  trackPlanPreview,
+  trackPlanDownload
+} from '../utils/analytics';
 
 const RunningTrainingApp = () => {
   const [activeTab, setActiveTab] = useState('calculator');
@@ -618,6 +628,9 @@ const RunningTrainingApp = () => {
       setGoldenPace(calculatedGoldenPace);
       setTrainingPaces(calculateTrainingPaces(calculatedGoldenPace));
       
+      // Track calculator usage
+      trackCalculatorUsage(raceDistance, raceTime, calculatedGoldenPace);
+      
       // Auto-save to profile if profile exists
       if (savedProfileData && calculatedGoldenPace) {
         const updatedProfile = {
@@ -651,6 +664,8 @@ const RunningTrainingApp = () => {
   const handlePurchaseClick = (planId, planName, price) => {
     setSelectedPlanForPurchase({ id: planId, name: planName, price });
     setShowPurchaseModal(true);
+    // Track purchase attempt
+    trackPurchaseAttempt(planId, planName, price);
   };
 
   const handlePaymentSuccess = (paymentResult) => {
@@ -669,6 +684,14 @@ const RunningTrainingApp = () => {
     const updatedPurchases = [...purchasedPlans, newPurchase];
     setPurchasedPlans(updatedPurchases);
     localStorage.setItem('purchasedPlans', JSON.stringify(updatedPurchases));
+    
+    // Track successful purchase
+    trackPurchaseSuccess(
+      selectedPlanForPurchase.id,
+      selectedPlanForPurchase.name,
+      selectedPlanForPurchase.price,
+      newPurchase.transactionId
+    );
     
     setPurchaseLoading(false);
     setPurchaseSuccess(true);
@@ -774,6 +797,7 @@ const RunningTrainingApp = () => {
                       setShowAdminPanel(true);
                     } else {
                       setActiveTab(id);
+                      trackTabNavigation(id);
                     }
                   }}
                   aria-label={`Switch to ${label} tab`}
@@ -1594,7 +1618,12 @@ const RunningTrainingApp = () => {
                           <p style={{ 
                             color: colors.black,
                             fontSize: 'var(--text-sm)'
-                          }}>Member since: {savedProfileData?.created_date || new Date().toISOString().split('T')[0]}</p>
+                          }}>
+                            Member since: {savedProfileData?.created_date ? 
+                              new Date(savedProfileData.created_date).toLocaleDateString() : 
+                              <span className="text-gray-500">Profile created today</span>
+                            }
+                          </p>
                         </div>
                       </div>
                       
@@ -1621,11 +1650,16 @@ const RunningTrainingApp = () => {
                           <p className="mb-2" style={{ 
                             color: colors.black,
                             fontSize: 'var(--text-sm)'
-                          }}>Goal Time: {savedProfileData?.goalRaceTime || userProfile.goalRaceTime || 'Not set'}</p>
+                          }}>Goal Time: {savedProfileData?.goalRaceTime || userProfile.goalRaceTime || <span className="text-gray-500">Not set</span>}</p>
                           <p style={{ 
                             color: colors.black,
                             fontSize: 'var(--text-sm)'
-                          }}>Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage || 'Not set'} miles</p>
+                          }}>
+                            Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage ? 
+                              `${savedProfileData?.weekly_mileage || userProfile.weeklyMileage} miles` : 
+                              <span className="text-gray-500">Not set</span>
+                            }
+                          </p>
                         </div>
                       </div>
                       

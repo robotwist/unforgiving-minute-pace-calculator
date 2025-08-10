@@ -204,3 +204,8 @@ if not DEBUG:
     except ImportError:
         # Fallback to SQLite if dj_database_url not available
         pass
+
+# Stripe payment configuration
+STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='pk_test_placeholder')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default='sk_test_placeholder')
+STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')

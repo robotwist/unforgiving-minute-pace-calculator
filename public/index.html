@@ -29,6 +29,17 @@
     <meta property="twitter:description" content="Calculate your running paces and training plans. VDOT doesn't reflect what athletes actually run. Get personalized coaching." />
     <meta property="twitter:image" content="%PUBLIC_URL%/og-image.jpg" />
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GA_TRACKING_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      if ('%REACT_APP_GA_TRACKING_ID%' && '%REACT_APP_GA_TRACKING_ID%'.startsWith('G-')) {
+        gtag('config', '%REACT_APP_GA_TRACKING_ID%');
+      }
+    </script>
+    
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.svg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
