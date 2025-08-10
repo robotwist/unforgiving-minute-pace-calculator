@@ -6,8 +6,8 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='your-secret-key-here')
-DEBUG = True  # Force DEBUG to True for development
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,*.railway.app,unforgiving-moment-production.up.railway.app').split(',')
 
 # Custom user model
 AUTH_USER_MODEL = 'accounts.User'
@@ -105,17 +105,23 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
     # CORS settings for production
     CORS_ALLOWED_ORIGINS = [
         "https://unforgivingminute.netlify.app",
-        "https://web-production-bb66e.up.railway.app",
+        "https://unforgiving-moment-production.up.railway.app",
     ]
     
     # Database settings for production
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config(
-        default=config('DATABASE_URL', default=''),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    try:
+        import dj_database_url
+        DATABASES['default'] = dj_database_url.config(
+            default=config('DATABASE_URL', default=''),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    except ImportError:
+        # Fallback to SQLite if dj_database_url not available
+        pass

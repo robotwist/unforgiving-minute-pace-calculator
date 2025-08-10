@@ -848,9 +848,31 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
   };
 
   const parseTimeToSeconds = (timeStr) => {
-    const parts = timeStr.split(':').map(Number);
-    if (parts.length === 2) return parts[0] * 60 + parts[1];
-    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (!timeStr || timeStr.trim() === '') return null;
+    
+    // Remove any spaces and validate format
+    const cleanTime = timeStr.trim();
+    
+    // Handle formats like "22:30", "1:22:30", "22.30", "1.22.30"
+    const parts = cleanTime.split(/[:.]/).map(part => {
+      const num = parseInt(part, 10);
+      return isNaN(num) ? null : num;
+    }).filter(part => part !== null);
+    
+    if (parts.length === 2) {
+      // MM:SS format
+      const [minutes, seconds] = parts;
+      if (seconds >= 60) return null; // Invalid seconds
+      return minutes * 60 + seconds;
+    }
+    
+    if (parts.length === 3) {
+      // HH:MM:SS format
+      const [hours, minutes, seconds] = parts;
+      if (minutes >= 60 || seconds >= 60) return null; // Invalid minutes/seconds
+      return hours * 3600 + minutes * 60 + seconds;
+    }
+    
     return null;
   };
 
@@ -1096,20 +1118,102 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
   };
 
   const handleCalculate = () => {
-    const calculatedGoldenPace = calculateGoldenPace(raceTime, raceDistance);
-    setGoldenPace(calculatedGoldenPace);
-    setTrainingPaces(calculateTrainingPaces(calculatedGoldenPace));
+    // Clear any previous errors
+    setProfileError('');
     
-    // Auto-save to profile if profile exists
-    if (savedProfileData && calculatedGoldenPace) {
-      const updatedProfile = {
-        ...savedProfileData,
-        currentGoldenPace: calculatedGoldenPace,
-        goalRaceTime: raceTime,
-        goalRaceDistance: raceDistance,
-        lastCalculated: new Date().toISOString()
+    // Validate inputs
+    if (!raceTime || raceTime.trim() === '') {
+      setProfileError('Please enter a race time (e.g., 22:30 or 1:22:30)');
+      return;
+    }
+    
+    if (!raceDistance) {
+      setProfileError('Please select a race distance');
+      return;
+    }
+    
+    // Validate time format
+    const timeInSeconds = parseTimeToSeconds(raceTime);
+    if (!timeInSeconds || timeInSeconds <= 0) {
+      setProfileError('Please enter a valid time format (MM:SS or HH:MM:SS)');
+      return;
+    }
+    
+    // Validate reasonable time ranges
+    let minTime, maxTime, distanceName;
+    switch(raceDistance) {
+      case '5K':
+        minTime = 10 * 60; // 10:00
+        maxTime = 60 * 60; // 60:00
+        distanceName = '5K';
+        break;
+      case '10K':
+        minTime = 20 * 60; // 20:00
+        maxTime = 2 * 3600; // 2:00:00
+        distanceName = '10K';
+        break;
+      case '15K':
+        minTime = 30 * 60; // 30:00
+        maxTime = 3 * 3600; // 3:00:00
+        distanceName = '15K';
+        break;
+      case 'Half Marathon':
+        minTime = 60 * 60; // 1:00:00
+        maxTime = 4 * 3600; // 4:00:00
+        distanceName = 'Half Marathon';
+        break;
+      case 'Marathon':
+        minTime = 2 * 3600; // 2:00:00
+        maxTime = 8 * 3600; // 8:00:00
+        distanceName = 'Marathon';
+        break;
+      default:
+        minTime = 0;
+        maxTime = 8 * 3600;
+        distanceName = raceDistance;
+    }
+    
+    if (timeInSeconds < minTime || timeInSeconds > maxTime) {
+      const formatTime = (seconds) => {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        if (hours > 0) return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        return `${minutes}:${secs.toString().padStart(2, '0')}`;
       };
-      saveProfileData(updatedProfile);
+      setProfileError(`${distanceName} time should be between ${formatTime(minTime)} and ${formatTime(maxTime)}`);
+      return;
+    }
+    
+    try {
+      const calculatedGoldenPace = calculateGoldenPace(raceTime, raceDistance);
+      
+      if (!calculatedGoldenPace) {
+        setProfileError('Unable to calculate GoldenPace. Please check your inputs and try again.');
+        return;
+      }
+      
+      setGoldenPace(calculatedGoldenPace);
+      setTrainingPaces(calculateTrainingPaces(calculatedGoldenPace));
+      
+      // Auto-save to profile if profile exists
+      if (savedProfileData && calculatedGoldenPace) {
+        const updatedProfile = {
+          ...savedProfileData,
+          currentGoldenPace: calculatedGoldenPace,
+          goalRaceTime: raceTime,
+          goalRaceDistance: raceDistance,
+          lastCalculated: new Date().toISOString()
+        };
+        saveProfileData(updatedProfile);
+      }
+      
+      // Success feedback
+      console.log(`GoldenPace calculated successfully: ${calculatedGoldenPace} for ${raceDistance} in ${raceTime}`);
+      
+    } catch (error) {
+      console.error('Error calculating GoldenPace:', error);
+      setProfileError('An error occurred while calculating. Please try again.');
     }
   };
 
@@ -1450,20 +1554,35 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                       </label>
                       <input
                         type="text"
-                        placeholder="MM:SS or HH:MM:SS"
+                        placeholder="e.g., 22:30 or 1:22:30"
                         value={raceTime}
-                        onChange={(e) => setRaceTime(e.target.value)}
+                        onChange={(e) => {
+                          setRaceTime(e.target.value);
+                          // Clear error when user starts typing
+                          if (profileError && profileError.includes('time')) {
+                            setProfileError('');
+                          }
+                        }}
+                        onBlur={(e) => {
+                          // Validate time format when field loses focus
+                          const time = e.target.value.trim();
+                          if (time && !parseTimeToSeconds(time)) {
+                            setProfileError('Please enter a valid time format (MM:SS or HH:MM:SS)');
+                          }
+                        }}
                         aria-label="Race time in minutes and seconds"
                         aria-describedby="race-time-help"
-                        className="w-full px-3 sm:px-4 py-3 border-2 font-mono text-base sm:text-lg text-center"
+                        className={`w-full px-3 sm:px-4 py-3 border-2 font-mono text-base sm:text-lg text-center transition-colors ${
+                          profileError && profileError.includes('time') ? 'border-red-500 bg-red-50' : ''
+                        }`}
                         style={{ 
-                          borderColor: colors.border,
+                          borderColor: profileError && profileError.includes('time') ? '#ef4444' : colors.border,
                           color: colors.black,
-                          backgroundColor: colors.white
+                          backgroundColor: profileError && profileError.includes('time') ? '#fef2f2' : colors.white
                         }}
                       />
-                      <div id="race-time-help" className="sr-only">
-                        Enter your race time in MM:SS format for shorter races or HH:MM:SS for longer races
+                      <div id="race-time-help" className="text-xs mt-1" style={{ color: colors.darkGreen }}>
+                        Formats: 22:30 (MM:SS) or 1:22:30 (HH:MM:SS). You can also use periods: 22.30
                       </div>
                     </div>
                     
@@ -1490,6 +1609,16 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                       </select>
                     </div>
                   </div>
+                  
+                  {/* Error Display */}
+                  {profileError && (
+                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-sm text-red-700 flex items-center">
+                        <span className="inline-block w-4 h-4 mr-2 text-red-500">âš </span>
+                        {profileError}
+                      </p>
+                    </div>
+                  )}
                   
                   <button
                     onClick={handleCalculate}
