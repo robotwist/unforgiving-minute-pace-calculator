@@ -1,1 +1,1 @@
-web: gunicorn runpace_pro.wsgi:application --bind 0.0.0.0:$PORT 
+web: npm run serve 
