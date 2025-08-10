@@ -6,6 +6,8 @@ import StripePaymentForm from './StripePaymentForm';
 import BlogTabSection from './blog/BlogTabSection';
 import PremiumPlansSection from './premium/PremiumPlansSection';
 import TrainingPlansSection from './training/TrainingPlansSection';
+import WelcomeFlow from './onboarding/WelcomeFlow';
+import { BottomNavigation } from './navigation/MobileNavigation';
 import { 
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
@@ -33,10 +35,21 @@ const RunningTrainingApp = () => {
   const [raceDistance, setRaceDistance] = useState('5K');
   const [goldenPace, setGoldenPace] = useState(null);
   const [trainingPaces, setTrainingPaces] = useState(null);
+  
+  // Welcome Flow and Mobile Navigation State
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [userOnboarded, setUserOnboarded] = useState(
+    localStorage.getItem('user_onboarded') === 'true'
+  );
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showPostCalculatorModal, setShowPostCalculatorModal] = useState(false);
+  
   const [userProfile, setUserProfile] = useState({ 
     name: '', 
     email: '', 
     experience: 'beginner',
+    goal: '', // New: user's primary goal from onboarding
+    weeklyMiles: '', // New: from onboarding
     goalRaceDistance: '5K',
     goalRaceTime: '',
     weeklyMileage: '',
@@ -45,7 +58,10 @@ const RunningTrainingApp = () => {
     currentGoldenPace: null,
     goldenPaceHistory: [],
     projectedGoldenPace: null,
-    trainingStartDate: null
+    trainingStartDate: null,
+    onboardingComplete: false, // New: track onboarding completion
+    hasSeenPlans: false, // New: track plan viewing
+    hasSelectedPlan: false // New: track plan selection
   });
   const [profileError, setProfileError] = useState('');
   const [showProfileDashboard, setShowProfileDashboard] = useState(false);
@@ -108,6 +124,23 @@ const RunningTrainingApp = () => {
     }
   }, []);
 
+  // Check for new users and show welcome flow
+  useEffect(() => {
+    if (!userOnboarded && !savedProfileData) {
+      setShowWelcome(true);
+    }
+  }, [userOnboarded, savedProfileData]);
+
+  // Handle window resize for mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Save profile data to localStorage
   const saveProfileData = (profileData) => {
     localStorage.setItem('runningProfile', JSON.stringify(profileData));
@@ -149,6 +182,73 @@ const RunningTrainingApp = () => {
     const updatedPlans = [...trainingPlansCompleted, completedPlan];
     setTrainingPlansCompleted(updatedPlans);
     localStorage.setItem('completedPlans', JSON.stringify(updatedPlans));
+  };
+
+  // Handle welcome flow completion
+  const handleWelcomeComplete = (userData) => {
+    const updatedProfile = {
+      ...userProfile,
+      goal: userData.goal,
+      experience: userData.experience,
+      weeklyMiles: userData.weeklyMiles,
+      onboardingComplete: true,
+      name: userData.name || userProfile.name,
+      email: userData.email || userProfile.email
+    };
+    
+    setUserProfile(updatedProfile);
+    localStorage.setItem('user_onboarded', 'true');
+    localStorage.setItem('runningProfile', JSON.stringify(updatedProfile));
+    
+    setUserOnboarded(true);
+    setShowWelcome(false);
+    
+    // Track onboarding completion
+    trackEvent('User', 'Onboarding Complete', userData.goal);
+    trackProfileCreation();
+  };
+
+  // Enhanced calculator completion handler
+  const handleCalculatorComplete = (results) => {
+    const currentCalculatorUses = parseInt(localStorage.getItem('calculator_uses') || '0') + 1;
+    localStorage.setItem('calculator_uses', currentCalculatorUses.toString());
+    
+    setGoldenPace(results.goldenPace);
+    setTrainingPaces(results.trainingPaces);
+    
+    // Update user profile with current golden pace
+    const updatedProfile = {
+      ...userProfile,
+      currentGoldenPace: results.goldenPace,
+      goldenPaceHistory: [...(userProfile.goldenPaceHistory || []), {
+        pace: results.goldenPace,
+        date: new Date().toISOString(),
+        raceTime,
+        raceDistance
+      }]
+    };
+    setUserProfile(updatedProfile);
+    localStorage.setItem('runningProfile', JSON.stringify(updatedProfile));
+    
+    // Show post-calculator explanation modal
+    setShowPostCalculatorModal(true);
+    
+    // Track calculator completion
+    trackCalculatorUsage(raceDistance, raceTime, results.goldenPace);
+    trackEvent('Calculator', 'Completed', results.goldenPace.toString());
+    
+    // Auto-progress to plans if user hasn't seen them yet
+    setTimeout(() => {
+      if (!updatedProfile.hasSeenPlans) {
+        setActiveTab('plans');
+        trackEvent('Navigation', 'Auto Progress', 'Calculator to Plans');
+        
+        // Mark that user has seen plans
+        const profileWithPlansSeen = { ...updatedProfile, hasSeenPlans: true };
+        setUserProfile(profileWithPlansSeen);
+        localStorage.setItem('runningProfile', JSON.stringify(profileWithPlansSeen));
+      }
+    }, 3000); // 3 second delay to let them see the result
   };
 
   // Use global Munich 1972 CSS variables for consistent design system
@@ -625,11 +725,13 @@ const RunningTrainingApp = () => {
         return;
       }
       
-      setGoldenPace(calculatedGoldenPace);
-      setTrainingPaces(calculateTrainingPaces(calculatedGoldenPace));
+      const calculatedTrainingPaces = calculateTrainingPaces(calculatedGoldenPace);
       
-      // Track calculator usage
-      trackCalculatorUsage(raceDistance, raceTime, calculatedGoldenPace);
+      // Use enhanced calculator completion handler
+      handleCalculatorComplete({
+        goldenPace: calculatedGoldenPace,
+        trainingPaces: calculatedTrainingPaces
+      });
       
       // Auto-save to profile if profile exists
       if (savedProfileData && calculatedGoldenPace) {
@@ -750,6 +852,62 @@ const RunningTrainingApp = () => {
 
   return (
     <div className="min-h-screen relative" style={{ backgroundColor: colors.white }}>
+      {/* Welcome Flow Modal */}
+      {showWelcome && (
+        <WelcomeFlow 
+          colors={colors}
+          onComplete={handleWelcomeComplete}
+          onSkip={() => {
+            setShowWelcome(false);
+            setUserOnboarded(true);
+            localStorage.setItem('user_onboarded', 'true');
+            trackEvent('User', 'Onboarding Skipped');
+          }}
+        />
+      )}
+
+      {/* Post-Calculator Explanation Modal */}
+      {showPostCalculatorModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="munich-card max-w-md w-full">
+            <div className="munich-card-body text-center">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" 
+                   style={{ backgroundColor: colors.lightGreen + '20' }}>
+                <Target className="w-8 h-8" style={{ color: colors.lightGreen }} />
+              </div>
+              
+              <h3 className="text-xl font-bold mb-3" style={{ color: colors.black }}>
+                Your Golden Pace: {goldenPace}
+              </h3>
+              
+              <p className="mb-4" style={{ color: colors.darkGreen }}>
+                This is your optimal training intensity! Now let's find the perfect training plan 
+                to help you reach your {userProfile.goal || 'running'} goals.
+              </p>
+              
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => {
+                    setShowPostCalculatorModal(false);
+                    setActiveTab('plans');
+                    trackEvent('Navigation', 'Modal to Plans');
+                  }}
+                  className="flex-1 munich-btn munich-btn-primary"
+                >
+                  View Training Plans
+                </button>
+                <button
+                  onClick={() => setShowPostCalculatorModal(false)}
+                  className="flex-1 munich-btn munich-btn-outline"
+                >
+                  Continue Exploring
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Subtle geometric background pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-5">
         <div className="absolute top-20 left-10 w-2 h-2" style={{ 
@@ -814,65 +972,87 @@ const RunningTrainingApp = () => {
               </div>
             </div>
             
-            {/* Navigation - Munich 1972 Style */}
-            <nav className="flex flex-wrap justify-center sm:justify-end space-x-1">
-              {[
-                { id: 'calculator', label: 'GoldenPace Calculator', icon: Calculator },
-                { id: 'plans', label: 'Training Plans', icon: Target },
-                { id: 'blog', label: 'Articles', icon: BookOpen },
-                { id: 'premium', label: 'Premium Plans', icon: Star },
-                { id: 'profile', label: 'Profile', icon: User }
-              ].map(({ id, label, icon: Icon }) => (
+            {/* Navigation - Conditional Mobile/Desktop */}
+            {!isMobile ? (
+              /* Desktop Navigation - Munich 1972 Style */
+              <nav className="flex flex-wrap justify-center sm:justify-end space-x-1">
+                {[
+                  { id: 'calculator', label: 'GoldenPace Calculator', icon: Calculator },
+                  { id: 'plans', label: 'Training Plans', icon: Target },
+                  { id: 'blog', label: 'Articles', icon: BookOpen },
+                  { id: 'premium', label: 'Premium Plans', icon: Star },
+                  { id: 'profile', label: 'Profile', icon: User }
+                ].map(({ id, label, icon: Icon }) => (
+                  <button
+                    key={id}
+                    onClick={(e) => {
+                      // Secret admin access: Shift + Click on Articles
+                      if (id === 'blog' && e.shiftKey) {
+                        setShowAdminPanel(true);
+                      } else {
+                        setActiveTab(id);
+                        trackTabNavigation(id);
+                      }
+                    }}
+                    aria-label={`Switch to ${label} tab`}
+                    aria-current={activeTab === id ? 'page' : undefined}
+                    className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all duration-200 ${
+                      activeTab === id
+                        ? 'text-white shadow-sm'
+                        : 'text-gray-600 hover:text-white hover:shadow-sm'
+                    }`}
+                    style={{
+                      backgroundColor: activeTab === id ? colors.lightBlue : 'transparent',
+                      borderBottom: activeTab === id ? `2px solid ${colors.lightGreen}` : 'none'
+                    }}
+                  >
+                    <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="hidden sm:inline">{label}</span>
+                    <span className="sm:hidden">{label.split(' ')[0]}</span>
+                  </button>
+                ))}
+                
+                {/* Dark Mode Toggle */}
                 <button
-                  key={id}
-                  onClick={(e) => {
-                    // Secret admin access: Shift + Click on Articles
-                    if (id === 'blog' && e.shiftKey) {
-                      setShowAdminPanel(true);
-                    } else {
-                      setActiveTab(id);
-                      trackTabNavigation(id);
-                    }
-                  }}
-                  aria-label={`Switch to ${label} tab`}
-                  aria-current={activeTab === id ? 'page' : undefined}
-                  className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all duration-200 ${
-                    activeTab === id
-                      ? 'text-white shadow-sm'
-                      : 'text-gray-600 hover:text-white hover:shadow-sm'
-                  }`}
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
-                    backgroundColor: activeTab === id ? colors.lightBlue : 'transparent',
-                    borderBottom: activeTab === id ? `2px solid ${colors.lightGreen}` : 'none'
+                    backgroundColor: darkMode ? colors.yellow : colors.gray,
+                    color: darkMode ? colors.black : colors.lightBlue,
+                    border: `2px solid ${darkMode ? colors.yellow : colors.lightBlue}`
                   }}
+                  title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                  aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
-                  <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span className="hidden sm:inline">{label}</span>
-                  <span className="sm:hidden">{label.split(' ')[0]}</span>
+                  {darkMode ? (
+                    <span className="text-lg">☀️</span>
+                  ) : (
+                    <span className="text-lg">🌙</span>
+                  )}
                 </button>
-              ))}
-              
-              {/* Dark Mode Toggle */}
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
-                style={{
-                  backgroundColor: darkMode ? colors.yellow : colors.gray,
-                  color: darkMode ? colors.black : colors.lightBlue,
-                  border: `2px solid ${darkMode ? colors.yellow : colors.lightBlue}`
-                }}
-                title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {darkMode ? (
-                  <span className="text-lg">☀️</span>
-                ) : (
-                  <span className="text-lg">🌙</span>
-                )}
-              </button>
-              
-
-            </nav>
+              </nav>
+            ) : (
+              /* Mobile - Show only brand, navigation will be at bottom */
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="p-2 rounded-full transition-all duration-300 hover:scale-110"
+                  style={{
+                    backgroundColor: darkMode ? colors.yellow : colors.gray,
+                    color: darkMode ? colors.black : colors.lightBlue,
+                    border: `2px solid ${darkMode ? colors.yellow : colors.lightBlue}`
+                  }}
+                  title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                  aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                >
+                  {darkMode ? (
+                    <span className="text-lg">☀️</span>
+                  ) : (
+                    <span className="text-lg">🌙</span>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -2836,6 +3016,21 @@ const RunningTrainingApp = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Mobile Navigation */}
+      {isMobile && !showWelcome && (
+        <BottomNavigation 
+          activeTab={activeTab === 'profile' ? 'progress' : activeTab}
+          onTabChange={(view) => {
+            // Map progress back to profile for our state management
+            const mappedView = view === 'progress' ? 'profile' : view;
+            setActiveTab(mappedView);
+            trackTabNavigation(mappedView);
+          }}
+          colors={colors}
+          userHasNewFeatures={!!goldenPace || userProfile.hasSeenPlans}
+        />
       )}
     </div>
   );
