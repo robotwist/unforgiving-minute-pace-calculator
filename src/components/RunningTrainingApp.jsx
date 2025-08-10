@@ -9,6 +9,7 @@ import TrainingPlansSection from './training/TrainingPlansSection';
 import WelcomeFlow from './onboarding/WelcomeFlow';
 import { BottomNavigation } from './navigation/MobileNavigation';
 import PlanRecommendationEngine from './recommendations/PlanRecommendationEngine';
+import ProgressDashboard from './dashboard/ProgressDashboard';
 import { 
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
@@ -70,6 +71,11 @@ const RunningTrainingApp = () => {
   const [trainingHistory, setTrainingHistory] = useState([]);
   const [personalBests, setPersonalBests] = useState({});
   const [trainingPlansCompleted, setTrainingPlansCompleted] = useState([]);
+  
+  // User activities for progress dashboard
+  const [userActivities, setUserActivities] = useState(
+    JSON.parse(localStorage.getItem('user_activities') || '[]')
+  );
   
   // Purchase and premium plan state
   const [purchasedPlans, setPurchasedPlans] = useState([]);
@@ -1656,6 +1662,70 @@ const RunningTrainingApp = () => {
         )}
 
         {activeTab === 'profile' && (
+          <div className="space-y-6">
+            {/* Enhanced Progress Dashboard */}
+            <ProgressDashboard
+              colors={colors}
+              userProfile={userProfile}
+              currentPlan={selectedPlan}
+              recentActivities={userActivities}
+            />
+            
+            {/* Quick Actions */}
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              <div className="munich-card">
+                <div className="munich-card-body text-center">
+                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                    Log a Run
+                  </h3>
+                  <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                    Track your training progress
+                  </p>
+                  <button
+                    onClick={() => setShowTrainingLogForm(true)}
+                    className="munich-btn munich-btn-primary w-full"
+                  >
+                    Add Activity
+                  </button>
+                </div>
+              </div>
+              
+              <div className="munich-card">
+                <div className="munich-card-body text-center">
+                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                    Update Golden Pace
+                  </h3>
+                  <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                    Recalculate based on recent race
+                  </p>
+                  <button
+                    onClick={() => setActiveTab('calculator')}
+                    className="munich-btn munich-btn-outline w-full"
+                  >
+                    Recalculate
+                  </button>
+                </div>
+              </div>
+              
+              <div className="munich-card">
+                <div className="munich-card-body text-center">
+                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                    Browse Plans
+                  </h3>
+                  <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                    Find your next training goal
+                  </p>
+                  <button
+                    onClick={() => setActiveTab('plans')}
+                    className="munich-btn munich-btn-outline w-full"
+                  >
+                    View Plans
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
           <div className="space-y-8">
             <div className="text-center space-y-4 relative">
               {/* Geometric background elements */}
