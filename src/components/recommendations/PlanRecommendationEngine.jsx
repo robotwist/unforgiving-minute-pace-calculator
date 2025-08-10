@@ -16,6 +16,25 @@ const PlanRecommendationEngine = ({
   const getRecommendations = useMemo(() => {
     if (!goldenPace || !userGoal || !experience) return [];
 
+    const getMatchReason = (plan) => {
+      const reasons = [];
+      
+      if (userGoal === '5k-pr' && plan.distance === '5K') {
+        reasons.push('Perfect for your 5K goal');
+      }
+      if (userGoal === 'marathon' && plan.distance === 'Marathon') {
+        reasons.push('Designed for marathon success');
+      }
+      if (experience === 'beginner' && plan.weeklyMileage <= 35) {
+        reasons.push('Beginner-friendly mileage');
+      }
+      if (experience === 'advanced' && plan.weeklyMileage >= 45) {
+        reasons.push('Matches your experience level');
+      }
+      
+      return reasons[0] || 'Good training structure';
+    };
+
     const scorePlan = (plan) => {
       let score = 0;
       
@@ -52,25 +71,6 @@ const PlanRecommendationEngine = ({
 
     return scoredPlans;
   }, [goldenPace, userGoal, experience, trainingPlans]);
-
-  const getMatchReason = (plan) => {
-    const reasons = [];
-    
-    if (userGoal === '5k-pr' && plan.distance === '5K') {
-      reasons.push('Perfect for your 5K goal');
-    }
-    if (userGoal === 'marathon' && plan.distance === 'Marathon') {
-      reasons.push('Designed for marathon success');
-    }
-    if (experience === 'beginner' && plan.weeklyMileage <= 35) {
-      reasons.push('Beginner-friendly mileage');
-    }
-    if (experience === 'advanced' && plan.weeklyMileage >= 45) {
-      reasons.push('Matches your experience level');
-    }
-    
-    return reasons[0] || 'Good training structure';
-  };
 
   const topRecommendation = getRecommendations[0];
   const otherRecommendations = getRecommendations.slice(1, 4);

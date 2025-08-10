@@ -8,6 +8,7 @@ import PremiumPlansSection from './premium/PremiumPlansSection';
 import TrainingPlansSection from './training/TrainingPlansSection';
 import WelcomeFlow from './onboarding/WelcomeFlow';
 import { BottomNavigation } from './navigation/MobileNavigation';
+import PlanRecommendationEngine from './recommendations/PlanRecommendationEngine';
 import { 
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
@@ -249,6 +250,38 @@ const RunningTrainingApp = () => {
         localStorage.setItem('runningProfile', JSON.stringify(profileWithPlansSeen));
       }
     }, 3000); // 3 second delay to let them see the result
+  };
+
+  // Enhanced plan selection handler
+  const handlePlanSelect = (plan, source) => {
+    setSelectedPlan(plan);
+    
+    // Track plan selection with source context
+    trackEvent('Plan', 'Selected', plan.name, { 
+      source,
+      goldenPace: goldenPace,
+      userGoal: userProfile.goal,
+      experience: userProfile.experience 
+    });
+    
+    // Update user profile with plan selection
+    const updatedProfile = {
+      ...userProfile,
+      currentPlan: plan,
+      planStartDate: new Date().toISOString(),
+      hasSelectedPlan: true
+    };
+    setUserProfile(updatedProfile);
+    localStorage.setItem('runningProfile', JSON.stringify(updatedProfile));
+    
+    // Show plan details
+    setShowPlanDetails(true);
+    
+    // For premium plans, show purchase modal
+    if (plan.premium && !userProfile.isPremium) {
+      setSelectedPlanForPurchase(plan);
+      setShowPurchaseModal(true);
+    }
   };
 
   // Use global Munich 1972 CSS variables for consistent design system
@@ -1566,14 +1599,60 @@ const RunningTrainingApp = () => {
         )}
 
         {activeTab === 'plans' && (
-          <TrainingPlansSection 
-            colors={colors}
-            trainingPlans={trainingPlans}
-            setSelectedPlan={setSelectedPlan}
-            setShowPlanDetails={setShowPlanDetails}
-            showPlanDetails={showPlanDetails}
-            selectedPlan={selectedPlan}
-          />
+          <div className="space-y-6">
+            {/* Smart Plan Recommendations */}
+            <div className="text-center space-y-4 mb-8">
+              <h2 className="text-2xl font-bold" style={{ color: colors.black }}>
+                {goldenPace ? 'Personalized Training Plans' : 'Training Plans'}
+              </h2>
+              {goldenPace && userProfile.goal && (
+                <p style={{ color: colors.darkGreen }}>
+                  Based on your Golden Pace of {goldenPace} and {userProfile.goal === '5k-pr' ? '5K goal' : 
+                  userProfile.goal === 'marathon' ? 'marathon goal' : 'fitness goal'}
+                </p>
+              )}
+            </div>
+
+            {/* Recommendation Engine or Fallback */}
+            {goldenPace && userProfile.goal ? (
+              <PlanRecommendationEngine
+                colors={colors}
+                userGoal={userProfile.goal}
+                experience={userProfile.experience}
+                goldenPace={goldenPace}
+                trainingPlans={trainingPlans}
+                onPlanSelect={handlePlanSelect}
+              />
+            ) : (
+              /* Fallback to original TrainingPlansSection for users without complete profile */
+              <div className="space-y-6">
+                <div className="text-center p-6 rounded-lg" style={{ backgroundColor: colors.gray + '20' }}>
+                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                    Get Personalized Recommendations
+                  </h3>
+                  <p className="mb-4" style={{ color: colors.darkGreen }}>
+                    {!goldenPace ? 'Calculate your Golden Pace first to see personalized plan recommendations' : 
+                     'Complete your profile to get smart plan matching'}
+                  </p>
+                  <button
+                    onClick={() => setActiveTab(!goldenPace ? 'calculator' : 'profile')}
+                    className="munich-btn munich-btn-primary"
+                  >
+                    {!goldenPace ? 'Calculate Golden Pace' : 'Complete Profile'}
+                  </button>
+                </div>
+                
+                <TrainingPlansSection 
+                  colors={colors}
+                  trainingPlans={trainingPlans}
+                  setSelectedPlan={setSelectedPlan}
+                  setShowPlanDetails={setShowPlanDetails}
+                  showPlanDetails={showPlanDetails}
+                  selectedPlan={selectedPlan}
+                />
+              </div>
+            )}
+          </div>
         )}
 
         {activeTab === 'profile' && (
