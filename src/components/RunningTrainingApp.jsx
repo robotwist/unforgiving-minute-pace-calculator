@@ -3,11 +3,6 @@ import { Calculator, Download, Target, Clock, TrendingUp, User, BookOpen, Star, 
 import { Elements } from '@stripe/react-stripe-js';
 import stripePromise from '../config/stripe';
 import StripePaymentForm from './StripePaymentForm';
-import TabNavigation from './layout/TabNavigation';
-import GoldenPaceCalculator from './calculator/GoldenPaceCalculator';
-import ResultsDisplay from './calculator/ResultsDisplay';
-import TrainingLogForm from './training/TrainingLogForm';
-import ProfileDashboard from './profile/ProfileDashboard';
 import { 
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
@@ -58,6 +53,16 @@ const RunningTrainingApp = () => {
   
   // Training log form state
   const [showTrainingLogForm, setShowTrainingLogForm] = useState(false);
+  const [trainingLogData, setTrainingLogData] = useState({
+    type: 'Easy Run',
+    distance: '',
+    time: '',
+    feeling: 'Good',
+    effort: 'Easy',
+    notes: '',
+    weather: '',
+    location: ''
+  });
 
   // Load saved data from localStorage on component mount
   useEffect(() => {
@@ -2295,25 +2300,9 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
                 </div>
               </div>
             ) : (
-              // Profile Dashboard Component
-              <ProfileDashboard
-                colors={colors}
-                userProfile={userProfile}
-                savedProfileData={savedProfileData}
-                trainingHistory={trainingHistory}
-                personalBests={personalBests}
-                trainingPlansCompleted={trainingPlansCompleted}
-                goldenPace={goldenPace}
-                setRaceTime={setRaceTime}
-                setRaceDistance={setRaceDistance}
-                setActiveTab={setActiveTab}
-                setShowProfileDashboard={setShowProfileDashboard}
-                setShowTrainingLogForm={setShowTrainingLogForm}
-                generateGoldenPaceProgression={generateGoldenPaceProgression}
-                updatePersonalBest={updatePersonalBest}
-                addTrainingSession={addTrainingSession}
-              />
-
+              // Profile Dashboard
+              <div className="space-y-6">
+                <div className="munich-card">
                   <div className="munich-card-header relative overflow-hidden" style={{ 
                     backgroundColor: colors.lightGreen 
                   }}>
@@ -2844,25 +2833,274 @@ Most runners who follow this protocol see their first breakthrough in 6-8 weeksâ
           </div>
         )}
 
-        {/* Training Log Form Component */}
-        <TrainingLogForm
-          colors={colors}
-          showTrainingLogForm={showTrainingLogForm}
-          setShowTrainingLogForm={setShowTrainingLogForm}
-          userProfile={userProfile}
-          logTrainingSession={(sessionData) => {
-            // Add the training session
-            addTrainingSession(sessionData);
-            
-            // Check if this is a race/PR
-            if (sessionData.type.includes('Race') && sessionData.distance && sessionData.time) {
-              const currentPB = personalBests[sessionData.distance];
-              if (!currentPB || parseTimeToSeconds(sessionData.time) < parseTimeToSeconds(currentPB)) {
-                updatePersonalBest(sessionData.distance, sessionData.time);
-              }
-            }
-          }}
-        />
+        {/* Training Log Form Modal */}
+        {showTrainingLogForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="munich-card max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="munich-card-header relative overflow-hidden" style={{ 
+                backgroundColor: colors.lightBlue 
+              }}>
+                <div className="absolute inset-0 progressive-melange opacity-20"></div>
+                <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                  backgroundColor: colors.orange,
+                  opacity: 0.8
+                }}></div>
+                
+                <div className="relative z-10">
+                  <h3 className="font-bold flex items-center" style={{ 
+                    color: colors.white,
+                    fontSize: 'var(--text-2xl)'
+                  }}>
+                    <Activity className="w-6 h-6 mr-3" />
+                    Log Training Session
+                  </h3>
+                  <p className="mt-2" style={{ 
+                    color: colors.white,
+                    opacity: 0.9,
+                    fontSize: 'var(--text-base)'
+                  }}>Track your workout details and how you felt</p>
+                </div>
+              </div>
+              
+              <div className="p-8">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  
+                  // Add the training session
+                  addTrainingSession({
+                    type: trainingLogData.type,
+                    distance: trainingLogData.distance,
+                    time: trainingLogData.time,
+                    feeling: trainingLogData.feeling,
+                    effort: trainingLogData.effort,
+                    notes: trainingLogData.notes,
+                    weather: trainingLogData.weather,
+                    location: trainingLogData.location
+                  });
+                  
+                  // Check if this is a race/PR
+                  if (trainingLogData.type.includes('Race') && trainingLogData.distance && trainingLogData.time) {
+                    const currentPB = personalBests[trainingLogData.distance];
+                    if (!currentPB || parseTimeToSeconds(trainingLogData.time) < parseTimeToSeconds(currentPB)) {
+                      updatePersonalBest(trainingLogData.distance, trainingLogData.time);
+                    }
+                  }
+                  
+                  // Reset form and close
+                  setTrainingLogData({
+                    type: 'Easy Run',
+                    distance: '',
+                    time: '',
+                    feeling: 'Good',
+                    effort: 'Easy',
+                    notes: '',
+                    weather: '',
+                    location: ''
+                  });
+                  setShowTrainingLogForm(false);
+                }}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Workout Type
+                      </label>
+                      <select
+                        value={trainingLogData.type}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, type: e.target.value})}
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      >
+                        <option value="Easy Run">Easy Run</option>
+                        <option value="Tempo Run">Tempo Run</option>
+                        <option value="Interval Training">Interval Training</option>
+                        <option value="Long Run">Long Run</option>
+                        <option value="Recovery Run">Recovery Run</option>
+                        <option value="Race">Race</option>
+                        <option value="Cross Training">Cross Training</option>
+                        <option value="Strength Training">Strength Training</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Distance
+                      </label>
+                      <input
+                        type="text"
+                        value={trainingLogData.distance}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, distance: e.target.value})}
+                        placeholder="e.g., 5K, 6 miles, 10K"
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Time
+                      </label>
+                      <input
+                        type="text"
+                        value={trainingLogData.time}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, time: e.target.value})}
+                        placeholder="e.g., 25:00, 1:30:45"
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        How did you feel?
+                      </label>
+                      <select
+                        value={trainingLogData.feeling}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, feeling: e.target.value})}
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      >
+                        <option value="Excellent">Excellent</option>
+                        <option value="Good">Good</option>
+                        <option value="Average">Average</option>
+                        <option value="Tired">Tired</option>
+                        <option value="Struggled">Struggled</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Effort Level
+                      </label>
+                      <select
+                        value={trainingLogData.effort}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, effort: e.target.value})}
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      >
+                        <option value="Easy">Easy</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Comfortably Hard">Comfortably Hard</option>
+                        <option value="Hard">Hard</option>
+                        <option value="Very Hard">Very Hard</option>
+                        <option value="Max Effort">Max Effort</option>
+                      </select>
+                    </div>
+                    
+                    <div>
+                      <label className="block font-medium mb-3" style={{ 
+                        color: colors.black,
+                        fontSize: 'var(--text-sm)'
+                      }}>
+                        Location
+                      </label>
+                      <input
+                        type="text"
+                        value={trainingLogData.location}
+                        onChange={(e) => setTrainingLogData({...trainingLogData, location: e.target.value})}
+                        placeholder="e.g., Local park, Track, Treadmill"
+                        className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                        style={{ 
+                          borderColor: colors.gray,
+                          fontSize: 'var(--text-base)'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <label className="block font-medium mb-3" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-sm)'
+                    }}>
+                      Weather
+                    </label>
+                    <input
+                      type="text"
+                      value={trainingLogData.weather}
+                      onChange={(e) => setTrainingLogData({...trainingLogData, weather: e.target.value})}
+                      placeholder="e.g., Sunny 70Â°F, Rainy, Hot and humid"
+                      className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                      style={{ 
+                        borderColor: colors.gray,
+                        fontSize: 'var(--text-base)'
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="mt-6">
+                    <label className="block font-medium mb-3" style={{ 
+                      color: colors.black,
+                      fontSize: 'var(--text-sm)'
+                    }}>
+                      Notes
+                    </label>
+                    <textarea
+                      value={trainingLogData.notes}
+                      onChange={(e) => setTrainingLogData({...trainingLogData, notes: e.target.value})}
+                      placeholder="How did the workout go? Any observations, goals achieved, etc."
+                      rows={4}
+                      className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                      style={{ 
+                        borderColor: colors.gray,
+                        fontSize: 'var(--text-base)'
+                      }}
+                    />
+                  </div>
+                  
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <button
+                      type="submit"
+                      className="munich-btn munich-btn-primary relative"
+                    >
+                      Save Training Session
+                      <div className="absolute top-0 right-0 w-4 h-4 geometric-diamond" style={{ 
+                        backgroundColor: colors.lightGreen
+                      }}></div>
+                    </button>
+                    
+                    <button
+                      type="button"
+                      onClick={() => setShowTrainingLogForm(false)}
+                      className="munich-btn munich-btn-outline"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Blog/Articles Section - Munich 1972 Design */}
         {activeTab === 'blog' && !selectedArticle && (
