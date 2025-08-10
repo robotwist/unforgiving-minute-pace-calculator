@@ -1,7 +1,7 @@
 [build]
   base = "."
   publish = "build"
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "echo 'React-only build' && npm ci --legacy-peer-deps && npm run build"
   ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [build.processing]
@@ -11,15 +11,12 @@
   NODE_VERSION = "20"
   NPM_FLAGS = "--legacy-peer-deps"
   CI = "true"
-  REACT_APP_API_URL = "https://unforgiving-moment-production.up.railway.app/api"
   NODE_ENV = "production"
   GENERATE_SOURCEMAP = "false"
-  # CRITICAL: Force Netlify to ignore Python completely
-  NETLIFY_SKIP_PYTHON_BUILD = "true"
   SKIP_PYTHON_INSTALL = "true"
-  PYTHON_VERSION = ""
+  NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250809170000"
+  NETLIFY_CACHE_ID = "v20250810_react_only"
 
 # Site configuration
 [context.production]

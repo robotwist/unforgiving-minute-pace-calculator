@@ -1,0 +1,8 @@
+{
+  "name": "unforgiving-minute-react-frontend",
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
+  "buildpack": "https://github.com/heroku/heroku-buildpack-nodejs"
+}

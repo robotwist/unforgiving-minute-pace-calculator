@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build && npm run build:sitemap",
+    "build": "craco build",
+    "build:full": "craco build && npm run build:sitemap",
     "build:sitemap": "node generate-sitemap.js",
     "test": "craco test",
     "eject": "react-scripts eject",
