@@ -943,7 +943,7 @@ const RunningTrainingApp = () => {
               </p>
               
               <div className="flex space-x-3">
-                <button
+                <button aria-label="Open navigation menu"
                   onClick={() => {
                     setShowPostCalculatorModal(false);
                     setActiveTab('plans');
@@ -953,7 +953,7 @@ const RunningTrainingApp = () => {
                 >
                   View Training Plans
                 </button>
-                <button
+                <button aria-label="Calculate again"
                   onClick={() => setShowPostCalculatorModal(false)}
                   className="flex-1 munich-btn munich-btn-outline"
                 >
@@ -1070,7 +1070,7 @@ const RunningTrainingApp = () => {
                 ))}
                 
                 {/* Dark Mode Toggle */}
-                <button
+                <button aria-label="Go to plans"
                   onClick={() => setDarkMode(!darkMode)}
                   className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
@@ -1091,7 +1091,7 @@ const RunningTrainingApp = () => {
             ) : (
               /* Mobile - Show only brand, navigation will be at bottom */
               <div className="flex items-center space-x-4">
-                <button
+                <button aria-label="Continue exploring"
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
@@ -1337,8 +1337,9 @@ const RunningTrainingApp = () => {
                     </div>
                   )}
                   
-                  <button
+            <button
                     onClick={handleCalculate}
+              title="Calculate GoldenPace"
                     aria-label="Calculate training paces from race time"
                     className="w-full py-3 px-6 font-medium text-base sm:text-lg transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg relative btn-high-contrast"
                     style={{ 
@@ -1515,7 +1516,7 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       <div className="flex flex-col sm:flex-row gap-3">
-                        <button 
+                        <button aria-label="View premium programs"
                           onClick={() => setActiveTab('premium')}
                           className="flex-1 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                           style={{ 
@@ -1527,7 +1528,7 @@ const RunningTrainingApp = () => {
                           <TrendingUp className="w-6 h-6 mr-3" />
                           Get Complete 12-Week Program
                         </button>
-                        <button 
+                        <button aria-label="Browse all programs"
                           onClick={() => setActiveTab('plans')}
                           className="flex-1 px-6 py-4 rounded-lg font-medium border-2 transition-all duration-200 flex items-center justify-center"
                           style={{ 
@@ -1904,7 +1905,7 @@ const RunningTrainingApp = () => {
                   </div>
 
                   <div className="flex gap-4">
-                    <button 
+                    <button aria-label="Open purchase modal"
                       onClick={savedProfileData ? updateProfile : saveProfile}
                       className="munich-btn munich-btn-primary flex-1 relative"
                       aria-label={savedProfileData ? 'Update your training profile' : 'Create your training profile'}
@@ -2724,7 +2725,7 @@ const RunningTrainingApp = () => {
                   </div>
                   
                   <div className="mt-8 flex flex-wrap gap-4">
-                    <button
+                    <button aria-label="Add activity"
                       type="submit"
                       className="munich-btn munich-btn-primary relative"
                     >
@@ -2734,7 +2735,7 @@ const RunningTrainingApp = () => {
                       }}></div>
                     </button>
                     
-                    <button
+                    <button aria-label="View plans"
                       type="button"
                       onClick={() => setShowTrainingLogForm(false)}
                       className="munich-btn munich-btn-outline"
@@ -3109,7 +3110,7 @@ const RunningTrainingApp = () => {
               </div>
               
               <div className="mt-8 flex justify-center">
-                <button
+                <button aria-label="Recalculate GoldenPace"
                   onClick={() => setShowAdminPanel(false)}
                   className="munich-btn munich-btn-primary"
                 >

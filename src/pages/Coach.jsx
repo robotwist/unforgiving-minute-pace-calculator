@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import colors from '../data/colors';
+import CalendlyModal from '../components/consultation/CalendlyModal';
 
 const Coach = () => {
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
   useEffect(() => {
     document.title = 'Coach | Unforgiving Minute';
   }, []);
@@ -12,6 +14,16 @@ const Coach = () => {
         <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.yellow}10, ${colors.lightBlue}10)` }}>
           <div className="munich-card-body">
             <h1 className="text-3xl font-bold mb-4" style={{ color: colors.black }}>Coach</h1>
+            <div className="mb-6">
+              <button
+                onClick={() => setIsCalendlyOpen(true)}
+                aria-label="Schedule a coaching consultation"
+                className="munich-btn munich-btn-primary"
+                style={{ backgroundColor: colors.lightBlue, color: colors.white }}
+              >
+                Schedule Consultation
+              </button>
+            </div>
             <div className="max-w-2xl text-base" style={{ color: colors.black }}>
               <p className="mb-2 font-medium">Rob Wistrand — Head Coach, Founder, and Athlete</p>
               <p className="mb-2">
@@ -21,6 +33,7 @@ const Coach = () => {
           </div>
         </div>
       </div>
+      <CalendlyModal isOpen={isCalendlyOpen} onClose={() => setIsCalendlyOpen(false)} colors={colors} />
     </div>
   );
 };
