@@ -1,14 +1,14 @@
 [build]
   base = "."
   publish = "build"
-  command = "echo 'React-only build' && npm ci --legacy-peer-deps && npm run build"
+  command = "npm ci --legacy-peer-deps --production=false && npm run build"
   ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [build.processing]
   skip_processing = false
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
   CI = "true"
   NODE_ENV = "production"
@@ -16,7 +16,7 @@
   SKIP_PYTHON_INSTALL = "true"
   NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250810_react_only"
+  NETLIFY_CACHE_ID = "v20250810_craco_fix"
 
 # Site configuration
 [context.production]
