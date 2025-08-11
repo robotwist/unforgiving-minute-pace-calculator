@@ -32,6 +32,23 @@ const Coach = () => {
               <p>I ran for the winningest team in Division I collegiate sports under one of the most legendary coaches in history. A career-ending injury/illness in the fall of my sophomore year shifted my path. I went on to coach multiple state champions, age-group champions, race winners, athletes who became All-Americans and professionals, and Olympic Trials and national place-winners.</p>
               <p>I love coaching and have an instinct for what truly works. I coach with the relentless desire of someone with unfinished business—who loves the sport with innate passion and loves seeing people grow and succeed. Running and coaching are the vehicles I use to help people grow and transcend physically, mentally, and spiritually. I’m excited to coach you, watch you grow, and help you overcome big obstacles to become a better person.</p>
             </div>
+            <div className="mt-8">
+              <h2 className="text-2xl font-bold mb-3" style={{ color: colors.black }}>Athlete Feedback</h2>
+              <div className="space-y-3">
+                <blockquote className="p-4 rounded-lg border" style={{ borderColor: colors.lightBlue, backgroundColor: 'white' }}>
+                  <p className="text-sm" style={{ color: colors.black }}>
+                    “Rob helped me drop from 22:10 to 19:58 in 10 weeks without getting injured. The right workouts at the right time.”
+                  </p>
+                  <cite className="text-xs" style={{ color: colors.darkGreen }}>— A.D., 5K runner</cite>
+                </blockquote>
+                <blockquote className="p-4 rounded-lg border" style={{ borderColor: colors.lightGreen, backgroundColor: 'white' }}>
+                  <p className="text-sm" style={{ color: colors.black }}>
+                    “Smart, personalized, and motivating. I PR’d my half marathon by 6 minutes.”
+                  </p>
+                  <cite className="text-xs" style={{ color: colors.darkGreen }}>— M.K., half marathoner</cite>
+                </blockquote>
+              </div>
+            </div>
           </div>
         </div>
       </div>

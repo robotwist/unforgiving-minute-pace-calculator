@@ -26,6 +26,14 @@ const PremiumPlansSection = ({
         <p className="text-xl" style={{ color: colors.darkGreen }}>
           Comprehensive, professionally-designed training programs for serious athletes
         </p>
+        <a
+          href="/coach"
+          className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold border-2"
+          style={{ borderColor: colors.lightGreen, color: colors.lightGreen, backgroundColor: 'white' }}
+          aria-label="Schedule a free consultation"
+        >
+          Free 15‑min Consult
+        </a>
       </div>
 
       {/* Who am I? Section */}
