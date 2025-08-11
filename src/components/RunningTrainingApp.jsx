@@ -1084,7 +1084,7 @@ const RunningTrainingApp = () => {
                 </a>
                 
                 {/* Dark Mode Toggle */}
-                <button aria-label="Toggle dark mode"
+                <button
                   onClick={() => setDarkMode(!darkMode)}
                   className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
@@ -1117,7 +1117,7 @@ const RunningTrainingApp = () => {
                 >
                   Consult
                 </a>
-                <button aria-label="Toggle dark mode"
+                <button
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 rounded-full transition-all duration-300 hover:scale-110"
                   style={{
