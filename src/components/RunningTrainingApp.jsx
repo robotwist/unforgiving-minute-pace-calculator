@@ -106,8 +106,22 @@ const RunningTrainingApp = () => {
     
     if (savedProfile) {
       const profileData = JSON.parse(savedProfile);
-      setSavedProfileData(profileData);
-      setUserProfile(profileData);
+      // Normalize legacy profiles that might have stored objects for goal/experience
+      const normalizedProfileData = { ...profileData };
+      if (profileData && typeof profileData.goal === 'object' && profileData.goal !== null) {
+        normalizedProfileData.goal = profileData.goal.id || '';
+      }
+      if (profileData && typeof profileData.experience === 'object' && profileData.experience !== null) {
+        normalizedProfileData.experience = profileData.experience.id || '';
+        // Prefer human-readable weekly miles if present on the object
+        if (!normalizedProfileData.weeklyMiles && profileData.experience.weeklyMiles) {
+          normalizedProfileData.weeklyMiles = profileData.experience.weeklyMiles;
+        }
+      }
+      setSavedProfileData(normalizedProfileData);
+      setUserProfile(normalizedProfileData);
+      // Persist normalization
+      localStorage.setItem('runningProfile', JSON.stringify(normalizedProfileData));
       
       // If profile exists, show dashboard by default
       setShowProfileDashboard(true);
@@ -192,11 +206,16 @@ const RunningTrainingApp = () => {
 
   // Handle welcome flow completion
   const handleWelcomeComplete = (userData) => {
+    // Persist only ids/strings in profile (avoid storing whole objects)
+    const normalizedGoal = typeof userData.goal === 'object' && userData.goal !== null ? userData.goal.id : (userData.goal || '');
+    const normalizedExperience = typeof userData.experience === 'object' && userData.experience !== null ? userData.experience.id : (userData.experience || '');
+    const normalizedWeeklyMiles = typeof userData.experience === 'object' && userData.experience?.weeklyMiles ? userData.experience.weeklyMiles : (userData.weeklyMiles || userProfile.weeklyMiles || '');
+
     const updatedProfile = {
       ...userProfile,
-      goal: userData.goal,
-      experience: userData.experience,
-      weeklyMiles: userData.weeklyMiles,
+      goal: normalizedGoal,
+      experience: normalizedExperience,
+      weeklyMiles: normalizedWeeklyMiles,
       onboardingComplete: true,
       name: userData.name || userProfile.name,
       email: userData.email || userProfile.email

@@ -67,8 +67,9 @@ const WelcomeFlow = ({ colors, onComplete }) => {
 
   const handleComplete = () => {
     onComplete({
-      goal: selectedGoal,
-      experience: experience,
+      goal: selectedGoal?.id || '',
+      experience: experience?.id || '',
+      weeklyMiles: experience?.weeklyMiles || '',
       personalizedMessage: generatePersonalizedMessage()
     });
   };
@@ -79,7 +80,7 @@ const WelcomeFlow = ({ colors, onComplete }) => {
       'marathon': 'Let\'s build your marathon training foundation with proper pacing',
       'general-fitness': 'Let\'s find your training zones for consistent improvement'
     };
-    return goalMessages[selectedGoal.id];
+    return selectedGoal && selectedGoal.id ? goalMessages[selectedGoal.id] : '';
   };
 
   return (
