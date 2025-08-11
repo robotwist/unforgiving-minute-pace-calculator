@@ -4,7 +4,7 @@ import RunningTrainingApp from './components/RunningTrainingApp';
 import RunningDesignApp from './RunningDesignApp';
 
 function App() {
-  const [currentView] = useState('calculator'); // Start with calculator as landing page
+  const [currentView] = useState('calculator'); // Start with calculator as landing page - Build: 2025-08-11
 
   return (
     <div className="App">
