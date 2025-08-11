@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import RunningTrainingApp from './components/RunningTrainingApp';
 import RunningDesignApp from './RunningDesignApp';
 import Coach from './pages/Coach';
+import Thanks from './pages/Thanks';
 
 function App() {
   const [currentView] = useState('calculator'); // Start with calculator as landing page - Build: 2025-08-11
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={currentView === 'design' ? <RunningDesignApp /> : <RunningTrainingApp />} />
         <Route path="/coach" element={<Coach />} />
+        <Route path="/thanks" element={<Thanks />} />
         <Route path="*" element={<RunningTrainingApp />} />
       </Routes>
     </div>

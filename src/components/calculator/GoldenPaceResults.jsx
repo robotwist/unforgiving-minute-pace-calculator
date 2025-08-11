@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Clock, TrendingUp, Star, Target, User, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const GoldenPaceResults = ({
   colors,
@@ -8,6 +9,36 @@ const GoldenPaceResults = ({
   setActiveTab,
   savedProfileData
 }) => {
+  const navigate = useNavigate();
+  const [leadName, setLeadName] = useState('');
+  const [leadEmail, setLeadEmail] = useState('');
+  const [leadError, setLeadError] = useState('');
+  const [leadLoading, setLeadLoading] = useState(false);
+
+  const submitLead = async (e) => {
+    e.preventDefault();
+    setLeadError('');
+    if (!leadEmail || !/^\S+@\S+\.\S+$/.test(leadEmail)) {
+      setLeadError('Please enter a valid email');
+      return;
+    }
+    setLeadLoading(true);
+    try {
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: leadEmail, name: leadName, source: 'calculator_result' })
+      });
+      if (window.gtag) {
+        window.gtag('event', 'lead_submit', { source: 'calculator_result' });
+      }
+      navigate('/thanks');
+    } catch (err) {
+      setLeadError('Could not submit. Please try again.');
+    } finally {
+      setLeadLoading(false);
+    }
+  };
   return (
     <div className="space-y-8">
       {/* GoldenPace Display - Central Hero Result */}
@@ -72,6 +103,42 @@ const GoldenPaceResults = ({
 
       {/* Freemium Flow - Post-Calculation User Journey */}
       <div className="space-y-6">
+        {/* Lead capture: 7-day PDF */}
+        <div className="bg-white border-2 rounded-lg p-6" style={{ borderColor: colors.lightBlue }}>
+          <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>Get Your Free 7‑Day Personalized Training Week</h3>
+          <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>Enter your email to receive a downloadable 7‑day plan tailored to your GoldenPace.</p>
+          <form onSubmit={submitLead} className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <input
+              type="text"
+              placeholder="Your name (optional)"
+              value={leadName}
+              onChange={(e) => setLeadName(e.target.value)}
+              className="px-3 py-2 border-2 rounded"
+              style={{ borderColor: colors.border, color: colors.black, backgroundColor: 'white' }}
+              aria-label="Your name"
+            />
+            <input
+              type="email"
+              placeholder="Your email"
+              value={leadEmail}
+              onChange={(e) => setLeadEmail(e.target.value)}
+              className={`px-3 py-2 border-2 rounded ${leadError ? 'border-red-500' : ''}`}
+              style={{ borderColor: leadError ? '#ef4444' : colors.border, color: colors.black, backgroundColor: 'white' }}
+              aria-label="Your email"
+              required
+            />
+            <button
+              type="submit"
+              disabled={leadLoading}
+              className="px-4 py-2 font-semibold border-2 rounded"
+              style={{ borderColor: colors.lightGreen, color: 'white', backgroundColor: colors.lightGreen }}
+              aria-label="Send my 7-day personalized week"
+            >
+              {leadLoading ? 'Sending…' : 'Send My 7‑Day Week'}
+            </button>
+          </form>
+          {leadError && <div className="text-sm mt-2" style={{ color: '#dc2626' }}>{leadError}</div>}
+        </div>
         {/* Free Training Week Sample */}
         <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 border-2 rounded-lg p-6 relative overflow-hidden" style={{ 
           borderColor: colors.lightBlue,
