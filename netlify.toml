@@ -16,7 +16,7 @@
   SKIP_PYTHON_INSTALL = "true"
   NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250810_craco_fix"
+  NETLIFY_CACHE_ID = "v20250811_fresh_build"
 
 # Site configuration
 [context.production]
