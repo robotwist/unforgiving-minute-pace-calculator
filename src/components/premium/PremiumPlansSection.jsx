@@ -61,7 +61,73 @@ const PremiumPlansSection = ({
       </div>
 
       {/* Premium Plans Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        {/* 30-Minute Consultation */}
+        <div className="munich-card relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-8 h-8 geometric-diamond" style={{ 
+            backgroundColor: colors.lightBlue,
+            opacity: 0.8
+          }}></div>
+          
+          <div className="munich-card-header">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+                30-Min Consultation
+              </h4>
+              <span className="text-xs font-medium px-2 py-1" style={{ 
+                backgroundColor: colors.lightBlue,
+                color: colors.white 
+              }}>
+                STARTER
+              </span>
+            </div>
+          </div>
+          
+          <div className="munich-card-body">
+            <div className="mb-4">
+              <div className="flex items-baseline">
+                <span className="text-3xl font-bold" style={{ color: colors.black }}>$50</span>
+              </div>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>Per session</p>
+            </div>
+            
+            <ul className="space-y-2 mb-6 text-sm">
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Individual assessment & analysis</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Personalized pace recommendations</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Training plan explanation</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Q&A and guidance</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Weekly workout samples</span>
+              </li>
+            </ul>
+            
+            <button 
+              className="munich-btn munich-btn-primary w-full"
+              onClick={() => handleConsultationClick('consultation-30min', '30-Min Consultation', 50)}
+            >
+              Book Session
+            </button>
+            
+            <p className="text-xs text-center mt-2" style={{ color: colors.silver }}>
+              Perfect for getting started • Can purchase multiple
+            </p>
+          </div>
+        </div>
+
         {/* 5K Mastery Plan */}
         <div className="munich-card relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-8 h-8 geometric-diamond" style={{ 
@@ -136,6 +202,118 @@ const PremiumPlansSection = ({
             <p className="text-xs text-center mt-2" style={{ color: colors.silver }}>
               Instant download • 30-day money back guarantee
             </p>
+          </div>
+        </div>
+
+        {/* 10K Excellence Plan */}
+        <div className="munich-card relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-8 h-8 geometric-octagon" style={{ 
+            backgroundColor: colors.lightGreen,
+            opacity: 0.8
+          }}></div>
+          
+          <div className="munich-card-header">
+            <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+              10K Excellence
+            </h4>
+          </div>
+          
+          <div className="munich-card-body">
+            <div className="mb-4">
+              <div className="flex items-baseline">
+                <span className="text-3xl font-bold" style={{ color: colors.black }}>$67</span>
+              </div>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>14-week complete program</p>
+            </div>
+            
+            <ul className="space-y-2 mb-6 text-sm">
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Base building phase (6 weeks)</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Lactate threshold development (4 weeks)</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Peak and race prep (4 weeks)</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Advanced pacing strategies</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Mental preparation guide</span>
+              </li>
+            </ul>
+            
+            <button 
+              className="munich-btn munich-btn-secondary w-full"
+              onClick={() => handlePurchaseClick('10k-excellence', '10K Excellence', 67)}
+              disabled={purchasedPlans.some(p => p.id === '10k-excellence')}
+            >
+              {purchasedPlans.some(p => p.id === '10k-excellence') ? 'Purchased' : 'Get 10K Plan'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Second Row - Half Marathon & Marathon */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        {/* Half Marathon Breakthrough */}
+        <div className="munich-card relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-8 h-8 geometric-square" style={{ 
+            backgroundColor: colors.violet,
+            opacity: 0.8
+          }}></div>
+          
+          <div className="munich-card-header">
+            <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+              Half Marathon Breakthrough
+            </h4>
+          </div>
+          
+          <div className="munich-card-body">
+            <div className="mb-4">
+              <div className="flex items-baseline">
+                <span className="text-3xl font-bold" style={{ color: colors.black }}>$82</span>
+              </div>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>16-week complete program</p>
+            </div>
+            
+            <ul className="space-y-2 mb-6 text-sm">
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Aerobic base development (6 weeks)</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Tempo and threshold work (6 weeks)</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Peak phase and taper (4 weeks)</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Fueling and hydration strategy</span>
+              </li>
+              <li className="flex items-start">
+                <span style={{ color: colors.lightBlue }}>✓</span>
+                <span className="ml-2" style={{ color: colors.black }}>Long run progression guide</span>
+              </li>
+            </ul>
+            
+            <button 
+              className="munich-btn munich-btn-secondary w-full"
+              onClick={() => handlePurchaseClick('half-marathon-breakthrough', 'Half Marathon Breakthrough', 82)}
+              disabled={purchasedPlans.some(p => p.id === 'half-marathon-breakthrough')}
+            >
+              {purchasedPlans.some(p => p.id === 'half-marathon-breakthrough') ? 'Purchased' : 'Get Half Marathon Plan'}
+            </button>
           </div>
         </div>
 
@@ -220,13 +398,13 @@ const PremiumPlansSection = ({
                 <span className="text-3xl font-bold" style={{ color: colors.black }}>$297</span>
                 <span className="text-sm ml-1" style={{ color: colors.darkGreen }}>/month</span>
               </div>
-              <p className="text-sm" style={{ color: colors.darkGreen }}>One-on-one coaching</p>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>Comprehensive coaching program</p>
             </div>
             
             <ul className="space-y-2 mb-6 text-sm">
               <li className="flex items-start">
                 <span style={{ color: colors.lightBlue }}>✓</span>
-                <span className="ml-2" style={{ color: colors.black }}>Weekly one-on-one sessions</span>
+                <span className="ml-2" style={{ color: colors.black }}>4 weekly coaching sessions (30 min)</span>
               </li>
               <li className="flex items-start">
                 <span style={{ color: colors.lightBlue }}>✓</span>
@@ -238,7 +416,7 @@ const PremiumPlansSection = ({
               </li>
               <li className="flex items-start">
                 <span style={{ color: colors.lightBlue }}>✓</span>
-                <span className="ml-2" style={{ color: colors.black }}>24/7 text support</span>
+                <span className="ml-2" style={{ color: colors.black }}>Unlimited email support</span>
               </li>
               <li className="flex items-start">
                 <span style={{ color: colors.lightBlue }}>✓</span>
@@ -304,6 +482,46 @@ const PremiumPlansSection = ({
                 <div className="text-sm" style={{ color: colors.darkGreen }}>Portland, OR • Multiple PR athlete</div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* How It Works Section */}
+      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
+        <div className="munich-card-body text-center">
+          <h3 className="text-2xl font-bold mb-6" style={{ color: colors.black }}>
+            How Our System Works
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="w-16 h-16 geometric-diamond mx-auto mb-4" style={{ backgroundColor: colors.lightBlue }}></div>
+              <h4 className="font-bold mb-2" style={{ color: colors.black }}>1. Start with Consultation</h4>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>
+                Book a $50 session to get personalized assessment and understand your training needs. 
+                Perfect for testing our approach.
+              </p>
+            </div>
+            <div>
+              <div className="w-16 h-16 geometric-octagon mx-auto mb-4" style={{ backgroundColor: colors.lightGreen }}></div>
+              <h4 className="font-bold mb-2" style={{ color: colors.black }}>2. Choose Your Distance</h4>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>
+                Ready for a complete program? Select from 5K ($49) to Marathon ($97). 
+                Each includes detailed daily workouts and coaching guidance.
+              </p>
+            </div>
+            <div>
+              <div className="w-16 h-16 geometric-square mx-auto mb-4" style={{ backgroundColor: colors.violet }}></div>
+              <h4 className="font-bold mb-2" style={{ color: colors.black }}>3. Upgrade or Continue</h4>
+              <p className="text-sm" style={{ color: colors.darkGreen }}>
+                Need ongoing support? Continue with consultation blocks or upgrade to 
+                monthly coaching for comprehensive guidance.
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 p-4" style={{ backgroundColor: `${colors.lightBlue}20`, borderRadius: '12px' }}>
+            <p className="font-medium" style={{ color: colors.black }}>
+              💡 Try Before You Commit: Start with a $50 consultation to experience our personalized approach
+            </p>
           </div>
         </div>
       </div>
