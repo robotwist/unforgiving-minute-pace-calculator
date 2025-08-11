@@ -195,7 +195,7 @@ const GoldenPaceResults = ({
               </button>
               <a
                 href="/coach"
-                className="flex-1 px-6 py-4 rounded-lg font-medium border-2 transition-all duration-200 flex items-center justify-center"
+                className="flex-1 px-6 py-4 rounded-lg font-semibold border-2 transition-all duration-200 flex items-center justify-center"
                 style={{
                   borderColor: colors.lightGreen,
                   color: colors.lightGreen,

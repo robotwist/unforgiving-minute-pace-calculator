@@ -1068,6 +1068,20 @@ const RunningTrainingApp = () => {
                     <span className="sm:hidden">{label.split(' ')[0]}</span>
                   </button>
                 ))}
+
+                {/* Global Consult CTA */}
+                <a
+                  href="/coach"
+                  className="ml-2 sm:ml-4 px-3 sm:px-4 py-2 font-semibold border-2 rounded-md transition-colors"
+                  style={{
+                    borderColor: colors.lightGreen,
+                    color: colors.lightGreen,
+                    backgroundColor: 'white'
+                  }}
+                  aria-label="Schedule a free 15 minute coaching consultation"
+                >
+                  Free 15‑min Consult
+                </a>
                 
                 {/* Dark Mode Toggle */}
                 <button aria-label="Toggle dark mode"
@@ -1090,7 +1104,19 @@ const RunningTrainingApp = () => {
               </nav>
             ) : (
               /* Mobile - Show only brand, navigation will be at bottom */
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <a
+                  href="/coach"
+                  className="px-3 py-2 font-semibold border-2 rounded-md transition-colors"
+                  style={{
+                    borderColor: colors.lightGreen,
+                    color: colors.lightGreen,
+                    backgroundColor: 'white'
+                  }}
+                  aria-label="Schedule a free 15 minute coaching consultation"
+                >
+                  Consult
+                </a>
                 <button aria-label="Toggle dark mode"
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 rounded-full transition-all duration-300 hover:scale-110"
