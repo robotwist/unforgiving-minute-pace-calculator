@@ -28,6 +28,72 @@ app.post('/api/leads', async (req, res) => {
     };
     leads.push(lead);
     console.log('New lead captured:', lead);
+
+    // Optional: Slack webhook
+    if (process.env.SLACK_WEBHOOK_URL) {
+      try {
+        const https = require('https');
+        const payload = JSON.stringify({ text: `New lead: ${email}${name ? ` (${name})` : ''} — source: ${lead.source}` });
+        const url = new URL(process.env.SLACK_WEBHOOK_URL);
+        const options = {
+          hostname: url.hostname,
+          path: url.pathname + (url.search || ''),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
+        };
+        const reqSlack = https.request(options, (r) => r.on('data', () => {}));
+        reqSlack.on('error', (e) => console.log('Slack webhook error:', e.message));
+        reqSlack.write(payload);
+        reqSlack.end();
+      } catch (e) { console.log('Slack integration error:', e.message); }
+    }
+
+    // Optional: Brevo contact upsert
+    if (process.env.BREVO_API_KEY && process.env.BREVO_LIST_ID) {
+      try {
+        const https = require('https');
+        const payload = JSON.stringify({
+          email,
+          attributes: { FIRSTNAME: name || '' },
+          listIds: [parseInt(process.env.BREVO_LIST_ID, 10)].filter(Boolean),
+          updateEnabled: true
+        });
+        const options = {
+          hostname: 'api.brevo.com',
+          path: '/v3/contacts',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(payload),
+            'api-key': process.env.BREVO_API_KEY
+          }
+        };
+        const reqBrevo = https.request(options, (r) => r.on('data', () => {}));
+        reqBrevo.on('error', (e) => console.log('Brevo error:', e.message));
+        reqBrevo.write(payload);
+        reqBrevo.end();
+      } catch (e) { console.log('Brevo integration error:', e.message); }
+    }
+
+    // Optional: Zapier/Make webhook
+    if (process.env.ZAPIER_WEBHOOK_URL) {
+      try {
+        const https = require('https');
+        const url = new URL(process.env.ZAPIER_WEBHOOK_URL);
+        const payload = JSON.stringify(lead);
+        const options = {
+          hostname: url.hostname,
+          path: url.pathname + (url.search || ''),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
+        };
+        const reqZap = https.request(options, (r) => r.on('data', () => {}));
+        reqZap.on('error', (e) => console.log('Zapier webhook error:', e.message));
+        reqZap.write(payload);
+        reqZap.end();
+      } catch (e) { console.log('Zapier integration error:', e.message); }
+    }
+
     return res.json({ ok: true });
   } catch (err) {
     console.error('Lead capture error:', err);
