@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CalendlyModal from '../consultation/CalendlyModal';
 
 const PremiumPlansSection = ({ 
   colors, 
   handlePurchaseClick, 
   purchasedPlans 
 }) => {
+  const [isCalendlyModalOpen, setIsCalendlyModalOpen] = useState(false);
+
+  const handleConsultationClick = (planId, planName, price) => {
+    // If user already has the coaching plan, open Calendly directly
+    if (purchasedPlans.some(p => p.id === 'personal-coaching')) {
+      setIsCalendlyModalOpen(true);
+    } else {
+      // Otherwise, proceed with purchase flow
+      handlePurchaseClick(planId, planName, price);
+    }
+  };
   return (
     <div className="space-y-8">
       <div className="text-center space-y-4">
@@ -236,10 +248,10 @@ const PremiumPlansSection = ({
             
             <button 
               className="munich-btn munich-btn-outline w-full"
-              onClick={() => handlePurchaseClick('personal-coaching', 'Personal Coaching', 297)}
-              disabled={purchasedPlans.some(p => p.id === 'personal-coaching')}
+              onClick={() => handleConsultationClick('personal-coaching', 'Personal Coaching', 297)}
+              disabled={false}
             >
-              {purchasedPlans.some(p => p.id === 'personal-coaching') ? 'Active Coaching' : 'Schedule Consultation'}
+              {purchasedPlans.some(p => p.id === 'personal-coaching') ? 'Schedule Session' : 'Schedule Consultation'}
             </button>
           </div>
         </div>
@@ -295,6 +307,13 @@ const PremiumPlansSection = ({
           </div>
         </div>
       </div>
+
+      {/* Calendly Modal */}
+      <CalendlyModal 
+        isOpen={isCalendlyModalOpen}
+        onClose={() => setIsCalendlyModalOpen(false)}
+        colors={colors}
+      />
     </div>
   );
 };
