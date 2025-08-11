@@ -193,6 +193,19 @@ const GoldenPaceResults = ({
                 <Target className="w-5 h-5 mr-2" />
                 Browse All Programs
               </button>
+              <a
+                href="/coach"
+                className="flex-1 px-6 py-4 rounded-lg font-medium border-2 transition-all duration-200 flex items-center justify-center"
+                style={{
+                  borderColor: colors.lightGreen,
+                  color: colors.lightGreen,
+                  backgroundColor: 'white'
+                }}
+                aria-label="Schedule a free consultation"
+              >
+                <User className="w-5 h-5 mr-2" />
+                Free 15‑min Consult
+              </a>
             </div>
           </div>
         </div>
