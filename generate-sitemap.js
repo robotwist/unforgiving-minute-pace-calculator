@@ -11,7 +11,9 @@ const urls = [
   { loc: '/plans', priority: '0.9', changefreq: 'weekly' },
   { loc: '/blog', priority: '0.8', changefreq: 'daily' },
   { loc: '/premium', priority: '0.7', changefreq: 'monthly' },
-  { loc: '/profile', priority: '0.6', changefreq: 'weekly' }
+  { loc: '/profile', priority: '0.6', changefreq: 'weekly' },
+  { loc: '/coach', priority: '0.9', changefreq: 'weekly' },
+  { loc: '/thanks', priority: '0.5', changefreq: 'monthly' }
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
