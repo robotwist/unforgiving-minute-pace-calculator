@@ -10,6 +10,31 @@ app.use(cors());
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 
+// Simple leads capture (temporary storage/logging)
+const leads = [];
+
+app.post('/api/leads', async (req, res) => {
+  try {
+    const { email, name, source } = req.body || {};
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'Valid email is required' });
+    }
+    const lead = {
+      id: Date.now().toString(),
+      email,
+      name: name || '',
+      source: source || 'unknown',
+      createdAt: new Date().toISOString(),
+    };
+    leads.push(lead);
+    console.log('New lead captured:', lead);
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error('Lead capture error:', err);
+    return res.status(500).json({ error: 'Internal error' });
+  }
+});
+
 // Create payment intent for one-time purchases
 app.post('/api/create-payment-intent', async (req, res) => {
   try {
