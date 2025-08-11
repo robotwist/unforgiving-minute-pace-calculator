@@ -28,6 +28,36 @@ const PremiumPlansSection = ({
         </p>
       </div>
 
+      {/* Who am I? Section */}
+      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.yellow}10, ${colors.lightBlue}10)` }}>
+        <div className="munich-card-body text-center">
+          <h3 className="text-2xl font-bold mb-2" style={{ color: colors.black }}>
+            Who am I?
+          </h3>
+          <div className="max-w-2xl mx-auto text-base" style={{ color: colors.black }}>
+            <p className="mb-2 font-medium">Rob Wistrand — Head Coach, Founder, and Athlete</p>
+            <p className="mb-2">I’m a lifelong runner, coach, and student of the sport. My journey began as a high school state champion and continued through collegiate competition, but my real education came from years of coaching athletes of all levels — from first-time 5K finishers to Boston Marathon qualifiers and Olympic Trials hopefuls.</p>
+            <p className="mb-2">I hold certifications from USATF and RRCA, and have spent over a decade refining a system that integrates the best of modern sports science with the art of individualized coaching. My passion is helping athletes unlock their potential by understanding their unique physiology, psychology, and life context.</p>
+            <p className="mb-2">I believe that every runner deserves a plan that fits their life, not the other way around. My approach is rooted in evidence, empathy, and relentless curiosity — and I’m here to help you achieve your goals, whether that’s a new PR or a lifelong love of running.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Why Personal Coaching / IFTS Value Section */}
+      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightGreen}10, ${colors.violet}10)` }}>
+        <div className="munich-card-body text-center">
+          <h3 className="text-2xl font-bold mb-2" style={{ color: colors.black }}>
+            Why Personal Coaching?
+          </h3>
+          <div className="max-w-2xl mx-auto text-base" style={{ color: colors.black }}>
+            <p className="mb-2 font-medium">The IFTS System: Individual Factor Training Synthesis</p>
+            <p className="mb-2">Most plans treat you like a number. Our IFTS system is different: it’s a dynamic, science-based approach that adapts to <span className="font-bold">your</span> age, experience, recovery, and goals. We analyze your unique profile and build a plan that evolves with you — not just a template, but a living roadmap.</p>
+            <p className="mb-2">With personal coaching, you get real-time adjustments, direct access to your coach, and a partnership focused on your long-term growth. This is the gold standard for athletes who want more than a generic plan — it’s for those who want to maximize their potential, avoid injury, and enjoy the journey.</p>
+            <p className="mb-2">If you’re ready for a truly individualized experience, personal coaching is the fastest, safest, and most rewarding path to your goals.</p>
+          </div>
+        </div>
+      </div>
+
       {/* Value Proposition */}
       <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
         <div className="munich-card-body text-center">
