@@ -14,7 +14,7 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
         // Initialize Calendly widget
         if (window.Calendly) {
           window.Calendly.initInlineWidget({
-            url: 'https://calendly.com/your-calendly-username/consultation',
+            url: 'https://calendly.com/robwistrand',
             parentElement: document.getElementById('calendly-inline-widget'),
             prefill: {},
             utm: {}
@@ -82,7 +82,7 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
             <p className="text-sm" style={{ color: colors.darkGreen }}>
               Having trouble with the calendar? 
               <a 
-                href="https://calendly.com/your-calendly-username/consultation" 
+                href="https://calendly.com/robwistrand" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="ml-1 underline font-semibold"
