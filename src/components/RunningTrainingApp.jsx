@@ -1542,7 +1542,7 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       <div className="flex flex-col sm:flex-row gap-3">
-                        <button aria-label="View premium programs"
+                        <button
                           onClick={() => setActiveTab('premium')}
                           className="flex-1 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                           style={{ 
@@ -1554,7 +1554,7 @@ const RunningTrainingApp = () => {
                           <TrendingUp className="w-6 h-6 mr-3" />
                           Get Complete 12-Week Program
                         </button>
-                        <button aria-label="Browse all programs"
+                        <button
                           onClick={() => setActiveTab('plans')}
                           className="flex-1 px-6 py-4 rounded-lg font-medium border-2 transition-all duration-200 flex items-center justify-center"
                           style={{ 
@@ -1931,7 +1931,7 @@ const RunningTrainingApp = () => {
                   </div>
 
                   <div className="flex gap-4">
-                    <button aria-label="Open purchase modal"
+                    <button
                       onClick={savedProfileData ? updateProfile : saveProfile}
                       className="munich-btn munich-btn-primary flex-1 relative"
                       aria-label={savedProfileData ? 'Update your training profile' : 'Create your training profile'}
