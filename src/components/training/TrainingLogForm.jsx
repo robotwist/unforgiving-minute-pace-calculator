@@ -364,29 +364,31 @@ const TrainingLogForm = ({
             />
           </div>
 
-          {/* Form Actions */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-end pt-6 border-t" style={{ borderColor: colors.gray }}>
-            <button
-              type="submit"
-              className="munich-btn munich-btn-primary flex-1 sm:flex-none"
-              style={{ 
-                backgroundColor: colors.lightBlue,
-                color: colors.white
-              }}
-              aria-label="Save training session to log"
-            >
-              <Activity className="w-4 h-4 mr-2" />
-              Log Session
-            </button>
-            
-            <button
-              type="button"
-              onClick={() => setShowTrainingLogForm(false)}
-              className="munich-btn munich-btn-outline"
-              aria-label="Cancel and close training log form"
-            >
-              Cancel
-            </button>
+          {/* Form Actions (sticky footer for visibility) */}
+          <div className="sticky bottom-0 bg-white pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 justify-end pt-4 border-t" style={{ borderColor: colors.gray }}>
+              <button
+                type="submit"
+                className="munich-btn munich-btn-primary flex-1 sm:flex-none"
+                style={{ 
+                  backgroundColor: colors.lightBlue,
+                  color: colors.white
+                }}
+                aria-label="Save training session to log"
+              >
+                <Activity className="w-4 h-4 mr-2" />
+                Log Session
+              </button>
+              
+              <button
+                type="button"
+                onClick={() => setShowTrainingLogForm(false)}
+                className="munich-btn munich-btn-outline"
+                aria-label="Cancel and close training log form"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </form>
       </div>
