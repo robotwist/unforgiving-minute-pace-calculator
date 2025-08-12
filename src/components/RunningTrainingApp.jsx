@@ -1069,6 +1069,20 @@ const RunningTrainingApp = () => {
                   </button>
                 ))}
 
+                {/* Coach page link */}
+                <a
+                  href="/coach"
+                  className="ml-2 sm:ml-3 px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors"
+                  style={{
+                    color: colors.lightBlue,
+                    border: `1px solid ${colors.lightBlue}`,
+                    backgroundColor: 'white'
+                  }}
+                  aria-label="Go to Coach page"
+                >
+                  Coach
+                </a>
+
                 {/* Global Consult CTA */}
                 <a
                   href="/coach"
@@ -1105,6 +1119,18 @@ const RunningTrainingApp = () => {
             ) : (
               /* Mobile - Show only brand, navigation will be at bottom */
               <div className="flex items-center space-x-2">
+                <a
+                  href="/coach"
+                  className="px-3 py-2 font-semibold border-2 rounded-md transition-colors"
+                  style={{
+                    borderColor: colors.lightBlue,
+                    color: colors.lightBlue,
+                    backgroundColor: 'white'
+                  }}
+                  aria-label="Go to Coach page"
+                >
+                  Coach
+                </a>
                 <a
                   href="/coach"
                   className="px-3 py-2 font-semibold border-2 rounded-md transition-colors"
