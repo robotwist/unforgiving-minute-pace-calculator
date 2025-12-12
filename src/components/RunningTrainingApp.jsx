@@ -11,7 +11,7 @@ import { BottomNavigation } from './navigation/MobileNavigation';
 import PlanRecommendationEngine from './recommendations/PlanRecommendationEngine';
 import ProgressDashboard from './dashboard/ProgressDashboard';
 import { 
-  goldenPaceFrom5K, 
+  paceIndexFrom5K, 
   trainingPacesByVDOT, 
   baseTrainingPlans,
   generatePersonalizedPlan
@@ -35,7 +35,7 @@ const RunningTrainingApp = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [raceTime, setRaceTime] = useState('');
   const [raceDistance, setRaceDistance] = useState('5K');
-  const [goldenPace, setGoldenPace] = useState(null);
+  const [paceIndex, setPaceIndex] = useState(null);
   const [trainingPaces, setTrainingPaces] = useState(null);
   
   // Welcome Flow and Mobile Navigation State
@@ -57,9 +57,9 @@ const RunningTrainingApp = () => {
     weeklyMileage: '',
     injuryHistory: '',
     preferredUnits: 'imperial',
-    currentGoldenPace: null,
-    goldenPaceHistory: [],
-    projectedGoldenPace: null,
+    currentPaceIndex: null,
+    paceIndexHistory: [],
+    projectedPaceIndex: null,
     trainingStartDate: null,
     onboardingComplete: false, // New: track onboarding completion
     hasSeenPlans: false, // New: track plan viewing
@@ -174,7 +174,7 @@ const RunningTrainingApp = () => {
       ...session,
       id: Date.now(),
       date: new Date().toISOString().split('T')[0],
-      goldenPace: goldenPace
+      paceIndex: paceIndex
     };
     
     const updatedHistory = [...trainingHistory, newSession];
@@ -228,7 +228,7 @@ const RunningTrainingApp = () => {
     const completedPlan = {
       name: planName,
       completedDate: new Date().toISOString().split('T')[0],
-      goldenPaceAtCompletion: goldenPace
+      paceIndexAtCompletion: paceIndex
     };
     
     const updatedPlans = [...trainingPlansCompleted, completedPlan];
@@ -270,15 +270,15 @@ const RunningTrainingApp = () => {
     const currentCalculatorUses = parseInt(localStorage.getItem('calculator_uses') || '0') + 1;
     localStorage.setItem('calculator_uses', currentCalculatorUses.toString());
     
-    setGoldenPace(results.goldenPace);
+    setPaceIndex(results.paceIndex);
     setTrainingPaces(results.trainingPaces);
     
-    // Update user profile with current golden pace
+    // Update user profile with current pace index
     const updatedProfile = {
       ...userProfile,
-      currentGoldenPace: results.goldenPace,
-      goldenPaceHistory: [...(userProfile.goldenPaceHistory || []), {
-        pace: results.goldenPace,
+      currentPaceIndex: results.paceIndex,
+      paceIndexHistory: [...(userProfile.paceIndexHistory || []), {
+        pace: results.paceIndex,
         date: new Date().toISOString(),
         raceTime,
         raceDistance
@@ -291,8 +291,8 @@ const RunningTrainingApp = () => {
     setShowPostCalculatorModal(true);
     
     // Track calculator completion
-    trackCalculatorUsage(raceDistance, raceTime, results.goldenPace);
-    trackEvent('Calculator', 'Completed', results.goldenPace.toString());
+    trackCalculatorUsage(raceDistance, raceTime, results.paceIndex);
+    trackEvent('Calculator', 'Completed', results.paceIndex.toString());
     
     // Auto-progress to plans if user hasn't seen them yet
     setTimeout(() => {
@@ -315,7 +315,7 @@ const RunningTrainingApp = () => {
     // Track plan selection with source context
     trackEvent('Plan', 'Selected', plan.name, { 
       source,
-      goldenPace: goldenPace,
+      paceIndex: paceIndex,
       userGoal: userProfile.goal,
       experience: userProfile.experience 
     });
@@ -360,8 +360,8 @@ const RunningTrainingApp = () => {
   // Get featured articles from imported data
   const featuredArticles = getFeaturedArticles();
 
-  // GoldenPace calculation based on Daniels Running Formula
-  const calculateGoldenPace = (time, distance) => {
+  // Pace Index calculation based on Daniels Running Formula
+  const calculatePaceIndex = (time, distance) => {
     const timeInSeconds = parseTimeToSeconds(time);
     if (!timeInSeconds) return null;
 
@@ -378,19 +378,19 @@ const RunningTrainingApp = () => {
       default: distanceInMeters = 5000;
     }
 
-    // Convert to equivalent 5K time for GoldenPace lookup
+    // Convert to equivalent 5K time for Pace Index lookup
     // Using Daniels Running Formula race time conversion (Riegel formula)
     const equivalent5KTime = timeInSeconds * Math.pow(5000 / distanceInMeters, 1.06);
     
-    // Official Daniels GoldenPace table based on 5K times (30-85 range)
+    // Official Daniels Pace Index table based on 5K times (30-85 range)
     // Now imported from '../data/trainingPlans'
 
     // Find closest 5K time and interpolate if needed
-    const timeKeys = Object.keys(goldenPaceFrom5K).map(Number).sort((a, b) => a - b);
+    const timeKeys = Object.keys(paceIndexFrom5K).map(Number).sort((a, b) => a - b);
     
     // Handle edge cases
-    if (equivalent5KTime <= timeKeys[0]) return goldenPaceFrom5K[timeKeys[0]];
-    if (equivalent5KTime >= timeKeys[timeKeys.length - 1]) return goldenPaceFrom5K[timeKeys[timeKeys.length - 1]];
+    if (equivalent5KTime <= timeKeys[0]) return paceIndexFrom5K[timeKeys[0]];
+    if (equivalent5KTime >= timeKeys[timeKeys.length - 1]) return paceIndexFrom5K[timeKeys[timeKeys.length - 1]];
     
     // Find the two closest times for interpolation
     let lowerTime = timeKeys[0];
@@ -404,19 +404,19 @@ const RunningTrainingApp = () => {
       }
     }
     
-    // Interpolate GoldenPace value
-    const lowerGoldenPace = goldenPaceFrom5K[lowerTime];
-    const upperGoldenPace = goldenPaceFrom5K[upperTime];
+    // Interpolate Pace Index value
+    const lowerPaceIndex = paceIndexFrom5K[lowerTime];
+    const upperPaceIndex = paceIndexFrom5K[upperTime];
     
     const interpolationFactor = (equivalent5KTime - lowerTime) / (upperTime - lowerTime);
-    const interpolatedGoldenPace = lowerGoldenPace + (upperGoldenPace - lowerGoldenPace) * interpolationFactor;
+    const interpolatedPaceIndex = lowerPaceIndex + (upperPaceIndex - lowerPaceIndex) * interpolationFactor;
     
-    return Math.round(interpolatedGoldenPace * 10) / 10; // Round to 1 decimal place
+    return Math.round(interpolatedPaceIndex * 10) / 10; // Round to 1 decimal place
   };
 
-  // Calculate projected GoldenPace improvement (1 VDOT point per 6 weeks average)
-  const calculateProjectedGoldenPace = (currentGoldenPace, trainingStartDate, weeklyMileage = 20) => {
-    if (!currentGoldenPace || !trainingStartDate) return null;
+  // Calculate projected Pace Index improvement (1 VDOT point per 6 weeks average)
+  const calculateProjectedPaceIndex = (currentPaceIndex, trainingStartDate, weeklyMileage = 20) => {
+    if (!currentPaceIndex || !trainingStartDate) return null;
     
     const startDate = new Date(trainingStartDate);
     const currentDate = new Date();
@@ -430,17 +430,17 @@ const RunningTrainingApp = () => {
     const mileageFactor = Math.min(1.2, Math.max(0.7, weeklyMileage / 40));
     
     // Diminishing returns factor (improvement slows at higher VDOT levels)
-    const diminishingFactor = Math.max(0.5, 1 - (currentGoldenPace - 40) * 0.01);
+    const diminishingFactor = Math.max(0.5, 1 - (currentPaceIndex - 40) * 0.01);
     
     const adjustedImprovementRate = baseImprovementRate * mileageFactor * diminishingFactor;
     const projectedImprovement = weeksTraining * adjustedImprovementRate;
     
-    return Math.round((currentGoldenPace + projectedImprovement) * 10) / 10;
+    return Math.round((currentPaceIndex + projectedImprovement) * 10) / 10;
   };
 
-  // Generate GoldenPace progression graph data
-  const generateGoldenPaceProgression = (startingGoldenPace, trainingStartDate, weeklyMileage = 20, weeksToProject = 52) => {
-    if (!startingGoldenPace || !trainingStartDate) return [];
+  // Generate Pace Index progression graph data
+  const generatePaceIndexProgression = (startingPaceIndex, trainingStartDate, weeklyMileage = 20, weeksToProject = 52) => {
+    if (!startingPaceIndex || !trainingStartDate) return [];
     
     const progression = [];
     const startDate = new Date(trainingStartDate);
@@ -452,15 +452,15 @@ const RunningTrainingApp = () => {
       // Calculate projected VDOT for this week
       const baseImprovementRate = 1 / 6; // 1 VDOT per 6 weeks
       const mileageFactor = Math.min(1.2, Math.max(0.7, weeklyMileage / 40));
-      const diminishingFactor = Math.max(0.5, 1 - (startingGoldenPace - 40) * 0.01);
+      const diminishingFactor = Math.max(0.5, 1 - (startingPaceIndex - 40) * 0.01);
       const adjustedImprovementRate = baseImprovementRate * mileageFactor * diminishingFactor;
       
-      const projectedGoldenPace = startingGoldenPace + (week * adjustedImprovementRate);
+      const projectedPaceIndex = startingPaceIndex + (week * adjustedImprovementRate);
       
       progression.push({
         week,
         date: currentDate.toISOString().split('T')[0],
-        goldenPace: Math.round(projectedGoldenPace * 10) / 10,
+        paceIndex: Math.round(projectedPaceIndex * 10) / 10,
         weeklyMileage: weeklyMileage
       });
     }
@@ -499,43 +499,43 @@ const RunningTrainingApp = () => {
 
 
 
-  const calculateTrainingPaces = (goldenPaceValue) => {
-    if (!goldenPaceValue) return null;
+  const calculateTrainingPaces = (paceIndexValue) => {
+    if (!paceIndexValue) return null;
 
-    // Validate GoldenPace range
-    if (goldenPaceValue < 30 || goldenPaceValue > 85) {
-      console.warn(`GoldenPace value ${goldenPaceValue} is outside valid range (30-85)`);
-      goldenPaceValue = Math.max(30, Math.min(85, goldenPaceValue));
+    // Validate Pace Index range
+    if (paceIndexValue < 30 || paceIndexValue > 85) {
+      console.warn(`Pace Index value ${paceIndexValue} is outside valid range (30-85)`);
+      paceIndexValue = Math.max(30, Math.min(85, paceIndexValue));
     }
 
     // Official Daniels training pace table (minutes:seconds per mile)
     // Now using imported data from trainingPlans.js
     const paceTable = trainingPacesByVDOT;
 
-    // Find closest GoldenPace values for interpolation
-    const goldenPaceKeys = Object.keys(paceTable).map(Number).sort((a, b) => a - b);
+    // Find closest Pace Index values for interpolation
+    const paceIndexKeys = Object.keys(paceTable).map(Number).sort((a, b) => a - b);
     
     // Handle edge cases
-    if (goldenPaceValue <= goldenPaceKeys[0]) return paceTable[goldenPaceKeys[0]];
-    if (goldenPaceValue >= goldenPaceKeys[goldenPaceKeys.length - 1]) return paceTable[goldenPaceKeys[goldenPaceKeys.length - 1]];
+    if (paceIndexValue <= paceIndexKeys[0]) return paceTable[paceIndexKeys[0]];
+    if (paceIndexValue >= paceIndexKeys[paceIndexKeys.length - 1]) return paceTable[paceIndexKeys[paceIndexKeys.length - 1]];
     
-    // Find the two closest GoldenPace values for interpolation
-    let lowerGoldenPace = goldenPaceKeys[0];
-    let upperGoldenPace = goldenPaceKeys[goldenPaceKeys.length - 1];
+    // Find the two closest Pace Index values for interpolation
+    let lowerPaceIndex = paceIndexKeys[0];
+    let upperPaceIndex = paceIndexKeys[paceIndexKeys.length - 1];
     
-    for (let i = 0; i < goldenPaceKeys.length - 1; i++) {
-      if (goldenPaceValue >= goldenPaceKeys[i] && goldenPaceValue <= goldenPaceKeys[i + 1]) {
-        lowerGoldenPace = goldenPaceKeys[i];
-        upperGoldenPace = goldenPaceKeys[i + 1];
+    for (let i = 0; i < paceIndexKeys.length - 1; i++) {
+      if (paceIndexValue >= paceIndexKeys[i] && paceIndexValue <= paceIndexKeys[i + 1]) {
+        lowerPaceIndex = paceIndexKeys[i];
+        upperPaceIndex = paceIndexKeys[i + 1];
         break;
       }
     }
     
     // Interpolate training paces
-    const lowerPaces = paceTable[lowerGoldenPace];
-    const upperPaces = paceTable[upperGoldenPace];
+    const lowerPaces = paceTable[lowerPaceIndex];
+    const upperPaces = paceTable[upperPaceIndex];
     
-    const interpolationFactor = (goldenPaceValue - lowerGoldenPace) / (upperGoldenPace - lowerGoldenPace);
+    const interpolationFactor = (paceIndexValue - lowerPaceIndex) / (upperPaceIndex - lowerPaceIndex);
     
     // Helper function to interpolate pace strings
     const interpolatePace = (lowerPace, upperPace) => {
@@ -583,32 +583,32 @@ const RunningTrainingApp = () => {
       }
       
       const currentDate = new Date().toISOString().split('T')[0];
-      const currentGoldenPace = goldenPace || null;
+      const currentPaceIndex = paceIndex || null;
       
-      // Initialize GoldenPace history if first time
-      let goldenPaceHistory = [];
-      if (currentGoldenPace) {
-        goldenPaceHistory = [{
+      // Initialize Pace Index history if first time
+      let paceIndexHistory = [];
+      if (currentPaceIndex) {
+        paceIndexHistory = [{
           date: currentDate,
-          goldenPace: currentGoldenPace,
+          paceIndex: currentPaceIndex,
           raceDistance: raceDistance,
           raceTime: raceTime,
           weeklyMileage: parseInt(userProfile.weeklyMileage) || 20
         }];
       }
       
-      // Calculate projected GoldenPace
-      const projectedGoldenPace = currentGoldenPace 
-        ? calculateProjectedGoldenPace(currentGoldenPace, currentDate, parseInt(userProfile.weeklyMileage) || 20)
+      // Calculate projected Pace Index
+      const projectedPaceIndex = currentPaceIndex 
+        ? calculateProjectedPaceIndex(currentPaceIndex, currentDate, parseInt(userProfile.weeklyMileage) || 20)
         : null;
       
-      // Create profile data with GoldenPace tracking
+      // Create profile data with Pace Index tracking
       const profileData = {
         ...userProfile,
-        current_vdot: currentGoldenPace,
-        currentGoldenPace: currentGoldenPace,
-        goldenPaceHistory: goldenPaceHistory,
-        projectedGoldenPace: projectedGoldenPace,
+        current_vdot: currentPaceIndex,
+        currentPaceIndex: currentPaceIndex,
+        paceIndexHistory: paceIndexHistory,
+        projectedPaceIndex: projectedPaceIndex,
         trainingStartDate: currentDate,
         weekly_mileage: parseInt(userProfile.weeklyMileage) || null,
         created_date: currentDate,
@@ -620,13 +620,13 @@ const RunningTrainingApp = () => {
       setShowProfileDashboard(true);
       
       // Add this calculation to training history
-      if (currentGoldenPace && raceTime && raceDistance) {
+      if (currentPaceIndex && raceTime && raceDistance) {
         addTrainingSession({
-          type: 'GoldenPace Calculation',
+          type: 'Pace Index Calculation',
           distance: raceDistance,
           time: raceTime,
-          goldenPace: currentGoldenPace,
-          notes: `Initial GoldenPace calculation: ${currentGoldenPace}. Projected in 6 weeks: ${projectedGoldenPace || 'N/A'}`
+          paceIndex: currentPaceIndex,
+          notes: `Initial Pace Index calculation: ${currentPaceIndex}. Projected in 6 weeks: ${projectedPaceIndex || 'N/A'}`
         });
         
         // Update personal best if this is better
@@ -636,7 +636,7 @@ const RunningTrainingApp = () => {
         }
       }
       
-      console.log('Profile saved successfully with GoldenPace tracking');
+      console.log('Profile saved successfully with Pace Index tracking');
     } catch (error) {
       console.error('Error saving profile:', error);
       setProfileError('Error saving profile. Please try again.');
@@ -666,7 +666,7 @@ const RunningTrainingApp = () => {
           });
           
           if (data.current_vdot) {
-            setGoldenPace(data.current_vdot);
+            setPaceIndex(data.current_vdot);
           }
           
           console.log('Profile loaded successfully from localStorage');
@@ -690,38 +690,38 @@ const RunningTrainingApp = () => {
       }
       
       const currentDate = new Date().toISOString().split('T')[0];
-      const currentGoldenPace = goldenPace || savedProfileData?.currentGoldenPace || null;
+      const currentPaceIndex = paceIndex || savedProfileData?.currentPaceIndex || null;
       
-      // Update GoldenPace history if there's a new GoldenPace
-      let updatedGoldenPaceHistory = savedProfileData?.goldenPaceHistory || [];
-      if (currentGoldenPace && goldenPace && goldenPace !== savedProfileData?.currentGoldenPace) {
+      // Update Pace Index history if there's a new Pace Index
+      let updatedPaceIndexHistory = savedProfileData?.paceIndexHistory || [];
+      if (currentPaceIndex && paceIndex && paceIndex !== savedProfileData?.currentPaceIndex) {
         const newEntry = {
           date: currentDate,
-          goldenPace: currentGoldenPace,
+          paceIndex: currentPaceIndex,
           raceDistance: raceDistance,
           raceTime: raceTime,
           weeklyMileage: parseInt(userProfile.weeklyMileage) || 20
         };
-        updatedGoldenPaceHistory = [...updatedGoldenPaceHistory, newEntry];
+        updatedPaceIndexHistory = [...updatedPaceIndexHistory, newEntry];
       }
       
-      // Recalculate projected GoldenPace
-      const projectedGoldenPace = currentGoldenPace 
-        ? calculateProjectedGoldenPace(
-            currentGoldenPace, 
+      // Recalculate projected Pace Index
+      const projectedPaceIndex = currentPaceIndex 
+        ? calculateProjectedPaceIndex(
+            currentPaceIndex, 
             savedProfileData?.trainingStartDate || currentDate, 
             parseInt(userProfile.weeklyMileage) || 20
           )
         : null;
       
-      // Create updated profile data with enhanced GoldenPace tracking
+      // Create updated profile data with enhanced Pace Index tracking
       const updatedProfileData = {
         ...savedProfileData,
         ...userProfile,
-        current_vdot: currentGoldenPace,
-        currentGoldenPace: currentGoldenPace,
-        goldenPaceHistory: updatedGoldenPaceHistory,
-        projectedGoldenPace: projectedGoldenPace,
+        current_vdot: currentPaceIndex,
+        currentPaceIndex: currentPaceIndex,
+        paceIndexHistory: updatedPaceIndexHistory,
+        projectedPaceIndex: projectedPaceIndex,
         trainingStartDate: savedProfileData?.trainingStartDate || currentDate,
         weekly_mileage: parseInt(userProfile.weeklyMileage) || null,
         last_updated: currentDate
@@ -731,7 +731,7 @@ const RunningTrainingApp = () => {
       saveProfileData(updatedProfileData);
       setSavedProfileData(updatedProfileData);
       
-      console.log('Profile updated successfully with GoldenPace tracking');
+      console.log('Profile updated successfully with Pace Index tracking');
     } catch (error) {
       console.error('Error updating profile:', error);
       setProfileError('Error updating profile. Please try again.');
@@ -807,26 +807,26 @@ const RunningTrainingApp = () => {
     }
     
     try {
-      const calculatedGoldenPace = calculateGoldenPace(raceTime, raceDistance);
+      const calculatedPaceIndex = calculatePaceIndex(raceTime, raceDistance);
       
-      if (!calculatedGoldenPace) {
-        setProfileError('Unable to calculate GoldenPace. Please check your inputs and try again.');
+      if (!calculatedPaceIndex) {
+        setProfileError('Unable to calculate Pace Index. Please check your inputs and try again.');
         return;
       }
       
-      const calculatedTrainingPaces = calculateTrainingPaces(calculatedGoldenPace);
+      const calculatedTrainingPaces = calculateTrainingPaces(calculatedPaceIndex);
       
       // Use enhanced calculator completion handler
       handleCalculatorComplete({
-        goldenPace: calculatedGoldenPace,
+        paceIndex: calculatedPaceIndex,
         trainingPaces: calculatedTrainingPaces
       });
       
       // Auto-save to profile if profile exists
-      if (savedProfileData && calculatedGoldenPace) {
+      if (savedProfileData && calculatedPaceIndex) {
         const updatedProfile = {
           ...savedProfileData,
-          currentGoldenPace: calculatedGoldenPace,
+          currentPaceIndex: calculatedPaceIndex,
           goalRaceTime: raceTime,
           goalRaceDistance: raceDistance,
           lastCalculated: new Date().toISOString()
@@ -835,17 +835,17 @@ const RunningTrainingApp = () => {
       }
       
       // Success feedback
-      console.log(`GoldenPace calculated successfully: ${calculatedGoldenPace} for ${raceDistance} in ${raceTime}`);
+      console.log(`Pace Index calculated successfully: ${calculatedPaceIndex} for ${raceDistance} in ${raceTime}`);
       
     } catch (error) {
-      console.error('Error calculating GoldenPace:', error);
+      console.error('Error calculating Pace Index:', error);
       setProfileError('An error occurred while calculating. Please try again.');
     }
   };
 
-  // Generate personalized training plans based on user's GoldenPace
-  const trainingPlans = goldenPace ? 
-    baseTrainingPlans.map(plan => generatePersonalizedPlan(plan, Math.round(goldenPace))) :
+  // Generate personalized training plans based on user's Pace Index
+  const trainingPlans = paceIndex ? 
+    baseTrainingPlans.map(plan => generatePersonalizedPlan(plan, Math.round(paceIndex))) :
     baseTrainingPlans;
 
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -966,7 +966,7 @@ const RunningTrainingApp = () => {
               </div>
               
               <h3 className="text-xl font-bold mb-3" style={{ color: colors.black }}>
-                Your Golden Pace: {goldenPace}
+                Your Pace Index: {paceIndex}
               </h3>
               
               <p className="mb-4" style={{ color: colors.darkGreen }}>
@@ -1066,7 +1066,7 @@ const RunningTrainingApp = () => {
               /* Desktop Navigation - Munich 1972 Style */
               <nav className="flex flex-wrap justify-center sm:justify-end space-x-1">
                 {[
-                  { id: 'calculator', label: 'GoldenPace Calculator', icon: Calculator },
+                  { id: 'calculator', label: 'Pace Index Calculator', icon: Calculator },
                   { id: 'plans', label: 'Training Plans', icon: Target },
                   { id: 'blog', label: 'Articles', icon: BookOpen },
                   { id: 'premium', label: 'Premium Plans', icon: Star },
@@ -1284,7 +1284,7 @@ const RunningTrainingApp = () => {
               </div>
               
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
-                GoldenPace Calculator
+                Pace Index Calculator
               </h2>
               
               {/* Show helpful message if race data is pre-populated from profile */}
@@ -1345,7 +1345,7 @@ const RunningTrainingApp = () => {
                 <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 relative z-10">
                   <h3 className="text-lg sm:text-xl font-bold flex items-center" style={{ color: colors.black }}>
                     <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: colors.lightBlue }} />
-                    GoldenPace Calculator
+                    Pace Index Calculator
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -1423,7 +1423,7 @@ const RunningTrainingApp = () => {
                   
             <button
                     onClick={handleCalculate}
-              title="Calculate GoldenPace"
+              title="Calculate Pace Index"
                     aria-label="Calculate training paces from race time"
                     className="w-full py-3 px-6 font-medium text-base sm:text-lg transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg relative btn-high-contrast"
                     style={{ 
@@ -1432,7 +1432,7 @@ const RunningTrainingApp = () => {
                       border: `2px solid ${colors.darkGreen}`
                     }}
                   >
-                    Calculate GoldenPace
+                    Calculate Pace Index
                     {/* Geometric accent on button */}
                     <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
                       backgroundColor: colors.lightGreen
@@ -1443,9 +1443,9 @@ const RunningTrainingApp = () => {
             </div>
 
             {/* Results Section - Munich 1972 Geometric Style */}
-            {goldenPace && trainingPaces && (
+            {paceIndex && trainingPaces && (
               <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
-                {/* GoldenPace Display */}
+                {/* Pace Index Display */}
                 <div className="text-center p-4 sm:p-6 bg-white shadow-sm border relative overflow-hidden" style={{ borderColor: colors.border }}>
                   {/* Progressive Melange Background */}
                   <div className="absolute inset-0 progressive-melange opacity-5"></div>
@@ -1456,10 +1456,10 @@ const RunningTrainingApp = () => {
                   
                   <div className="relative z-10">
                     <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: colors.lightBlue }}>
-                      {goldenPace}
+                      {paceIndex}
                     </div>
                     <div className="text-base sm:text-lg font-medium" style={{ color: colors.black }}>
-                      GoldenPace
+                      Pace Index
                     </div>
                     <p className="text-xs sm:text-sm mt-2" style={{ color: colors.lightBlue }}>
                       Your training fitness level
@@ -1521,7 +1521,7 @@ const RunningTrainingApp = () => {
                             Your Personalized Training Week
                           </h3>
                           <p className="text-sm" style={{ color: colors.darkGreen }}>
-                            Based on your {goldenPace} GoldenPace • Elite-tested training system
+                            Based on your {paceIndex} Pace Index • Elite-tested training system
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
@@ -1662,7 +1662,7 @@ const RunningTrainingApp = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                           <div className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                            <span className="text-sm" style={{ color: colors.black }}>Save your GoldenPace & training paces</span>
+                            <span className="text-sm" style={{ color: colors.black }}>Save your Pace Index & training paces</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
@@ -1712,23 +1712,23 @@ const RunningTrainingApp = () => {
             {/* Smart Plan Recommendations */}
             <div className="text-center space-y-4 mb-8">
               <h2 className="text-2xl font-bold" style={{ color: colors.black }}>
-                {goldenPace ? 'Personalized Training Plans' : 'Training Plans'}
+                {paceIndex ? 'Personalized Training Plans' : 'Training Plans'}
               </h2>
-              {goldenPace && userProfile.goal && (
+              {paceIndex && userProfile.goal && (
                 <p style={{ color: colors.darkGreen }}>
-                  Based on your Golden Pace of {goldenPace} and {userProfile.goal === '5k-pr' ? '5K goal' : 
+                  Based on your Pace Index of {paceIndex} and {userProfile.goal === '5k-pr' ? '5K goal' : 
                   userProfile.goal === 'marathon' ? 'marathon goal' : 'fitness goal'}
                 </p>
               )}
             </div>
 
             {/* Recommendation Engine or Fallback */}
-            {goldenPace && userProfile.goal ? (
+            {paceIndex && userProfile.goal ? (
               <PlanRecommendationEngine
                 colors={colors}
                 userGoal={userProfile.goal}
                 experience={userProfile.experience}
-                goldenPace={goldenPace}
+                paceIndex={paceIndex}
                 trainingPlans={trainingPlans}
                 onPlanSelect={handlePlanSelect}
               />
@@ -1740,14 +1740,14 @@ const RunningTrainingApp = () => {
                     Get Personalized Recommendations
                   </h3>
                   <p className="mb-4" style={{ color: colors.darkGreen }}>
-                    {!goldenPace ? 'Calculate your Golden Pace first to see personalized plan recommendations' : 
+                    {!paceIndex ? 'Calculate your Pace Index first to see personalized plan recommendations' : 
                      'Complete your profile to get smart plan matching'}
                   </p>
                   <button
-                    onClick={() => setActiveTab(!goldenPace ? 'calculator' : 'profile')}
+                    onClick={() => setActiveTab(!paceIndex ? 'calculator' : 'profile')}
                     className="munich-btn munich-btn-primary"
                   >
-                    {!goldenPace ? 'Calculate Golden Pace' : 'Complete Profile'}
+                    {!paceIndex ? 'Calculate Pace Index' : 'Complete Profile'}
                   </button>
                 </div>
                 
@@ -2153,13 +2153,13 @@ const RunningTrainingApp = () => {
                               <span style={{ 
                                 color: colors.black,
                                 fontSize: 'var(--text-sm)'
-                              }}>Current GoldenPace:</span>
-                              {savedProfileData?.currentGoldenPace || goldenPace ? (
+                              }}>Current Pace Index:</span>
+                              {savedProfileData?.currentPaceIndex || paceIndex ? (
                                 <span className="font-bold" style={{ 
                                   color: colors.violet,
                                   fontSize: 'var(--text-lg)'
                                 }}>
-                                  {savedProfileData?.currentGoldenPace || goldenPace}
+                                  {savedProfileData?.currentPaceIndex || paceIndex}
                                 </span>
                               ) : (
                                 <div className="flex items-center gap-2">
@@ -2188,7 +2188,7 @@ const RunningTrainingApp = () => {
                               )}
                             </div>
                             
-                            {savedProfileData?.projectedGoldenPace && (
+                            {savedProfileData?.projectedPaceIndex && (
                               <div className="flex justify-between items-center">
                                 <span style={{ 
                                   color: colors.black,
@@ -2198,7 +2198,7 @@ const RunningTrainingApp = () => {
                                   color: colors.lightGreen,
                                   fontSize: 'var(--text-lg)'
                                 }}>
-                                  {savedProfileData.projectedGoldenPace}
+                                  {savedProfileData.projectedPaceIndex}
                                 </span>
                               </div>
                             )}
@@ -2214,8 +2214,8 @@ const RunningTrainingApp = () => {
                       </div>
                     </div>
 
-                    {/* GoldenPace Progression Chart */}
-                    {savedProfileData?.currentGoldenPace && savedProfileData?.trainingStartDate && (
+                    {/* Pace Index Progression Chart */}
+                    {savedProfileData?.currentPaceIndex && savedProfileData?.trainingStartDate && (
                       <div className="mt-8">
                         <div className="munich-card relative overflow-hidden">
                           <div className="absolute inset-0 progressive-melange opacity-3"></div>
@@ -2230,7 +2230,7 @@ const RunningTrainingApp = () => {
                               fontSize: 'var(--text-xl)'
                             }}>
                               <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
-                              GoldenPace Progression Forecast
+                              Pace Index Progression Forecast
                             </h4>
                             
                             <div className="mb-4 text-sm" style={{ color: colors.darkGreen }}>
@@ -2242,8 +2242,8 @@ const RunningTrainingApp = () => {
                             <div className="bg-white p-6 rounded-lg border" style={{ borderColor: colors.gray }}>
                               <div className="space-y-2">
                                 {(() => {
-                                  const progression = generateGoldenPaceProgression(
-                                    savedProfileData.currentGoldenPace, 
+                                  const progression = generatePaceIndexProgression(
+                                    savedProfileData.currentPaceIndex, 
                                     savedProfileData.trainingStartDate, 
                                     savedProfileData.weekly_mileage || 20,
                                     26 // 6 months
@@ -2251,7 +2251,7 @@ const RunningTrainingApp = () => {
                                   
                                   return progression.filter((_, index) => index % 2 === 0).slice(0, 7).map((point, index) => {
                                     const isCurrentWeek = point.week === 0;
-                                    const barWidth = Math.min(100, ((point.goldenPace - savedProfileData.currentGoldenPace) / 6) * 100 + 20);
+                                    const barWidth = Math.min(100, ((point.paceIndex - savedProfileData.currentPaceIndex) / 6) * 100 + 20);
                                     
                                     return (
                                       <div key={point.week} className="flex items-center space-x-3">
@@ -2277,14 +2277,14 @@ const RunningTrainingApp = () => {
                                               color: colors.black,
                                               textShadow: '0 0 3px white'
                                             }}>
-                                              {point.goldenPace}
+                                              {point.paceIndex}
                                             </span>
                                           </div>
                                         </div>
                                         <div className="w-16 text-xs" style={{ color: colors.darkGreen }}>
                                           {point.week === 0 ? 'Current' : 
-                                            point.goldenPace > savedProfileData.currentGoldenPace ? 
-                                            `+${(point.goldenPace - savedProfileData.currentGoldenPace).toFixed(1)}` : '---'}
+                                            point.paceIndex > savedProfileData.currentPaceIndex ? 
+                                            `+${(point.paceIndex - savedProfileData.currentPaceIndex).toFixed(1)}` : '---'}
                                         </div>
                                       </div>
                                     );
@@ -2297,7 +2297,7 @@ const RunningTrainingApp = () => {
                                 color: colors.darkGreen
                               }}>
                                 <p>💡 <strong>Pro Tip:</strong> Consistency is key! Maintain your weekly mileage and training intensity for steady progression.</p>
-                                <p>📈 Your projected GoldenPace in 6 months: <strong>{savedProfileData.projectedGoldenPace || 'N/A'}</strong></p>
+                                <p>📈 Your projected Pace Index in 6 months: <strong>{savedProfileData.projectedPaceIndex || 'N/A'}</strong></p>
                               </div>
                             </div>
                           </div>
@@ -2404,13 +2404,13 @@ const RunningTrainingApp = () => {
                                       {session.weather && ` • ${session.weather}`}
                                     </div>
                                   )}
-                                  {session.goldenPace && (
+                                  {session.paceIndex && (
                                     <div style={{ 
                                       color: colors.orange,
                                       fontSize: 'var(--text-sm)',
                                       fontWeight: '500'
                                     }}>
-                                      GoldenPace: {session.goldenPace}
+                                      Pace Index: {session.paceIndex}
                                     </div>
                                   )}
                                   {session.notes && (
@@ -2483,7 +2483,7 @@ const RunningTrainingApp = () => {
                         className="munich-btn munich-btn-primary relative"
                         aria-label="Go to pace calculator with your goal race"
                       >
-                        Calculate GoldenPace
+                        Calculate Pace Index
                         {/* Geometric accent on button */}
                         <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
                           backgroundColor: colors.lightGreen
@@ -2868,7 +2868,7 @@ const RunningTrainingApp = () => {
                 Unforgiving Minute Distance Running
               </h3>
               <p className="text-xs sm:text-sm" style={{ color: colors.darkGreen }}>
-                Professional distance running training with scientifically-based GoldenPace calculations.
+                Professional distance running training with scientifically-based Pace Index calculations.
               </p>
             </div>
             <div>
@@ -2882,7 +2882,7 @@ const RunningTrainingApp = () => {
                     className="transition-colors duration-200 hover:text-blue-600"
                     style={{ color: colors.darkGreen }}
                   >
-                    GoldenPace Calculator
+                    Pace Index Calculator
                   </button>
                 </li>
                 <li>
@@ -2931,7 +2931,7 @@ const RunningTrainingApp = () => {
                 onClick={() => setActiveTab('calculator')}
                 className="munich-btn munich-btn-primary"
               >
-                Calculate Your GoldenPace
+                Calculate Your Pace Index
               </button>
             </div>
           </div>
@@ -3194,7 +3194,7 @@ const RunningTrainingApp = () => {
               </div>
               
               <div className="mt-8 flex justify-center">
-                <button aria-label="Recalculate GoldenPace"
+                <button aria-label="Recalculate Pace Index"
                   onClick={() => setShowAdminPanel(false)}
                   className="munich-btn munich-btn-primary"
                 >
@@ -3281,7 +3281,7 @@ const RunningTrainingApp = () => {
             trackTabNavigation(mappedView);
           }}
           colors={colors}
-          userHasNewFeatures={!!goldenPace || userProfile.hasSeenPlans}
+          userHasNewFeatures={!!paceIndex || userProfile.hasSeenPlans}
         />
       )}
     </div>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, Clock, TrendingUp, Target, Trophy } from 'lucide-react';
 
-const GoldenPaceCalculator = ({ 
+const PaceIndexCalculator = ({ 
   colors, 
   raceTime, 
   setRaceTime, 
   selectedDistance, 
   setSelectedDistance, 
-  goldenPace, 
-  setGoldenPace,
+  paceIndex, 
+  setPaceIndex,
   trainingPaces,
   setTrainingPaces,
   profileError,
@@ -140,7 +140,7 @@ const GoldenPaceCalculator = ({
       const pacePerMile = timeInSeconds / getDistanceInMiles(selectedDistance);
       const estimatedVDOT = Math.round(15 + (420 - pacePerMile) / 10); // Simplified VDOT estimation
       
-      setGoldenPace(Math.max(30, Math.min(85, estimatedVDOT)));
+      setPaceIndex(Math.max(30, Math.min(85, estimatedVDOT)));
       
       const calculatedPaces = {
         easy: formatTime(Math.round(pacePerMile * 1.2)),

@@ -6,6 +6,16 @@ export const articles = [
     title: 'Why Your Running Paces Don\'t Match VDOT Charts',
     excerpt: 'Discover the individual factors that VDOT completely ignores and how they affect your training paces. Learn why many runners struggle with Daniels\' recommendations.',
     readTime: '5 min read',
+    sources: [
+      {
+        title: 'Daniels, J. — Daniels’ Running Formula (book)',
+        details: 'Human Kinetics. Source for VDOT concepts and training pace zone framework.'
+      },
+      {
+        title: 'Riegel, P. S. — Athletic Records and Human Endurance',
+        details: 'American Scientist (1981). Source for the race-time prediction approach commonly referred to as the “Riegel formula”.'
+      }
+    ],
     content: `
 # Why Your Running Paces Don't Match VDOT Charts
 
@@ -83,8 +93,9 @@ VDOT isn't wrong—it's incomplete. Use it to understand your potential and stru
 
 ---
 
-**References:**
-1. Scudamore, E. M., et al. "An Evaluation of Time-Trial Based Predictions of VO2max." *Journal of Strength and Conditioning Research*, 2018.
+**Sources:**
+1. Daniels, J. *Daniels’ Running Formula*. Human Kinetics.
+2. Riegel, P. S. "Athletic Records and Human Endurance." *American Scientist*, 1981.
     `,
     featured: true
   },
@@ -95,6 +106,12 @@ VDOT isn't wrong—it's incomplete. Use it to understand your potential and stru
     title: 'The Individual Factors VDOT Completely Ignores',
     excerpt: 'Age, experience, biomechanics, and recovery capacity all affect your training paces. Here\'s how to account for what makes you unique.',
     readTime: '7 min read',
+    sources: [
+      {
+        title: 'Daniels, J. — Daniels’ Running Formula (book)',
+        details: 'Human Kinetics. Baseline methodology reference for pace zones and adaptation principles.'
+      }
+    ],
     content: `
 # The Individual Factors VDOT Completely Ignores
 
@@ -122,6 +139,12 @@ This comprehensive guide will cover:
     title: 'How GoldenPace Training Broke My 5K Plateau',
     excerpt: 'After two years stuck at 22 minutes, individualized pacing helped me break through to sub-20. Here\'s how personal factors made the difference.',
     readTime: '4 min read',
+    sources: [
+      {
+        title: 'Daniels, J. — Daniels’ Running Formula (book)',
+        details: 'Human Kinetics. Reference framework for training intensities.'
+      }
+    ],
     content: `
 # How GoldenPace Training Broke My 5K Plateau
 

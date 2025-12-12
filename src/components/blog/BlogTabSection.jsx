@@ -2,6 +2,7 @@ import React from 'react';
 import { Star } from 'lucide-react';
 import PremiumPaywall from './PremiumPaywall';
 import { premiumArticleExample } from '../../data/premiumContent';
+import { markdownToHtml } from '../../utils/markdownToHtml';
 
 const BlogTabSection = ({ 
   colors, 
@@ -192,25 +193,42 @@ const BlogTabSection = ({
                     />
                   ) : (
                     <div 
-                      className="article-content"
-                      style={{ 
-                        lineHeight: '1.8',
-                        fontSize: '1.1rem'
+                      className="um-article"
+                      style={{
+                        // allow CSS to key off your theme colors
+                        '--um-article-text': colors.black,
+                        '--um-article-muted': colors.darkGreen,
+                        '--um-article-border': colors.border || colors.gray
                       }}
                       dangerouslySetInnerHTML={{ 
-                        __html: (selectedArticle.fullContent || selectedArticle.content)
-                          .replace(/\n\n/g, '</p><p>')
-                          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                          .replace(/^# (.*?)$/gm, '<h2 style="font-size: 1.8rem; font-weight: bold; margin: 2rem 0 1rem 0; color: ' + colors.black + ';">$1</h2>')
-                          .replace(/^## (.*?)$/gm, '<h3 style="font-size: 1.4rem; font-weight: bold; margin: 1.5rem 0 1rem 0; color: ' + colors.darkGreen + ';">$1</h3>')
-                          .replace(/^\* (.*?)$/gm, '<li>$1</li>')
-                          .replace(/(<li>.*<\/li>)/gs, '<ul style="margin: 1rem 0; padding-left: 1.5rem; list-style: disc;">$1</ul>')
-                          .replace(/^(?!<[hul])/gm, '<p>')
-                          .replace(/$(?!<\/)/gm, '</p>')
+                        __html: markdownToHtml(selectedArticle.fullContent || selectedArticle.content)
                       }} 
                     />
                   )}
                 </div>
+
+                {/* Sources */}
+                {Array.isArray(selectedArticle.sources) && selectedArticle.sources.length > 0 && (
+                  <div className="border-t pt-6" style={{ borderColor: colors.border }}>
+                    <h3 className="text-xl font-bold mb-3" style={{ color: colors.black }}>
+                      Sources
+                    </h3>
+                    <ol className="space-y-2 list-decimal pl-5">
+                      {selectedArticle.sources.map((s, idx) => (
+                        <li key={idx} className="text-sm" style={{ color: colors.darkGreen }}>
+                          {s.url ? (
+                            <a href={s.url} target="_blank" rel="noreferrer" className="underline" style={{ color: colors.lightBlue }}>
+                              {s.title}
+                            </a>
+                          ) : (
+                            <span style={{ color: colors.black }}>{s.title}</span>
+                          )}
+                          {s.details ? <span style={{ color: colors.silver }}> — {s.details}</span> : null}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
 
                 {/* Article Actions */}
                 <div className="border-t pt-6 flex justify-between items-center" style={{ borderColor: colors.border }}>
