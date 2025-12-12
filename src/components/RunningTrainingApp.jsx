@@ -23,8 +23,10 @@ import {
   trackProfileCreation,
   trackPurchaseAttempt,
   trackPurchaseSuccess,
-  trackTabNavigation
+  trackTabNavigation,
+  trackActivityLogged
 } from '../utils/analytics';
+import { makeActivityFromTrainingSession } from '../utils/trainingMetrics';
 
 const RunningTrainingApp = () => {
   const [activeTab, setActiveTab] = useState('calculator');
@@ -71,10 +73,9 @@ const RunningTrainingApp = () => {
   const [trainingPlansCompleted, setTrainingPlansCompleted] = useState([]);
   
   // User activities for progress dashboard (ready for future enhancements)
-  const [userActivities] = useState(
+  const [userActivities, setUserActivities] = useState(
     JSON.parse(localStorage.getItem('user_activities') || '[]')
   );
-  // const setUserActivities - available for future activity tracking
   
   // Purchase and premium plan state
   const [purchasedPlans, setPurchasedPlans] = useState([]);
@@ -179,7 +180,38 @@ const RunningTrainingApp = () => {
     const updatedHistory = [...trainingHistory, newSession];
     setTrainingHistory(updatedHistory);
     localStorage.setItem('trainingHistory', JSON.stringify(updatedHistory));
+    trackActivityLogged(newSession.type);
+
+    // Also add to activity feed used by the progress dashboard
+    // (separate from trainingHistory so the dashboard has normalized numeric metrics)
+    try {
+      const newActivity = makeActivityFromTrainingSession(newSession);
+      setUserActivities(prev => {
+        const updated = [...(prev || []), newActivity];
+        localStorage.setItem('user_activities', JSON.stringify(updated));
+        return updated;
+      });
+    } catch (e) {
+      // Never block training log on parsing issues
+      console.warn('Failed to add activity from training session', e);
+    }
   };
+
+  // Backfill activity feed from existing training history (one-time) if missing.
+  useEffect(() => {
+    try {
+      const hasActivities = Array.isArray(userActivities) && userActivities.length > 0;
+      const hasHistory = Array.isArray(trainingHistory) && trainingHistory.length > 0;
+      if (!hasActivities && hasHistory) {
+        const derived = trainingHistory.map(s => makeActivityFromTrainingSession(s));
+        setUserActivities(derived);
+        localStorage.setItem('user_activities', JSON.stringify(derived));
+      }
+    } catch (e) {
+      console.warn('Failed to backfill user activities', e);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trainingHistory]);
 
   // Update personal best
   const updatePersonalBest = (distance, time) => {

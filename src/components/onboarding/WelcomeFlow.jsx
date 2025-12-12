@@ -1,8 +1,8 @@
 // Welcome Flow Component - First Use Experience
 import React, { useState } from 'react';
-import { Target, Trophy, Zap } from 'lucide-react';
+import { Target, Trophy, Zap, X, ArrowLeft } from 'lucide-react';
 
-const WelcomeFlow = ({ colors, onComplete }) => {
+const WelcomeFlow = ({ colors, onComplete, onSkip }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [experience, setExperience] = useState(null);
@@ -84,26 +84,67 @@ const WelcomeFlow = ({ colors, onComplete }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="munich-card max-w-2xl w-full">
-        <div className="munich-card-header" style={{ backgroundColor: colors.lightBlue }}>
-          <div className="relative">
-            <div className="absolute top-0 right-0 w-8 h-8 geometric-diamond" style={{ 
+    <div className="um-modal-overlay um-modal-overlay--dim">
+      <div className="munich-card um-modal-panel um-modal-panel--2xl">
+        <div
+          className="munich-card-header relative overflow-hidden"
+          style={{
+            background: `linear-gradient(135deg, ${colors.lightBlue}, ${colors.lightGreen})`
+          }}
+        >
+          <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
+          <div
+            className="absolute top-0 right-0 w-6 h-6 geometric-diamond"
+            style={{
               backgroundColor: colors.orange,
-              opacity: 0.8
-            }}></div>
-            <div className="text-center">
-              <h2 className="text-2xl font-bold" style={{ color: colors.white }}>
-                Welcome to Unforgiving Minute
-              </h2>
-              <p className="mt-2" style={{ color: colors.white, opacity: 0.9 }}>
-                Personalized training that goes beyond generic pace charts
-              </p>
-            </div>
+              opacity: 0.85
+            }}
+          />
+
+          {typeof onSkip === 'function' && (
+            <button
+              type="button"
+              aria-label="Skip onboarding"
+              onClick={onSkip}
+              className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold"
+              style={{
+                backgroundColor: colors.white + '20',
+                color: colors.white,
+                border: `1px solid ${colors.white}40`
+              }}
+            >
+              <X className="w-4 h-4" />
+              Skip
+            </button>
+          )}
+
+          <div className="relative z-10 text-center">
+            <h2 className="text-2xl font-bold" style={{ color: colors.white }}>
+              Welcome to Unforgiving Minute
+            </h2>
+            <p className="mt-2" style={{ color: colors.white, opacity: 0.92 }}>
+              Personalized training that goes beyond generic pace charts
+            </p>
           </div>
         </div>
 
         <div className="munich-card-body space-y-6">
+          {/* Back (for steps 2/3) */}
+          {currentStep > 1 && (
+            <div className="flex justify-start">
+              <button
+                type="button"
+                onClick={() => setCurrentStep((s) => Math.max(1, s - 1))}
+                className="munich-btn munich-btn-outline inline-flex items-center gap-2"
+                style={{ borderColor: colors.lightBlue, color: colors.lightBlue }}
+                aria-label="Go back"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </button>
+            </div>
+          )}
+
           {/* Progress Indicator */}
           <div className="flex justify-center space-x-2">
             {[1, 2, 3].map((step) => (
