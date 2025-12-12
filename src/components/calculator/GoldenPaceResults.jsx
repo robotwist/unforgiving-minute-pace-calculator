@@ -41,59 +41,119 @@ const GoldenPaceResults = ({
   };
   return (
     <div className="space-y-8">
-      {/* GoldenPace Display - Central Hero Result */}
-      <div className="text-center p-6 sm:p-8 bg-gradient-to-br from-blue-50 via-white to-green-50 border-2 relative overflow-hidden" style={{ 
-        borderColor: colors.lightBlue,
-        boxShadow: '0 20px 40px rgba(30, 107, 150, 0.15)' 
-      }}>
+      {/* GoldenPace Display - Enhanced Glassmorphism */}
+      <div
+        className="munich-card um-card-accent text-center p-8 sm:p-10 lg:p-12 relative overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${colors.white}E6, ${colors.lightGray}E6)`,
+          borderColor: `${colors.lightBlue}40`,
+        }}
+      >
         {/* Progressive Melange Background */}
-        <div className="absolute inset-0 progressive-melange opacity-5"></div>
-        
-        {/* Geometric border accents */}
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-2 sm:w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-2 sm:w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
-        
+        <div className="progressive-melange um-melange-overlay um-melange-overlay--05"></div>
+
+        {/* Enhanced geometric border accents */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-2 sm:w-16 sm:h-2 rounded-full"
+             style={{
+               background: `linear-gradient(90deg, ${colors.lightBlue}, ${colors.lightGreen})`,
+               boxShadow: `0 2px 8px ${colors.lightBlue}30`
+             }}></div>
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-2 sm:w-16 sm:h-2 rounded-full"
+             style={{
+               background: `linear-gradient(90deg, ${colors.lightGreen}, ${colors.lightBlue})`,
+               boxShadow: `0 2px 8px ${colors.lightGreen}30`
+             }}></div>
+
         <div className="relative z-10">
-          <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: colors.lightBlue }}>
+          <div className="munich-4xl font-bold mb-4" style={{
+            color: colors.lightBlue,
+            textShadow: `0 2px 4px ${colors.lightBlue}08`
+          }}>
             {goldenPace}
           </div>
-          <div className="text-base sm:text-lg font-medium" style={{ color: colors.black }}>
+          <div className="munich-xl font-medium mb-2" style={{ color: colors.black }}>
             GoldenPace
           </div>
-          <p className="text-xs sm:text-sm mt-2" style={{ color: colors.lightBlue }}>
-            Your training fitness level
-          </p>
+          <div className="mt-4 p-4 rounded-lg" style={{
+            backgroundColor: `${colors.lightBlue}10`,
+            border: `1px solid ${colors.lightBlue}30`
+          }}>
+            <p className="text-sm sm:text-base font-medium mb-2" style={{ color: colors.black }}>
+              What is GoldenPace?
+            </p>
+            <p className="text-xs sm:text-sm" style={{ color: colors.darkGreen }}>
+              Your scientifically-calculated training intensity metric. Unlike traditional VDOT systems,
+              GoldenPace uses advanced algorithms to determine your optimal training paces for endurance development.
+              It's the foundation of your personalized training plan.
+            </p>
+          </div>
+          <div
+            className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full um-glass-pill"
+            style={{
+              backgroundColor: `${colors.lightBlue}20`,
+              border: `1px solid ${colors.lightBlue}40`,
+            }}
+          >
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+            <span className="text-sm font-medium" style={{ color: colors.black }}>
+              Scientifically validated
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Training Paces Grid - Munich 1972 Geometric Style */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+      {/* Training Paces Grid - Enhanced Glassmorphism */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {[
-          { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray },
-          { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen },
-          { name: 'Interval', pace: trainingPaces.interval, icon: Clock, color: colors.darkGreen },
-          { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.lightBlue }
-        ].map(({ name, pace, icon: Icon, color }, index) => (
-          <div key={name} className="bg-white shadow-sm border p-3 sm:p-4 text-center relative overflow-hidden" style={{ borderColor: colors.border }}>
+          { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray, desc: 'Recovery & long runs' },
+          { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen, desc: 'Tempo & steady runs' },
+          { name: 'Interval', pace: trainingPaces.interval, icon: Clock, color: colors.darkGreen, desc: 'High-intensity work' },
+          { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.lightBlue, desc: 'Speed development' }
+        ].map(({ name, pace, icon: Icon, color, desc }, index) => (
+          <div
+            key={name}
+            className="munich-card p-6 text-center relative overflow-hidden transition-all duration-300 hover:scale-105"
+            style={{
+              borderColor: `${color}30`,
+            }}
+          >
             {/* Progressive Melange Background */}
-            <div className="absolute inset-0 progressive-melange opacity-3"></div>
-            
-            {/* Geometric corner accent */}
-            <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
-              backgroundColor: color,
-              opacity: 0.3,
-              animationDelay: `${index * 0.5}s`
-            }}></div>
-            
+            <div className="progressive-melange um-melange-overlay um-melange-overlay--03"></div>
+
+            {/* Enhanced geometric corner accent */}
+            <div
+              className="absolute top-3 right-3 w-6 h-6 geometric-diamond geometric-float-counterclockwise"
+              style={{
+                background: `linear-gradient(135deg, ${color}, ${color}80)`,
+                opacity: 0.4,
+                animationDelay: `${index * 0.5}s`
+              }}
+            ></div>
+
             <div className="relative z-10">
-              <Icon className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-2" style={{ color: color }} />
-              <h4 className="text-sm sm:text-md font-medium mb-1" style={{ color: colors.black }}>
+              <div
+                className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center um-icon-badge"
+                style={{
+                  backgroundColor: `${color}20`,
+                  border: `1px solid ${color}40`
+                }}
+              >
+                <Icon className="w-7 h-7" style={{ color: color }} />
+              </div>
+              <h4 className="text-lg font-bold mb-1" style={{ color: colors.black }}>
                 {name}
               </h4>
-              <div className="text-lg sm:text-xl font-bold font-mono" style={{ color: color }}>
+              <p className="text-sm mb-3" style={{ color: colors.darkGreen }}>
+                {desc}
+              </p>
+              <div className="text-xl sm:text-2xl font-bold font-mono px-3 py-2 rounded-lg" style={{
+                color: color,
+                backgroundColor: `${color}15`,
+                border: `1px solid ${color}30`
+              }}>
                 {pace}
               </div>
-              <p className="text-xs mt-1" style={{ color: colors.lightBlue }}>
+              <p className="text-xs mt-2 font-medium" style={{ color: colors.lightBlue }}>
                 per mile
               </p>
             </div>
@@ -104,7 +164,8 @@ const GoldenPaceResults = ({
       {/* Freemium Flow - Post-Calculation User Journey */}
       <div className="space-y-6">
         {/* Lead capture: 7-day PDF */}
-        <div className="bg-white border-2 rounded-lg p-6" style={{ borderColor: colors.lightBlue }}>
+        <div className="munich-card" style={{ borderColor: colors.lightBlue }}>
+          <div className="munich-card-body">
           <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>Get Your Free 7‑Day Personalized Training Week</h3>
           <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>Enter your email to receive a downloadable 7‑day plan tailored to your GoldenPace.</p>
           <form onSubmit={submitLead} className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -114,7 +175,7 @@ const GoldenPaceResults = ({
               value={leadName}
               onChange={(e) => setLeadName(e.target.value)}
               className="px-3 py-2 border-2 rounded"
-              style={{ borderColor: colors.border, color: colors.black, backgroundColor: 'white' }}
+              style={{ borderColor: colors.border, color: colors.black, backgroundColor: colors.white }}
               aria-label="Your name"
             />
             <input
@@ -123,7 +184,7 @@ const GoldenPaceResults = ({
               value={leadEmail}
               onChange={(e) => setLeadEmail(e.target.value)}
               className={`px-3 py-2 border-2 rounded ${leadError ? 'border-red-500' : ''}`}
-              style={{ borderColor: leadError ? '#ef4444' : colors.border, color: colors.black, backgroundColor: 'white' }}
+              style={{ borderColor: leadError ? '#ef4444' : colors.border, color: colors.black, backgroundColor: colors.white }}
               aria-label="Your email"
               required
             />
@@ -138,6 +199,7 @@ const GoldenPaceResults = ({
             </button>
           </form>
           {leadError && <div className="text-sm mt-2" style={{ color: '#dc2626' }}>{leadError}</div>}
+          </div>
         </div>
         {/* Free Training Week Sample */}
         <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 border-2 rounded-lg p-6 relative overflow-hidden" style={{ 
@@ -261,17 +323,17 @@ const GoldenPaceResults = ({
                 Browse All Programs
               </button>
               <a
-                href="/coach"
+                href="/apply"
                 className="flex-1 px-6 py-4 rounded-lg font-semibold border-2 transition-all duration-200 flex items-center justify-center"
                 style={{
                   borderColor: colors.lightGreen,
                   color: colors.lightGreen,
-                  backgroundColor: 'white'
+                  backgroundColor: 'transparent'
                 }}
-                aria-label="Schedule a free consultation"
+                aria-label="Apply for coaching"
               >
                 <User className="w-5 h-5 mr-2" />
-                Free 15‑min Consult
+                Apply for coaching
               </a>
             </div>
           </div>

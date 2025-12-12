@@ -49,7 +49,7 @@ const StripePaymentForm = ({
 
     try {
       // Create payment intent with backend
-      const apiUrl = process.env.REACT_APP_API_URL || 'https://unforgiving-moment-production.up.railway.app/api';
+      const apiUrl = process.env.REACT_APP_API_URL || 'https://unforgiving-minute-api-secure-42ba5a7f30a8.herokuapp.com/api';
       
       const response = await fetch(`${apiUrl}/create-payment-intent`, {
         method: 'POST',

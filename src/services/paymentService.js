@@ -1,7 +1,7 @@
 // Payment service for handling Stripe API calls
 class PaymentService {
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_URL || 'https://unforgiving-moment-production.up.railway.app/api';
+    this.baseURL = process.env.REACT_APP_API_URL || 'https://unforgiving-minute-api-secure-42ba5a7f30a8.herokuapp.com/api';
   }
 
   async createPaymentIntent(planId, amount, planName) {

@@ -133,7 +133,7 @@ export const Input = ({
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label className="block font-medium text-sm" style={{ color: MUNICH_COLORS.black }}>
+        <label className="um-label" style={{ color: MUNICH_COLORS.black }}>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -144,9 +144,7 @@ export const Input = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
-        className={`w-full p-3 border-2 rounded focus:outline-none transition-colors ${
-          error ? 'border-red-500' : ''
-        }`}
+        className={`um-field ${error ? 'um-field--error' : ''}`}
         style={{
           borderColor: error ? '#ef4444' : MUNICH_COLORS.gray,
           fontSize: 'var(--text-base)'
@@ -183,7 +181,7 @@ export const Select = ({
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label className="block font-medium text-sm" style={{ color: MUNICH_COLORS.black }}>
+        <label className="um-label" style={{ color: MUNICH_COLORS.black }}>
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -192,9 +190,7 @@ export const Select = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
-        className={`w-full p-3 border-2 rounded focus:outline-none transition-colors ${
-          error ? 'border-red-500' : ''
-        }`}
+        className={`um-field ${error ? 'um-field--error' : ''}`}
         style={{
           borderColor: error ? '#ef4444' : MUNICH_COLORS.gray,
           fontSize: 'var(--text-base)'

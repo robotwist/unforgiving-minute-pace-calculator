@@ -109,12 +109,13 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className="group flex items-center space-x-3 px-6 py-3 rounded-lg font-medium transition-all duration-300 relative overflow-hidden"
+              className={`group flex items-center space-x-3 px-6 py-3 rounded-lg font-medium transition-all duration-300 relative overflow-hidden ${
+                isActive ? 'um-shadow-active' : ''
+              }`}
               style={{
                 backgroundColor: isActive ? colors.lightBlue : 'transparent',
                 color: isActive ? colors.white : colors.darkGreen,
                 border: `2px solid ${isActive ? colors.lightBlue : 'transparent'}`,
-                boxShadow: isActive ? `0 4px 12px ${colors.lightBlue}30` : 'none'
               }}
               aria-label={`Switch to ${tab.label}`}
             >
@@ -156,13 +157,13 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
       </div>
 
       {/* Add padding to content when mobile nav is present */}
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{__html: `
         @media (max-width: 768px) {
           main {
             padding-bottom: 80px !important;
           }
         }
-      `}</style>
+      `}} />
     </>
   );
 };

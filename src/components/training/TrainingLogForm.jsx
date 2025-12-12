@@ -90,12 +90,12 @@ const TrainingLogForm = ({
   if (!showTrainingLogForm) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="munich-card max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="um-modal-overlay um-modal-overlay--dim">
+      <div className="munich-card um-modal-panel um-modal-panel--2xl">
         <div className="munich-card-header relative overflow-hidden" style={{ 
           backgroundColor: colors.lightBlue 
         }}>
-          <div className="absolute inset-0 progressive-melange opacity-20"></div>
+          <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
           <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
             backgroundColor: colors.orange,
             opacity: 0.8
@@ -134,7 +134,7 @@ const TrainingLogForm = ({
                 type="date"
                 value={trainingLogData.date}
                 onChange={(e) => setTrainingLogData({...trainingLogData, date: e.target.value})}
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -155,7 +155,7 @@ const TrainingLogForm = ({
               <select
                 value={trainingLogData.type}
                 onChange={(e) => setTrainingLogData({...trainingLogData, type: e.target.value})}
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -186,7 +186,7 @@ const TrainingLogForm = ({
                 value={trainingLogData.distance}
                 onChange={(e) => setTrainingLogData({...trainingLogData, distance: e.target.value})}
                 placeholder="e.g., 6.2"
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -209,7 +209,7 @@ const TrainingLogForm = ({
                 value={trainingLogData.time}
                 onChange={(e) => setTrainingLogData({...trainingLogData, time: e.target.value})}
                 placeholder="e.g., 45:30"
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -231,7 +231,7 @@ const TrainingLogForm = ({
                 value={trainingLogData.pace}
                 onChange={(e) => setTrainingLogData({...trainingLogData, pace: e.target.value})}
                 placeholder="Auto-calculated"
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)',
@@ -255,7 +255,7 @@ const TrainingLogForm = ({
               <select
                 value={trainingLogData.effort}
                 onChange={(e) => setTrainingLogData({...trainingLogData, effort: e.target.value})}
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -280,7 +280,7 @@ const TrainingLogForm = ({
               <select
                 value={trainingLogData.feeling}
                 onChange={(e) => setTrainingLogData({...trainingLogData, feeling: e.target.value})}
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -310,7 +310,7 @@ const TrainingLogForm = ({
                 value={trainingLogData.location}
                 onChange={(e) => setTrainingLogData({...trainingLogData, location: e.target.value})}
                 placeholder="e.g., City Park, Gym, Track"
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -332,7 +332,7 @@ const TrainingLogForm = ({
                 value={trainingLogData.weather}
                 onChange={(e) => setTrainingLogData({...trainingLogData, weather: e.target.value})}
                 placeholder="e.g., Sunny 70°F, Rainy, Hot and humid"
-                className="w-full p-3 border-2 rounded focus:outline-none transition-colors"
+                className="um-field"
                 style={{ 
                   borderColor: colors.gray,
                   fontSize: 'var(--text-base)'
@@ -355,7 +355,7 @@ const TrainingLogForm = ({
               onChange={(e) => setTrainingLogData({...trainingLogData, notes: e.target.value})}
               placeholder="Any additional notes about the session..."
               rows={3}
-              className="w-full p-3 border-2 rounded focus:outline-none transition-colors resize-vertical"
+              className="um-field um-textarea"
               style={{ 
                 borderColor: colors.gray,
                 fontSize: 'var(--text-base)'

@@ -55,7 +55,6 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
                 backgroundColor: activeTab === id ? colors.lightBlue : 'white',
                 color: activeTab === id ? 'white' : colors.lightBlue,
                 border: `2px solid ${colors.lightBlue}`,
-                borderRadius: '8px'
               }}
             >
               <Icon className="w-4 h-4 sm:w-5 sm:h-5" />

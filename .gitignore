@@ -52,6 +52,7 @@ venv.bak/
 *~
 
 # Cursor / editor session artifacts
+.cursor/
 .specstory/
 
 # OS
@@ -133,3 +134,5 @@ celerybeat.pid
 .mypy_cache/
 .dmypy.json
 dmypy.json
+venv/
+.venv/

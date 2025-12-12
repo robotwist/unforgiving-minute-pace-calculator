@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CalendlyModal from '../consultation/CalendlyModal';
-import { coachBio } from '../../content/coachBio';
 
 const PremiumPlansSection = ({ 
   colors, 
@@ -28,12 +27,12 @@ const PremiumPlansSection = ({
           Comprehensive, professionally-designed training programs for serious athletes
         </p>
         <a
-          href="/coach"
+          href="/apply"
           className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold border-2"
-          style={{ borderColor: colors.lightGreen, color: colors.lightGreen, backgroundColor: 'white' }}
-          aria-label="Schedule a free consultation"
+          style={{ borderColor: colors.lightGreen, color: colors.lightGreen, backgroundColor: 'transparent' }}
+          aria-label="Apply for coaching"
         >
-          Free 15‑min Consult
+          Apply for coaching
         </a>
       </div>
 
@@ -41,13 +40,22 @@ const PremiumPlansSection = ({
       <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.yellow}10, ${colors.lightBlue}10)` }}>
         <div className="munich-card-body text-center">
           <h3 className="text-2xl font-bold mb-2" style={{ color: colors.black }}>
-            Who am I?
+            Your Coach
           </h3>
           <div className="max-w-2xl mx-auto text-base space-y-3 leading-relaxed" style={{ color: colors.black }}>
-            <p className="mb-2 font-medium">{coachBio.nameLine}</p>
-            {coachBio.paragraphs.map((p, idx) => (
-              <p key={idx} className="mb-2">{p}</p>
-            ))}
+            <p className="mb-2 font-medium">Rob Wistrand — Coach, founder, and lifelong athlete</p>
+            <p className="mb-2">
+              I grew up obsessed with the clock—first as a kid with a stopwatch, later as an athlete chasing the edge of what I thought was possible.
+              That obsession became a system: how to train with intention, recover well, and show up when it matters.
+            </p>
+            <p className="mb-2">
+              I’ve lived the whole arc: early breakthroughs, big stages, big setbacks, and the hard reset. When my own career got cut short, I moved into coaching
+              and focused on the part I care about most: helping the right athletes build durable fitness and race with confidence.
+            </p>
+            <p className="mb-2">
+              My approach is simple: clear communication, individualized pacing, and consistent execution. The calculator and plans in this app are a sample of how I think—
+              the real value is the relationship and the weekly adjustments based on <em>your</em> life, feedback, and progress.
+            </p>
           </div>
         </div>
       </div>
@@ -557,7 +565,7 @@ const PremiumPlansSection = ({
               </p>
             </div>
           </div>
-          <div className="mt-6 p-4" style={{ backgroundColor: `${colors.lightBlue}20`, borderRadius: '12px' }}>
+          <div className="mt-6 p-4 um-radius-md" style={{ backgroundColor: `${colors.lightBlue}20` }}>
             <p className="font-medium" style={{ color: colors.black }}>
               💡 Try Before You Commit: Start with a $50 consultation to experience our personalized approach
             </p>

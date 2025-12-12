@@ -57,6 +57,9 @@ export const paceIndexFrom5K = {
   764: 85    // 12:44 - Pace Index 85
 };
 
+// Backwards-compat alias (older parts of the app still refer to GoldenPace)
+export const goldenPaceFrom5K = paceIndexFrom5K;
+
 // Training Paces by VDOT Level - 400+ lines of pace data
 export const trainingPacesByVDOT = {
   30: { 

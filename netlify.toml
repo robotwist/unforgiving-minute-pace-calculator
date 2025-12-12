@@ -16,7 +16,7 @@
   SKIP_PYTHON_INSTALL = "true"
   NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250816_stripe_fix"
+  NETLIFY_CACHE_ID = "v20250906_secure_api_deploy"
 
 # Site configuration
 [context.production]
@@ -24,7 +24,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "https://unforgiving-moment-production.up.railway.app/api/:splat"
+  to = "https://unforgiving-minute-api-secure-42ba5a7f30a8.herokuapp.com/api/:splat"
   status = 200
   force = true
 

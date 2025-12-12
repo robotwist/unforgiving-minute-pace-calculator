@@ -108,7 +108,13 @@ const PlanRecommendationEngine = ({
         border: `3px solid ${colors.lightGreen}`,
         background: `linear-gradient(135deg, ${colors.lightGreen}05, ${colors.lightBlue}05)`
       }}>
-        <div className="absolute top-4 right-4">
+        <div 
+          className="absolute top-4 right-4"
+          style={{ 
+            zIndex: 1,
+            pointerEvents: 'none'
+          }}
+        >
           <div 
             className="px-3 py-1 rounded-full text-xs font-bold"
             style={{ 
@@ -197,8 +203,23 @@ const PlanRecommendationEngine = ({
               </div>
 
               <button
-                onClick={() => onPlanSelect(topRecommendation, 'recommended')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (onPlanSelect && topRecommendation) {
+                    onPlanSelect(topRecommendation, 'recommended');
+                  } else {
+                    console.error('Missing onPlanSelect or topRecommendation', { onPlanSelect, topRecommendation });
+                  }
+                }}
                 className="w-full munich-btn munich-btn-primary"
+                style={{ 
+                  backgroundColor: colors.lightBlue,
+                  color: colors.white,
+                  border: `2px solid ${colors.darkGreen}`,
+                }}
+                type="button"
+                aria-label="Start this training plan"
               >
                 Start This Plan
               </button>
@@ -254,8 +275,19 @@ const PlanRecommendationEngine = ({
                   </div>
                   
                   <button
-                    onClick={() => onPlanSelect(plan, 'alternative')}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (onPlanSelect && plan) {
+                        onPlanSelect(plan, 'alternative');
+                      }
+                    }}
                     className="w-full mt-4 munich-btn munich-btn-outline text-sm"
+                    style={{ 
+                      cursor: 'pointer',
+                      pointerEvents: 'auto'
+                    }}
+                    type="button"
                   >
                     View Plan
                   </button>
@@ -269,6 +301,7 @@ const PlanRecommendationEngine = ({
       {/* Show All Plans Option */}
       <div className="text-center">
         <button
+          type="button"
           onClick={() => setShowAllPlans(!showAllPlans)}
           className="munich-btn munich-btn-outline"
           style={{ color: colors.lightBlue }}
@@ -294,8 +327,19 @@ const PlanRecommendationEngine = ({
                     {plan.distance} • {plan.duration} weeks • {plan.phase}
                   </p>
                   <button
-                    onClick={() => onPlanSelect(plan, 'browse')}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (onPlanSelect && plan) {
+                        onPlanSelect(plan, 'browse');
+                      }
+                    }}
                     className="w-full munich-btn munich-btn-outline text-sm"
+                    style={{ 
+                      cursor: 'pointer',
+                      pointerEvents: 'auto'
+                    }}
+                    type="button"
                   >
                     View Details
                   </button>

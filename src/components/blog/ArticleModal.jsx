@@ -45,12 +45,12 @@ const ArticleModal = ({ article, colors, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto">
-      <div className="munich-card max-w-4xl w-full max-h-[95vh] overflow-y-auto">
+    <div className="um-modal-overlay um-modal-overlay--dim um-modal-overlay--scroll">
+      <div className="munich-card um-modal-panel um-modal-panel--4xl">
         <div className="munich-card-header relative overflow-hidden" style={{ 
           backgroundColor: colors.lightBlue 
         }}>
-          <div className="absolute inset-0 progressive-melange opacity-20"></div>
+          <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
           <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
             backgroundColor: colors.orange,
             opacity: 0.8

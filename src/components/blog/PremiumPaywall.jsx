@@ -1,5 +1,6 @@
 // Premium Blog Paywall System
 import React, { useState } from 'react';
+import DOMPurify from 'dompurify';
 
 const PremiumPaywall = ({ article, colors, onSubscribe }) => {
   const [selectedTier, setSelectedTier] = useState('pro');
@@ -44,7 +45,7 @@ const PremiumPaywall = ({ article, colors, onSubscribe }) => {
         <div className="prose prose-lg max-w-none" style={{ color: colors.black }}>
           <div 
             dangerouslySetInnerHTML={{ 
-              __html: article.teaser_content || article.content.substring(0, 500) + '...'
+              __html: DOMPurify.sanitize(article.teaser_content || article.content.substring(0, 500) + '...')
             }} 
           />
         </div>
