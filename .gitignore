@@ -50,6 +50,8 @@ venv.bak/
 *.swp
 *.swo
 *~
+.cursor/
+.specstory/
 
 # Cursor / editor session artifacts
 .cursor/
