@@ -64,16 +64,3 @@ export const trackPlanPreview = (planId, planName) => {
 export const trackPlanDownload = (planId, planName) => {
   trackEvent('plan_download', 'engagement', planName, 1);
 };
-
-// Retention tracking
-export const trackWeeklyCheckInSubmitted = () => {
-  trackEvent('weekly_checkin_submitted', 'retention', 'weekly_checkin', 1);
-};
-
-export const trackWeeklyRecapCopied = () => {
-  trackEvent('weekly_recap_copied', 'retention', 'share_week', 1);
-};
-
-export const trackActivityLogged = (activityType) => {
-  trackEvent('activity_logged', 'retention', activityType || 'unknown', 1);
-};

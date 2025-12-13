@@ -4,61 +4,58 @@
  * Based on Jack Daniels Running Formula and VDOT methodology
  */
 
-// Pace Index Lookup Tables - 500+ lines of pace data
-export const paceIndexFrom5K = {
-  1840: 30,  // 30:40 - Pace Index 30
-  1745: 32,  // 29:05 - Pace Index 32
-  1659: 34,  // 27:39 - Pace Index 34
-  1582: 36,  // 26:22 - Pace Index 36
-  1512: 38,  // 25:12 - Pace Index 38
-  1448: 40,  // 24:08 - Pace Index 40
-  1389: 42,  // 23:09 - Pace Index 42
-  1335: 44,  // 22:15 - Pace Index 44
-  1310: 45,  // 21:50 - Pace Index 45
-  1285: 46,  // 21:25 - Pace Index 46
-  1262: 47,  // 21:02 - Pace Index 47
-  1239: 48,  // 20:39 - Pace Index 48
-  1218: 49,  // 20:18 - Pace Index 49
-  1197: 50,  // 19:57 - Pace Index 50
-  1176: 51,  // 19:36 - Pace Index 51
-  1157: 52,  // 19:17 - Pace Index 52
-  1138: 53,  // 18:58 - Pace Index 53
-  1120: 54,  // 18:40 - Pace Index 54
-  1102: 55,  // 18:22 - Pace Index 55
-  1085: 56,  // 18:05 - Pace Index 56
-  1069: 57,  // 17:49 - Pace Index 57
-  1053: 58,  // 17:33 - Pace Index 58
-  1038: 59,  // 17:18 - Pace Index 59
-  1023: 60,  // 17:03 - Pace Index 60
-  1009: 61,  // 16:49 - Pace Index 61
-  995: 62,   // 16:35 - Pace Index 62
-  982: 63,   // 16:22 - Pace Index 63
-  969: 64,   // 16:09 - Pace Index 64
-  956: 65,   // 15:56 - Pace Index 65
-  944: 66,   // 15:44 - Pace Index 66
-  932: 67,   // 15:32 - Pace Index 67
-  920: 68,   // 15:20 - Pace Index 68
-  909: 69,   // 15:09 - Pace Index 69
-  898: 70,   // 14:58 - Pace Index 70
-  887: 71,   // 14:47 - Pace Index 71
-  877: 72,   // 14:37 - Pace Index 72
-  867: 73,   // 14:27 - Pace Index 73
-  857: 74,   // 14:17 - Pace Index 74
-  847: 75,   // 14:07 - Pace Index 75
-  838: 76,   // 13:58 - Pace Index 76
-  829: 77,   // 13:49 - Pace Index 77
-  820: 78,   // 13:40 - Pace Index 78
-  811: 79,   // 13:31 - Pace Index 79
-  803: 80,   // 13:23 - Pace Index 80
-  795: 81,   // 13:15 - Pace Index 81
-  787: 82,   // 13:07 - Pace Index 82
-  779: 83,   // 12:59 - Pace Index 83
-  771: 84,   // 12:51 - Pace Index 84
-  764: 85    // 12:44 - Pace Index 85
+// VDOT Lookup Tables - 500+ lines of pace data
+export const goldenPaceFrom5K = {
+  1840: 30,  // 30:40 - GoldenPace 30
+  1745: 32,  // 29:05 - GoldenPace 32
+  1659: 34,  // 27:39 - GoldenPace 34
+  1582: 36,  // 26:22 - GoldenPace 36
+  1512: 38,  // 25:12 - GoldenPace 38
+  1448: 40,  // 24:08 - GoldenPace 40
+  1389: 42,  // 23:09 - GoldenPace 42
+  1335: 44,  // 22:15 - GoldenPace 44
+  1310: 45,  // 21:50 - GoldenPace 45
+  1285: 46,  // 21:25 - GoldenPace 46
+  1262: 47,  // 21:02 - GoldenPace 47
+  1239: 48,  // 20:39 - GoldenPace 48
+  1218: 49,  // 20:18 - GoldenPace 49
+  1197: 50,  // 19:57 - GoldenPace 50
+  1176: 51,  // 19:36 - GoldenPace 51
+  1157: 52,  // 19:17 - GoldenPace 52
+  1138: 53,  // 18:58 - GoldenPace 53
+  1120: 54,  // 18:40 - GoldenPace 54
+  1102: 55,  // 18:22 - GoldenPace 55
+  1085: 56,  // 18:05 - GoldenPace 56
+  1069: 57,  // 17:49 - GoldenPace 57
+  1053: 58,  // 17:33 - GoldenPace 58
+  1038: 59,  // 17:18 - GoldenPace 59
+  1023: 60,  // 17:03 - GoldenPace 60
+  1009: 61,  // 16:49 - GoldenPace 61
+  995: 62,   // 16:35 - GoldenPace 62
+  982: 63,   // 16:22 - GoldenPace 63
+  969: 64,   // 16:09 - GoldenPace 64
+  956: 65,   // 15:56 - GoldenPace 65
+  944: 66,   // 15:44 - GoldenPace 66
+  932: 67,   // 15:32 - GoldenPace 67
+  920: 68,   // 15:20 - GoldenPace 68
+  909: 69,   // 15:09 - GoldenPace 69
+  898: 70,   // 14:58 - GoldenPace 70
+  887: 71,   // 14:47 - GoldenPace 71
+  877: 72,   // 14:37 - GoldenPace 72
+  867: 73,   // 14:27 - GoldenPace 73
+  857: 74,   // 14:17 - GoldenPace 74
+  847: 75,   // 14:07 - GoldenPace 75
+  838: 76,   // 13:58 - GoldenPace 76
+  829: 77,   // 13:49 - GoldenPace 77
+  820: 78,   // 13:40 - GoldenPace 78
+  811: 79,   // 13:31 - GoldenPace 79
+  803: 80,   // 13:23 - GoldenPace 80
+  795: 81,   // 13:15 - GoldenPace 81
+  787: 82,   // 13:07 - GoldenPace 82
+  779: 83,   // 12:59 - GoldenPace 83
+  771: 84,   // 12:51 - GoldenPace 84
+  764: 85    // 12:44 - GoldenPace 85
 };
-
-// Backwards-compat alias (older parts of the app still refer to GoldenPace)
-export const goldenPaceFrom5K = paceIndexFrom5K;
 
 // Training Paces by VDOT Level - 400+ lines of pace data
 export const trainingPacesByVDOT = {
@@ -737,10 +734,10 @@ export const generatePersonalizedPlan = (basePlan, goldenPaceLevel) => {
   };
 };
 
-// Convert 5K time to Pace Index
-export const convertTimeToPaceIndex = (timeInSeconds) => {
+// Convert 5K time to VDOT
+export const convertTimeToVDOT = (timeInSeconds) => {
   // Find the closest match in our lookup table
-  const times = Object.keys(paceIndexFrom5K).map(Number).sort((a, b) => a - b);
+  const times = Object.keys(goldenPaceFrom5K).map(Number).sort((a, b) => a - b);
   
   // Find closest time
   let closestTime = times[0];
@@ -754,16 +751,16 @@ export const convertTimeToPaceIndex = (timeInSeconds) => {
     }
   }
   
-  return paceIndexFrom5K[closestTime];
+  return goldenPaceFrom5K[closestTime];
 };
 
 const trainingPlansExport = {
-  paceIndexFrom5K,
+  goldenPaceFrom5K,
   trainingPacesByVDOT,
   baseTrainingPlans,
   getTrainingPacesForLevel,
   generatePersonalizedPlan,
-  convertTimeToPaceIndex
+  convertTimeToVDOT
 };
 
 export default trainingPlansExport;
