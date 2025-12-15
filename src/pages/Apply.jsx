@@ -6,6 +6,7 @@ import { useToast } from '../context/ToastContext';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import FormField from '../components/common/FormField';
+import logger from '../utils/logger';
 
 const initialForm = {
   name: '',
