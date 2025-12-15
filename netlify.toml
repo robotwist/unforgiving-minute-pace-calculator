@@ -2,7 +2,8 @@
   base = "."
   publish = "build"
   command = "npm ci --legacy-peer-deps --production=false && npm run build"
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF src/ public/ package.json package-lock.json"
+  # Temporarily disabled to force rebuild
+  # ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF src/ public/ package.json package-lock.json"
 
 [build.processing]
   skip_processing = false
