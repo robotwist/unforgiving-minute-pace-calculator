@@ -107,7 +107,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
           <option value="50K">50K</option>
           <option value="50 Mile">50 Mile</option>
         </select>
-        <p className="text-xs mt-1" style={{ color: colors.darkGreen }}>
+        <p className="text-xs mt-1" style={{ color: colors.textSecondary || colors.darkGray }}>
           Training zones will be mapped based on this goal distance
         </p>
       </div>
@@ -155,7 +155,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
       <div className="p-3 rounded" style={{ backgroundColor: `${colors.lightBlue}10`, border: `1px solid ${colors.lightBlue}30` }}>
         <div className="flex items-start gap-2">
           <Clock className="w-4 h-4 mt-0.5" style={{ color: colors.lightBlue }} />
-          <div className="text-xs" style={{ color: colors.darkGreen }}>
+          <div className="text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
             <p className="font-medium mb-1">Time Format:</p>
             <p>Use MM:SS for times under an hour (e.g., 22:30 for 22 minutes 30 seconds)</p>
             <p>Use HH:MM:SS for times over an hour (e.g., 1:28:00 for 1 hour 28 minutes)</p>

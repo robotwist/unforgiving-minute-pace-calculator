@@ -39,7 +39,7 @@ const PRProfileGraph = ({ prs, colors }) => {
   if (dataPoints.length === 0) {
     return (
       <div className="munich-card p-8 text-center" style={{ borderColor: colors.border }}>
-        <p className="text-sm" style={{ color: colors.darkGreen }}>
+        <p className="text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
           Enter at least one PR to see your profile graph
         </p>
       </div>
@@ -91,7 +91,7 @@ const PRProfileGraph = ({ prs, colors }) => {
       <h3 className="text-lg font-bold mb-4" style={{ color: colors.black }}>
         Your PR Profile
       </h3>
-      <p className="text-xs mb-4" style={{ color: colors.darkGreen }}>
+      <p className="text-xs mb-4" style={{ color: colors.textSecondary || colors.darkGray }}>
         Pace per mile across race distances. Actual PRs shown in blue, projected times in green.
       </p>
       
@@ -224,14 +224,14 @@ const PRProfileGraph = ({ prs, colors }) => {
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: colors.lightBlue }}
           />
-          <span style={{ color: colors.darkGreen }}>Actual PR</span>
+          <span style={{ color: colors.textSecondary || colors.darkGray }}>Actual PR</span>
         </div>
         <div className="flex items-center gap-2">
           <div
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: colors.lightGreen }}
           />
-          <span style={{ color: colors.darkGreen }}>Projected</span>
+          <span style={{ color: colors.textSecondary || colors.darkGray }}>Projected</span>
         </div>
       </div>
     </div>

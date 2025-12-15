@@ -22,17 +22,17 @@ const PRTrainingPacesResults = ({ trainingPaces, colors, goalDistance, prs }) =>
               <h4 className="font-semibold mb-2" style={{ color: colors.black }}>
                 PR Consistency Check
               </h4>
-              <p className="text-sm mb-3" style={{ color: colors.darkGreen }}>
+              <p className="text-sm mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
                 Some of your PRs are inconsistent with others. This may indicate:
               </p>
-              <ul className="text-sm space-y-1 mb-3" style={{ color: colors.darkGreen }}>
+              <ul className="text-sm space-y-1 mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
                 {consistencyIssues.map((issue, idx) => (
                   <li key={idx}>
-                    • <strong>{issue.distance}</strong> is {issue.type} than expected based on your other PRs
+                    • <strong style={{ color: colors.text || colors.black }}>{issue.distance}</strong> is {issue.type} than expected based on your other PRs
                   </li>
                 ))}
               </ul>
-              <p className="text-xs" style={{ color: colors.darkGreen }}>
+              <p className="text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
                 Training paces use your actual PRs. If a PR seems off, consider retesting that distance.
               </p>
             </div>
@@ -45,7 +45,7 @@ const PRTrainingPacesResults = ({ trainingPaces, colors, goalDistance, prs }) =>
         <h3 className="text-xl font-bold mb-4" style={{ color: colors.black }}>
           Your Training Paces
         </h3>
-        <p className="text-sm mb-6" style={{ color: colors.darkGreen }}>
+        <p className="text-sm mb-6" style={{ color: colors.textSecondary || colors.darkGray }}>
           Based on your actual PRs. These are proven paces you can run—use them directly in training.
         </p>
         
@@ -71,12 +71,12 @@ const PRTrainingPacesResults = ({ trainingPaces, colors, goalDistance, prs }) =>
           <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
             The PR-Based Approach
           </h4>
-          <p className="text-sm mb-4 leading-relaxed" style={{ color: colors.darkGreen }}>
+          <p className="text-sm mb-4 leading-relaxed" style={{ color: colors.textSecondary || colors.darkGray }}>
             Unlike formula-based systems, these paces come directly from your actual race performances. 
             If you can run a {trainingPaces.sources.marathon || 'marathon'} at a certain pace, that pace 
             is your proven aerobic capacity. Use it. No calculations needed.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm" style={{ color: colors.darkGreen }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
             <div>
               <p className="font-semibold mb-1" style={{ color: colors.black }}>✓ Accurate</p>
               <p>Uses your actual performance, not theoretical calculations</p>

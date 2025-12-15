@@ -87,7 +87,7 @@ const PRPaceCard = ({ zone, pace, sourceDistance, isProjected, description, colo
           {config.name}
         </h4>
         
-        <p className="text-xs mb-3" style={{ color: colors.darkGreen }}>
+        <p className="text-xs mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
           {description || config.desc}
         </p>
         
@@ -105,9 +105,9 @@ const PRPaceCard = ({ zone, pace, sourceDistance, isProjected, description, colo
         
         {sourceDistance && (
           <div className="mt-3 pt-3 border-t" style={{ borderColor: colors.border }}>
-            <p className="text-xs" style={{ color: colors.darkGreen }}>
+            <p className="text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
               {isProjected ? 'Based on your ' : 'Your '}
-              <span className="font-semibold">{sourceDistance}</span>
+              <span className="font-semibold" style={{ color: colors.text || colors.black }}>{sourceDistance}</span>
               {isProjected ? ' PR (projected)' : ' PR pace'}
             </p>
           </div>
