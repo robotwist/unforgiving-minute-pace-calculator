@@ -16,7 +16,7 @@
   SKIP_PYTHON_INSTALL = "true"
   NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20251211_pr_calculator"
+  NETLIFY_CACHE_ID = "v20251211_pr_calculator_v2"
 
 # Site configuration
 [context.production]
