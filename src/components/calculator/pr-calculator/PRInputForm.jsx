@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Clock, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 import { DEFAULT_DISTANCES, ADVANCED_DISTANCES } from '../../../data/raceDistances';
 import { parseTimeToSeconds } from '../../../utils/riegel';
+import TimeInput from './TimeInput';
 
 const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, errors, setErrors }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -48,31 +49,21 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
     const error = errors && errors[distance];
     
     return (
-      <div key={distance} className="space-y-1">
+      <div key={distance} className="space-y-2">
         <label className="um-label text-sm font-medium" style={{ color: colors.black }}>
           {distance}
         </label>
         <div className="relative">
-          <input
-            type="text"
+          <TimeInput
             value={value}
-            onChange={(e) => handlePRChange(distance, e.target.value)}
-            onBlur={(e) => handleBlur(distance, e.target.value)}
-            placeholder="MM:SS or HH:MM:SS"
-            className={`w-full px-3 py-2 border-2 font-mono text-center transition-colors ${
-              error ? 'border-red-500' : ''
-            }`}
-            style={{
-              borderColor: error ? '#ef4444' : colors.border,
-              color: colors.black,
-              backgroundColor: error ? '#fef2f2' : colors.white,
-            }}
-            aria-label={`${distance} PR time`}
-            aria-invalid={error ? 'true' : 'false'}
-            aria-describedby={error ? `${distance}-error` : undefined}
+            onChange={(formattedTime) => handlePRChange(distance, formattedTime)}
+            onBlur={(formattedTime) => handleBlur(distance, formattedTime)}
+            distance={distance}
+            colors={colors}
+            error={error}
           />
           {error && (
-            <div id={`${distance}-error`} className="text-xs mt-1 text-red-600 flex items-center gap-1">
+            <div id={`${distance}-error`} className="text-xs mt-2 text-red-600 flex items-center gap-1">
               <AlertCircle className="w-3 h-3" />
               {error}
             </div>
@@ -156,9 +147,8 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
         <div className="flex items-start gap-2">
           <Clock className="w-4 h-4 mt-0.5" style={{ color: colors.lightBlue }} />
           <div className="text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
-            <p className="font-medium mb-1">Time Format:</p>
-            <p>Use MM:SS for times under an hour (e.g., 22:30 for 22 minutes 30 seconds)</p>
-            <p>Use HH:MM:SS for times over an hour (e.g., 1:28:00 for 1 hour 28 minutes)</p>
+            <p className="font-medium mb-1">Time Entry:</p>
+            <p>Enter your race time using the separate hour, minute, and second fields. Hours field will appear automatically for longer distances.</p>
             <p className="mt-2">You only need one PR to get started. Additional PRs improve accuracy.</p>
           </div>
         </div>
