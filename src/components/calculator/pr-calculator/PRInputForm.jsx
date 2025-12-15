@@ -31,7 +31,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
       if (setErrors) {
         setErrors(prev => ({
           ...prev,
-          [distance]: 'Invalid time format. Use MM:SS or HH:MM:SS'
+          [distance]: 'Please enter a valid time'
         }));
       }
       return false;
