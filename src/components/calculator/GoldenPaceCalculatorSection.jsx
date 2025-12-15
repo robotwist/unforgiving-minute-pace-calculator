@@ -169,6 +169,17 @@ export default function GoldenPaceCalculatorSection({
             Meet the coach
           </Link>
         </div>
+        
+        <div className="mt-4 text-center">
+          <Link
+            to="/calculator/pr"
+            className="text-sm font-medium underline"
+            style={{ color: colors.lightBlue }}
+            aria-label="Try PR-based training calculator"
+          >
+            Or try the PR-Based Training Calculator →
+          </Link>
+        </div>
       </div>
 
       {/* Calculator Card - Munich 1972 Geometric Style */}

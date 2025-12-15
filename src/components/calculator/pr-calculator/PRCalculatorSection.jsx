@@ -1,0 +1,189 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Trophy, Calculator } from 'lucide-react';
+import PRInputForm from './PRInputForm';
+import PRProfileGraph from './PRProfileGraph';
+import PRTrainingPacesResults from './PRTrainingPacesResults';
+import { calculatePRTrainingPaces } from '../../../utils/prCalculator';
+import { DEFAULT_DISTANCES } from '../../../data/raceDistances';
+
+const PRCalculatorSection = ({ colors, savedProfileData }) => {
+  const [prs, setPRs] = useState(() => {
+    // Load from saved profile if available
+    if (savedProfileData && savedProfileData.prs) {
+      return savedProfileData.prs;
+    }
+    // Initialize with empty values for default distances
+    const initial = {};
+    DEFAULT_DISTANCES.forEach(dist => {
+      initial[dist] = '';
+    });
+    return initial;
+  });
+  
+  const [goalDistance, setGoalDistance] = useState('5K');
+  const [errors, setErrors] = useState({});
+  const [trainingPaces, setTrainingPaces] = useState(null);
+  
+  const handleCalculate = () => {
+    // Validate that at least one PR is entered
+    const hasAnyPR = Object.values(prs).some(time => time && time.trim());
+    
+    if (!hasAnyPR) {
+      setErrors({ general: 'Please enter at least one PR to calculate training paces' });
+      return;
+    }
+    
+    // Clear general error
+    if (errors.general) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors.general;
+        return newErrors;
+      });
+    }
+    
+    // Calculate training paces
+    const result = calculatePRTrainingPaces(prs, goalDistance);
+    setTrainingPaces(result);
+  };
+  
+  return (
+    <div className="space-y-6 sm:space-y-8">
+      {/* Hero Section */}
+      <div className="text-center space-y-4 sm:space-y-6">
+        {/* Icon/Trophy visual */}
+        <div className="inline-block">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto relative">
+            <div
+              className="absolute inset-0 rounded-full border-4 flex items-center justify-center"
+              style={{
+                borderColor: colors.lightBlue,
+                backgroundColor: `${colors.lightBlue}10`
+              }}
+            >
+              <Trophy className="w-16 h-16 sm:w-20 sm:h-20" style={{ color: colors.lightBlue }} />
+            </div>
+          </div>
+        </div>
+
+        <h2 className="munich-3xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
+          PR-Based Training Calculator
+        </h2>
+
+        <p className="text-lg sm:text-xl max-w-3xl mx-auto px-4 leading-relaxed" style={{ color: colors.black }}>
+          Use your actual race performances to set training paces. No formulas. No guessing. 
+          Just your proven PRs mapped directly to training zones.
+        </p>
+
+        {/* Value proposition badges */}
+        <div className="flex flex-wrap justify-center gap-3 mt-6 px-4">
+          <div
+            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            style={{
+              borderColor: colors.lightBlue,
+              backgroundColor: colors.lightBlue + '10',
+              color: colors.black,
+            }}
+          >
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightBlue }} />
+            <span className="text-sm font-medium">Proven Paces</span>
+          </div>
+          <div
+            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            style={{
+              borderColor: colors.lightGreen,
+              backgroundColor: colors.lightGreen + '10',
+              color: colors.black,
+            }}
+          >
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }} />
+            <span className="text-sm font-medium">Multi-Distance</span>
+          </div>
+          <div
+            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            style={{
+              borderColor: colors.orange,
+              backgroundColor: colors.orange + '10',
+              color: colors.black,
+            }}
+          >
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.orange }} />
+            <span className="text-sm font-medium">Simplified</span>
+          </div>
+        </div>
+
+        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-4">
+          <Link
+            to="/apply"
+            className="munich-btn munich-btn-primary um-cta"
+            style={{ textAlign: 'center' }}
+            aria-label="Apply for personalized coaching"
+          >
+            Apply for personalized coaching
+          </Link>
+          <Link
+            to="/coach"
+            className="munich-btn munich-btn-outline"
+            style={{ textAlign: 'center' }}
+            aria-label="Meet the coach"
+          >
+            Meet the coach
+          </Link>
+        </div>
+      </div>
+
+      {/* Calculator Card */}
+      <div className="max-w-4xl mx-auto">
+        <div className="munich-card p-4 sm:p-8 space-y-6 relative z-10">
+          <h3 className="text-lg sm:text-xl font-bold flex items-center" style={{ color: colors.black }}>
+            <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: colors.lightBlue }} />
+            Enter Your Personal Records
+          </h3>
+
+          <PRInputForm
+            prs={prs}
+            setPRs={setPRs}
+            goalDistance={goalDistance}
+            setGoalDistance={setGoalDistance}
+            colors={colors}
+            errors={errors}
+            setErrors={setErrors}
+          />
+          
+          {errors.general && (
+            <div className="p-3 rounded border-2" style={{ borderColor: '#ef4444', backgroundColor: '#fef2f2' }}>
+              <p className="text-sm text-red-600">{errors.general}</p>
+            </div>
+          )}
+
+          <button
+            onClick={handleCalculate}
+            className="w-full munich-btn munich-btn-primary py-4 text-lg font-bold"
+            aria-label="Calculate training paces from PRs"
+          >
+            Calculate Training Paces
+          </button>
+        </div>
+      </div>
+
+      {/* Results Section */}
+      {trainingPaces && (
+        <div className="max-w-6xl mx-auto space-y-8">
+          {/* PR Profile Graph */}
+          <PRProfileGraph prs={prs} colors={colors} />
+          
+          {/* Training Paces Results */}
+          <PRTrainingPacesResults
+            trainingPaces={trainingPaces}
+            colors={colors}
+            goalDistance={goalDistance}
+            prs={prs}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PRCalculatorSection;
