@@ -90,7 +90,7 @@ export default function GoldenPaceCalculatorSection({
         </div>
 
         <h2 className="munich-3xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
-          GoldenPace Calculator
+          Optimal Progress Pace Calculator
         </h2>
 
         {/* Show helpful message if race data is pre-populated from profile */}
@@ -186,7 +186,7 @@ export default function GoldenPaceCalculatorSection({
           <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 relative z-10">
             <h3 className="text-lg sm:text-xl font-bold flex items-center" style={{ color: colors.black }}>
               <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: colors.lightBlue }} />
-              GoldenPace Calculator
+              Optimal Progress Pace Calculator
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -271,7 +271,7 @@ export default function GoldenPaceCalculatorSection({
                 border: `2px solid ${colors.darkGreen}`,
               }}
             >
-              Calculate GoldenPace
+              Calculate Optimal Progress Pace
               {/* Geometric accent on button */}
               <div
                 className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond"

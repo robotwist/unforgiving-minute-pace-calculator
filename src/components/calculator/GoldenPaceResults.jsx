@@ -72,19 +72,18 @@ const GoldenPaceResults = ({
             {goldenPace}
           </div>
           <div className="munich-xl font-medium mb-2" style={{ color: colors.black }}>
-            GoldenPace
+            Optimal Progress Pace
           </div>
           <div className="mt-4 p-4 rounded-lg" style={{
             backgroundColor: `${colors.lightBlue}10`,
             border: `1px solid ${colors.lightBlue}30`
           }}>
             <p className="text-sm sm:text-base font-medium mb-2" style={{ color: colors.black }}>
-              What is GoldenPace?
+              What is Optimal Progress Pace?
             </p>
             <p className="text-xs sm:text-sm" style={{ color: colors.darkGreen }}>
-              Your scientifically-calculated training intensity metric. Unlike traditional VDOT systems,
-              GoldenPace uses advanced algorithms to determine your optimal training paces for endurance development.
-              It's the foundation of your personalized training plan.
+              The pace that gives you maximum improvement when run at the right times in your training. 
+              This is the target pace that drives progress—use it in specific workouts to accelerate your fitness gains.
             </p>
           </div>
           <div
@@ -167,7 +166,7 @@ const GoldenPaceResults = ({
         <div className="munich-card" style={{ borderColor: colors.lightBlue }}>
           <div className="munich-card-body">
           <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>Get Your Free 7‑Day Personalized Training Week</h3>
-          <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>Enter your email to receive a downloadable 7‑day plan tailored to your GoldenPace.</p>
+          <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>Enter your email to receive a downloadable 7‑day plan tailored to your Optimal Progress Pace.</p>
           <form onSubmit={submitLead} className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <input
               type="text"
@@ -372,7 +371,7 @@ const GoldenPaceResults = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                  <span className="text-sm" style={{ color: colors.black }}>Save your GoldenPace & training paces</span>
+                  <span className="text-sm" style={{ color: colors.black }}>Save your Optimal Progress Pace & training paces</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />

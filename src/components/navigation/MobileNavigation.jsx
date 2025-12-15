@@ -172,7 +172,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
 const ProgressTab = ({ colors, userProfile, trainingHistory, personalBests }) => {
   const stats = [
     {
-      label: 'Current GoldenPace',
+      label: 'Current Optimal Progress Pace',
       value: userProfile?.goldenPace || '--',
       change: '+2 vs last month',
       positive: true

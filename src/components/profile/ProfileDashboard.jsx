@@ -147,7 +147,7 @@ const ProfileDashboard = ({
               </div>
             </div>
             
-            {/* GoldenPace Progress Card */}
+            {/* Optimal Progress Pace Progress Card */}
             <div className="munich-card relative overflow-hidden">
               <div className="absolute inset-0 progressive-melange opacity-3"></div>
               <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
@@ -162,14 +162,14 @@ const ProfileDashboard = ({
                   fontSize: 'var(--text-lg)'
                 }}>
                   <Activity className="w-4 h-4 mr-2" />
-                  GoldenPace Progress
+                  Optimal Progress Pace Progress
                 </h4>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span style={{ 
                       color: colors.black,
                       fontSize: 'var(--text-sm)'
-                    }}>Current GoldenPace:</span>
+                    }}>Current Optimal Progress Pace:</span>
                     {displayProfile?.currentGoldenPace || goldenPace ? (
                       <span className="font-bold" style={{ 
                         color: colors.violet,
@@ -230,7 +230,7 @@ const ProfileDashboard = ({
             </div>
           </div>
 
-          {/* GoldenPace Progression Chart */}
+          {/* Optimal Progress Pace Progression Chart */}
           {displayProfile?.currentGoldenPace && displayProfile?.trainingStartDate && generateGoldenPaceProgression && (
             <div className="mt-8">
               <div className="munich-card relative overflow-hidden">
@@ -246,7 +246,7 @@ const ProfileDashboard = ({
                     fontSize: 'var(--text-xl)'
                   }}>
                     <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
-                    GoldenPace Progression Forecast
+                    Optimal Progress Pace Progression Forecast
                   </h4>
                   
                   <div className="mb-4 text-sm" style={{ color: colors.darkGreen }}>
@@ -313,7 +313,7 @@ const ProfileDashboard = ({
                       color: colors.darkGreen
                     }}>
                       <p>💡 <strong>Pro Tip:</strong> Consistency is key! Maintain your weekly mileage and training intensity for steady progression.</p>
-                      <p>📈 Your projected GoldenPace in 6 months: <strong>{displayProfile.projectedGoldenPace || 'N/A'}</strong></p>
+                      <p>📈 Your projected Optimal Progress Pace in 6 months: <strong>{displayProfile.projectedGoldenPace || 'N/A'}</strong></p>
                     </div>
                   </div>
                 </div>
@@ -426,7 +426,7 @@ const ProfileDashboard = ({
                             fontSize: 'var(--text-sm)',
                             fontWeight: '500'
                           }}>
-                            GoldenPace: {session.goldenPace}
+                            Optimal Progress Pace: {session.goldenPace}
                           </div>
                         )}
                         {session.notes && (

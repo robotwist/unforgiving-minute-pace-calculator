@@ -83,7 +83,7 @@ const TrainingPlansSection = ({
                     }}
                   ></div>
                   <p className="font-semibold mb-1" style={{ color: colors.black }}>
-                    Personalized for GoldenPace {plan.goldenPaceLevel}
+                    Personalized for Optimal Progress Pace {plan.goldenPaceLevel}
                   </p>
                   <div className="flex gap-4 text-sm">
                     <span style={{ color: colors.darkGreen }}>

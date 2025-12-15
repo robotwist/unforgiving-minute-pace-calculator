@@ -616,11 +616,11 @@ const RunningTrainingApp = () => {
       // Add this calculation to training history
       if (currentGoldenPace && raceTime && raceDistance) {
         addTrainingSession({
-          type: 'GoldenPace Calculation',
+          type: 'Optimal Progress Pace Calculation',
           distance: raceDistance,
           time: raceTime,
           goldenPace: currentGoldenPace,
-          notes: `Initial GoldenPace calculation: ${currentGoldenPace}. Projected in 6 weeks: ${projectedGoldenPace || 'N/A'}`
+          notes: `Initial Optimal Progress Pace calculation: ${currentGoldenPace}. Projected in 6 weeks: ${projectedGoldenPace || 'N/A'}`
         });
         
         // Update personal best if this is better
@@ -804,7 +804,7 @@ const RunningTrainingApp = () => {
       const calculatedGoldenPace = calculateGoldenPace(raceTime, raceDistance);
       
       if (!calculatedGoldenPace) {
-        setProfileError('Unable to calculate GoldenPace. Please check your inputs and try again.');
+        setProfileError('Unable to calculate Optimal Progress Pace. Please check your inputs and try again.');
         return;
       }
       
@@ -1107,7 +1107,7 @@ const RunningTrainingApp = () => {
               /* Desktop Navigation - Munich 1972 Style */
               <nav className="flex flex-wrap justify-center sm:justify-end space-x-1">
                 {[
-                  { id: 'calculator', label: 'GoldenPace Calculator', icon: Calculator },
+                  { id: 'calculator', label: 'Optimal Progress Pace', icon: Calculator },
                   { id: 'plans', label: 'Training Plans', icon: Target },
                   { id: 'blog', label: 'Articles', icon: BookOpen },
                   { id: 'premium', label: 'Premium Plans', icon: Star },
@@ -1304,10 +1304,10 @@ const RunningTrainingApp = () => {
                       {goldenPace}
                     </div>
                     <div className="text-base sm:text-lg font-medium" style={{ color: colors.black }}>
-                      GoldenPace
+                      Optimal Progress Pace
                     </div>
                     <p className="text-xs sm:text-sm mt-2" style={{ color: colors.lightBlue }}>
-                      Your training fitness level
+                      The pace that drives maximum improvement when run at the right times
                     </p>
                   </div>
                 </div>
@@ -1507,7 +1507,7 @@ const RunningTrainingApp = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                           <div className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                            <span className="text-sm" style={{ color: colors.black }}>Save your GoldenPace & training paces</span>
+                            <span className="text-sm" style={{ color: colors.black }}>Save your Optimal Progress Pace & training paces</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
@@ -1561,7 +1561,7 @@ const RunningTrainingApp = () => {
               </h2>
               {goldenPace && userProfile.goal && (
                 <p style={{ color: colors.darkGreen }}>
-                  Based on your Golden Pace of {goldenPace} and {userProfile.goal === '5k-pr' ? '5K goal' : 
+                  Based on your Optimal Progress Pace of {goldenPace} and {userProfile.goal === '5k-pr' ? '5K goal' : 
                   userProfile.goal === 'marathon' ? 'marathon goal' : 'fitness goal'}
                 </p>
               )}
@@ -1674,7 +1674,7 @@ const RunningTrainingApp = () => {
                       {selectedPlan.goldenPaceLevel && selectedPlan.trainingPaces && (
                         <div>
                           <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
-                            Training Paces (GoldenPace {selectedPlan.goldenPaceLevel})
+                            Training Paces (Optimal Progress Pace {selectedPlan.goldenPaceLevel})
                           </h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="munich-card">
@@ -1735,7 +1735,7 @@ const RunningTrainingApp = () => {
                         onClick={() => {
                           let planContent = `Training Plan: ${selectedPlan.name}\n\nDuration: ${selectedPlan.duration} weeks\nFocus: ${selectedPlan.phase}\nWeekly Mileage: ${selectedPlan.weeklyMileage} miles\n\nDescription: ${selectedPlan.description}\n`;
                           if (selectedPlan.goldenPaceLevel && selectedPlan.trainingPaces) {
-                            planContent += `\nTRAINING PACES (GoldenPace ${selectedPlan.goldenPaceLevel}):\n`;
+                            planContent += `\nTRAINING PACES (Optimal Progress Pace ${selectedPlan.goldenPaceLevel}):\n`;
                             planContent += `Easy/Long Run: ${selectedPlan.trainingPaces.easy} per mile\n`;
                             planContent += `Threshold: ${selectedPlan.trainingPaces.threshold} per mile\n`;
                             planContent += `Interval (400m): ${selectedPlan.trainingPaces.interval}\n`;
@@ -1813,7 +1813,7 @@ const RunningTrainingApp = () => {
               <div className="munich-card">
                 <div className="munich-card-body text-center">
                   <h3 className="font-bold mb-2" style={{ color: colors.black }}>
-                    Update Golden Pace
+                    Update Optimal Progress Pace
                   </h3>
                   <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
                     Recalculate based on recent race
@@ -2163,14 +2163,14 @@ const RunningTrainingApp = () => {
                             fontSize: 'var(--text-lg)'
                           }}>
                             <Activity className="w-4 h-4 mr-2" />
-                            GoldenPace Progress
+                            Optimal Progress Pace Progress
                           </h4>
                           <div className="space-y-3">
                             <div className="flex justify-between items-center">
                               <span style={{ 
                                 color: colors.black,
                                 fontSize: 'var(--text-sm)'
-                              }}>Current GoldenPace:</span>
+                              }}>Current Optimal Progress Pace:</span>
                               {savedProfileData?.currentGoldenPace || goldenPace ? (
                                 <span className="font-bold" style={{ 
                                   color: colors.violet,
@@ -2231,7 +2231,7 @@ const RunningTrainingApp = () => {
                       </div>
                     </div>
 
-                    {/* GoldenPace Progression Chart */}
+                    {/* Optimal Progress Pace Progression Chart */}
                     {savedProfileData?.currentGoldenPace && savedProfileData?.trainingStartDate && (
                       <div className="mt-8">
                         <div className="munich-card relative overflow-hidden">
@@ -2247,7 +2247,7 @@ const RunningTrainingApp = () => {
                               fontSize: 'var(--text-xl)'
                             }}>
                               <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
-                              GoldenPace Progression Forecast
+                              Optimal Progress Pace Progression Forecast
                             </h4>
                             
                             <div className="mb-4 text-sm" style={{ color: colors.darkGreen }}>
@@ -2314,7 +2314,7 @@ const RunningTrainingApp = () => {
                                 color: colors.darkGreen
                               }}>
                                 <p>💡 <strong>Pro Tip:</strong> Consistency is key! Maintain your weekly mileage and training intensity for steady progression.</p>
-                                <p>📈 Your projected GoldenPace in 6 months: <strong>{savedProfileData.projectedGoldenPace || 'N/A'}</strong></p>
+                                <p>📈 Your projected Optimal Progress Pace in 6 months: <strong>{savedProfileData.projectedGoldenPace || 'N/A'}</strong></p>
                               </div>
                             </div>
                           </div>
@@ -2899,7 +2899,7 @@ const RunningTrainingApp = () => {
                     className="transition-colors duration-200 hover:text-blue-600"
                     style={{ color: colors.darkGreen }}
                   >
-                    GoldenPace Calculator
+                    Optimal Progress Pace Calculator
                   </button>
                 </li>
                 <li>
@@ -2948,7 +2948,7 @@ const RunningTrainingApp = () => {
                 onClick={() => setActiveTab('calculator')}
                 className="munich-btn munich-btn-primary"
               >
-                Calculate Your GoldenPace
+                Calculate Your Optimal Progress Pace
               </button>
             </div>
           </div>

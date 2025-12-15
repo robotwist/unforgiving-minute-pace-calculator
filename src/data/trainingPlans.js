@@ -700,8 +700,8 @@ export const generatePersonalizedPlan = (basePlan, goldenPaceLevel) => {
   
   return {
     ...basePlan,
-    name: `${basePlan.name} (GoldenPace ${goldenPaceLevel})`,
-    description: `${basePlan.description} Personalized for GoldenPace ${goldenPaceLevel} with specific training paces.`,
+    name: `${basePlan.name} (Optimal Progress Pace ${goldenPaceLevel})`,
+    description: `${basePlan.description} Personalized for Optimal Progress Pace ${goldenPaceLevel} with specific training paces.`,
     goldenPaceLevel: goldenPaceLevel,
     trainingPaces: paces,
     workouts: basePlan.workouts.map(workout => ({

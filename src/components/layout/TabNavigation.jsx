@@ -3,7 +3,7 @@ import { Calculator, Target, BookOpen, Star, User } from 'lucide-react';
 
 const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, darkMode, setDarkMode }) => {
   const tabs = [
-    { id: 'calculator', label: 'GoldenPace Calculator', icon: Calculator },
+    { id: 'calculator', label: 'Optimal Progress Pace', icon: Calculator },
     { id: 'plans', label: 'Training Plans', icon: Target },
     { id: 'blog', label: 'Articles', icon: BookOpen },
     { id: 'premium', label: 'Premium Plans', icon: Star },

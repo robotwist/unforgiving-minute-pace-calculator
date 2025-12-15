@@ -55,7 +55,7 @@ const ResultsDisplay = ({
         <div className="relative z-10 p-4 sm:p-6">
           <div className="flex items-center justify-center mb-3">
             <Trophy className="w-5 h-5 sm:w-6 sm:h-6 mr-2" style={{ color: colors.orange }} />
-            <span className="text-sm sm:text-base font-medium" style={{ color: colors.black }}>Your GoldenPace</span>
+            <span className="text-sm sm:text-base font-medium" style={{ color: colors.black }}>Your Optimal Progress Pace</span>
           </div>
           <div className="text-4xl sm:text-6xl font-bold mb-2" style={{ color: colors.lightBlue }}>
             {goldenPace}
