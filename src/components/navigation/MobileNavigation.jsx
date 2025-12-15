@@ -40,12 +40,15 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
   return (
     <>
       {/* Mobile Bottom Navigation - Fixed Position */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden">
+      {/* Safe area padding for devices with home indicator (iPhone X+) */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-safe">
         <div 
-          className="flex items-center justify-around py-2 border-t-2 backdrop-blur-sm"
+          className="flex items-center justify-around border-t-2 backdrop-blur-sm"
           style={{ 
             backgroundColor: colors.white + 'f0', // Semi-transparent
-            borderTopColor: colors.lightBlue + '40'
+            borderTopColor: colors.lightBlue + '40',
+            paddingTop: '4px',
+            paddingBottom: 'max(4px, env(safe-area-inset-bottom))' // Safe area for notch devices
           }}
         >
           {tabs.map((tab) => {
@@ -56,39 +59,49 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
               <button
                 key={tab.id}
                 onClick={() => onTabChange(tab.id)}
-                className="flex flex-col items-center justify-center py-1 px-2 min-w-0 flex-1 relative transition-all duration-200"
+                className="flex flex-col items-center justify-center min-w-0 flex-1 relative transition-all duration-200 touch-manipulation"
+                style={{
+                  minHeight: '60px', // Touch-friendly: 60px total height (44px minimum + padding)
+                  padding: '8px 4px'
+                }}
                 aria-label={`Switch to ${tab.label}`}
+                aria-current={isActive ? 'page' : undefined}
               >
                 {/* Badge for new features */}
                 {tab.badge && (
                   <div 
-                    className="absolute -top-1 -right-1 w-3 h-3 rounded-full"
+                    className="absolute -top-1 right-2 w-3 h-3 rounded-full z-10"
                     style={{ backgroundColor: colors.orange }}
+                    aria-label="New features available"
                   />
                 )}
                 
-                {/* Icon with active state */}
+                {/* Icon with active state - larger for better touch targets */}
                 <div 
-                  className="p-1 rounded-lg transition-all duration-200"
+                  className="rounded-lg transition-all duration-200 flex items-center justify-center"
                   style={{
                     backgroundColor: isActive ? colors.lightBlue + '20' : 'transparent',
-                    transform: isActive ? 'scale(1.1)' : 'scale(1)'
+                    transform: isActive ? 'scale(1.15)' : 'scale(1)',
+                    padding: '6px',
+                    minWidth: '44px', // Touch-friendly icon area
+                    minHeight: '44px'
                   }}
                 >
                   <IconComponent 
-                    className="w-5 h-5" 
+                    className="w-6 h-6" // Larger icon (24px instead of 20px) for better visibility
                     style={{ 
                       color: isActive ? colors.lightBlue : colors.darkGreen 
                     }} 
                   />
                 </div>
                 
-                {/* Label */}
+                {/* Label - improved readability */}
                 <span 
                   className="text-xs font-medium mt-1 truncate w-full text-center transition-colors duration-200"
                   style={{ 
                     color: isActive ? colors.lightBlue : colors.darkGreen,
-                    fontSize: '10px'
+                    fontSize: '11px', // Slightly larger for readability
+                    lineHeight: '1.2'
                   }}
                 >
                   {tab.shortLabel}

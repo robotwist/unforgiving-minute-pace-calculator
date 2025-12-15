@@ -1576,6 +1576,17 @@ a:focus-visible {
   animation: slide-in 0.3s ease-out;
 }
 
+/* Mobile safe area support for devices with notches */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Touch manipulation optimization */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Pulse animation for skeleton loaders */
 @keyframes pulse {
   0%, 100% {

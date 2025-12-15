@@ -939,7 +939,7 @@ const RunningTrainingApp = () => {
 
   return (
     <div
-      className="min-h-screen relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden pb-20 md:pb-0"
       style={{
         backgroundColor: colors.white,
         backgroundImage: `
