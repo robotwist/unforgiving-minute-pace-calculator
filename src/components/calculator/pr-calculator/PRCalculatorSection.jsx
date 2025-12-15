@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy, Calculator } from 'lucide-react';
+import { useToast } from '../../../context/ToastContext';
 import PRInputForm from './PRInputForm';
 import PRProfileGraph from './PRProfileGraph';
 import PRTrainingPacesResults from './PRTrainingPacesResults';
+import SkeletonLoader from '../../common/SkeletonLoader';
+import { HelpIcon } from '../../common/Tooltip';
 import { calculatePRTrainingPaces } from '../../../utils/prCalculator';
 import { DEFAULT_DISTANCES } from '../../../data/raceDistances';
 
 const PRCalculatorSection = ({ colors, savedProfileData }) => {
+  const { showToast } = useToast();
+  const [calculating, setCalculating] = useState(false);
+  
   const [prs, setPRs] = useState(() => {
     // Load from saved profile if available
     if (savedProfileData && savedProfileData.prs) {
@@ -30,7 +36,9 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
     const hasAnyPR = Object.values(prs).some(time => time && time.trim());
     
     if (!hasAnyPR) {
-      setErrors({ general: 'Please enter at least one PR to calculate training paces' });
+      const errorMsg = 'Please enter at least one PR to calculate training paces';
+      setErrors({ general: errorMsg });
+      showToast(errorMsg, 'warning');
       return;
     }
     
@@ -43,9 +51,16 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
       });
     }
     
-    // Calculate training paces
-    const result = calculatePRTrainingPaces(prs, goalDistance);
-    setTrainingPaces(result);
+    // Show loading state
+    setCalculating(true);
+    
+    // Simulate async calculation (for skeleton loader demo, though it's instant)
+    setTimeout(() => {
+      const result = calculatePRTrainingPaces(prs, goalDistance);
+      setTrainingPaces(result);
+      setCalculating(false);
+      showToast('Training paces calculated successfully!', 'success');
+    }, 300);
   };
   
   return (
@@ -136,9 +151,13 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
       {/* Calculator Card */}
       <div className="max-w-4xl mx-auto">
         <div className="munich-card p-4 sm:p-8 space-y-6 relative z-10">
-          <h3 className="text-lg sm:text-xl font-bold flex items-center" style={{ color: colors.black }}>
-            <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: colors.lightBlue }} />
-            Enter Your Personal Records
+          <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2" style={{ color: colors.black }}>
+            <Calculator className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: colors.lightBlue }} />
+            <span>Enter Your Personal Records</span>
+            <HelpIcon 
+              content="Enter your actual race times. The calculator uses these proven paces directly for training zones—no formulas needed."
+              colors={colors}
+            />
           </h3>
 
           <PRInputForm
@@ -168,7 +187,12 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
       </div>
 
       {/* Results Section */}
-      {trainingPaces && (
+      {calculating ? (
+        <div className="max-w-6xl mx-auto space-y-8">
+          <SkeletonLoader type="calculator" />
+          <SkeletonLoader type="card" />
+        </div>
+      ) : trainingPaces ? (
         <div className="max-w-6xl mx-auto space-y-8">
           {/* PR Profile Graph */}
           <PRProfileGraph prs={prs} colors={colors} />
@@ -181,7 +205,7 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
             prs={prs}
           />
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

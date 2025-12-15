@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calculator, Target, Clock, TrendingUp, User, BookOpen, Star, Calendar, Activity, Trophy, CheckCircle } from 'lucide-react';
 import { Elements } from '@stripe/react-stripe-js';
 import stripePromise from '../config/stripe';
+import { useToast } from '../context/ToastContext';
 import StripePaymentForm from './StripePaymentForm';
 import BlogTabSection from './blog/BlogTabSection';
 import PremiumPlansSection from './premium/PremiumPlansSection';
@@ -28,6 +29,7 @@ import {
 } from '../utils/analytics';
 
 const RunningTrainingApp = () => {
+  const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState('calculator');
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -829,6 +831,7 @@ const RunningTrainingApp = () => {
       }
       
       // Success feedback
+      showToast(`Optimal Progress Pace calculated: ${calculatedGoldenPace}`, 'success');
       console.log(`GoldenPace calculated successfully: ${calculatedGoldenPace} for ${raceDistance} in ${raceTime}`);
       
     } catch (error) {

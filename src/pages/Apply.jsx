@@ -1,7 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipboardList, ShieldCheck, Sparkles } from 'lucide-react';
 import colors, { getAdaptiveColors } from '../data/colors';
+import { useToast } from '../context/ToastContext';
+import { useFormValidation } from '../hooks/useFormValidation';
+import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
+import FormField from '../components/common/FormField';
 
 const initialForm = {
   name: '',
@@ -20,16 +24,80 @@ const initialForm = {
 
 export default function Apply() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const isDark = localStorage.getItem('dark_mode_enabled') === 'true';
   const uiColors = useMemo(() => getAdaptiveColors(isDark), [isDark]);
 
-  const [form, setForm] = useState(initialForm);
+  // Form validation with real-time feedback
+  const {
+    values: form,
+    errors,
+    isValid,
+    handleChange,
+    handleBlur,
+    setFieldValue
+  } = useFormValidation(initialForm, {
+    name: { required: true, message: 'Name is required' },
+    email: {
+      required: true,
+      validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      message: 'Please enter a valid email address'
+    },
+    phone: {
+      validate: (v) => !v || /^[\d\s\-+()]+$/.test(v),
+      message: 'Please enter a valid phone number'
+    },
+    currentWeeklyMileage: {
+      validate: (v) => !v || (!isNaN(v) && Number(v) >= 0 && Number(v) <= 300),
+      message: 'Weekly mileage must be between 0 and 300'
+    }
+  });
+
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
+  // Load draft from localStorage on mount
+  useEffect(() => {
+    const draft = localStorage.getItem('coaching_application_draft');
+    if (draft) {
+      try {
+        const draftData = JSON.parse(draft);
+        Object.keys(draftData).forEach(key => {
+          if (draftData[key] !== undefined) {
+            setFieldValue(key, draftData[key]);
+          }
+        });
+      } catch (err) {
+        console.error('Error loading draft:', err);
+      }
+    }
+  }, [setFieldValue]);
+
+  // Auto-save draft every 10 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      localStorage.setItem('coaching_application_draft', JSON.stringify(form));
+    }, 10000);
+    return () => clearInterval(timer);
+  }, [form]);
+
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    'Meta+Enter': (e) => {
+      if (isValid && !submitting) {
+        submit(e);
+      }
+    },
+    'Ctrl+Enter': (e) => {
+      if (isValid && !submitting) {
+        submit(e);
+      }
+    }
+  }, [isValid, submitting]);
+
   const onChange = (key) => (e) => {
     const value = e?.target?.type === 'checkbox' ? e.target.checked : e.target.value;
-    setForm((prev) => ({ ...prev, [key]: value }));
+    handleChange(key, value);
   };
 
   const submit = async (e) => {
@@ -67,9 +135,14 @@ export default function Apply() {
         throw new Error(msg);
       }
 
+      // Clear draft on successful submission
+      localStorage.removeItem('coaching_application_draft');
+      showToast('Application submitted successfully!', 'success');
       navigate('/apply/thanks');
     } catch (err) {
-      setError(err?.message || 'Unable to submit. Please try again.');
+      const errorMsg = err?.message || 'Unable to submit. Please try again.';
+      setError(errorMsg);
+      showToast(errorMsg, 'error');
     } finally {
       setSubmitting(false);
     }
@@ -116,24 +189,80 @@ export default function Apply() {
                   )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="um-label">Name *</label>
-                      <input className="um-field" value={form.name} onChange={onChange('name')} autoComplete="name" />
-                    </div>
-                    <div>
-                      <label className="um-label">Email *</label>
-                      <input className="um-field" value={form.email} onChange={onChange('email')} autoComplete="email" />
-                    </div>
+                    <FormField
+                      label="Name"
+                      required
+                      error={errors.name}
+                      success={form.name && !errors.name}
+                      colors={uiColors}
+                    >
+                      <input
+                        type="text"
+                        className="um-field"
+                        value={form.name || ''}
+                        onChange={onChange('name')}
+                        onBlur={() => handleBlur('name')}
+                        autoComplete="name"
+                        style={{
+                          borderColor: errors.name ? '#ef4444' : (form.name && !errors.name ? uiColors.lightGreen : uiColors.border)
+                        }}
+                      />
+                    </FormField>
+                    <FormField
+                      label="Email"
+                      required
+                      error={errors.email}
+                      success={form.email && !errors.email}
+                      colors={uiColors}
+                    >
+                      <input
+                        type="email"
+                        className="um-field"
+                        value={form.email || ''}
+                        onChange={onChange('email')}
+                        onBlur={() => handleBlur('email')}
+                        autoComplete="email"
+                        style={{
+                          borderColor: errors.email ? '#ef4444' : (form.email && !errors.email ? uiColors.lightGreen : uiColors.border)
+                        }}
+                      />
+                    </FormField>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="um-label">Phone (optional)</label>
-                      <input className="um-field" value={form.phone} onChange={onChange('phone')} autoComplete="tel" />
-                    </div>
-                    <div>
-                      <label className="um-label">Primary event</label>
-                      <select className="um-field" value={form.primaryEvent} onChange={onChange('primaryEvent')}>
+                    <FormField
+                      label="Phone"
+                      error={errors.phone}
+                      success={form.phone && !errors.phone}
+                      helpText="Optional"
+                      colors={uiColors}
+                    >
+                      <input
+                        type="tel"
+                        inputMode="tel"
+                        className="um-field"
+                        value={form.phone || ''}
+                        onChange={onChange('phone')}
+                        onBlur={() => handleBlur('phone')}
+                        autoComplete="tel"
+                        style={{
+                          borderColor: errors.phone ? '#ef4444' : (form.phone && !errors.phone ? uiColors.lightGreen : uiColors.border)
+                        }}
+                      />
+                    </FormField>
+                    <FormField
+                      label="Primary event"
+                      colors={uiColors}
+                    >
+                      <select 
+                        className="um-field" 
+                        value={form.primaryEvent || ''} 
+                        onChange={onChange('primaryEvent')}
+                        style={{
+                          minHeight: '44px', // Better touch target
+                          padding: '0.75rem'
+                        }}
+                      >
                         <option value="">Select…</option>
                         <option value="1500m">1500m</option>
                         <option value="Mile">Mile</option>
@@ -146,24 +275,47 @@ export default function Apply() {
                         <option value="Trail">Trail</option>
                         <option value="Other">Other</option>
                       </select>
-                    </div>
+                    </FormField>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="um-label">Current weekly mileage</label>
+                    <FormField
+                      label="Current weekly mileage"
+                      error={errors.currentWeeklyMileage}
+                      success={form.currentWeeklyMileage && !errors.currentWeeklyMileage}
+                      helpText="Miles per week (0-300)"
+                      colors={uiColors}
+                    >
                       <input
-                        className="um-field"
+                        type="number"
                         inputMode="numeric"
-                        value={form.currentWeeklyMileage}
+                        min="0"
+                        max="300"
+                        className="um-field"
+                        value={form.currentWeeklyMileage || ''}
                         onChange={onChange('currentWeeklyMileage')}
+                        onBlur={() => handleBlur('currentWeeklyMileage')}
                         placeholder="e.g., 35"
+                        style={{
+                          borderColor: errors.currentWeeklyMileage ? '#ef4444' : (form.currentWeeklyMileage && !errors.currentWeeklyMileage ? uiColors.lightGreen : uiColors.border)
+                        }}
                       />
-                    </div>
-                    <div>
-                      <label className="um-label">Time zone</label>
-                      <input className="um-field" value={form.timeZone} onChange={onChange('timeZone')} placeholder="e.g., America/Chicago" />
-                    </div>
+                    </FormField>
+                    <FormField
+                      label="Time zone"
+                      helpText="Auto-detected from your browser"
+                      colors={uiColors}
+                    >
+                      <input 
+                        className="um-field" 
+                        value={form.timeZone || ''} 
+                        onChange={onChange('timeZone')} 
+                        placeholder="e.g., America/Chicago"
+                        style={{
+                          minHeight: '44px', // Better touch target
+                        }}
+                      />
+                    </FormField>
                   </div>
 
                   <div>
@@ -182,14 +334,34 @@ export default function Apply() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="um-label">How did you find me?</label>
-                      <input className="um-field" value={form.referrer} onChange={onChange('referrer')} placeholder="Friend, Instagram, race, blog, etc." />
-                    </div>
-                    <div>
-                      <label className="um-label">Anything else I should know?</label>
-                      <input className="um-field" value={form.notes} onChange={onChange('notes')} placeholder="Injuries, constraints, context." />
-                    </div>
+                    <FormField
+                      label="How did you find me?"
+                      colors={uiColors}
+                    >
+                      <input 
+                        className="um-field" 
+                        value={form.referrer || ''} 
+                        onChange={onChange('referrer')} 
+                        placeholder="Friend, Instagram, race, blog, etc."
+                        style={{
+                          minHeight: '44px',
+                        }}
+                      />
+                    </FormField>
+                    <FormField
+                      label="Anything else I should know?"
+                      colors={uiColors}
+                    >
+                      <input 
+                        className="um-field" 
+                        value={form.notes || ''} 
+                        onChange={onChange('notes')} 
+                        placeholder="Injuries, constraints, context."
+                        style={{
+                          minHeight: '44px',
+                        }}
+                      />
+                    </FormField>
                   </div>
 
                   <label className="flex items-start gap-3">
@@ -200,7 +372,15 @@ export default function Apply() {
                   </label>
 
                   <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-                    <button type="submit" className="munich-btn munich-btn-primary um-cta" disabled={submitting}>
+                    <button
+                      type="submit"
+                      className="munich-btn munich-btn-primary um-cta"
+                      disabled={submitting || !isValid}
+                      style={{
+                        opacity: (submitting || !isValid) ? 0.6 : 1,
+                        cursor: (submitting || !isValid) ? 'not-allowed' : 'pointer'
+                      }}
+                    >
                       {submitting ? 'Submitting…' : 'Submit application'}
                     </button>
                     <Link to="/coach" className="munich-btn munich-btn-outline" style={{ textAlign: 'center' }}>

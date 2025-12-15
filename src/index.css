@@ -262,6 +262,8 @@ body::before {
   border-color: var(--munich-border);
   border-radius: 0.25rem;
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  min-height: 44px; /* Better touch target for mobile (iOS guideline) */
+  font-size: 16px; /* Prevents zoom on iOS */
 }
 
 .um-field:focus {
@@ -1556,6 +1558,36 @@ a:focus-visible {
   border-radius: 50%;
   border-top-color: transparent;
   animation: spin 1s linear infinite;
+}
+
+/* Toast animations */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Pulse animation for skeleton loaders */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes spin {

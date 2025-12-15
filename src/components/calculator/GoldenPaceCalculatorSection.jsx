@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calculator, Target } from 'lucide-react';
+import TimeInput from './pr-calculator/TimeInput';
+import { HelpIcon } from '../common/Tooltip';
 
 export default function GoldenPaceCalculatorSection({
   colors,
@@ -89,8 +91,12 @@ export default function GoldenPaceCalculatorSection({
           </div>
         </div>
 
-        <h2 className="munich-3xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
-          Optimal Progress Pace Calculator
+        <h2 className="munich-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-3" style={{ color: colors.black }}>
+          <span>Optimal Progress Pace Calculator</span>
+          <HelpIcon 
+            content="Optimal Progress Pace is the pace that gives you maximum improvement when run at the right times. Based on Jack Daniels' Running Formula."
+            colors={colors}
+          />
         </h2>
 
         {/* Show helpful message if race data is pre-populated from profile */}
@@ -205,36 +211,24 @@ export default function GoldenPaceCalculatorSection({
                 <label className="um-label" style={{ color: colors.black }}>
                   Race Time
                 </label>
-                <input
-                  type="text"
-                  placeholder="e.g., 22:30 or 1:22:30"
+                <TimeInput
                   value={raceTime}
-                  onChange={(e) => {
-                    setRaceTime(e.target.value);
+                  onChange={(formattedTime) => {
+                    setRaceTime(formattedTime);
                     if (profileError && profileError.includes('time')) {
                       setProfileError('');
                     }
                   }}
-                  onBlur={(e) => {
-                    const time = e.target.value.trim();
+                  onBlur={(formattedTime) => {
+                    const time = formattedTime.trim();
                     if (time && !parseTimeToSeconds(time)) {
-                      setProfileError('Please enter a valid time format (MM:SS or HH:MM:SS)');
+                      setProfileError('Please enter a valid time');
                     }
                   }}
-                  aria-label="Race time in minutes and seconds"
-                  aria-describedby="race-time-help"
-                  className={`w-full px-3 sm:px-4 py-3 border-2 font-mono text-base sm:text-lg text-center transition-colors ${
-                    profileError && profileError.includes('time') ? 'border-red-500 bg-red-50' : ''
-                  }`}
-                  style={{
-                    borderColor: profileError && profileError.includes('time') ? '#ef4444' : colors.border,
-                    color: colors.black,
-                    backgroundColor: profileError && profileError.includes('time') ? '#fef2f2' : colors.white,
-                  }}
+                  distance={raceDistance}
+                  colors={colors}
+                  error={profileError && profileError.includes('time') ? profileError : undefined}
                 />
-                <div id="race-time-help" className="text-xs mt-1" style={{ color: colors.darkGreen }}>
-                  Formats: 22:30 (MM:SS) or 1:22:30 (HH:MM:SS). You can also use periods: 22.30
-                </div>
               </div>
 
               <div>

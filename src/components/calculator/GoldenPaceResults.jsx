@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Clock, TrendingUp, Star, Target, User, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
 
 const GoldenPaceResults = ({
   colors,
@@ -10,6 +11,7 @@ const GoldenPaceResults = ({
   savedProfileData
 }) => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [leadName, setLeadName] = useState('');
   const [leadEmail, setLeadEmail] = useState('');
   const [leadError, setLeadError] = useState('');
@@ -32,9 +34,12 @@ const GoldenPaceResults = ({
       if (window.gtag) {
         window.gtag('event', 'lead_submit', { source: 'calculator_result' });
       }
+      showToast('Email submitted successfully!', 'success');
       navigate('/thanks');
     } catch (err) {
-      setLeadError('Could not submit. Please try again.');
+      const errorMsg = 'Could not submit. Please try again.';
+      setLeadError(errorMsg);
+      showToast(errorMsg, 'error');
     } finally {
       setLeadLoading(false);
     }

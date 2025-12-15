@@ -3,6 +3,7 @@ import { Clock, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 import { DEFAULT_DISTANCES, ADVANCED_DISTANCES } from '../../../data/raceDistances';
 import { parseTimeToSeconds } from '../../../utils/riegel';
 import TimeInput from './TimeInput';
+import { HelpIcon } from '../../common/Tooltip';
 
 const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, errors, setErrors }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -77,8 +78,12 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
     <div className="space-y-6">
       {/* Goal Distance Selector */}
       <div>
-        <label className="um-label font-semibold" style={{ color: colors.black }}>
-          Primary Goal Distance
+        <label className="um-label font-semibold flex items-center gap-2" style={{ color: colors.black }}>
+          <span>Primary Goal Distance</span>
+          <HelpIcon 
+            content="Training zones will be mapped based on this distance. For example, if training for a 5K, your aerobic pace will be your marathon PR pace."
+            colors={colors}
+          />
         </label>
         <select
           value={goalDistance}
