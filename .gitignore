@@ -138,3 +138,5 @@ celerybeat.pid
 dmypy.json
 venv/
 .venv/
+# Netlify CLI state files
+.netlify/
