@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import colors from '../../data/colors';
+import logger from '../../utils/logger';
 
 /**
  * ErrorBoundary Component
@@ -19,8 +20,18 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Error boundary caught an error:', error, errorInfo);
-    // Could send to error reporting service here
+    logger.error('Error boundary caught an error:', error, errorInfo);
+    
+    // Send to error tracking service if available
+    if (window.errorTracker) {
+      try {
+        window.errorTracker.captureException(error, {
+          contexts: { react: errorInfo }
+        });
+      } catch (e) {
+        // Fail silently if error tracking fails
+      }
+    }
   }
 
   render() {

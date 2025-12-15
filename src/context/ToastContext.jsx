@@ -34,9 +34,10 @@ export const ToastProvider = ({ children }) => {
 export const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {
-    // Fallback if used outside provider
+    // Fallback if used outside provider - use logger instead of console
+    const logger = require('../utils/logger').default || require('../utils/logger').logger;
     return {
-      showToast: () => console.warn('Toast used outside ToastProvider'),
+      showToast: () => logger?.warn('Toast used outside ToastProvider') || console.warn('Toast used outside ToastProvider'),
       removeToast: () => {},
       clearAll: () => {}
     };

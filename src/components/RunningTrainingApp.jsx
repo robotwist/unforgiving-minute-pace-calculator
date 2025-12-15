@@ -28,6 +28,7 @@ import {
   trackPurchaseSuccess,
   trackTabNavigation
 } from '../utils/analytics';
+import logger from '../utils/logger';
 
 const RunningTrainingApp = () => {
   const { showToast } = useToast();
@@ -501,7 +502,7 @@ const RunningTrainingApp = () => {
 
     // Validate GoldenPace range
     if (goldenPaceValue < 30 || goldenPaceValue > 85) {
-      console.warn(`GoldenPace value ${goldenPaceValue} is outside valid range (30-85)`);
+      logger.warn(`GoldenPace value ${goldenPaceValue} is outside valid range (30-85)`);
       goldenPaceValue = Math.max(30, Math.min(85, goldenPaceValue));
     }
 
@@ -633,9 +634,9 @@ const RunningTrainingApp = () => {
         }
       }
       
-      console.log('Profile saved successfully with GoldenPace tracking');
+      logger.log('Profile saved successfully with GoldenPace tracking');
     } catch (error) {
-      console.error('Error saving profile:', error);
+      logger.error('Error saving profile:', error);
       setProfileError('Error saving profile. Please try again.');
     }
   };
@@ -666,13 +667,13 @@ const RunningTrainingApp = () => {
             setGoldenPace(data.current_vdot);
           }
           
-          console.log('Profile loaded successfully from localStorage');
+          logger.log('Profile loaded successfully from localStorage');
         } else {
-          console.log('No saved profile found for this email');
+          logger.log('No saved profile found for this email');
         }
       }
     } catch (error) {
-      console.error('Error loading profile:', error);
+      logger.error('Error loading profile:', error);
     }
   };
 
@@ -728,9 +729,9 @@ const RunningTrainingApp = () => {
       saveProfileData(updatedProfileData);
       setSavedProfileData(updatedProfileData);
       
-      console.log('Profile updated successfully with GoldenPace tracking');
+      logger.log('Profile updated successfully with GoldenPace tracking');
     } catch (error) {
-      console.error('Error updating profile:', error);
+      logger.error('Error updating profile:', error);
       setProfileError('Error updating profile. Please try again.');
     }
   };
@@ -833,10 +834,10 @@ const RunningTrainingApp = () => {
       
       // Success feedback
       showToast(`Optimal Progress Pace calculated: ${calculatedGoldenPace}`, 'success');
-      console.log(`GoldenPace calculated successfully: ${calculatedGoldenPace} for ${raceDistance} in ${raceTime}`);
+      logger.log(`GoldenPace calculated successfully: ${calculatedGoldenPace} for ${raceDistance} in ${raceTime}`);
       
     } catch (error) {
-      console.error('Error calculating GoldenPace:', error);
+      logger.error('Error calculating GoldenPace:', error);
       setProfileError('An error occurred while calculating. Please try again.');
     }
   };
@@ -926,7 +927,7 @@ const RunningTrainingApp = () => {
   };
 
   const handlePaymentError = (error) => {
-    console.error('Payment error:', error);
+    logger.error('Payment error:', error);
     setPurchaseLoading(false);
     // Could add error state here for user feedback
   };

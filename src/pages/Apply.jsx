@@ -68,7 +68,7 @@ export default function Apply() {
           }
         });
       } catch (err) {
-        console.error('Error loading draft:', err);
+        logger.error('Error loading draft:', err);
       }
     }
   }, [setFieldValue]);
