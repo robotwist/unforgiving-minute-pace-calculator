@@ -12,6 +12,7 @@ import { BottomNavigation } from './navigation/MobileNavigation';
 import PlanRecommendationEngine from './recommendations/PlanRecommendationEngine';
 import ProgressDashboard from './dashboard/ProgressDashboard';
 import GoldenPaceCalculatorSection from './calculator/GoldenPaceCalculatorSection';
+import PostCalculatorModal from './calculator/PostCalculatorModal';
 import { 
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
@@ -974,66 +975,19 @@ const RunningTrainingApp = () => {
       )}
 
       {/* Post-Calculator Explanation Modal - Enhanced Glassmorphism */}
-      {showPostCalculatorModal && (
-        <div
-          className="um-modal-overlay um-modal-overlay--dim"
-          onClick={() => setShowPostCalculatorModal(false)}
-        >
-          <div
-            className="munich-card um-modal-panel um-modal-panel--md"
-            style={{
-              background: `linear-gradient(135deg, ${colors.white}E8, ${colors.lightGray}E8)`,
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="munich-card-body text-center">
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center um-icon-badge"
-                   style={{
-                     backgroundColor: `${colors.lightGreen}20`,
-                     border: `1px solid ${colors.lightGreen}40`
-                   }}>
-                <Target className="w-8 h-8" style={{ color: colors.lightGreen }} />
-              </div>
-
-              <h3 className="text-2xl font-bold mb-3" style={{ color: colors.black }}>
-                Your Golden Pace: {goldenPace}
-              </h3>
-
-              <p className="mb-4 text-lg" style={{ color: colors.darkGreen }}>
-                This is your optimal training intensity! Now let's find the perfect training plan
-                to help you reach your {userProfile.goal || 'running'} goals.
-              </p>
-
-              <div className="flex space-x-3">
-                <button aria-label="View training plans"
-                  onClick={() => {
-                    setShowPostCalculatorModal(false);
-                    setActiveTab('plans');
-                    trackEvent('Navigation', 'Modal to Plans');
-                  }}
-                  className="flex-1 munich-btn munich-btn-primary"
-                  style={{
-                    background: `linear-gradient(135deg, ${colors.lightBlue}, ${colors.lightGreen})`,
-                    color: colors.white,
-                    border: `2px solid ${colors.darkGreen}`
-                  }}
-                >
-                  View Training Plans
-                </button>
-                <button aria-label="Continue exploring"
-                  onClick={() => setShowPostCalculatorModal(false)}
-                  className="flex-1 munich-btn munich-btn-outline"
-                  style={{
-                    border: `2px solid ${colors.lightBlue}`,
-                    color: colors.lightBlue
-                  }}
-                >
-                  Continue Exploring
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      {showPostCalculatorModal && goldenPace && (
+        <PostCalculatorModal
+          goldenPace={goldenPace}
+          trainingPaces={trainingPaces}
+          raceDistance={raceDistance}
+          colors={colors}
+          onClose={() => setShowPostCalculatorModal(false)}
+          onViewPlans={() => {
+            setActiveTab('plans');
+            trackEvent('Navigation', 'Modal to Plans');
+          }}
+          onContinueExploring={() => {}}
+        />
       )}
 
       {/* Enhanced geometric background pattern */}
