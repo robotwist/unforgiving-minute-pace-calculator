@@ -2,7 +2,7 @@
   base = "."
   publish = "build"
   command = "npm ci --legacy-peer-deps --production=false && npm run build"
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF src/ public/ package.json package-lock.json"
 
 [build.processing]
   skip_processing = false
@@ -16,7 +16,7 @@
   SKIP_PYTHON_INSTALL = "true"
   NETLIFY_SKIP_PYTHON_BUILD = "true"
   # Force cache refresh
-  NETLIFY_CACHE_ID = "v20250906_secure_api_deploy"
+  NETLIFY_CACHE_ID = "v20251211_pr_calculator"
 
 # Site configuration
 [context.production]
