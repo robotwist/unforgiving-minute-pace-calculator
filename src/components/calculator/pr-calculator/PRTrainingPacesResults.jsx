@@ -65,13 +65,13 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
-          {Object.entries(trainingPaces.paces).map(([zone, pace], index) => (
+          {paceCards.map((cardData, index) => (
             <PRPaceCard
-              key={zone}
-              zone={zone}
-              pace={pace}
-              sourceDistance={trainingPaces.sources[zone]}
-              isProjected={trainingPaces.projected[zone]}
+              key={cardData.zone}
+              zone={cardData.zone}
+              pace={cardData.pace}
+              sourceDistance={cardData.sourceDistance}
+              isProjected={cardData.isProjected}
               colors={colors}
               index={index}
             />
