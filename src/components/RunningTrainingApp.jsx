@@ -3263,7 +3263,6 @@ const RunningTrainingApp = () => {
           userHasNewFeatures={!!goldenPace || userProfile.hasSeenPlans}
         />
       )}
-        </main>
     </div>
   );
 };
