@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Download } from 'lucide-react';
 
-const TrainingPlansSection = ({ 
+const TrainingPlansSection = memo(({ 
   colors,
   trainingPlans,
   setSelectedPlan,
@@ -121,6 +121,8 @@ const TrainingPlansSection = ({
       </div>
     </div>
   );
-};
+});
+
+TrainingPlansSection.displayName = 'TrainingPlansSection';
 
 export default TrainingPlansSection;

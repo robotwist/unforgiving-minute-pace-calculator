@@ -13,6 +13,7 @@ import PlanRecommendationEngine from './recommendations/PlanRecommendationEngine
 import ProgressDashboard from './dashboard/ProgressDashboard';
 import GoldenPaceCalculatorSection from './calculator/GoldenPaceCalculatorSection';
 import PostCalculatorModal from './calculator/PostCalculatorModal';
+import SkipLinks from './common/SkipLinks';
 import { 
   goldenPaceFrom5K, 
   trainingPacesByVDOT, 
@@ -950,6 +951,7 @@ const RunningTrainingApp = () => {
         `
       }}
     >
+      <SkipLinks />
       {/* Enhanced background layers for glassmorphism depth */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -1011,7 +1013,9 @@ const RunningTrainingApp = () => {
       </div>
       {/* Header - Enhanced Glassmorphism */}
       <header
+        id="navigation"
         className="um-app-header relative overflow-hidden"
+        aria-label="Main navigation"
       >
         {/* Progressive Melange Background */}
         <div className="absolute inset-0 progressive-melange opacity-10"></div>
@@ -3259,6 +3263,7 @@ const RunningTrainingApp = () => {
           userHasNewFeatures={!!goldenPace || userProfile.hasSeenPlans}
         />
       )}
+        </main>
     </div>
   );
 };

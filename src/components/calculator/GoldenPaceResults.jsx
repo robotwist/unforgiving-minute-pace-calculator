@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useMemo } from 'react';
 import { Clock, TrendingUp, Star, Target, User, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../context/ToastContext';
 
-const GoldenPaceResults = ({
+const GoldenPaceResults = memo(({
   colors,
   goldenPace,
   trainingPaces,
@@ -44,6 +44,18 @@ const GoldenPaceResults = ({
       setLeadLoading(false);
     }
   };
+
+  // Memoize expensive computations
+  const paceCardsData = useMemo(() => {
+    if (!trainingPaces) return [];
+    return [
+      { name: 'Easy', pace: trainingPaces.easy, icon: Clock, description: 'Recovery runs, long runs' },
+      { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, description: 'Tempo runs, lactate threshold' },
+      { name: 'Interval', pace: trainingPaces.interval, icon: Clock, description: 'VO2 max workouts' },
+      { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, description: 'Speed workouts' }
+    ];
+  }, [trainingPaces]);
+
   return (
     <div className="space-y-8">
       {/* GoldenPace Display - Enhanced Glassmorphism */}
@@ -418,6 +430,8 @@ const GoldenPaceResults = ({
       </div>
     </div>
   );
-};
+});
+
+GoldenPaceResults.displayName = 'GoldenPaceResults';
 
 export default GoldenPaceResults;

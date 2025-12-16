@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Pure CSS build - Munich 1972 Olympic Design System */
+/* Note: Tailwind directives removed - using custom utilities for better control and smaller bundle */
 
 /* Munich 1972 Olympic Design System - Global Styles */
 :root {
@@ -87,21 +86,34 @@ body {
   outline: none;
 }
 
-/* Skip Link for Screen Readers */
+/* Skip Links for Accessibility */
+.skip-links {
+  position: relative;
+  z-index: 100;
+}
+
 .skip-link {
   position: absolute;
   top: -40px;
   left: 6px;
   background: var(--munich-black);
   color: var(--munich-white);
-  padding: 8px;
+  padding: 8px 16px;
   text-decoration: none;
   z-index: 100;
   border-radius: 4px;
+  font-weight: 600;
+  transition: top 0.3s ease;
 }
 
 .skip-link:focus {
   top: 6px;
+  outline: 3px solid var(--munich-light-blue);
+  outline-offset: 2px;
+}
+
+.skip-link:hover {
+  background: var(--munich-dark-green);
 }
 
 /* Screen Reader Only Content */

@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { User, AlertTriangle } from 'lucide-react';
 import PRPaceCard from './PRPaceCard';
 import { validatePRConsistency } from '../../../utils/prValidation';
 
-const PRTrainingPacesResults = ({ trainingPaces, colors, goalDistance, prs }) => {
+const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs }) => {
   if (!trainingPaces || !trainingPaces.paces || Object.keys(trainingPaces.paces).length === 0) {
     return null;
   }
   
-  const consistencyIssues = validatePRConsistency(prs);
+  // Memoize validation - only runs when prs change
+  const consistencyIssues = useMemo(() => {
+    return validatePRConsistency(prs);
+  }, [prs]);
+  
+  // Memoize pace cards data
+  const paceCards = useMemo(() => {
+    if (!trainingPaces?.paces) return [];
+    return Object.entries(trainingPaces.paces).map(([zone, pace]) => ({
+      zone,
+      pace,
+      sourceDistance: trainingPaces.sources?.[zone],
+      isProjected: trainingPaces.projected?.[zone]
+    }));
+  }, [trainingPaces]);
   
   return (
     <div className="space-y-8">
@@ -115,6 +129,8 @@ const PRTrainingPacesResults = ({ trainingPaces, colors, goalDistance, prs }) =>
       </div>
     </div>
   );
-};
+});
+
+PRTrainingPacesResults.displayName = 'PRTrainingPacesResults';
 
 export default PRTrainingPacesResults;
