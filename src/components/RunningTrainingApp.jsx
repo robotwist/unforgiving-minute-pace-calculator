@@ -1202,7 +1202,7 @@ const RunningTrainingApp = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 relative" style={{ backgroundColor: colors.white, color: colors.black }}>
+      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 relative" style={{ backgroundColor: colors.white, color: colors.black }} role="main">
         {/* Floating runner elements - hidden on mobile for performance */}
         <div className="hidden sm:block absolute top-20 left-10 w-12 h-12 geometric-float-counterclockwise">
           {/* Olympic Runner Icon */}

@@ -5,16 +5,12 @@ import PRPaceCard from './PRPaceCard';
 import { validatePRConsistency } from '../../../utils/prValidation';
 
 const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs }) => {
-  if (!trainingPaces || !trainingPaces.paces || Object.keys(trainingPaces.paces).length === 0) {
-    return null;
-  }
-  
-  // Memoize validation - only runs when prs change
+  // Memoize validation - only runs when prs change (hooks must come before early return)
   const consistencyIssues = useMemo(() => {
     return validatePRConsistency(prs);
   }, [prs]);
   
-  // Memoize pace cards data
+  // Memoize pace cards data (hooks must come before early return)
   const paceCards = useMemo(() => {
     if (!trainingPaces?.paces) return [];
     return Object.entries(trainingPaces.paces).map(([zone, pace]) => ({
@@ -24,6 +20,11 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
       isProjected: trainingPaces.projected?.[zone]
     }));
   }, [trainingPaces]);
+
+  // Early return after hooks
+  if (!trainingPaces || !trainingPaces.paces || Object.keys(trainingPaces.paces).length === 0) {
+    return null;
+  }
   
   return (
     <div className="space-y-8">
