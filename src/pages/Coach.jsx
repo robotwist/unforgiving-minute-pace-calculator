@@ -52,18 +52,7 @@ const Coach = () => {
         `
       }}
     >
-      {/* Enhanced background layers for glassmorphism depth */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `
-            repeating-linear-gradient(45deg, ${colors.black} 0px, ${colors.black} 1px, transparent 1px, transparent 20px),
-            repeating-linear-gradient(-45deg, ${colors.black} 0px, ${colors.black} 1px, transparent 1px, transparent 20px)
-          `
-        }}
-      />
-      
-      {/* Additional depth layer with blur effect */}
+      {/* Subtle depth layer with blur effect */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
