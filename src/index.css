@@ -274,32 +274,52 @@ h6 {
   animation: stopwatch-tick-counterclockwise 2s ease-in-out infinite;
 }
 
-/* Progressive Melange Animation */
-@keyframes progressive-melange {
-  0% {
-    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
-    background-size: 400% 400%;
-  }
-  25% {
-    background: linear-gradient(45deg, var(--munich-green) 0%, var(--munich-white) 25%, var(--munich-blue) 50%, var(--munich-green) 75%, var(--munich-white) 100%);
-    background-size: 400% 400%;
-  }
-  50% {
-    background: linear-gradient(45deg, var(--munich-white) 0%, var(--munich-blue) 25%, var(--munich-green) 50%, var(--munich-white) 75%, var(--munich-blue) 100%);
-    background-size: 400% 400%;
-  }
-  75% {
-    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
-    background-size: 400% 400%;
-  }
-  100% {
-    background: linear-gradient(45deg, var(--munich-blue) 0%, var(--munich-green) 25%, var(--munich-white) 50%, var(--munich-blue) 75%, var(--munich-green) 100%);
-    background-size: 400% 400%;
-  }
+/* Olympic Runner Background - Inspired by 1972 Munich Olympics */
+.olympic-runner-bg {
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.progressive-melange {
-  animation: progressive-melange 8s ease-in-out infinite;
+/* Olympic Runner Background Overlay Variants */
+.um-olympic-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.um-olympic-overlay--subtle {
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.03;
+}
+
+.um-olympic-overlay--light {
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.05;
+}
+
+.um-olympic-overlay--medium {
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+}
+
+.um-olympic-overlay--strong {
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
 }
 
 /* Running Pictogram Animation */

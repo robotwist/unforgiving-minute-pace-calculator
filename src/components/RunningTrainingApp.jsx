@@ -1017,7 +1017,8 @@ const RunningTrainingApp = () => {
         className="um-app-header um-relative um-overflow-hidden"
         aria-label="Main navigation"
       >
-        {/* Progressive Melange Background */}
+        {/* Olympic Runner Background */}
+        <div className="um-olympic-overlay um-olympic-overlay--medium"></div>
         
         <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
           <div className="um-flex um-flex-col um-sm-flex-row um-justify-between um-items-center um-py-4 um-sm-py-6 um-space-y-4 um-sm-space-y-0">
@@ -1253,7 +1254,8 @@ const RunningTrainingApp = () => {
               <div className="max-w-4xl um-mx-auto um-space-y-4 sm:space-y-6">
                 {/* GoldenPace Display */}
                 <div className="um-text-center um-p-4 um-sm-p-6 bg-white shadow-sm border um-relative um-overflow-hidden" style={{ borderColor: colors.border }}>
-                  {/* Progressive Melange Background */}
+                  {/* Olympic Runner Background */}
+                  <div className="um-olympic-overlay um-olympic-overlay--light"></div>
                   
                   {/* Geometric border accents */}
                   <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
@@ -1281,7 +1283,8 @@ const RunningTrainingApp = () => {
                     { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.lightBlue }
                   ].map(({ name, pace, icon: Icon, color }, index) => (
                     <div key={name} className="bg-white shadow-sm border p-3 um-sm-p-4 um-text-center um-relative um-overflow-hidden" style={{ borderColor: colors.border }}>
-                      {/* Progressive Melange Background */}
+                      {/* Olympic Runner Background */}
+                      <div className="um-olympic-overlay um-olympic-overlay--subtle"></div>
                       
                       {/* Geometric corner accent */}
                       <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
@@ -1827,7 +1830,8 @@ const RunningTrainingApp = () => {
                 <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
                   backgroundColor: colors.lightBlue 
                 }}>
-                  {/* Progressive Melange Background */}
+                  {/* Olympic Runner Background */}
+                  <div className="um-olympic-overlay um-olympic-overlay--strong"></div>
                   
                   {/* Geometric corner accent */}
                   <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
@@ -2001,7 +2005,8 @@ const RunningTrainingApp = () => {
                   <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
                     backgroundColor: colors.lightGreen 
                   }}>
-                    {/* Progressive Melange Background */}
+                    {/* Olympic Runner Background */}
+                    <div className="um-olympic-overlay um-olympic-overlay--strong"></div>
                     
                     {/* Geometric corner accent */}
                     <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
@@ -2028,7 +2033,8 @@ const RunningTrainingApp = () => {
                   <div className="um-p-8">
                     <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
                       <div className="munich-card um-relative um-overflow-hidden">
-                        {/* Progressive Melange Background */}
+                        {/* Olympic Runner Background */}
+                        <div className="um-olympic-overlay um-olympic-overlay--subtle"></div>
                         
                         {/* Geometric corner accent */}
                         <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
@@ -2066,7 +2072,8 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       <div className="munich-card um-relative um-overflow-hidden">
-                        {/* Progressive Melange Background */}
+                        {/* Olympic Runner Background */}
+                        <div className="um-olympic-overlay um-olympic-overlay--subtle"></div>
                         
                         {/* Geometric corner accent */}
                         <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
@@ -2101,7 +2108,8 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       <div className="munich-card um-relative um-overflow-hidden">
-                        {/* Progressive Melange Background */}
+                        {/* Olympic Runner Background */}
+                        <div className="um-olympic-overlay um-olympic-overlay--subtle"></div>
                         
                         {/* Geometric corner accent */}
                         <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
@@ -2823,7 +2831,8 @@ const RunningTrainingApp = () => {
 
       {/* Footer - Munich 1972 Geometric Style */}
       <footer className="um-py-6 um-sm-py-8 um-relative um-overflow-hidden" style={{ backgroundColor: colors.gray }}>
-        {/* Progressive Melange Background */}
+        {/* Olympic Runner Background */}
+        <div className="um-olympic-overlay um-olympic-overlay--light"></div>
         
         <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
           <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-4 sm:um-gap-6">

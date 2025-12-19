@@ -59,7 +59,8 @@ const ProfileDashboard = ({
         <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
           backgroundColor: colors.lightGreen 
         }}>
-          {/* Progressive Melange Background */}
+          {/* Olympic Runner Background */}
+          <div className="um-olympic-overlay um-olympic-overlay--strong"></div>
           
           {/* Geometric corner accent */}
           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 

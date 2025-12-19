@@ -66,7 +66,8 @@ const GoldenPaceResults = memo(({
           borderColor: `${colors.lightBlue}40`,
         }}
       >
-        {/* Progressive Melange Background */}
+        {/* Olympic Runner Background */}
+        <div className="um-olympic-overlay um-olympic-overlay--light"></div>
 
         {/* Enhanced geometric border accents */}
         <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2 um-rounded-full"
@@ -132,7 +133,8 @@ const GoldenPaceResults = memo(({
               borderColor: `${color}30`,
             }}
           >
-            {/* Progressive Melange Background */}
+            {/* Olympic Runner Background */}
+            <div className="um-olympic-overlay um-olympic-overlay--subtle"></div>
 
             {/* Enhanced geometric corner accent */}
             <div

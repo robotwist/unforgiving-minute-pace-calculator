@@ -45,7 +45,8 @@ const PRPaceCard = ({ zone, pace, sourceDistance, isProjected, description, colo
         borderColor: `${config.color}30`,
       }}
     >
-      {/* Progressive Melange Background */}
+      {/* Olympic Runner Background */}
+      <div className="um-olympic-overlay um-olympic-overlay--subtle"></div>
 
       {/* Projected badge */}
       {isProjected && (

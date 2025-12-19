@@ -191,7 +191,8 @@ export default function GoldenPaceCalculatorSection({
       {/* Calculator Card - Munich 1972 Geometric Style */}
       <div className="max-w-2xl um-mx-auto">
         <div className="shadow-sm border um-relative um-overflow-hidden" style={{ borderColor: colors.border, backgroundColor: colors.white }}>
-          {/* Progressive Melange Background */}
+          {/* Olympic Runner Background */}
+          <div className="um-olympic-overlay um-olympic-overlay--light"></div>
 
           {/* Subtle geometric corner accents */}
           <div className="um-absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 um-border-t-2" style={{ borderColor: colors.lightBlue }} />
