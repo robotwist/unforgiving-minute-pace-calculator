@@ -1013,10 +1013,10 @@ const RunningTrainingApp = () => {
           filter: 'blur(1px)'
         }}></div>
       </div>
-      {/* Header - Enhanced Glassmorphism with Munich Theme */}
+      {/* Header - Clean Glassmorphism */}
       <header
         id="navigation"
-        className={`um-app-header um-relative um-overflow-hidden ${getThemeClass('hero', true)}`}
+        className="um-app-header um-relative um-overflow-hidden"
         aria-label="Main navigation"
       >
         
