@@ -104,7 +104,7 @@ const TrainingLogForm = ({
           <div className="um-relative um-z-10">
             <h3 className="um-font-bold flex um-items-center" style={{ 
               color: colors.white,
-              fontSize: 'var(--um-text-2xl)'
+              fontSize: 'var(--text-2xl)'
             }}>
               <Activity className="w-6 h-6 mr-3" />
               Log Training Session
@@ -112,7 +112,7 @@ const TrainingLogForm = ({
             <p className="mt-2" style={{ 
               color: colors.white,
               opacity: 0.9,
-              fontSize: 'var(--um-text-base)'
+              fontSize: 'var(--text-base)'
             }}>
               Track your training to monitor progress and build your running history
             </p>
@@ -121,11 +121,11 @@ const TrainingLogForm = ({
 
         <form onSubmit={handleSubmit} className="munich-card-body space-y-6">
           {/* Essential Training Data */}
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4">
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <Calendar className="w-4 h-4 inline mr-2" />
                 Date *
@@ -137,7 +137,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 required
                 aria-label="Training session date"
@@ -147,7 +147,7 @@ const TrainingLogForm = ({
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <Activity className="w-4 h-4 inline mr-2" />
                 Workout Type *
@@ -158,7 +158,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 required
                 aria-label="Select workout type"
@@ -172,11 +172,11 @@ const TrainingLogForm = ({
           </div>
 
           {/* Distance and Time */}
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-4">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-4">
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 Distance * (miles)
               </label>
@@ -189,7 +189,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 required
                 aria-label="Distance covered in miles"
@@ -199,7 +199,7 @@ const TrainingLogForm = ({
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <Clock className="w-4 h-4 inline mr-2" />
                 Time * (MM:SS or HH:MM:SS)
@@ -212,7 +212,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 required
                 aria-label="Total workout time"
@@ -222,7 +222,7 @@ const TrainingLogForm = ({
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 Pace (per mile)
               </label>
@@ -234,7 +234,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)',
+                  fontSize: 'var(--text-base)',
                   backgroundColor: colors.lightGray
                 }}
                 aria-label="Average pace per mile"
@@ -243,11 +243,11 @@ const TrainingLogForm = ({
           </div>
 
           {/* Subjective Data */}
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4">
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <Heart className="w-4 h-4 inline mr-2" />
                 Effort Level
@@ -258,7 +258,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 aria-label="Perceived effort level"
               >
@@ -272,7 +272,7 @@ const TrainingLogForm = ({
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <Star className="w-4 h-4 inline mr-2" />
                 How You Felt
@@ -283,7 +283,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 aria-label="Overall feeling during workout"
               >
@@ -296,11 +296,11 @@ const TrainingLogForm = ({
           </div>
 
           {/* Environmental Data */}
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4">
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <MapPin className="w-4 h-4 inline mr-2" />
                 Location
@@ -313,7 +313,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 aria-label="Workout location"
               />
@@ -322,7 +322,7 @@ const TrainingLogForm = ({
             <div>
               <label className="block um-font-medium um-mb-2" style={{ 
                 color: colors.black,
-                fontSize: 'var(--um-text-sm)'
+                fontSize: 'var(--text-sm)'
               }}>
                 <Thermometer className="w-4 h-4 inline mr-2" />
                 Weather
@@ -335,7 +335,7 @@ const TrainingLogForm = ({
                 className="um-field"
                 style={{ 
                   borderColor: colors.gray,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}
                 aria-label="Weather conditions"
               />
@@ -346,7 +346,7 @@ const TrainingLogForm = ({
           <div>
             <label className="block um-font-medium um-mb-2" style={{ 
               color: colors.black,
-              fontSize: 'var(--um-text-sm)'
+              fontSize: 'var(--text-sm)'
             }}>
               Notes
             </label>
@@ -358,7 +358,7 @@ const TrainingLogForm = ({
               className="um-field um-textarea"
               style={{ 
                 borderColor: colors.gray,
-                fontSize: 'var(--um-text-base)'
+                fontSize: 'var(--text-base)'
               }}
               aria-label="Additional notes about the workout"
             />
@@ -369,7 +369,7 @@ const TrainingLogForm = ({
             <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 um-justify-end pt-4 um-border-t" style={{ borderColor: colors.gray }}>
               <button
                 type="submit"
-                className="munich-btn munich-btn-primary flex-1 um-sm\:flex-none"
+                className="munich-btn munich-btn-primary flex-1 um-sm-flex-none"
                 style={{ 
                   backgroundColor: colors.lightBlue,
                   color: colors.white

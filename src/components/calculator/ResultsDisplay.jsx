@@ -25,26 +25,26 @@ const ResultsDisplay = ({
       <div className="munich-card um-text-center um-relative um-overflow-hidden">
         {/* Olympic rings background */}
         <div className="um-absolute um-inset-0 opacity-5">
-          <div className="um-absolute toum-p-4 left-1/2 transform -translate-x-1/2">
+          <div className="um-absolute um-top-4 left-1/2 transform -translate-x-1/2">
             {/* Track lanes effect */}
             <div className="um-relative w-32 h-32">
               {/* Lane 4 (outermost) */}
-              <div className="um-absolute um-inset-0 um-border-2 um-um-rounded-full" style={{ 
+              <div className="um-absolute um-inset-0 um-border-2 um-rounded-full" style={{ 
                 borderColor: colors.orange,
                 background: `conic-gradient(from 0deg, ${colors.orange} 0deg, ${colors.violet} 90deg, ${colors.orange} 180deg, ${colors.violet} 270deg, ${colors.orange} 360deg)`
               }}></div>
               {/* Lane 3 */}
-              <div className="um-absolute inset-3 um-border-2 um-um-rounded-full" style={{ 
+              <div className="um-absolute inset-3 um-border-2 um-rounded-full" style={{ 
                 borderColor: colors.violet,
                 background: `conic-gradient(from 0deg, ${colors.violet} 0deg, ${colors.orange} 90deg, ${colors.violet} 180deg, ${colors.orange} 270deg, ${colors.violet} 360deg)`
               }}></div>
               {/* Lane 2 */}
-              <div className="um-absolute inset-5 um-border-2 um-um-rounded-full" style={{ 
+              <div className="um-absolute inset-5 um-border-2 um-rounded-full" style={{ 
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`
               }}></div>
               {/* Lane 1 (innermost) */}
-              <div className="um-absolute inset-7 um-border-2 um-um-rounded-full" style={{ 
+              <div className="um-absolute inset-7 um-border-2 um-rounded-full" style={{ 
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`
               }}></div>
@@ -72,7 +72,7 @@ const ResultsDisplay = ({
       </div>
 
       {/* Training Paces Grid */}
-      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-4 um-gap-3 sm:gaum-p-4">
+      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-4 um-gap-3 sm:um-gap-4">
         {paceData.map(({ name, pace, icon: Icon, color, description }, index) => (
           <div key={name} className="munich-card hover:shadow-lg transition-shadow duration-200 um-relative um-overflow-hidden">
             {/* Geometric accent */}
@@ -121,19 +121,19 @@ const ResultsDisplay = ({
           </h4>
           <ul className="space-y-2 um-text-sm" style={{ color: colors.darkGreen }}>
             <li className="um-flex um-items-start">
-              <span className="w-2 h-2 um-um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.gray }}></span>
+              <span className="w-2 h-2 um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.gray }}></span>
               <span><strong>Easy:</strong> 70-80% of your weekly mileage should be at this comfortable, conversational pace</span>
             </li>
             <li className="um-flex um-items-start">
-              <span className="w-2 h-2 um-um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.lightGreen }}></span>
+              <span className="w-2 h-2 um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.lightGreen }}></span>
               <span><strong>Threshold:</strong> Sustained efforts of 20-40 minutes to improve lactate clearance</span>
             </li>
             <li className="um-flex um-items-start">
-              <span className="w-2 h-2 um-um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.darkGreen }}></span>
+              <span className="w-2 h-2 um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.darkGreen }}></span>
               <span><strong>Interval:</strong> Hard efforts with equal rest periods to boost VO2 max</span>
             </li>
             <li className="um-flex um-items-start">
-              <span className="w-2 h-2 um-um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.lightBlue }}></span>
+              <span className="w-2 h-2 um-rounded-full um-mt-2 mr-3 flex-shrink-0" style={{ backgroundColor: colors.lightBlue }}></span>
               <span><strong>Repetition:</strong> Short, fast efforts with full recovery for speed and economy</span>
             </li>
           </ul>

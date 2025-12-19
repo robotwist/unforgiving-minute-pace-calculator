@@ -43,7 +43,7 @@ const Toast = ({ id, message, type = 'info', duration = 5000, onClose, colors })
 
   return (
     <div
-      className="um-flex um-items-start um-gap-3 um-p-4 um-um-rounded-lg shadow-lg um-border-2 um-mb-3 animate-slide-in"
+      className="um-flex um-items-start um-gap-3 um-p-4 um-rounded-lg shadow-lg um-border-2 um-mb-3 animate-slide-in"
       style={{
         backgroundColor: config.bgColor,
         borderColor: config.borderColor,

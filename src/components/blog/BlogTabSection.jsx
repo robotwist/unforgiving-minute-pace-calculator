@@ -35,7 +35,7 @@ const BlogTabSection = ({
               Featured Articles
             </h3>
             
-            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
+            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
               {featuredArticles.map((article) => (
                 <div key={article.id} className="munich-card um-relative um-overflow-hidden group um-cursor-pointer transition-all hover:shadow-xl" 
                      onClick={() => setSelectedArticle(article)}>
@@ -46,7 +46,7 @@ const BlogTabSection = ({
                   
                   <div className="munich-card-body">
                     <div className="mb-4">
-                      <span className="um-text-xs um-font-bold px-3 py-1 um-um-rounded-full" style={{ 
+                      <span className="um-text-xs um-font-bold px-3 py-1 um-rounded-full" style={{ 
                         backgroundColor: colors.lightBlue + '20',
                         color: colors.lightBlue
                       }}>
@@ -66,7 +66,7 @@ const BlogTabSection = ({
                       <span className="um-text-xs" style={{ color: colors.silver }}>
                         {article.readTime}
                       </span>
-                      <button className="um-text-xs um-font-medium um-px-4 um-py-2 um-um-rounded-full transition-all hover:shadow-md" style={{
+                      <button className="um-text-xs um-font-medium um-px-4 um-py-2 um-rounded-full transition-all hover:shadow-md" style={{
                         backgroundColor: colors.lightBlue,
                         color: colors.white
                       }}>
@@ -85,7 +85,7 @@ const BlogTabSection = ({
               All Articles
             </h3>
             
-            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
+            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-6">
               {allArticles.map((article) => (
                 <div key={article.id} className="munich-card um-relative um-overflow-hidden group um-cursor-pointer transition-all hover:shadow-lg border-l-4" 
                      style={{ borderLeftColor: article.featured ? colors.orange : colors.lightGreen }}
@@ -93,7 +93,7 @@ const BlogTabSection = ({
                   
                   {/* Premium Badge */}
                   {article.isPremium && (
-                    <div className="um-absolute top-2 right-2 um-text-xs um-font-bold px-2 py-1 um-um-rounded-full" style={{
+                    <div className="um-absolute top-2 right-2 um-text-xs um-font-bold px-2 py-1 um-rounded-full" style={{
                       backgroundColor: colors.orange,
                       color: colors.white
                     }}>
@@ -142,7 +142,7 @@ const BlogTabSection = ({
       {selectedArticle && (
         <div className="space-y-6">
           {/* Article Header */}
-          <div className="um-flex um-items-center gaum-p-4 um-mb-6">
+          <div className="um-flex um-items-center um-gap-4 um-mb-6">
             <button 
               onClick={() => setSelectedArticle(null)}
               className="munich-btn munich-btn-outline"
@@ -157,14 +157,14 @@ const BlogTabSection = ({
               <div className="munich-card-body space-y-6">
                 <div className="um-border-b pb-6" style={{ borderColor: colors.border }}>
                   <div className="um-flex um-items-center gap-2 um-mb-4">
-                    <span className="um-text-sm um-font-medium px-3 py-1 um-um-rounded-full" style={{ 
+                    <span className="um-text-sm um-font-medium px-3 py-1 um-rounded-full" style={{ 
                       backgroundColor: colors.lightBlue + '20',
                       color: colors.lightBlue
                     }}>
                       {selectedArticle.category}
                     </span>
                     {selectedArticle.isPremium && (
-                      <span className="um-text-sm um-font-bold px-3 py-1 um-um-rounded-full" style={{
+                      <span className="um-text-sm um-font-bold px-3 py-1 um-rounded-full" style={{
                         backgroundColor: colors.orange,
                         color: colors.white
                       }}>

@@ -69,7 +69,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
       <div className="munich-card-body">
         <div className="um-flex um-items-center um-justify-between um-mb-3">
           <div 
-            className="w-10 um-h-10 um-um-rounded-full flex um-items-center um-justify-center"
+            className="w-10 um-h-10 um-rounded-full flex um-items-center um-justify-center"
             style={{ backgroundColor: colors.lightBlue + '20' }}
           >
             <Icon className="w-5 h-5" style={{ color: colors.lightBlue }} />
@@ -77,7 +77,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
           {progress && (
             <div className="um-text-right">
               <div 
-                className="um-text-xs px-2 py-1 um-um-rounded-full"
+                className="um-text-xs px-2 py-1 um-rounded-full"
                 style={{ 
                   backgroundColor: getProgressColor(progress) + '20',
                   color: getProgressColor(progress)
@@ -106,11 +106,11 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
         {progress && (
           <div className="mt-3">
             <div 
-              className="um-w-full h-1.5 um-um-rounded-full"
+              className="um-w-full h-1.5 um-rounded-full"
               style={{ backgroundColor: colors.gray + '30' }}
             >
               <div 
-                className="h-1.5 um-um-rounded-full transition-all duration-500"
+                className="h-1.5 um-rounded-full transition-all duration-500"
                 style={{ 
                   backgroundColor: getProgressColor(progress),
                   width: `${progress}%`
@@ -139,7 +139,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
           </p>
         </div>
         <div 
-          className="um-px-4 um-py-2 um-um-rounded-full"
+          className="um-px-4 um-py-2 um-rounded-full"
           style={{ backgroundColor: colors.lightGreen + '20', color: colors.lightGreen }}
         >
           <Calendar className="w-4 h-4 inline mr-2" />
@@ -148,7 +148,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
       </div>
 
       {/* Key Metrics Grid */}
-      <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 gaum-p-4">
+      <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 um-gap-4">
         <MetricCard
           icon={MapPin}
           title="Weekly Miles"
@@ -184,11 +184,11 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
       {currentPlan && (
         <div className="munich-card">
           <div className="munich-card-body">
-            <div className="um-grid um-md-grid-cols-3 gaum-p-6">
+            <div className="um-grid um-md-grid-cols-3 um-gap-6">
               <div className="md:col-span-2">
                 <div className="um-flex um-items-center space-x-4 um-mb-4">
                   <div 
-                    className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center"
+                    className="w-12 um-h-12 um-rounded-full flex um-items-center um-justify-center"
                     style={{ backgroundColor: colors.orange + '20' }}
                   >
                     <Award className="w-6 h-6" style={{ color: colors.orange }} />
@@ -212,11 +212,11 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
                       </span>
                     </div>
                     <div 
-                      className="um-w-full h-2 um-um-rounded-full"
+                      className="um-w-full h-2 um-rounded-full"
                       style={{ backgroundColor: colors.gray + '30' }}
                     >
                       <div 
-                        className="h-2 um-um-rounded-full transition-all duration-1000"
+                        className="h-2 um-rounded-full transition-all duration-1000"
                         style={{ 
                           backgroundColor: colors.orange,
                           width: `${((currentPlan.currentWeek - 1) / currentPlan.duration) * 100}%`
@@ -225,7 +225,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
                     </div>
                   </div>
 
-                  <div className="um-grid um-grid-cols-3 gaum-p-4 um-text-sm">
+                  <div className="um-grid um-grid-cols-3 um-gap-4 um-text-sm">
                     <div>
                       <div style={{ color: colors.darkGreen }}>Weeks Left</div>
                       <div className="um-font-bold" style={{ color: colors.black }}>
@@ -263,7 +263,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
                     Next Workout
                   </h4>
                   <div 
-                    className="p-3 um-um-rounded-lg um-text-sm"
+                    className="p-3 um-rounded-lg um-text-sm"
                     style={{ backgroundColor: colors.lightBlue + '10' }}
                   >
                     <div className="um-font-bold" style={{ color: colors.lightBlue }}>
@@ -294,7 +294,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
                   <div className="um-flex um-items-center um-justify-between">
                     <div className="um-flex um-items-center space-x-4">
                       <div 
-                        className="w-10 um-h-10 um-um-rounded-full flex um-items-center um-justify-center"
+                        className="w-10 um-h-10 um-rounded-full flex um-items-center um-justify-center"
                         style={{ 
                           backgroundColor: activity.hitGoldenPace ? colors.lightGreen + '20' : colors.gray + '20'
                         }}
@@ -318,7 +318,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
                     
                     {activity.hitGoldenPace && (
                       <div 
-                        className="px-2 py-1 um-um-rounded-full um-text-xs um-font-bold"
+                        className="px-2 py-1 um-rounded-full um-text-xs um-font-bold"
                         style={{ 
                           backgroundColor: colors.lightGreen,
                           color: colors.white
@@ -334,7 +334,7 @@ const ProgressDashboard = ({ colors, userProfile, currentPlan, recentActivities 
           </div>
         ) : (
           <div 
-            className="um-text-center um-py-8 um-um-rounded-lg"
+            className="um-text-center um-py-8 um-rounded-lg"
             style={{ backgroundColor: colors.gray + '10' }}
           >
             <Activity className="w-8 um-h-8 um-mx-auto um-mb-2" style={{ color: colors.gray }} />

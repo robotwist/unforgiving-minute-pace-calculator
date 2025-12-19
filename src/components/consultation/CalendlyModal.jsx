@@ -233,7 +233,7 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
           ) : !isCalendlyLoaded ? (
             <div className="um-text-center py-12" aria-live="polite" aria-busy="true">
               <div 
-                className="inline-block animate-spin um-um-rounded-full um-h-8 um-w-8 um-border-b-2" 
+                className="inline-block animate-spin um-rounded-full um-h-8 um-w-8 um-border-b-2" 
                 style={{ borderColor: colors.lightBlue }}
                 role="status"
                 aria-label="Loading"

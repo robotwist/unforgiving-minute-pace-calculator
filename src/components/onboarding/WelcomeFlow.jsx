@@ -109,7 +109,7 @@ const WelcomeFlow = ({ colors, onComplete }) => {
             {[1, 2, 3].map((step) => (
               <div
                 key={step}
-                className="w-3 h-3 um-um-rounded-full transition-all"
+                className="w-3 h-3 um-rounded-full transition-all"
                 style={{
                   backgroundColor: currentStep >= step ? colors.lightBlue : colors.gray,
                   opacity: currentStep >= step ? 1 : 0.3
@@ -130,7 +130,7 @@ const WelcomeFlow = ({ colors, onComplete }) => {
                 </p>
               </div>
 
-              <div className="um-grid um-grid-cols-1 gaum-p-4">
+              <div className="um-grid um-grid-cols-1 um-gap-4">
                 {goals.map((goal) => {
                   const IconComponent = goal.icon;
                   return (
@@ -143,7 +143,7 @@ const WelcomeFlow = ({ colors, onComplete }) => {
                       <div className="munich-card-body">
                         <div className="um-flex um-items-start space-x-4">
                           <div 
-                            className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center"
+                            className="w-12 um-h-12 um-rounded-full flex um-items-center um-justify-center"
                             style={{ backgroundColor: goal.color + '20' }}
                           >
                             <IconComponent className="w-6 h-6" style={{ color: goal.color }} />

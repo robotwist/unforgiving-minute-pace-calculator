@@ -22,7 +22,7 @@ const SkeletonLoader = ({ type = 'default', className = '' }) => {
     calculator: (
       <div className="animate-pulse space-y-6">
         <div className="h-10 bg-gray-200 um-rounded w-3/4"></div>
-        <div className="um-grid um-grid-cols-2 gaum-p-4">
+        <div className="um-grid um-grid-cols-2 um-gap-4">
           <div className="h-12 bg-gray-200 um-rounded"></div>
           <div className="h-12 bg-gray-200 um-rounded"></div>
         </div>

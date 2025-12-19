@@ -34,7 +34,7 @@ const PostCalculatorModal = ({
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="um-absolute toum-p-4 right-4 p-2 um-um-rounded-full hover:bg-um-opacity-10 transition-colors"
+            className="um-absolute um-top-4 right-4 p-2 um-rounded-full hover:bg-um-opacity-10 transition-colors"
             style={{ color: colors.black }}
             aria-label="Close modal"
           >
@@ -44,7 +44,7 @@ const PostCalculatorModal = ({
           {/* Header */}
           <div className="um-text-center um-mb-6">
             <div
-              className="w-16 um-h-16 um-mx-auto um-mb-4 um-um-rounded-full flex um-items-center um-justify-center um-icon-badge"
+              className="w-16 um-h-16 um-mx-auto um-mb-4 um-rounded-full flex um-items-center um-justify-center um-icon-badge"
               style={{
                 backgroundColor: `${colors.lightGreen}20`,
                 border: `1px solid ${colors.lightGreen}40`
@@ -63,7 +63,7 @@ const PostCalculatorModal = ({
           </div>
 
           {/* What is Optimal Progress Pace? */}
-          <div className="mb-6 um-p-4 um-um-rounded-lg um-border-2" style={{ borderColor: `${colors.lightBlue}40`, backgroundColor: `${colors.lightBlue}08` }}>
+          <div className="mb-6 um-p-4 um-rounded-lg um-border-2" style={{ borderColor: `${colors.lightBlue}40`, backgroundColor: `${colors.lightBlue}08` }}>
             <div className="um-flex um-items-start um-gap-3 um-mb-3">
               <Info className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: colors.lightBlue }} />
               <div>
@@ -89,7 +89,7 @@ const PostCalculatorModal = ({
               
               <div className="space-y-3">
                 {trainingPaces.easy && (
-                  <div className="p-3 border um-um-rounded-lg" style={{ borderColor: colors.border }}>
+                  <div className="p-3 border um-rounded-lg" style={{ borderColor: colors.border }}>
                     <div className="um-flex um-items-center gap-2 mb-1">
                       <Clock className="w-4 h-4" style={{ color: colors.gray }} />
                       <span className="um-font-semibold" style={{ color: colors.black }}>Easy Pace: {trainingPaces.easy}</span>
@@ -101,7 +101,7 @@ const PostCalculatorModal = ({
                 )}
 
                 {trainingPaces.threshold && (
-                  <div className="p-3 border um-um-rounded-lg" style={{ borderColor: colors.border }}>
+                  <div className="p-3 border um-rounded-lg" style={{ borderColor: colors.border }}>
                     <div className="um-flex um-items-center gap-2 mb-1">
                       <TrendingUp className="w-4 h-4" style={{ color: colors.lightGreen }} />
                       <span className="um-font-semibold" style={{ color: colors.black }}>Threshold Pace: {trainingPaces.threshold}</span>
@@ -113,7 +113,7 @@ const PostCalculatorModal = ({
                 )}
 
                 {trainingPaces.interval && (
-                  <div className="p-3 border um-um-rounded-lg" style={{ borderColor: colors.border }}>
+                  <div className="p-3 border um-rounded-lg" style={{ borderColor: colors.border }}>
                     <div className="um-flex um-items-center gap-2 mb-1">
                       <TrendingUp className="w-4 h-4" style={{ color: colors.darkGreen }} />
                       <span className="um-font-semibold" style={{ color: colors.black }}>Interval Pace: {trainingPaces.interval}</span>
@@ -125,7 +125,7 @@ const PostCalculatorModal = ({
                 )}
 
                 {trainingPaces.repetition && (
-                  <div className="p-3 border um-um-rounded-lg" style={{ borderColor: colors.border }}>
+                  <div className="p-3 border um-rounded-lg" style={{ borderColor: colors.border }}>
                     <div className="um-flex um-items-center gap-2 mb-1">
                       <TrendingUp className="w-4 h-4" style={{ color: colors.lightBlue }} />
                       <span className="um-font-semibold" style={{ color: colors.black }}>Repetition Pace: {trainingPaces.repetition}</span>
@@ -140,7 +140,7 @@ const PostCalculatorModal = ({
           )}
 
           {/* Next Steps */}
-          <div className="mb-6 um-p-4 um-um-rounded-lg um-border-2" style={{ borderColor: `${colors.lightGreen}40`, backgroundColor: `${colors.lightGreen}08` }}>
+          <div className="mb-6 um-p-4 um-rounded-lg um-border-2" style={{ borderColor: `${colors.lightGreen}40`, backgroundColor: `${colors.lightGreen}08` }}>
             <h3 className="um-font-bold um-text-lg um-mb-3 flex um-items-center gap-2" style={{ color: colors.black }}>
               <BarChart3 className="w-5 h-5" style={{ color: colors.lightGreen }} />
               What's Next?

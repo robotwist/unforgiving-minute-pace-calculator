@@ -35,7 +35,7 @@ const Tooltip = ({
       {children}
       {show && content && (
         <div
-          className={`um-absolute z-50 px-3 um-py-2 um-text-sm um-um-rounded-lg shadow-lg max-w-xs ${positionClasses[position]}`}
+          className={`um-absolute z-50 px-3 um-py-2 um-text-sm um-rounded-lg shadow-lg max-w-xs ${positionClasses[position]}`}
           style={{
             backgroundColor: colors?.black || '#1A1A1A',
             color: colors?.white || '#FFFFFF',
@@ -69,7 +69,7 @@ export const HelpIcon = ({ content, colors, className = '' }) => {
     <Tooltip content={content} colors={colors}>
       <button
         type="button"
-        className={`inline-flex um-items-center um-justify-center w-4 h-4 um-um-rounded-full ${className}`}
+        className={`inline-flex um-items-center um-justify-center w-4 h-4 um-rounded-full ${className}`}
         style={{
           backgroundColor: `${colors?.lightBlue || '#1E6B96'}20`,
           color: colors?.lightBlue || '#1E6B96'

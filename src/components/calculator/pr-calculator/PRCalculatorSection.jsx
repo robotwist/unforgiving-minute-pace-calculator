@@ -71,7 +71,7 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
         <div className="inline-block">
           <div className="w-32 h-32 sm:w-40 sm:h-40 um-mx-auto um-relative">
             <div
-              className="um-absolute um-inset-0 um-um-rounded-full border-4 flex um-items-center um-justify-center"
+              className="um-absolute um-inset-0 um-rounded-full border-4 flex um-items-center um-justify-center"
               style={{
                 borderColor: colors.lightBlue,
                 backgroundColor: `${colors.lightBlue}10`
@@ -94,36 +94,36 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
         {/* Value proposition badges */}
         <div className="um-flex um-flex-wrap um-justify-center um-gap-3 mt-6 um-px-4">
           <div
-            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-rounded-full border"
             style={{
               borderColor: colors.lightBlue,
               backgroundColor: colors.lightBlue + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }} />
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.lightBlue }} />
             <span className="um-text-sm um-font-medium">Proven Paces</span>
           </div>
           <div
-            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-rounded-full border"
             style={{
               borderColor: colors.lightGreen,
               backgroundColor: colors.lightGreen + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }} />
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.lightGreen }} />
             <span className="um-text-sm um-font-medium">Multi-Distance</span>
           </div>
           <div
-            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-rounded-full border"
             style={{
               borderColor: colors.orange,
               backgroundColor: colors.orange + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.orange }} />
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.orange }} />
             <span className="um-text-sm um-font-medium">Simplified</span>
           </div>
         </div>

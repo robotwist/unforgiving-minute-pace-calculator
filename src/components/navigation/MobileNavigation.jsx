@@ -41,7 +41,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
     <>
       {/* Mobile Bottom Navigation - Fixed Position */}
       {/* Safe area padding for devices with home indicator (iPhone X+) */}
-      <div className="um-fixed bottom-0 left-0 right-0 um-z-40 um-md\:hidden pb-safe">
+      <div className="um-fixed bottom-0 left-0 right-0 um-z-40 um-md-hidden pb-safe">
         <div 
           className="um-flex um-items-center um-justify-around um-border-t-2 backdrop-blur-sm"
           style={{ 
@@ -70,7 +70,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
                 {/* Badge for new features */}
                 {tab.badge && (
                   <div 
-                    className="um-absolute -top-1 right-2 w-3 h-3 um-um-rounded-full um-z-10"
+                    className="um-absolute -top-1 right-2 w-3 h-3 um-rounded-full um-z-10"
                     style={{ backgroundColor: colors.orange }}
                     aria-label="New features available"
                   />
@@ -78,7 +78,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
                 
                 {/* Icon with active state - larger for better touch targets */}
                 <div 
-                  className="um-um-rounded-lg transition-all duration-200 flex um-items-center um-justify-center"
+                  className="um-rounded-lg transition-all duration-200 flex um-items-center um-justify-center"
                   style={{
                     backgroundColor: isActive ? colors.lightBlue + '20' : 'transparent',
                     transform: isActive ? 'scale(1.15)' : 'scale(1)',
@@ -113,7 +113,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
       </div>
 
       {/* Desktop Top Navigation - Enhanced */}
-      <div className="hidden um-md\:flex um-items-center um-justify-center space-x-6 mb-8">
+      <div className="hidden um-md-flex um-items-center um-justify-center space-x-6 mb-8">
         {tabs.map((tab) => {
           const IconComponent = tab.icon;
           const isActive = activeTab === tab.id;
@@ -122,7 +122,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`group flex um-items-center um-space-x-3 um-px-6 py-3 um-um-rounded-lg um-font-medium transition-all duration-300 um-relative um-overflow-hidden ${
+              className={`group flex um-items-center um-space-x-3 um-px-6 py-3 um-rounded-lg um-font-medium transition-all duration-300 um-relative um-overflow-hidden ${
                 isActive ? 'um-shadow-active' : ''
               }`}
               style={{
@@ -144,7 +144,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
               {/* Badge for new features */}
               {tab.badge && (
                 <div 
-                  className="um-absolute -top-2 -right-2 w-4 h-4 um-um-rounded-full flex um-items-center um-justify-center"
+                  className="um-absolute -top-2 -right-2 w-4 h-4 um-rounded-full flex um-items-center um-justify-center"
                   style={{ backgroundColor: colors.orange }}
                 >
                   <span className="um-text-xs um-font-bold" style={{ color: colors.white }}>!</span>
@@ -222,7 +222,7 @@ const ProgressTab = ({ colors, userProfile, trainingHistory, personalBests }) =>
       </div>
 
       {/* Stats Grid */}
-      <div className="um-grid um-grid-cols-2 um-lg-grid-cols-4 gaum-p-4">
+      <div className="um-grid um-grid-cols-2 um-lg-grid-cols-4 um-gap-4">
         {stats.map((stat, index) => (
           <div key={index} className="munich-card">
             <div className="munich-card-body um-text-center">
@@ -251,7 +251,7 @@ const ProgressTab = ({ colors, userProfile, trainingHistory, personalBests }) =>
           <h3 className="um-font-bold um-mb-4" style={{ color: colors.black }}>
             Quick Actions
           </h3>
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-4">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-4">
             <button className="munich-btn munich-btn-primary">
               Log Workout
             </button>

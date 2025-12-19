@@ -941,7 +941,7 @@ const RunningTrainingApp = () => {
 
   return (
     <div
-      className="min-h-screen um-relative um-overflow-hidden um-pb-20 um-md\:pb-0"
+      className="min-h-screen um-relative um-overflow-hidden um-pb-20 um-md-pb-0"
       style={{
         backgroundColor: colors.white,
         backgroundImage: `
@@ -1000,7 +1000,7 @@ const RunningTrainingApp = () => {
           clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
           filter: 'blur(1px)'
         }}></div>
-        <div className="um-absolute toum-p-40 um-right-20 w-3 h-3" style={{
+        <div className="um-absolute um-top-40 um-right-20 w-3 h-3" style={{
           backgroundColor: colors.lightGreen,
           clipPath: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
           filter: 'blur(1px)'
@@ -1021,12 +1021,12 @@ const RunningTrainingApp = () => {
         <div className="um-absolute um-inset-0 progressive-melange um-opacity-10"></div>
         
         <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
-          <div className="um-flex um-flex-col um-sm-flex-row um-justify-between um-items-center um-py-4 um-sm-py-6 um-space-y-4 um-sm\:space-y-0">
+          <div className="um-flex um-flex-col um-sm-flex-row um-justify-between um-items-center um-py-4 um-sm-py-6 um-space-y-4 um-sm-space-y-0">
             {/* Brand Logo - Enhanced Prominence */}
             <div className="um-flex um-items-center um-space-x-3">
               <div className="um-relative">
                 {/* Geometric logo background */}
-                <div className="w-12 um-h-12 um-sm\:w-16 um-sm\:h-16 geometric-octagon flex um-items-center um-justify-center" style={{ 
+                <div className="w-12 um-h-12 um-sm-w-16 um-sm-h-16 geometric-octagon flex um-items-center um-justify-center" style={{ 
                   backgroundColor: colors.lightBlue,
                   boxShadow: '0 6px 12px rgba(30,107,150,0.3)'
                 }}>
@@ -1034,7 +1034,7 @@ const RunningTrainingApp = () => {
                   <img 
                     src="/olympicrunner72icon.png" 
                     alt="Olympic Runner" 
-                    className="w-8 um-h-8 um-sm\:w-10 um-sm\:h-10 um-object-contain running-pictogram"
+                    className="w-8 um-h-8 um-sm-w-10 um-sm-h-10 um-object-contain running-pictogram"
                     style={{ filter: 'brightness(0) invert(1)' }}
                   />
                 </div>
@@ -1056,7 +1056,7 @@ const RunningTrainingApp = () => {
                 }}>
                   DISTANCE RUNNING
                 </p>
-                <div className="hidden um-sm\:block um-mt-1">
+                <div className="hidden um-sm-block um-mt-1">
                   <div className="h-0.5 w-20 bg-gradient-to-r" style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.lightBlue} 0%, ${colors.orange} 50%, ${colors.lightGreen} 100%)`
                   }}></div>
@@ -1099,15 +1099,15 @@ const RunningTrainingApp = () => {
                     }}
                   >
                     <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span className="hidden um-sm\:inline">{label}</span>
-                    <span className="um-sm\:hidden">{label.split(' ')[0]}</span>
+                    <span className="hidden um-sm-inline">{label}</span>
+                    <span className="um-sm-hidden">{label.split(' ')[0]}</span>
                   </button>
                 ))}
 
                 {/* Coach page link */}
                 <a
                   href="/apply"
-                  className="ml-2 sm:ml-3 px-2 sm:px-3 um-py-2 um-um-rounded-md um-text-xs um-sm-text-sm um-font-medium transition-colors"
+                  className="ml-2 sm:ml-3 px-2 sm:px-3 um-py-2 um-rounded-md um-text-xs um-sm-text-sm um-font-medium transition-colors"
                   style={{
                     color: colors.lightBlue,
                     border: `1px solid ${colors.lightBlue}`,
@@ -1121,7 +1121,7 @@ const RunningTrainingApp = () => {
                 {/* Global Consult CTA */}
                 <a
                   href="/coach"
-                  className="ml-2 sm:ml-4 px-3 um-sm-px-4 um-py-2 um-font-semibold um-border-2 um-um-rounded-md transition-colors"
+                  className="ml-2 sm:ml-4 px-3 um-sm-px-4 um-py-2 um-font-semibold um-border-2 um-rounded-md transition-colors"
                   style={{
                     borderColor: colors.lightGreen,
                     color: colors.lightGreen,
@@ -1135,7 +1135,7 @@ const RunningTrainingApp = () => {
                 {/* Dark Mode Toggle */}
                 <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="ml-4 p-2 um-um-rounded-full transition-all duration-300 hover:scale-110"
+                  className="ml-4 p-2 um-rounded-full transition-all duration-300 hover:scale-110"
                   style={{
                     backgroundColor: darkMode ? colors.yellow : colors.gray,
                     color: darkMode ? colors.black : colors.lightBlue,
@@ -1156,7 +1156,7 @@ const RunningTrainingApp = () => {
               <div className="um-flex um-items-center space-x-2">
                 <a
                   href="/apply"
-                  className="px-3 um-py-2 um-font-semibold um-border-2 um-um-rounded-md transition-colors"
+                  className="px-3 um-py-2 um-font-semibold um-border-2 um-rounded-md transition-colors"
                   style={{
                     borderColor: colors.lightBlue,
                     color: colors.lightBlue,
@@ -1168,7 +1168,7 @@ const RunningTrainingApp = () => {
                 </a>
                 <a
                   href="/coach"
-                  className="px-3 um-py-2 um-font-semibold um-border-2 um-um-rounded-md transition-colors"
+                  className="px-3 um-py-2 um-font-semibold um-border-2 um-rounded-md transition-colors"
                   style={{
                     borderColor: colors.lightGreen,
                     color: colors.lightGreen,
@@ -1180,7 +1180,7 @@ const RunningTrainingApp = () => {
                 </a>
                 <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="p-2 um-um-rounded-full transition-all duration-300 hover:scale-110"
+                  className="p-2 um-rounded-full transition-all duration-300 hover:scale-110"
                   style={{
                     backgroundColor: darkMode ? colors.yellow : colors.gray,
                     color: darkMode ? colors.black : colors.lightBlue,
@@ -1204,7 +1204,7 @@ const RunningTrainingApp = () => {
       {/* Main Content */}
       <main id="main-content" className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-py-4 um-sm-py-8 um-relative" style={{ backgroundColor: colors.white, color: colors.black }} role="main">
         {/* Floating runner elements - hidden on mobile for performance */}
-        <div className="hidden um-sm\:block um-absolute um-top-20 um-left-10 um-w-12 um-h-12 geometric-float-counterclockwise">
+        <div className="hidden um-sm-block um-absolute um-top-20 um-left-10 um-w-12 um-h-12 geometric-float-counterclockwise">
           {/* Olympic Runner Icon */}
           <img 
             src="/olympicrunner72icon.png" 
@@ -1214,7 +1214,7 @@ const RunningTrainingApp = () => {
           />
         </div>
         
-        <div className="hidden um-sm\:block um-absolute toum-p-40 um-right-20 um-w-16 um-h-16 geometric-float-counterclockwise" style={{ animationDelay: '2s' }}>
+        <div className="hidden um-sm-block um-absolute um-top-40 um-right-20 um-w-16 um-h-16 geometric-float-counterclockwise" style={{ animationDelay: '2s' }}>
           {/* Olympic Runner Icon */}
           <img 
             src="/olympicrunner72icon.png" 
@@ -1224,7 +1224,7 @@ const RunningTrainingApp = () => {
           />
         </div>
         
-        <div className="hidden um-sm\:block um-absolute um-bottom-40 um-left-1-4 um-w-8 um-h-8 geometric-float-counterclockwise" style={{ animationDelay: '4s' }}>
+        <div className="hidden um-sm-block um-absolute um-bottom-40 um-left-1-4 um-w-8 um-h-8 geometric-float-counterclockwise" style={{ animationDelay: '4s' }}>
           {/* Olympic Runner Icon */}
           <img 
             src="/olympicrunner72icon.png" 
@@ -1258,8 +1258,8 @@ const RunningTrainingApp = () => {
                   <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
                   
                   {/* Geometric border accents */}
-                  <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm\:w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
-                  <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm\:w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
+                  <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
+                  <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
                   
                   <div className="um-relative um-z-10">
                     <div className="um-text-3xl um-sm-text-4xl um-font-bold um-mb-2" style={{ color: colors.lightBlue }}>
@@ -1275,7 +1275,7 @@ const RunningTrainingApp = () => {
                 </div>
 
                 {/* Training Paces Grid - Munich 1972 Geometric Style */}
-                <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 um-gap-3 sm:gaum-p-4">
+                <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 um-gap-3 sm:um-gap-4">
                   {[
                     { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray },
                     { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen },
@@ -1312,7 +1312,7 @@ const RunningTrainingApp = () => {
                 {/* Freemium Flow - Post-Calculation User Journey */}
                 <div className="mt-8 space-y-6">
                   {/* Free Training Week Sample */}
-                  <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 um-border-2 um-um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
+                  <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 um-border-2 um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
                     borderColor: colors.lightBlue,
                     boxShadow: '0 10px 25px rgba(30, 107, 150, 0.15)'
                   }}>
@@ -1332,7 +1332,7 @@ const RunningTrainingApp = () => {
                           </p>
                         </div>
                         <div className="um-flex um-items-center gap-2">
-                          <span className="um-px-4 um-py-2 um-um-rounded-full um-text-sm um-font-bold um-border-2" style={{ 
+                          <span className="um-px-4 um-py-2 um-rounded-full um-text-sm um-font-bold um-border-2" style={{ 
                             backgroundColor: colors.lightGreen,
                             borderColor: colors.darkGreen,
                             color: 'white'
@@ -1342,11 +1342,11 @@ const RunningTrainingApp = () => {
                         </div>
                       </div>
                       
-                      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4 mb-8">
+                      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4 mb-8">
                         <div className="space-y-3">
-                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
                             <div className="um-flex um-items-center um-gap-3">
-                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                              <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
                               <span className="um-font-medium" style={{ color: colors.black }}>Monday - Recovery Run</span>
                             </div>
                             <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -1354,9 +1354,9 @@ const RunningTrainingApp = () => {
                               backgroundColor: colors.lightBlue + '15'
                             }}>{trainingPaces.easy}</span>
                           </div>
-                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
                             <div className="um-flex um-items-center um-gap-3">
-                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                              <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
                               <span className="um-font-medium" style={{ color: colors.black }}>Wednesday - Threshold Run</span>
                             </div>
                             <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -1366,9 +1366,9 @@ const RunningTrainingApp = () => {
                           </div>
                         </div>
                         <div className="space-y-3">
-                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
                             <div className="um-flex um-items-center um-gap-3">
-                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
+                              <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
                               <span className="um-font-medium" style={{ color: colors.black }}>Friday - Interval Session</span>
                             </div>
                             <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -1376,9 +1376,9 @@ const RunningTrainingApp = () => {
                               backgroundColor: colors.darkGreen + '15'
                             }}>{trainingPaces.interval}</span>
                           </div>
-                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
                             <div className="um-flex um-items-center um-gap-3">
-                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                              <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
                               <span className="um-font-medium" style={{ color: colors.black }}>Sunday - Long Run</span>
                             </div>
                             <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -1390,9 +1390,9 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       {/* Value proposition with urgency */}
-                      <div className="bg-white um-um-rounded-lg um-p-4 um-mb-6 border" style={{ borderColor: colors.orange + '30' }}>
+                      <div className="bg-white um-rounded-lg um-p-4 um-mb-6 border" style={{ borderColor: colors.orange + '30' }}>
                         <div className="um-flex um-items-start um-gap-3">
-                          <div className="w-5 h-5 um-um-rounded-full flex um-items-center um-justify-center" style={{ backgroundColor: colors.orange }}>
+                          <div className="w-5 h-5 um-rounded-full flex um-items-center um-justify-center" style={{ backgroundColor: colors.orange }}>
                             <Star className="w-3 h-3 text-white" />
                           </div>
                           <div>
@@ -1409,7 +1409,7 @@ const RunningTrainingApp = () => {
                       <div className="um-flex um-flex-col um-sm-flex-row um-gap-3">
                         <button
                           onClick={() => setActiveTab('premium')}
-                          className="flex-1 um-px-8 um-py-4 um-um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                          className="flex-1 um-px-8 um-py-4 um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                           style={{ 
                             backgroundColor: colors.orange,
                             color: 'white'
@@ -1421,7 +1421,7 @@ const RunningTrainingApp = () => {
                         </button>
                         <button
                           onClick={() => setActiveTab('plans')}
-                          className="flex-1 um-px-6 um-py-4 um-um-rounded-lg um-font-medium um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
+                          className="flex-1 um-px-6 um-py-4 um-rounded-lg um-font-medium um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
                           style={{ 
                             borderColor: colors.lightBlue,
                             color: colors.lightBlue,
@@ -1438,7 +1438,7 @@ const RunningTrainingApp = () => {
 
                   {/* Profile Creation Prompt */}
                   {!savedProfileData && (
-                    <div className="um-border-2 um-um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
+                    <div className="um-border-2 um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
                       borderColor: colors.lightGreen + '60',
                       backgroundColor: 'white',
                       boxShadow: '0 8px 25px rgba(46, 139, 87, 0.12)'
@@ -1449,8 +1449,8 @@ const RunningTrainingApp = () => {
                       }}></div>
                       
                       <div className="um-relative um-z-10">
-                        <div className="um-flex um-items-start gaum-p-4 um-mb-4">
-                          <div className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center" style={{ 
+                        <div className="um-flex um-items-start um-gap-4 um-mb-4">
+                          <div className="w-12 um-h-12 um-rounded-full flex um-items-center um-justify-center" style={{ 
                             backgroundColor: colors.lightGreen + '20'
                           }}>
                             <User className="w-6 h-6" style={{ color: colors.lightGreen }} />
@@ -1488,7 +1488,7 @@ const RunningTrainingApp = () => {
                         <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 um-items-center">
                           <button 
                             onClick={() => setActiveTab('profile')}
-                            className="flex-1 um-px-8 um-py-4 um-um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                            className="flex-1 um-px-8 um-py-4 um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                             style={{ 
                               backgroundColor: colors.lightGreen,
                               color: 'white'
@@ -1499,7 +1499,7 @@ const RunningTrainingApp = () => {
                             Create Free Profile Now
                           </button>
                           <div className="um-flex um-items-center gap-2 um-text-sm" style={{ color: colors.darkGreen }}>
-                            <div className="w-4 h-4 um-um-rounded-full um-border-2" style={{ borderColor: colors.lightGreen }}>
+                            <div className="w-4 h-4 um-rounded-full um-border-2" style={{ borderColor: colors.lightGreen }}>
                               <CheckCircle className="w-3 h-3 text-green-600" />
                             </div>
                             No credit card • Always free
@@ -1542,7 +1542,7 @@ const RunningTrainingApp = () => {
             ) : (
               /* Fallback to original TrainingPlansSection for users without complete profile */
               <div className="space-y-6">
-                <div className="um-text-center um-p-6 um-um-rounded-lg" style={{ backgroundColor: colors.gray + '20' }}>
+                <div className="um-text-center um-p-6 um-rounded-lg" style={{ backgroundColor: colors.gray + '20' }}>
                   <h3 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     Get Personalized Recommendations
                   </h3>
@@ -1584,13 +1584,13 @@ const RunningTrainingApp = () => {
                     <div className="um-flex um-justify-between um-items-start um-mb-6">
                       <div>
                         <h3 className="um-text-3xl um-font-bold um-mb-2" style={{ color: colors.black }}>{selectedPlan.name}</h3>
-                        <div className="um-flex um-items-center gaum-p-4 um-text-sm">
+                        <div className="um-flex um-items-center um-gap-4 um-text-sm">
                           <div className="um-flex um-items-center gap-1">
                             <Clock className="w-4 h-4" style={{ color: colors.lightBlue }} />
                             <span style={{ color: colors.darkGreen }}>{selectedPlan.duration} weeks</span>
                           </div>
                           <div className="um-flex um-items-center gap-1">
-                            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
                             <span style={{ color: colors.darkGreen }}>{selectedPlan.phase} Phase</span>
                           </div>
                         </div>
@@ -1598,7 +1598,7 @@ const RunningTrainingApp = () => {
                       <button
                         type="button"
                         onClick={() => setShowPlanDetails(false)}
-                        className="um-text-2xl p-2 um-um-rounded-full transition-colors"
+                        className="um-text-2xl p-2 um-rounded-full transition-colors"
                         style={{ color: colors.darkGreen }}
                         aria-label="Close plan details"
                       >
@@ -1612,7 +1612,7 @@ const RunningTrainingApp = () => {
                         <p style={{ color: colors.darkGreen }}>{selectedPlan.description}</p>
                       </div>
 
-                      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-3 gaum-p-4">
+                      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-3 um-gap-4">
                         <div className="munich-card">
                           <div className="munich-card-body">
                             <div className="um-text-xs um-font-semibold" style={{ color: colors.darkGreen }}>Duration</div>
@@ -1638,7 +1638,7 @@ const RunningTrainingApp = () => {
                           <h4 className="um-text-lg um-font-bold um-mb-3" style={{ color: colors.black }}>
                             Training Paces (Optimal Progress Pace {selectedPlan.goldenPaceLevel})
                           </h4>
-                          <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 gaum-p-4">
+                          <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-gap-4">
                             <div className="munich-card">
                               <div className="munich-card-body">
                                 <div className="um-text-sm um-font-semibold" style={{ color: colors.darkGreen }}>Easy / Long</div>
@@ -1754,7 +1754,7 @@ const RunningTrainingApp = () => {
             />
             
             {/* Quick Actions */}
-            <div className="um-grid um-md-grid-cols-3 gaum-p-4 mt-8">
+            <div className="um-grid um-md-grid-cols-3 um-gap-4 mt-8">
               <div className="munich-card">
                 <div className="munich-card-body um-text-center">
                   <h3 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
@@ -1816,11 +1816,11 @@ const RunningTrainingApp = () => {
               <div className="um-relative um-z-10">
                 <h2 className="um-font-bold" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-4xl)'
+                  fontSize: 'var(--text-4xl)'
                 }}>Your Profile</h2>
                 <p style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-xl)'
+                  fontSize: 'var(--text-xl)'
                 }}>Customize your training experience</p>
               </div>
             </div>
@@ -1843,7 +1843,7 @@ const RunningTrainingApp = () => {
                   <div className="um-relative um-z-10">
                     <h3 className="um-font-bold flex um-items-center" style={{ 
                       color: colors.white,
-                      fontSize: 'var(--um-text-2xl)'
+                      fontSize: 'var(--text-2xl)'
                     }}>
                       <User className="w-6 h-6 mr-3" />
                       Create Your Running Profile
@@ -1852,11 +1852,11 @@ const RunningTrainingApp = () => {
                 </div>
                 
                 <div className="munich-card-body space-y-6">
-                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-6">
                     <div className="space-y-2">
                       <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>Name</label>
                       <input
                         type="text"
@@ -1871,7 +1871,7 @@ const RunningTrainingApp = () => {
                     <div className="space-y-2">
                       <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>Email</label>
                       <input
                         type="email"
@@ -1884,11 +1884,11 @@ const RunningTrainingApp = () => {
                     </div>
                   </div>
 
-                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-6">
                     <div className="space-y-2">
                       <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>Experience Level</label>
                       <select
                         value={userProfile.experience}
@@ -1905,7 +1905,7 @@ const RunningTrainingApp = () => {
                     <div className="space-y-2">
                       <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>Goal Race Distance</label>
                       <select
                         value={userProfile.goalRaceDistance}
@@ -1920,11 +1920,11 @@ const RunningTrainingApp = () => {
                     </div>
                   </div>
 
-                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-6">
                     <div className="space-y-2">
                       <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>Goal Race Time (optional)</label>
                       <input
                         type="text"
@@ -1939,7 +1939,7 @@ const RunningTrainingApp = () => {
                     <div className="space-y-2">
                       <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>Current Weekly Mileage</label>
                       <input
                         type="number"
@@ -1955,7 +1955,7 @@ const RunningTrainingApp = () => {
                   <div className="space-y-2">
                     <label className="block um-font-medium" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-sm)'
+                      fontSize: 'var(--text-sm)'
                     }}>Injury History (optional)</label>
                     <textarea
                       value={userProfile.injuryHistory}
@@ -1967,7 +1967,7 @@ const RunningTrainingApp = () => {
                     />
                   </div>
 
-                  <div className="um-flex gaum-p-4">
+                  <div className="um-flex um-gap-4">
                     <button
                       onClick={savedProfileData ? updateProfile : saveProfile}
                       className="munich-btn munich-btn-primary flex-1 um-relative"
@@ -2018,7 +2018,7 @@ const RunningTrainingApp = () => {
                     <div className="um-relative um-z-10">
                       <h3 className="um-font-bold flex um-items-center" style={{ 
                         color: colors.white,
-                        fontSize: 'var(--um-text-2xl)'
+                        fontSize: 'var(--text-2xl)'
                       }}>
                         <User className="w-6 h-6 mr-3" />
                         Welcome, {savedProfileData?.name || userProfile.name}!
@@ -2026,13 +2026,13 @@ const RunningTrainingApp = () => {
                       <p className="mt-2" style={{ 
                         color: colors.white,
                         opacity: 0.9,
-                        fontSize: 'var(--um-text-base)'
+                        fontSize: 'var(--text-base)'
                       }}>Your profile has been created successfully</p>
                     </div>
                   </div>
                   
                   <div className="um-p-8">
-                    <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
+                    <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
                       <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
                         <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
@@ -2046,23 +2046,23 @@ const RunningTrainingApp = () => {
                         <div className="munich-card-body um-relative um-z-10">
                           <h4 className="um-font-medium um-mb-4" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-lg)'
+                            fontSize: 'var(--text-lg)'
                           }}>Personal Info</h4>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>Name: {savedProfileData?.name || userProfile.name}</p>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>Email: {savedProfileData?.email || userProfile.email}</p>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>Experience: {savedProfileData?.experience || userProfile.experience}</p>
                           <p style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>
                             Member since: {savedProfileData?.created_date ? 
                               new Date(savedProfileData.created_date).toLocaleDateString() : 
@@ -2086,19 +2086,19 @@ const RunningTrainingApp = () => {
                         <div className="munich-card-body um-relative um-z-10">
                           <h4 className="um-font-medium um-mb-4" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-lg)'
+                            fontSize: 'var(--text-lg)'
                           }}>Running Goals</h4>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>Goal Race: {savedProfileData?.goalRaceDistance || userProfile.goalRaceDistance}</p>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>Goal Time: {savedProfileData?.goalRaceTime || userProfile.goalRaceTime || <span className="text-gray-500">Not set</span>}</p>
                           <p style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>
                             Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage ? 
                               `${savedProfileData?.weekly_mileage || userProfile.weeklyMileage} miles` : 
@@ -2122,7 +2122,7 @@ const RunningTrainingApp = () => {
                         <div className="munich-card-body um-relative um-z-10">
                           <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-lg)'
+                            fontSize: 'var(--text-lg)'
                           }}>
                             <Activity className="w-4 h-4 mr-2" />
                             Optimal Progress Pace Progress
@@ -2131,12 +2131,12 @@ const RunningTrainingApp = () => {
                             <div className="um-flex um-justify-between um-items-center">
                               <span style={{ 
                                 color: colors.black,
-                                fontSize: 'var(--um-text-sm)'
+                                fontSize: 'var(--text-sm)'
                               }}>Current Optimal Progress Pace:</span>
                               {savedProfileData?.currentGoldenPace || goldenPace ? (
                                 <span className="um-font-bold" style={{ 
                                   color: colors.violet,
-                                  fontSize: 'var(--um-text-lg)'
+                                  fontSize: 'var(--text-lg)'
                                 }}>
                                   {savedProfileData?.currentGoldenPace || goldenPace}
                                 </span>
@@ -2144,7 +2144,7 @@ const RunningTrainingApp = () => {
                                 <div className="um-flex um-items-center gap-2">
                                   <span style={{ 
                                     color: colors.darkGray,
-                                    fontSize: 'var(--um-text-sm)'
+                                    fontSize: 'var(--text-sm)'
                                   }}>Not calculated</span>
                                   {savedProfileData?.goalRaceTime && savedProfileData?.goalRaceDistance && (
                                     <button
@@ -2153,7 +2153,7 @@ const RunningTrainingApp = () => {
                                         setRaceDistance(savedProfileData.goalRaceDistance);
                                         setActiveTab('calculator');
                                       }}
-                                      className="px-2 py-1 um-text-xs um-um-rounded-md hover:opacity-80 transition-opacity"
+                                      className="px-2 py-1 um-text-xs um-rounded-md hover:opacity-80 transition-opacity"
                                       style={{ 
                                         backgroundColor: colors.lightBlue,
                                         color: colors.white
@@ -2171,11 +2171,11 @@ const RunningTrainingApp = () => {
                               <div className="um-flex um-justify-between um-items-center">
                                 <span style={{ 
                                   color: colors.black,
-                                  fontSize: 'var(--um-text-sm)'
+                                  fontSize: 'var(--text-sm)'
                                 }}>6-Week Projection:</span>
                                 <span className="um-font-bold" style={{ 
                                   color: colors.lightGreen,
-                                  fontSize: 'var(--um-text-lg)'
+                                  fontSize: 'var(--text-lg)'
                                 }}>
                                   {savedProfileData.projectedGoldenPace}
                                 </span>
@@ -2206,7 +2206,7 @@ const RunningTrainingApp = () => {
                           <div className="munich-card-body um-relative um-z-10">
                             <h4 className="um-font-medium um-mb-6 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--um-text-xl)'
+                              fontSize: 'var(--text-xl)'
                             }}>
                               <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                               Optimal Progress Pace Progression Forecast
@@ -2218,7 +2218,7 @@ const RunningTrainingApp = () => {
                             </div>
                             
                             {/* Simple ASCII-style progression chart */}
-                            <div className="bg-white um-p-6 um-um-rounded-lg border" style={{ borderColor: colors.gray }}>
+                            <div className="bg-white um-p-6 um-rounded-lg border" style={{ borderColor: colors.gray }}>
                               <div className="space-y-2">
                                 {(() => {
                                   const progression = generateGoldenPaceProgression(
@@ -2298,12 +2298,12 @@ const RunningTrainingApp = () => {
                           <div className="munich-card-body um-relative um-z-10">
                             <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--um-text-lg)'
+                              fontSize: 'var(--text-lg)'
                             }}>
                               <Trophy className="w-5 h-5 mr-2" style={{ color: colors.orange }} />
                               Personal Bests
                             </h4>
-                            <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 gaum-p-4">
+                            <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 um-gap-4">
                               {Object.entries(personalBests).map(([distance, time]) => (
                                 <div key={distance} className="um-text-center p-3 um-rounded" style={{ 
                                   backgroundColor: colors.lightGray,
@@ -2311,11 +2311,11 @@ const RunningTrainingApp = () => {
                                 }}>
                                   <div className="um-font-medium" style={{ 
                                     color: colors.black,
-                                    fontSize: 'var(--um-text-sm)'
+                                    fontSize: 'var(--text-sm)'
                                   }}>{distance}</div>
                                   <div className="um-font-bold" style={{ 
                                     color: colors.orange,
-                                    fontSize: 'var(--um-text-lg)'
+                                    fontSize: 'var(--text-lg)'
                                   }}>{time}</div>
                                 </div>
                               ))}
@@ -2336,7 +2336,7 @@ const RunningTrainingApp = () => {
                           <div className="munich-card-body um-relative um-z-10">
                             <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--um-text-lg)'
+                              fontSize: 'var(--text-lg)'
                             }}>
                               <Calendar className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                               Recent Training History
@@ -2350,17 +2350,17 @@ const RunningTrainingApp = () => {
                                   <div className="um-flex um-justify-between um-items-start um-mb-2">
                                     <span className="um-font-medium" style={{ 
                                       color: colors.black,
-                                      fontSize: 'var(--um-text-sm)'
+                                      fontSize: 'var(--text-sm)'
                                     }}>{session.type}</span>
                                     <span style={{ 
                                       color: colors.gray,
-                                      fontSize: 'var(--um-text-xs)'
+                                      fontSize: 'var(--text-xs)'
                                     }}>{session.date}</span>
                                   </div>
                                   {session.distance && (
                                     <div style={{ 
                                       color: colors.black,
-                                      fontSize: 'var(--um-text-sm)'
+                                      fontSize: 'var(--text-sm)'
                                     }}>
                                       Distance: {session.distance} • Time: {session.time}
                                     </div>
@@ -2368,7 +2368,7 @@ const RunningTrainingApp = () => {
                                   {(session.feeling || session.effort) && (
                                     <div style={{ 
                                       color: colors.lightBlue,
-                                      fontSize: 'var(--um-text-sm)'
+                                      fontSize: 'var(--text-sm)'
                                     }}>
                                       Felt: {session.feeling} • Effort: {session.effort}
                                     </div>
@@ -2376,7 +2376,7 @@ const RunningTrainingApp = () => {
                                   {session.location && (
                                     <div style={{ 
                                       color: colors.black,
-                                      fontSize: 'var(--um-text-xs)',
+                                      fontSize: 'var(--text-xs)',
                                       opacity: 0.8
                                     }}>
                                       {session.location}
@@ -2386,7 +2386,7 @@ const RunningTrainingApp = () => {
                                   {session.goldenPace && (
                                     <div style={{ 
                                       color: colors.orange,
-                                      fontSize: 'var(--um-text-sm)',
+                                      fontSize: 'var(--text-sm)',
                                       fontWeight: '500'
                                     }}>
                                       GoldenPace: {session.goldenPace}
@@ -2395,7 +2395,7 @@ const RunningTrainingApp = () => {
                                   {session.notes && (
                                     <div className="mt-2" style={{ 
                                       color: colors.gray,
-                                      fontSize: 'var(--um-text-xs)',
+                                      fontSize: 'var(--text-xs)',
                                       fontStyle: 'italic'
                                     }}>
                                       "{session.notes}"
@@ -2420,7 +2420,7 @@ const RunningTrainingApp = () => {
                           <div className="munich-card-body um-relative um-z-10">
                             <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--um-text-lg)'
+                              fontSize: 'var(--text-lg)'
                             }}>
                               <CheckCircle className="w-5 h-5 mr-2" style={{ color: colors.violet }} />
                               Completed Training Plans
@@ -2433,11 +2433,11 @@ const RunningTrainingApp = () => {
                                 }}>
                                   <span style={{ 
                                     color: colors.black,
-                                    fontSize: 'var(--um-text-sm)'
+                                    fontSize: 'var(--text-sm)'
                                   }}>{plan.name}</span>
                                   <span style={{ 
                                     color: colors.gray,
-                                    fontSize: 'var(--um-text-xs)'
+                                    fontSize: 'var(--text-xs)'
                                   }}>{plan.completedDate}</span>
                                 </div>
                               ))}
@@ -2447,7 +2447,7 @@ const RunningTrainingApp = () => {
                       )}
                     </div>
                     
-                    <div className="mt-8 flex um-flex-wrap gaum-p-4">
+                    <div className="mt-8 flex um-flex-wrap um-gap-4">
                       <button
                         onClick={() => {
                           // Transfer profile data to calculator
@@ -2559,7 +2559,7 @@ const RunningTrainingApp = () => {
                 <div className="um-relative um-z-10">
                   <h3 className="um-font-bold flex um-items-center" style={{ 
                     color: colors.white,
-                    fontSize: 'var(--um-text-2xl)'
+                    fontSize: 'var(--text-2xl)'
                   }}>
                     <Activity className="w-6 h-6 mr-3" />
                     Log Training Session
@@ -2567,7 +2567,7 @@ const RunningTrainingApp = () => {
                   <p className="mt-2" style={{ 
                     color: colors.white,
                     opacity: 0.9,
-                    fontSize: 'var(--um-text-base)'
+                    fontSize: 'var(--text-base)'
                   }}>Track your workout details and how you felt</p>
                 </div>
               </div>
@@ -2609,11 +2609,11 @@ const RunningTrainingApp = () => {
                   });
                   setShowTrainingLogForm(false);
                 }}>
-                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-6">
                     <div>
                       <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>
                         Workout Type
                       </label>
@@ -2623,7 +2623,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--um-text-base)'
+                          fontSize: 'var(--text-base)'
                         }}
                       >
                         <option value="Easy Run">Easy Run</option>
@@ -2640,7 +2640,7 @@ const RunningTrainingApp = () => {
                     <div>
                       <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>
                         Distance
                       </label>
@@ -2652,7 +2652,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--um-text-base)'
+                          fontSize: 'var(--text-base)'
                         }}
                       />
                     </div>
@@ -2660,7 +2660,7 @@ const RunningTrainingApp = () => {
                     <div>
                       <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>
                         Time
                       </label>
@@ -2672,7 +2672,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--um-text-base)'
+                          fontSize: 'var(--text-base)'
                         }}
                       />
                     </div>
@@ -2680,7 +2680,7 @@ const RunningTrainingApp = () => {
                     <div>
                       <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>
                         How did you feel?
                       </label>
@@ -2690,7 +2690,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--um-text-base)'
+                          fontSize: 'var(--text-base)'
                         }}
                       >
                         <option value="Excellent">Excellent</option>
@@ -2704,7 +2704,7 @@ const RunningTrainingApp = () => {
                     <div>
                       <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>
                         Effort Level
                       </label>
@@ -2714,7 +2714,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--um-text-base)'
+                          fontSize: 'var(--text-base)'
                         }}
                       >
                         <option value="Easy">Easy</option>
@@ -2729,7 +2729,7 @@ const RunningTrainingApp = () => {
                     <div>
                       <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>
                         Location
                       </label>
@@ -2741,7 +2741,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--um-text-base)'
+                          fontSize: 'var(--text-base)'
                         }}
                       />
                     </div>
@@ -2750,7 +2750,7 @@ const RunningTrainingApp = () => {
                   <div className="mt-6">
                     <label className="block um-font-medium um-mb-3" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-sm)'
+                      fontSize: 'var(--text-sm)'
                     }}>
                       Weather
                     </label>
@@ -2762,7 +2762,7 @@ const RunningTrainingApp = () => {
                       className="um-field"
                       style={{ 
                         borderColor: colors.gray,
-                        fontSize: 'var(--um-text-base)'
+                        fontSize: 'var(--text-base)'
                       }}
                     />
                   </div>
@@ -2770,7 +2770,7 @@ const RunningTrainingApp = () => {
                   <div className="mt-6">
                     <label className="block um-font-medium um-mb-3" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-sm)'
+                      fontSize: 'var(--text-sm)'
                     }}>
                       Notes
                     </label>
@@ -2782,12 +2782,12 @@ const RunningTrainingApp = () => {
                       className="um-field um-textarea"
                       style={{ 
                         borderColor: colors.gray,
-                        fontSize: 'var(--um-text-base)'
+                        fontSize: 'var(--text-base)'
                       }}
                     />
                   </div>
                   
-                  <div className="mt-8 flex um-flex-wrap gaum-p-4">
+                  <div className="mt-8 flex um-flex-wrap um-gap-4">
                     <button aria-label="Add activity"
                       type="submit"
                       className="munich-btn munich-btn-primary um-relative"
@@ -2841,7 +2841,7 @@ const RunningTrainingApp = () => {
         <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
         
         <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-4 sm:gaum-p-6">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-4 sm:um-gap-6">
             <div>
               <h3 className="um-text-base um-sm-text-lg um-font-medium um-mb-2 sm:mb-3" style={{ color: colors.black }}>
                 Unforgiving Minute Distance Running
@@ -2938,7 +2938,7 @@ const RunningTrainingApp = () => {
               <div className="um-relative um-z-10">
                 <h3 className="um-font-bold flex um-items-center um-justify-between" style={{ 
                   color: colors.white,
-                  fontSize: 'var(--um-text-2xl)'
+                  fontSize: 'var(--text-2xl)'
                 }}>
                   <span className="um-flex um-items-center">
                     <BookOpen className="w-6 h-6 mr-3" />
@@ -2954,7 +2954,7 @@ const RunningTrainingApp = () => {
                 <p className="mt-2" style={{ 
                   color: colors.white,
                   opacity: 0.9,
-                  fontSize: 'var(--um-text-base)'
+                  fontSize: 'var(--text-base)'
                 }}>Manage blog posts, premium training plans, and coaching services</p>
               </div>
             </div>
@@ -2972,11 +2972,11 @@ const RunningTrainingApp = () => {
                   <div className="munich-card-body um-relative um-z-10">
                     <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-xl)'
+                      fontSize: 'var(--text-xl)'
                     }}>Articles & Training Insights</h4>
                     
                     <div className="um-space-y-4">
-                      <p style={{ color: colors.darkGreen, fontSize: 'var(--um-text-sm)' }}>
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
                         <strong>Current Location:</strong> Lines 2500-2650 in RunningTrainingApp.jsx
                       </p>
                       
@@ -3040,11 +3040,11 @@ const RunningTrainingApp = () => {
                   <div className="munich-card-body um-relative um-z-10">
                     <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-xl)'
+                      fontSize: 'var(--text-xl)'
                     }}>⭐ Premium Training Plans</h4>
                     
                     <div className="um-space-y-4">
-                      <p style={{ color: colors.darkGreen, fontSize: 'var(--um-text-sm)' }}>
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
                         <strong>Current Location:</strong> Lines 2700-2850 in RunningTrainingApp.jsx
                       </p>
                       
@@ -3112,11 +3112,11 @@ const RunningTrainingApp = () => {
                   <div className="munich-card-body um-relative um-z-10">
                     <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-xl)'
+                      fontSize: 'var(--text-xl)'
                     }}>Personal Coaching Services</h4>
                     
                     <div className="um-space-y-4">
-                      <p style={{ color: colors.darkGreen, fontSize: 'var(--um-text-sm)' }}>
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
                         <strong>Current Location:</strong> Lines 2825-2870 in RunningTrainingApp.jsx
                       </p>
                       
@@ -3144,10 +3144,10 @@ const RunningTrainingApp = () => {
                   <div className="munich-card-body um-relative um-z-10">
                     <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-xl)'
+                      fontSize: 'var(--text-xl)'
                     }}>Quick Actions</h4>
                     
-                    <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4">
+                    <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4">
                       <div className="space-y-3">
                         <h5 className="um-font-medium" style={{ color: colors.black }}>Development Tasks:</h5>
                         <ul className="space-y-2 um-text-sm" style={{ color: colors.darkGreen }}>
@@ -3189,7 +3189,7 @@ const RunningTrainingApp = () => {
       {showPurchaseModal && selectedPlanForPurchase && (
         <div className="um-fixed um-inset-0 bg-black bg-opacity-50 flex um-items-center um-justify-center z-50 um-p-4">
           <div className="munich-card um-w-full max-w-lg um-relative max-h-[90vh] overflow-y-auto">
-            <div className="um-absolute toum-p-4 right-4 um-z-10">
+            <div className="um-absolute um-top-4 right-4 um-z-10">
               <button
                 onClick={closePurchaseModal}
                 className="um-text-2xl um-font-bold leading-none hover:opacity-70 transition-opacity"
@@ -3234,7 +3234,7 @@ const RunningTrainingApp = () => {
 
       {/* Purchase Success Message */}
       {purchaseSuccess && (
-        <div className="um-fixed toum-p-4 right-4 z-50 animate-fade-in">
+        <div className="um-fixed um-top-4 right-4 z-50 animate-fade-in">
           <div className="munich-card" style={{ backgroundColor: colors.darkGreen }}>
             <div className="um-p-4 um-text-center">
               <p className="um-font-bold text-white flex um-items-center um-justify-center">

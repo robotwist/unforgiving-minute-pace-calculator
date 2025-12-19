@@ -104,7 +104,7 @@ const StripePaymentForm = ({
           </label>
           
           <div 
-            className="um-p-4 um-border-2 um-um-rounded-lg transition-colors focus-within:um-border-blue-500"
+            className="um-p-4 um-border-2 um-rounded-lg transition-colors focus-within:um-border-blue-500"
             style={{ borderColor: colors.gray }}
             role="textbox"
             aria-label="Credit card information"
@@ -114,7 +114,7 @@ const StripePaymentForm = ({
 
           {paymentError && (
             <div 
-              className="p-3 um-um-rounded-lg um-text-sm"
+              className="p-3 um-rounded-lg um-text-sm"
               style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}
               role="alert"
               aria-live="polite"
@@ -125,7 +125,7 @@ const StripePaymentForm = ({
         </div>
 
       <div 
-        className="um-p-4 um-um-rounded-lg"
+        className="um-p-4 um-rounded-lg"
         style={{ backgroundColor: colors.lightBlue + '20' }}
       >
         <div className="space-y-2 um-text-sm">

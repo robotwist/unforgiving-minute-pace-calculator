@@ -70,12 +70,12 @@ const GoldenPaceResults = memo(({
         <div className="progressive-melange um-melange-overlay um-melange-overlay--05"></div>
 
         {/* Enhanced geometric border accents */}
-        <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm\:w-16 sm:h-2 um-um-rounded-full"
+        <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2 um-rounded-full"
              style={{
                background: `linear-gradient(90deg, ${colors.lightBlue}, ${colors.lightGreen})`,
                boxShadow: `0 2px 8px ${colors.lightBlue}30`
              }}></div>
-        <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm\:w-16 sm:h-2 um-um-rounded-full"
+        <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2 um-rounded-full"
              style={{
                background: `linear-gradient(90deg, ${colors.lightGreen}, ${colors.lightBlue})`,
                boxShadow: `0 2px 8px ${colors.lightGreen}30`
@@ -91,7 +91,7 @@ const GoldenPaceResults = memo(({
           <div className="munich-xl um-font-medium um-mb-2" style={{ color: colors.black }}>
             Optimal Progress Pace
           </div>
-          <div className="mt-4 um-p-4 um-um-rounded-lg" style={{
+          <div className="mt-4 um-p-4 um-rounded-lg" style={{
             backgroundColor: `${colors.lightBlue}10`,
             border: `1px solid ${colors.lightBlue}30`
           }}>
@@ -104,13 +104,13 @@ const GoldenPaceResults = memo(({
             </p>
           </div>
           <div
-            className="inline-flex um-items-center gap-2 um-mt-4 um-px-4 um-py-2 um-um-rounded-full um-glass-pill"
+            className="inline-flex um-items-center gap-2 um-mt-4 um-px-4 um-py-2 um-rounded-full um-glass-pill"
             style={{
               backgroundColor: `${colors.lightBlue}20`,
               border: `1px solid ${colors.lightBlue}40`,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
             <span className="um-text-sm um-font-medium" style={{ color: colors.black }}>
               Scientifically validated
             </span>
@@ -119,7 +119,7 @@ const GoldenPaceResults = memo(({
       </div>
 
       {/* Training Paces Grid - Enhanced Glassmorphism */}
-      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-4 gaum-p-4 sm:gaum-p-6">
+      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-4 um-gap-4 sm:um-gap-6">
         {[
           { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray, desc: 'Recovery & long runs' },
           { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen, desc: 'Tempo & steady runs' },
@@ -148,7 +148,7 @@ const GoldenPaceResults = memo(({
 
             <div className="um-relative um-z-10">
               <div
-                className="w-14 h-14 um-mx-auto um-mb-4 um-um-rounded-full flex um-items-center um-justify-center um-icon-badge"
+                className="w-14 h-14 um-mx-auto um-mb-4 um-rounded-full flex um-items-center um-justify-center um-icon-badge"
                 style={{
                   backgroundColor: `${color}20`,
                   border: `1px solid ${color}40`
@@ -162,7 +162,7 @@ const GoldenPaceResults = memo(({
               <p className="um-text-sm um-mb-3" style={{ color: colors.darkGreen }}>
                 {desc}
               </p>
-              <div className="um-text-xl um-sm-text-2xl um-font-bold font-mono px-3 um-py-2 um-um-rounded-lg" style={{
+              <div className="um-text-xl um-sm-text-2xl um-font-bold font-mono px-3 um-py-2 um-rounded-lg" style={{
                 color: color,
                 backgroundColor: `${color}15`,
                 border: `1px solid ${color}30`
@@ -218,7 +218,7 @@ const GoldenPaceResults = memo(({
           </div>
         </div>
         {/* Free Training Week Sample */}
-        <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 um-border-2 um-um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
+        <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 um-border-2 um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
           borderColor: colors.lightBlue,
           boxShadow: '0 10px 25px rgba(30, 107, 150, 0.15)'
         }}>
@@ -238,7 +238,7 @@ const GoldenPaceResults = memo(({
                 </p>
               </div>
               <div className="um-flex um-items-center gap-2">
-                <span className="um-px-4 um-py-2 um-um-rounded-full um-text-sm um-font-bold um-border-2" style={{ 
+                <span className="um-px-4 um-py-2 um-rounded-full um-text-sm um-font-bold um-border-2" style={{ 
                   backgroundColor: colors.lightGreen,
                   borderColor: colors.darkGreen,
                   color: 'white'
@@ -248,11 +248,11 @@ const GoldenPaceResults = memo(({
               </div>
             </div>
             
-            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4 mb-8">
+            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4 mb-8">
               <div className="space-y-3">
-                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
                   <div className="um-flex um-items-center um-gap-3">
-                    <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                    <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
                     <span className="um-font-medium" style={{ color: colors.black }}>Monday - Recovery Run</span>
                   </div>
                   <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -260,9 +260,9 @@ const GoldenPaceResults = memo(({
                     backgroundColor: colors.lightBlue + '15'
                   }}>{trainingPaces.easy}</span>
                 </div>
-                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
+                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
                   <div className="um-flex um-items-center um-gap-3">
-                    <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                    <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
                     <span className="um-font-medium" style={{ color: colors.black }}>Wednesday - Threshold Run</span>
                   </div>
                   <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -272,9 +272,9 @@ const GoldenPaceResults = memo(({
                 </div>
               </div>
               <div className="space-y-3">
-                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
+                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
                   <div className="um-flex um-items-center um-gap-3">
-                    <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
+                    <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
                     <span className="um-font-medium" style={{ color: colors.black }}>Friday - Interval Session</span>
                   </div>
                   <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -282,9 +282,9 @@ const GoldenPaceResults = memo(({
                     backgroundColor: colors.darkGreen + '15'
                   }}>{trainingPaces.interval}</span>
                 </div>
-                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
                   <div className="um-flex um-items-center um-gap-3">
-                    <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                    <div className="w-3 h-3 um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
                     <span className="um-font-medium" style={{ color: colors.black }}>Sunday - Long Run</span>
                   </div>
                   <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
@@ -296,9 +296,9 @@ const GoldenPaceResults = memo(({
             </div>
             
             {/* Value proposition with urgency */}
-            <div className="bg-white um-um-rounded-lg um-p-4 um-mb-6 border" style={{ borderColor: colors.orange + '30' }}>
+            <div className="bg-white um-rounded-lg um-p-4 um-mb-6 border" style={{ borderColor: colors.orange + '30' }}>
               <div className="um-flex um-items-start um-gap-3">
-                <div className="w-5 h-5 um-um-rounded-full flex um-items-center um-justify-center" style={{ backgroundColor: colors.orange }}>
+                <div className="w-5 h-5 um-rounded-full flex um-items-center um-justify-center" style={{ backgroundColor: colors.orange }}>
                   <Star className="w-3 h-3 text-white" />
                 </div>
                 <div>
@@ -315,7 +315,7 @@ const GoldenPaceResults = memo(({
             <div className="um-flex um-flex-col um-sm-flex-row um-gap-3">
               <button 
                 onClick={() => setActiveTab('premium')}
-                className="flex-1 um-px-8 um-py-4 um-um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="flex-1 um-px-8 um-py-4 um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 style={{ 
                   backgroundColor: colors.orange,
                   color: 'white'
@@ -327,7 +327,7 @@ const GoldenPaceResults = memo(({
               </button>
               <button 
                 onClick={() => setActiveTab('plans')}
-                className="flex-1 um-px-6 um-py-4 um-um-rounded-lg um-font-medium um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
+                className="flex-1 um-px-6 um-py-4 um-rounded-lg um-font-medium um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
                 style={{ 
                   borderColor: colors.lightBlue,
                   color: colors.lightBlue,
@@ -340,7 +340,7 @@ const GoldenPaceResults = memo(({
               </button>
               <a
                 href="/apply"
-                className="flex-1 um-px-6 um-py-4 um-um-rounded-lg um-font-semibold um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
+                className="flex-1 um-px-6 um-py-4 um-rounded-lg um-font-semibold um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
                 style={{
                   borderColor: colors.lightGreen,
                   color: colors.lightGreen,
@@ -357,7 +357,7 @@ const GoldenPaceResults = memo(({
 
         {/* Profile Creation Prompt */}
         {!savedProfileData && (
-          <div className="um-border-2 um-um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
+          <div className="um-border-2 um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
             borderColor: colors.lightGreen + '60',
             backgroundColor: 'white',
             boxShadow: '0 8px 25px rgba(46, 139, 87, 0.12)'
@@ -368,8 +368,8 @@ const GoldenPaceResults = memo(({
             }}></div>
             
             <div className="um-relative um-z-10">
-              <div className="um-flex um-items-start gaum-p-4 um-mb-4">
-                <div className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center" style={{ 
+              <div className="um-flex um-items-start um-gap-4 um-mb-4">
+                <div className="w-12 um-h-12 um-rounded-full flex um-items-center um-justify-center" style={{ 
                   backgroundColor: colors.lightGreen + '20'
                 }}>
                   <User className="w-6 h-6" style={{ color: colors.lightGreen }} />
@@ -407,7 +407,7 @@ const GoldenPaceResults = memo(({
               <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 um-items-center">
                 <button 
                   onClick={() => setActiveTab('profile')}
-                  className="flex-1 um-px-8 um-py-4 um-um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="flex-1 um-px-8 um-py-4 um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   style={{ 
                     backgroundColor: colors.lightGreen,
                     color: 'white'
@@ -418,7 +418,7 @@ const GoldenPaceResults = memo(({
                   Create Free Profile Now
                 </button>
                 <div className="um-flex um-items-center gap-2 um-text-sm" style={{ color: colors.darkGreen }}>
-                  <div className="w-4 h-4 um-um-rounded-full um-border-2" style={{ borderColor: colors.lightGreen }}>
+                  <div className="w-4 h-4 um-rounded-full um-border-2" style={{ borderColor: colors.lightGreen }}>
                     <CheckCircle className="w-3 h-3 text-green-600" />
                   </div>
                   No credit card • Always free

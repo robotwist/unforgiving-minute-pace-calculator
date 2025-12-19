@@ -113,7 +113,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
         <h3 className="um-text-sm um-font-semibold um-mb-3" style={{ color: colors.black }}>
           Personal Records
         </h3>
-        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 gaum-p-4">
+        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 um-gap-4">
           {DEFAULT_DISTANCES.map(distance => renderDistanceInput(distance))}
         </div>
       </div>
@@ -141,7 +141,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
         </button>
         
         {showAdvanced && (
-          <div className="mt-4 grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 gaum-p-4">
+          <div className="mt-4 grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 um-gap-4">
             {ADVANCED_DISTANCES.map(distance => renderDistanceInput(distance))}
           </div>
         )}

@@ -87,7 +87,7 @@ const PremiumPaywall = ({ article, colors, onSubscribe }) => {
           </div>
 
           {/* Subscription Tiers */}
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-4 um-mb-6">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-4 um-mb-6">
             {Object.entries(subscriptionTiers).map(([key, tier]) => (
               <div 
                 key={key}
@@ -103,7 +103,7 @@ const PremiumPaywall = ({ article, colors, onSubscribe }) => {
                 <div className="munich-card-body um-relative">
                   {tier.popular && (
                     <div 
-                      className="um-absolute -top-2 left-1/2 transform -translate-x-1/2 um-text-xs um-font-bold px-3 py-1 um-um-rounded-full"
+                      className="um-absolute -top-2 left-1/2 transform -translate-x-1/2 um-text-xs um-font-bold px-3 py-1 um-rounded-full"
                       style={{ 
                         backgroundColor: colors.orange,
                         color: colors.white
@@ -161,7 +161,7 @@ const PremiumPaywall = ({ article, colors, onSubscribe }) => {
         <h4 className="um-font-bold um-mb-4" style={{ color: colors.black }}>
           What You'll Get Access To:
         </h4>
-        <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-4 gaum-p-4">
+        <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-4 um-gap-4">
           <div className="um-text-center">
             <div className="w-12 um-h-12 geometric-diamond um-mx-auto um-mb-2" style={{ 
               backgroundColor: colors.lightBlue 

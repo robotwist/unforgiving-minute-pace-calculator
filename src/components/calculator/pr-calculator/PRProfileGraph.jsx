@@ -218,17 +218,17 @@ const PRProfileGraph = ({ prs, colors }) => {
       </div>
       
       {/* Legend */}
-      <div className="um-flex um-items-center um-justify-center gaum-p-6 um-mt-4 um-text-xs">
+      <div className="um-flex um-items-center um-justify-center um-gap-6 um-mt-4 um-text-xs">
         <div className="um-flex um-items-center gap-2">
           <div
-            className="w-3 h-3 um-um-rounded-full"
+            className="w-3 h-3 um-rounded-full"
             style={{ backgroundColor: colors.lightBlue }}
           />
           <span style={{ color: colors.textSecondary || colors.darkGray }}>Actual PR</span>
         </div>
         <div className="um-flex um-items-center gap-2">
           <div
-            className="w-3 h-3 um-um-rounded-full"
+            className="w-3 h-3 um-rounded-full"
             style={{ backgroundColor: colors.lightGreen }}
           />
           <span style={{ color: colors.textSecondary || colors.darkGray }}>Projected</span>

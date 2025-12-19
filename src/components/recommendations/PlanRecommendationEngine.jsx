@@ -109,14 +109,14 @@ const PlanRecommendationEngine = ({
         background: `linear-gradient(135deg, ${colors.lightGreen}05, ${colors.lightBlue}05)`
       }}>
         <div 
-          className="um-absolute toum-p-4 right-4"
+          className="um-absolute um-top-4 right-4"
           style={{ 
             zIndex: 1,
             pointerEvents: 'none'
           }}
         >
           <div 
-            className="px-3 py-1 um-um-rounded-full um-text-xs um-font-bold"
+            className="px-3 py-1 um-rounded-full um-text-xs um-font-bold"
             style={{ 
               backgroundColor: colors.lightGreen,
               color: colors.white
@@ -127,12 +127,12 @@ const PlanRecommendationEngine = ({
         </div>
 
         <div className="munich-card-body">
-          <div className="um-grid um-md-grid-cols-3 gaum-p-6">
+          <div className="um-grid um-md-grid-cols-3 um-gap-6">
             {/* Plan Overview */}
             <div className="md:col-span-2">
               <div className="um-flex um-items-start space-x-4">
                 <div 
-                  className="w-16 um-h-16 um-um-rounded-full flex um-items-center um-justify-center"
+                  className="w-16 um-h-16 um-rounded-full flex um-items-center um-justify-center"
                   style={{ backgroundColor: colors.lightGreen + '20' }}
                 >
                   {React.createElement(getPlanIcon(topRecommendation), {
@@ -148,7 +148,7 @@ const PlanRecommendationEngine = ({
                     {topRecommendation.description}
                   </p>
                   
-                  <div className="um-flex um-flex-wrap gaum-p-4 um-text-sm">
+                  <div className="um-flex um-flex-wrap um-gap-4 um-text-sm">
                     <div className="um-flex um-items-center space-x-1">
                       <Clock className="w-4 h-4" style={{ color: colors.lightBlue }} />
                       <span style={{ color: colors.black }}>{topRecommendation.duration} weeks</span>
@@ -181,11 +181,11 @@ const PlanRecommendationEngine = ({
                         <span style={{ color: confidence.color }}>{confidence.level}</span>
                       </div>
                       <div 
-                        className="um-w-full h-2 um-um-rounded-full"
+                        className="um-w-full h-2 um-rounded-full"
                         style={{ backgroundColor: colors.gray + '30' }}
                       >
                         <div 
-                          className="h-2 um-um-rounded-full transition-all duration-1000"
+                          className="h-2 um-rounded-full transition-all duration-1000"
                           style={{ 
                             backgroundColor: confidence.color,
                             width: `${confidence.percentage}%`
@@ -234,7 +234,7 @@ const PlanRecommendationEngine = ({
           Other Great Options
         </h3>
         
-        <div className="um-grid um-md-grid-cols-3 gaum-p-4">
+        <div className="um-grid um-md-grid-cols-3 um-gap-4">
           {otherRecommendations.map((plan, index) => {
             const IconComponent = getPlanIcon(plan);
             const confidence = getConfidenceLevel(plan.score);
@@ -244,7 +244,7 @@ const PlanRecommendationEngine = ({
                 <div className="munich-card-body">
                   <div className="um-flex um-items-start um-space-x-3 um-mb-4">
                     <div 
-                      className="w-10 um-h-10 um-um-rounded-full flex um-items-center um-justify-center"
+                      className="w-10 um-h-10 um-rounded-full flex um-items-center um-justify-center"
                       style={{ backgroundColor: confidence.color + '20' }}
                     >
                       <IconComponent className="w-5 h-5" style={{ color: confidence.color }} />
@@ -316,7 +316,7 @@ const PlanRecommendationEngine = ({
           <h3 className="um-text-lg um-font-bold um-mb-4" style={{ color: colors.black }}>
             All Available Plans
           </h3>
-          <div className="um-grid um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-4">
+          <div className="um-grid um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-4">
             {getRecommendations.slice(4).map((plan, index) => (
               <div key={index} className="munich-card">
                 <div className="munich-card-body">

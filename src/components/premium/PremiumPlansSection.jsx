@@ -28,7 +28,7 @@ const PremiumPlansSection = ({
         </p>
         <a
           href="/apply"
-          className="inline-flex um-items-center um-justify-center um-px-6 py-3 um-um-rounded-lg um-font-semibold um-border-2"
+          className="inline-flex um-items-center um-justify-center um-px-6 py-3 um-rounded-lg um-font-semibold um-border-2"
           style={{ borderColor: colors.lightGreen, color: colors.lightGreen, backgroundColor: 'transparent' }}
           aria-label="Apply for coaching"
         >
@@ -81,7 +81,7 @@ const PremiumPlansSection = ({
           <h3 className="um-text-2xl um-font-bold um-mb-4" style={{ color: colors.black }}>
             Why Premium Plans?
           </h3>
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-6">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-6">
             <div>
               <div className="w-12 um-h-12 geometric-diamond um-mx-auto um-mb-3" style={{ backgroundColor: colors.lightBlue }}></div>
               <h4 className="um-font-bold um-mb-2" style={{ color: colors.black }}>Individual Factor Integration</h4>
@@ -108,7 +108,7 @@ const PremiumPlansSection = ({
       </div>
 
       {/* Premium Plans Grid */}
-      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-4 gaum-p-6">
+      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-4 um-gap-6">
         
         {/* 30-Minute Consultation */}
         <div className="munich-card um-relative um-overflow-hidden group">
@@ -308,7 +308,7 @@ const PremiumPlansSection = ({
       </div>
 
       {/* Second Row - Half Marathon & Marathon */}
-      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
+      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
         
         {/* Half Marathon Breakthrough */}
         <div className="munich-card um-relative um-overflow-hidden group">
@@ -490,7 +490,7 @@ const PremiumPlansSection = ({
           </h3>
         </div>
         <div className="munich-card-body">
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
             <div className="um-text-center">
               <div className="mb-4">
                 <div className="w-16 um-h-16 geometric-diamond um-mx-auto" style={{ backgroundColor: colors.lightBlue }}></div>
@@ -539,7 +539,7 @@ const PremiumPlansSection = ({
           <h3 className="um-text-2xl um-font-bold um-mb-6" style={{ color: colors.black }}>
             How Our System Works
           </h3>
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-8">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-8">
             <div>
               <div className="w-16 um-h-16 geometric-diamond um-mx-auto um-mb-4" style={{ backgroundColor: colors.lightBlue }}></div>
               <h4 className="um-font-bold um-mb-2" style={{ color: colors.black }}>1. Start with Consultation</h4>

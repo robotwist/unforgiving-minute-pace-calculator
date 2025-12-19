@@ -71,7 +71,7 @@ const ProfileDashboard = ({
           <div className="um-relative um-z-10">
             <h3 className="um-font-bold flex um-items-center" style={{ 
               color: colors.white,
-              fontSize: 'var(--um-text-2xl)'
+              fontSize: 'var(--text-2xl)'
             }}>
               <User className="w-6 h-6 mr-3" />
               Welcome, {displayProfile?.name}!
@@ -79,13 +79,13 @@ const ProfileDashboard = ({
             <p className="mt-2" style={{ 
               color: colors.white,
               opacity: 0.9,
-              fontSize: 'var(--um-text-base)'
+              fontSize: 'var(--text-base)'
             }}>Your profile has been created successfully</p>
           </div>
         </div>
         
         <div className="um-p-8">
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
             {/* Personal Info Card */}
             <div className="munich-card um-relative um-overflow-hidden">
               <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
@@ -97,23 +97,23 @@ const ProfileDashboard = ({
               <div className="munich-card-body um-relative um-z-10">
                 <h4 className="um-font-medium um-mb-4" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-lg)'
+                  fontSize: 'var(--text-lg)'
                 }}>Personal Info</h4>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Name: {displayProfile?.name}</p>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Email: {displayProfile?.email}</p>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Experience: {displayProfile?.experience}</p>
                 <p style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Member since: {displayProfile?.created_date || new Date().toISOString().split('T')[0]}</p>
               </div>
             </div>
@@ -130,19 +130,19 @@ const ProfileDashboard = ({
               <div className="munich-card-body um-relative um-z-10">
                 <h4 className="um-font-medium um-mb-4" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-lg)'
+                  fontSize: 'var(--text-lg)'
                 }}>Running Goals</h4>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Goal Race: {displayProfile?.goalRaceDistance}</p>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Goal Time: {displayProfile?.goalRaceTime || 'Not set'}</p>
                 <p style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-sm)'
+                  fontSize: 'var(--text-sm)'
                 }}>Weekly Mileage: {displayProfile?.weekly_mileage || displayProfile?.weeklyMileage || 'Not set'} miles</p>
               </div>
             </div>
@@ -159,7 +159,7 @@ const ProfileDashboard = ({
               <div className="munich-card-body um-relative um-z-10">
                 <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--um-text-lg)'
+                  fontSize: 'var(--text-lg)'
                 }}>
                   <Activity className="w-4 h-4 mr-2" />
                   Optimal Progress Pace Progress
@@ -168,12 +168,12 @@ const ProfileDashboard = ({
                   <div className="um-flex um-justify-between um-items-center">
                     <span style={{ 
                       color: colors.black,
-                      fontSize: 'var(--um-text-sm)'
+                      fontSize: 'var(--text-sm)'
                     }}>Current Optimal Progress Pace:</span>
                     {displayProfile?.currentGoldenPace || goldenPace ? (
                       <span className="um-font-bold" style={{ 
                         color: colors.violet,
-                        fontSize: 'var(--um-text-lg)'
+                        fontSize: 'var(--text-lg)'
                       }}>
                         {displayProfile?.currentGoldenPace || goldenPace}
                       </span>
@@ -181,7 +181,7 @@ const ProfileDashboard = ({
                       <div className="um-flex um-items-center gap-2">
                         <span style={{ 
                           color: colors.darkGray,
-                          fontSize: 'var(--um-text-sm)'
+                          fontSize: 'var(--text-sm)'
                         }}>Not calculated</span>
                         {displayProfile?.goalRaceTime && displayProfile?.goalRaceDistance && (
                           <button
@@ -190,7 +190,7 @@ const ProfileDashboard = ({
                               setRaceDistance(displayProfile.goalRaceDistance);
                               setActiveTab('calculator');
                             }}
-                            className="px-2 py-1 um-text-xs um-um-rounded-md hover:opacity-80 transition-opacity"
+                            className="px-2 py-1 um-text-xs um-rounded-md hover:opacity-80 transition-opacity"
                             style={{ 
                               backgroundColor: colors.lightBlue,
                               color: colors.white
@@ -208,11 +208,11 @@ const ProfileDashboard = ({
                     <div className="um-flex um-justify-between um-items-center">
                       <span style={{ 
                         color: colors.black,
-                        fontSize: 'var(--um-text-sm)'
+                        fontSize: 'var(--text-sm)'
                       }}>6-Week Projection:</span>
                       <span className="um-font-bold" style={{ 
                         color: colors.lightGreen,
-                        fontSize: 'var(--um-text-lg)'
+                        fontSize: 'var(--text-lg)'
                       }}>
                         {displayProfile.projectedGoldenPace}
                       </span>
@@ -243,7 +243,7 @@ const ProfileDashboard = ({
                 <div className="munich-card-body um-relative um-z-10">
                   <h4 className="um-font-medium um-mb-6 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--um-text-xl)'
+                    fontSize: 'var(--text-xl)'
                   }}>
                     <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                     Optimal Progress Pace Progression Forecast
@@ -255,7 +255,7 @@ const ProfileDashboard = ({
                   </div>
                   
                   {/* Simple ASCII-style progression chart */}
-                  <div className="bg-white um-p-6 um-um-rounded-lg border" style={{ borderColor: colors.gray }}>
+                  <div className="bg-white um-p-6 um-rounded-lg border" style={{ borderColor: colors.gray }}>
                     <div className="space-y-2">
                       {(() => {
                         const progression = generateGoldenPaceProgression(
@@ -335,12 +335,12 @@ const ProfileDashboard = ({
                 <div className="munich-card-body um-relative um-z-10">
                   <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--um-text-lg)'
+                    fontSize: 'var(--text-lg)'
                   }}>
                     <Trophy className="w-5 h-5 mr-2" style={{ color: colors.orange }} />
                     Personal Bests
                   </h4>
-                  <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 gaum-p-4">
+                  <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 um-gap-4">
                     {Object.entries(personalBests).map(([distance, time]) => (
                       <div key={distance} className="um-text-center p-3 um-rounded" style={{ 
                         backgroundColor: colors.lightGray,
@@ -348,11 +348,11 @@ const ProfileDashboard = ({
                       }}>
                         <div className="um-font-medium" style={{ 
                           color: colors.black,
-                          fontSize: 'var(--um-text-sm)'
+                          fontSize: 'var(--text-sm)'
                         }}>{distance}</div>
                         <div className="um-font-bold" style={{ 
                           color: colors.orange,
-                          fontSize: 'var(--um-text-lg)'
+                          fontSize: 'var(--text-lg)'
                         }}>{time}</div>
                       </div>
                     ))}
@@ -373,7 +373,7 @@ const ProfileDashboard = ({
                 <div className="munich-card-body um-relative um-z-10">
                   <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--um-text-lg)'
+                    fontSize: 'var(--text-lg)'
                   }}>
                     <Calendar className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                     Recent Training History
@@ -387,17 +387,17 @@ const ProfileDashboard = ({
                         <div className="um-flex um-justify-between um-items-start um-mb-2">
                           <span className="um-font-medium" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>{session.type}</span>
                           <span style={{ 
                             color: colors.gray,
-                            fontSize: 'var(--um-text-xs)'
+                            fontSize: 'var(--text-xs)'
                           }}>{session.date}</span>
                         </div>
                         {session.distance && (
                           <div style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>
                             Distance: {session.distance} • Time: {session.time}
                           </div>
@@ -405,7 +405,7 @@ const ProfileDashboard = ({
                         {(session.feeling || session.effort) && (
                           <div style={{ 
                             color: colors.lightBlue,
-                            fontSize: 'var(--um-text-sm)'
+                            fontSize: 'var(--text-sm)'
                           }}>
                             Felt: {session.feeling} • Effort: {session.effort}
                           </div>
@@ -413,7 +413,7 @@ const ProfileDashboard = ({
                         {session.location && (
                           <div style={{ 
                             color: colors.black,
-                            fontSize: 'var(--um-text-xs)',
+                            fontSize: 'var(--text-xs)',
                             opacity: 0.8
                           }}>
                             {session.location}
@@ -423,7 +423,7 @@ const ProfileDashboard = ({
                         {session.goldenPace && (
                           <div style={{ 
                             color: colors.orange,
-                            fontSize: 'var(--um-text-sm)',
+                            fontSize: 'var(--text-sm)',
                             fontWeight: '500'
                           }}>
                             Optimal Progress Pace: {session.goldenPace}
@@ -432,7 +432,7 @@ const ProfileDashboard = ({
                         {session.notes && (
                           <div className="mt-2" style={{ 
                             color: colors.gray,
-                            fontSize: 'var(--um-text-xs)',
+                            fontSize: 'var(--text-xs)',
                             fontStyle: 'italic'
                           }}>
                             "{session.notes}"
@@ -457,7 +457,7 @@ const ProfileDashboard = ({
                 <div className="munich-card-body um-relative um-z-10">
                   <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--um-text-lg)'
+                    fontSize: 'var(--text-lg)'
                   }}>
                     <CheckCircle className="w-5 h-5 mr-2" style={{ color: colors.violet }} />
                     Completed Training Plans
@@ -470,11 +470,11 @@ const ProfileDashboard = ({
                       }}>
                         <span style={{ 
                           color: colors.black,
-                          fontSize: 'var(--um-text-sm)'
+                          fontSize: 'var(--text-sm)'
                         }}>{plan.name}</span>
                         <span style={{ 
                           color: colors.gray,
-                          fontSize: 'var(--um-text-xs)'
+                          fontSize: 'var(--text-xs)'
                         }}>{plan.completedDate}</span>
                       </div>
                     ))}
@@ -485,7 +485,7 @@ const ProfileDashboard = ({
           </div>
           
           {/* Action Buttons */}
-          <div className="mt-8 flex um-flex-wrap gaum-p-4">
+          <div className="mt-8 flex um-flex-wrap um-gap-4">
             <button
               onClick={() => {
                 // Transfer profile data to calculator

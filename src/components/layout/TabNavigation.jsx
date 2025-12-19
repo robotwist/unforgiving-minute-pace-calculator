@@ -16,8 +16,8 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
       <div className="um-text-center um-py-4 um-sm-py-8 um-relative um-overflow-hidden">
         {/* Geometric background elements */}
         <div className="um-absolute um-inset-0 opacity-5">
-          <div className="um-absolute toum-p-4 left-4 um-w-8 um-h-8 geometric-diamond" style={{ backgroundColor: colors.lightBlue }}></div>
-          <div className="um-absolute toum-p-8 right-8 w-6 h-6 geometric-octagon" style={{ backgroundColor: colors.lightGreen }}></div>
+          <div className="um-absolute um-top-4 left-4 um-w-8 um-h-8 geometric-diamond" style={{ backgroundColor: colors.lightBlue }}></div>
+          <div className="um-absolute um-top-8 right-8 w-6 h-6 geometric-octagon" style={{ backgroundColor: colors.lightGreen }}></div>
           <div className="um-absolute bottom-4 left-8 w-10 um-h-10 geometric-square" style={{ backgroundColor: colors.orange }}></div>
           <div className="um-absolute bottom-8 right-4 w-7 h-7 geometric-diamond" style={{ backgroundColor: colors.violet }}></div>
         </div>
@@ -31,7 +31,7 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
       </div>
 
       {/* Navigation */}
-      <div className="um-flex um-flex-wrap um-justify-center gap-2 sm:gaum-p-4 px-2 um-sm-px-4 um-relative">
+      <div className="um-flex um-flex-wrap um-justify-center gap-2 sm:um-gap-4 px-2 um-sm-px-4 um-relative">
         <div className="um-flex um-flex-wrap um-justify-center gap-1 sm:gap-2">
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
@@ -58,8 +58,8 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
               }}
             >
               <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="hidden um-sm\:inline">{label}</span>
-              <span className="um-sm\:hidden">{label.split(' ')[0]}</span>
+              <span className="hidden um-sm-inline">{label}</span>
+              <span className="um-sm-hidden">{label.split(' ')[0]}</span>
             </button>
           ))}
         </div>
@@ -67,7 +67,7 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
         {/* Dark Mode Toggle */}
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="ml-4 p-2 um-um-rounded-full transition-all duration-300 hover:scale-110"
+          className="ml-4 p-2 um-rounded-full transition-all duration-300 hover:scale-110"
           style={{
             backgroundColor: darkMode ? colors.yellow : colors.gray,
             color: darkMode ? colors.black : colors.lightBlue,

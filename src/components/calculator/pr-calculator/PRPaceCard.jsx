@@ -74,7 +74,7 @@ const PRPaceCard = ({ zone, pace, sourceDistance, isProjected, description, colo
 
       <div className="um-relative um-z-10">
         <div
-          className="w-14 h-14 um-mx-auto um-mb-4 um-um-rounded-full flex um-items-center um-justify-center um-icon-badge"
+          className="w-14 h-14 um-mx-auto um-mb-4 um-rounded-full flex um-items-center um-justify-center um-icon-badge"
           style={{
             backgroundColor: `${config.color}20`,
             border: `1px solid ${config.color}40`
@@ -91,7 +91,7 @@ const PRPaceCard = ({ zone, pace, sourceDistance, isProjected, description, colo
           {description || config.desc}
         </p>
         
-        <div className="um-text-xl um-sm-text-2xl um-font-bold font-mono px-3 um-py-2 um-um-rounded-lg um-mb-2" style={{
+        <div className="um-text-xl um-sm-text-2xl um-font-bold font-mono px-3 um-py-2 um-rounded-lg um-mb-2" style={{
           color: config.color,
           backgroundColor: `${config.color}15`,
           border: `1px solid ${config.color}30`

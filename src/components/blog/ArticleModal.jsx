@@ -68,14 +68,14 @@ const ArticleModal = ({ article, colors, onClose }) => {
               </div>
               <h3 className="um-font-bold" style={{ 
                 color: colors.white,
-                fontSize: 'var(--um-text-2xl)'
+                fontSize: 'var(--text-2xl)'
               }}>
                 {article.title}
               </h3>
               <p className="mt-2" style={{ 
                 color: colors.white,
                 opacity: 0.9,
-                fontSize: 'var(--um-text-base)'
+                fontSize: 'var(--text-base)'
               }}>{article.readTime}</p>
             </div>
             <button

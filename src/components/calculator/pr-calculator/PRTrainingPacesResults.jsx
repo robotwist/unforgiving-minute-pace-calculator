@@ -64,7 +64,7 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
           Based on your actual PRs. These are proven paces you can run—use them directly in training.
         </p>
         
-        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-5 gaum-p-4 sm:gaum-p-6">
+        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-5 um-gap-4 sm:um-gap-6">
           {paceCards.map((cardData, index) => (
             <PRPaceCard
               key={cardData.zone}
@@ -91,7 +91,7 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
             If you can run a {trainingPaces.sources.marathon || 'marathon'} at a certain pace, that pace 
             is your proven aerobic capacity. Use it. No calculations needed.
           </p>
-          <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 gaum-p-4 um-text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
+          <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-gap-4 um-text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
             <div>
               <p className="um-font-semibold mb-1" style={{ color: colors.black }}>✓ Accurate</p>
               <p>Uses your actual performance, not theoretical calculations</p>
@@ -116,7 +116,7 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
       <div className="um-flex um-flex-col um-sm-flex-row um-gap-3">
         <Link
           to="/apply"
-          className="flex-1 um-px-6 um-py-4 um-um-rounded-lg um-font-semibold um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
+          className="flex-1 um-px-6 um-py-4 um-rounded-lg um-font-semibold um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
           style={{
             borderColor: colors.lightGreen,
             color: colors.lightGreen,

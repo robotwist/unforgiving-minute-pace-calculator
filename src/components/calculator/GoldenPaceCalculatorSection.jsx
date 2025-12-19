@@ -26,7 +26,7 @@ export default function GoldenPaceCalculatorSection({
           <div className="um-relative w-44 h-24 sm:w-52 sm:h-32" style={{ transform: 'rotate(0deg)' }}>
             {/* Lane 8 (outermost) */}
             <div
-              className="um-absolute um-inset-0 um-border-2 um-um-rounded-full"
+              className="um-absolute um-inset-0 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -34,7 +34,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 7 */}
             <div
-              className="um-absolute inset-1 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-1 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -42,7 +42,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 6 */}
             <div
-              className="um-absolute inset-2 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-2 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -50,7 +50,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 5 */}
             <div
-              className="um-absolute inset-3 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-3 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -58,7 +58,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 4 */}
             <div
-              className="um-absolute inset-4 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-4 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -66,7 +66,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 3 */}
             <div
-              className="um-absolute inset-5 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-5 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -74,7 +74,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 2 */}
             <div
-              className="um-absolute inset-6 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-6 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -82,7 +82,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 1 (innermost) */}
             <div
-              className="um-absolute inset-7 um-border-2 um-um-rounded-full"
+              className="um-absolute inset-7 um-border-2 um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -102,7 +102,7 @@ export default function GoldenPaceCalculatorSection({
         {/* Show helpful message if race data is pre-populated from profile */}
         {savedProfileData && (raceTime || raceDistance !== '5K') && (
           <div
-            className="inline-flex um-items-center um-px-4 um-py-2 bg-um-opacity-10 um-um-rounded-lg um-mb-4"
+            className="inline-flex um-items-center um-px-4 um-py-2 bg-um-opacity-10 um-rounded-lg um-mb-4"
             style={{
               backgroundColor: colors.lightBlue,
               color: colors.darkBlue,
@@ -123,36 +123,36 @@ export default function GoldenPaceCalculatorSection({
         {/* Value proposition badges */}
         <div className="um-flex um-flex-wrap um-justify-center um-gap-3 mt-6 um-px-4">
           <div
-            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-rounded-full border"
             style={{
               borderColor: colors.lightBlue,
               backgroundColor: colors.lightBlue + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }} />
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.lightBlue }} />
             <span className="um-text-sm um-font-medium">Elite-Tested</span>
           </div>
           <div
-            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-rounded-full border"
             style={{
               borderColor: colors.lightGreen,
               backgroundColor: colors.lightGreen + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }} />
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.lightGreen }} />
             <span className="um-text-sm um-font-medium">Instant Results</span>
           </div>
           <div
-            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-rounded-full border"
             style={{
               borderColor: colors.orange,
               backgroundColor: colors.orange + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.orange }} />
+            <div className="w-2 h-2 um-rounded-full" style={{ backgroundColor: colors.orange }} />
             <span className="um-text-sm um-font-medium">Coach-built sample</span>
           </div>
         </div>
@@ -206,7 +206,7 @@ export default function GoldenPaceCalculatorSection({
               Optimal Progress Pace Calculator
             </h3>
 
-            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4 sm:gaum-p-6">
+            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-gap-4 sm:um-gap-6">
               <div>
                 <label className="um-label" style={{ color: colors.black }}>
                   Race Time
@@ -257,7 +257,7 @@ export default function GoldenPaceCalculatorSection({
 
             {/* Error Display */}
             {profileError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 um-um-rounded-lg">
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 um-rounded-lg">
                 <p className="um-text-sm text-red-700 flex um-items-center">
                   <span className="inline-block w-4 h-4 mr-2 text-red-500">⚠</span>
                   {profileError}
