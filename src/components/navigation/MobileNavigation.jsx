@@ -41,9 +41,9 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
     <>
       {/* Mobile Bottom Navigation - Fixed Position */}
       {/* Safe area padding for devices with home indicator (iPhone X+) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-safe">
+      <div className="um-fixed bottom-0 left-0 right-0 um-z-40 um-md\:hidden pb-safe">
         <div 
-          className="flex items-center justify-around border-t-2 backdrop-blur-sm"
+          className="um-flex um-items-center um-justify-around um-border-t-2 backdrop-blur-sm"
           style={{ 
             backgroundColor: colors.white + 'f0', // Semi-transparent
             borderTopColor: colors.lightBlue + '40',
@@ -59,7 +59,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
               <button
                 key={tab.id}
                 onClick={() => onTabChange(tab.id)}
-                className="flex flex-col items-center justify-center min-w-0 flex-1 relative transition-all duration-200 touch-manipulation"
+                className="um-flex um-flex-col um-items-center um-justify-center min-w-0 flex-1 um-relative transition-all duration-200 touch-manipulation"
                 style={{
                   minHeight: '60px', // Touch-friendly: 60px total height (44px minimum + padding)
                   padding: '8px 4px'
@@ -70,7 +70,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
                 {/* Badge for new features */}
                 {tab.badge && (
                   <div 
-                    className="absolute -top-1 right-2 w-3 h-3 rounded-full z-10"
+                    className="um-absolute -top-1 right-2 w-3 h-3 um-um-rounded-full um-z-10"
                     style={{ backgroundColor: colors.orange }}
                     aria-label="New features available"
                   />
@@ -78,7 +78,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
                 
                 {/* Icon with active state - larger for better touch targets */}
                 <div 
-                  className="rounded-lg transition-all duration-200 flex items-center justify-center"
+                  className="um-um-rounded-lg transition-all duration-200 flex um-items-center um-justify-center"
                   style={{
                     backgroundColor: isActive ? colors.lightBlue + '20' : 'transparent',
                     transform: isActive ? 'scale(1.15)' : 'scale(1)',
@@ -97,7 +97,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
                 
                 {/* Label - improved readability */}
                 <span 
-                  className="text-xs font-medium mt-1 truncate w-full text-center transition-colors duration-200"
+                  className="um-text-xs um-font-medium um-mt-1 truncate um-w-full um-text-center transition-colors duration-200"
                   style={{ 
                     color: isActive ? colors.lightBlue : colors.darkGreen,
                     fontSize: '11px', // Slightly larger for readability
@@ -113,7 +113,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
       </div>
 
       {/* Desktop Top Navigation - Enhanced */}
-      <div className="hidden md:flex items-center justify-center space-x-6 mb-8">
+      <div className="hidden um-md\:flex um-items-center um-justify-center space-x-6 mb-8">
         {tabs.map((tab) => {
           const IconComponent = tab.icon;
           const isActive = activeTab === tab.id;
@@ -122,7 +122,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`group flex items-center space-x-3 px-6 py-3 rounded-lg font-medium transition-all duration-300 relative overflow-hidden ${
+              className={`group flex um-items-center um-space-x-3 um-px-6 py-3 um-um-rounded-lg um-font-medium transition-all duration-300 um-relative um-overflow-hidden ${
                 isActive ? 'um-shadow-active' : ''
               }`}
               style={{
@@ -134,7 +134,7 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
             >
               {/* Background Animation */}
               <div 
-                className="absolute inset-0 transition-transform duration-300 transform translate-x-full group-hover:translate-x-0"
+                className="um-absolute um-inset-0 transition-transform duration-300 transform translate-x-full group-hover:translate-x-0"
                 style={{ 
                   background: `linear-gradient(90deg, ${colors.lightBlue}20, ${colors.lightGreen}20)`,
                   opacity: isActive ? 0 : 1
@@ -144,23 +144,23 @@ const BottomNavigation = ({ activeTab, onTabChange, colors, userHasNewFeatures =
               {/* Badge for new features */}
               {tab.badge && (
                 <div 
-                  className="absolute -top-2 -right-2 w-4 h-4 rounded-full flex items-center justify-center"
+                  className="um-absolute -top-2 -right-2 w-4 h-4 um-um-rounded-full flex um-items-center um-justify-center"
                   style={{ backgroundColor: colors.orange }}
                 >
-                  <span className="text-xs font-bold" style={{ color: colors.white }}>!</span>
+                  <span className="um-text-xs um-font-bold" style={{ color: colors.white }}>!</span>
                 </div>
               )}
               
               {/* Content */}
-              <div className="relative z-10 flex items-center space-x-3">
+              <div className="um-relative um-z-10 flex um-items-center um-space-x-3">
                 <IconComponent className="w-5 h-5" />
-                <span className="font-semibold tracking-wide">{tab.label}</span>
+                <span className="um-font-semibold tracking-wide">{tab.label}</span>
               </div>
               
               {/* Active Indicator */}
               {isActive && (
                 <div 
-                  className="absolute bottom-0 left-0 right-0 h-1"
+                  className="um-absolute bottom-0 left-0 right-0 h-1"
                   style={{ backgroundColor: colors.orange }}
                 />
               )}
@@ -212,28 +212,28 @@ const ProgressTab = ({ colors, userProfile, trainingHistory, personalBests }) =>
 
   return (
     <div className="space-y-6">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-2" style={{ color: colors.black }}>
+      <div className="um-text-center">
+        <h2 className="um-text-3xl um-font-bold um-mb-2" style={{ color: colors.black }}>
           Your Progress
         </h2>
-        <p className="text-lg" style={{ color: colors.darkGreen }}>
+        <p className="um-text-lg" style={{ color: colors.darkGreen }}>
           Track your training journey and improvements
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="um-grid um-grid-cols-2 um-lg-grid-cols-4 gaum-p-4">
         {stats.map((stat, index) => (
           <div key={index} className="munich-card">
-            <div className="munich-card-body text-center">
-              <div className="text-2xl font-bold mb-1" style={{ color: colors.black }}>
+            <div className="munich-card-body um-text-center">
+              <div className="um-text-2xl um-font-bold mb-1" style={{ color: colors.black }}>
                 {stat.value}
               </div>
-              <div className="text-sm font-medium mb-1" style={{ color: colors.darkGreen }}>
+              <div className="um-text-sm um-font-medium mb-1" style={{ color: colors.darkGreen }}>
                 {stat.label}
               </div>
               <div 
-                className="text-xs"
+                className="um-text-xs"
                 style={{ 
                   color: stat.positive ? colors.lightGreen : colors.silver 
                 }}
@@ -248,10 +248,10 @@ const ProgressTab = ({ colors, userProfile, trainingHistory, personalBests }) =>
       {/* Quick Actions */}
       <div className="munich-card">
         <div className="munich-card-body">
-          <h3 className="font-bold mb-4" style={{ color: colors.black }}>
+          <h3 className="um-font-bold um-mb-4" style={{ color: colors.black }}>
             Quick Actions
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-4">
             <button className="munich-btn munich-btn-primary">
               Log Workout
             </button>
@@ -269,21 +269,21 @@ const ProgressTab = ({ colors, userProfile, trainingHistory, personalBests }) =>
       {trainingHistory && trainingHistory.length > 0 && (
         <div className="munich-card">
           <div className="munich-card-body">
-            <h3 className="font-bold mb-4" style={{ color: colors.black }}>
+            <h3 className="um-font-bold um-mb-4" style={{ color: colors.black }}>
               Recent Training
             </h3>
             <div className="space-y-3">
               {trainingHistory.slice(-3).reverse().map((session, index) => (
-                <div key={index} className="flex justify-between items-center py-2 border-b" style={{ borderColor: colors.gray + '30' }}>
+                <div key={index} className="um-flex um-justify-between um-items-center um-py-2 um-border-b" style={{ borderColor: colors.gray + '30' }}>
                   <div>
-                    <div className="font-medium" style={{ color: colors.black }}>
+                    <div className="um-font-medium" style={{ color: colors.black }}>
                       {session.type}
                     </div>
-                    <div className="text-sm" style={{ color: colors.darkGreen }}>
+                    <div className="um-text-sm" style={{ color: colors.darkGreen }}>
                       {session.distance} miles • {session.feeling}
                     </div>
                   </div>
-                  <div className="text-sm" style={{ color: colors.silver }}>
+                  <div className="um-text-sm" style={{ color: colors.silver }}>
                     {session.date}
                   </div>
                 </div>

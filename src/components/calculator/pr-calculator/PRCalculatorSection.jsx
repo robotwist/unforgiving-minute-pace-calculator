@@ -66,69 +66,69 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Hero Section */}
-      <div className="text-center space-y-4 sm:space-y-6">
+      <div className="um-text-center um-space-y-4 sm:space-y-6">
         {/* Icon/Trophy visual */}
         <div className="inline-block">
-          <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto relative">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 um-mx-auto um-relative">
             <div
-              className="absolute inset-0 rounded-full border-4 flex items-center justify-center"
+              className="um-absolute um-inset-0 um-um-rounded-full border-4 flex um-items-center um-justify-center"
               style={{
                 borderColor: colors.lightBlue,
                 backgroundColor: `${colors.lightBlue}10`
               }}
             >
-              <Trophy className="w-16 h-16 sm:w-20 sm:h-20" style={{ color: colors.lightBlue }} />
+              <Trophy className="w-16 um-h-16 sm:w-20 sm:h-20" style={{ color: colors.lightBlue }} />
             </div>
           </div>
         </div>
 
-        <h2 className="munich-3xl font-bold tracking-tight mb-4" style={{ color: colors.black }}>
+        <h2 className="munich-3xl um-font-bold tracking-tight um-mb-4" style={{ color: colors.black }}>
           PR-Based Training Calculator
         </h2>
 
-        <p className="text-lg sm:text-xl max-w-3xl mx-auto px-4 leading-relaxed" style={{ color: colors.black }}>
+        <p className="um-text-lg um-sm-text-xl max-w-3xl um-mx-auto um-px-4 leading-relaxed" style={{ color: colors.black }}>
           Use your actual race performances to set training paces. No formulas. No guessing. 
           Just your proven PRs mapped directly to training zones.
         </p>
 
         {/* Value proposition badges */}
-        <div className="flex flex-wrap justify-center gap-3 mt-6 px-4">
+        <div className="um-flex um-flex-wrap um-justify-center um-gap-3 mt-6 um-px-4">
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
             style={{
               borderColor: colors.lightBlue,
               backgroundColor: colors.lightBlue + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightBlue }} />
-            <span className="text-sm font-medium">Proven Paces</span>
+            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }} />
+            <span className="um-text-sm um-font-medium">Proven Paces</span>
           </div>
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
             style={{
               borderColor: colors.lightGreen,
               backgroundColor: colors.lightGreen + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }} />
-            <span className="text-sm font-medium">Multi-Distance</span>
+            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }} />
+            <span className="um-text-sm um-font-medium">Multi-Distance</span>
           </div>
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
             style={{
               borderColor: colors.orange,
               backgroundColor: colors.orange + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.orange }} />
-            <span className="text-sm font-medium">Simplified</span>
+            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.orange }} />
+            <span className="um-text-sm um-font-medium">Simplified</span>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-4">
+        <div className="mt-6 flex um-flex-col um-sm-flex-row um-gap-3 um-justify-center um-px-4">
           <Link
             to="/apply"
             className="munich-btn munich-btn-primary um-cta"
@@ -149,9 +149,9 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
       </div>
 
       {/* Calculator Card */}
-      <div className="max-w-4xl mx-auto">
-        <div className="munich-card p-4 sm:p-8 space-y-6 relative z-10">
-          <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2" style={{ color: colors.black }}>
+      <div className="max-w-4xl um-mx-auto">
+        <div className="munich-card um-p-4 um-sm-p-8 space-y-6 um-relative um-z-10">
+          <h3 className="um-text-lg um-sm-text-xl um-font-bold flex um-items-center gap-2" style={{ color: colors.black }}>
             <Calculator className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: colors.lightBlue }} />
             <span>Enter Your Personal Records</span>
             <HelpIcon 
@@ -171,14 +171,14 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
           />
           
           {errors.general && (
-            <div className="p-3 rounded border-2" style={{ borderColor: '#ef4444', backgroundColor: '#fef2f2' }}>
-              <p className="text-sm text-red-600">{errors.general}</p>
+            <div className="p-3 um-rounded um-border-2" style={{ borderColor: '#ef4444', backgroundColor: '#fef2f2' }}>
+              <p className="um-text-sm text-red-600">{errors.general}</p>
             </div>
           )}
 
           <button
             onClick={handleCalculate}
-            className="w-full munich-btn munich-btn-primary py-4 text-lg font-bold"
+            className="um-w-full munich-btn munich-btn-primary um-py-4 um-text-lg um-font-bold"
             aria-label="Calculate training paces from PRs"
           >
             Calculate Training Paces
@@ -188,12 +188,12 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
 
       {/* Results Section */}
       {calculating ? (
-        <div className="max-w-6xl mx-auto space-y-8">
+        <div className="max-w-6xl um-mx-auto space-y-8">
           <SkeletonLoader type="calculator" />
           <SkeletonLoader type="card" />
         </div>
       ) : trainingPaces ? (
-        <div className="max-w-6xl mx-auto space-y-8">
+        <div className="max-w-6xl um-mx-auto space-y-8">
           {/* PR Profile Graph */}
           <PRProfileGraph prs={prs} colors={colors} />
           

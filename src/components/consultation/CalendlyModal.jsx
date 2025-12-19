@@ -166,7 +166,7 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
     >
       <div 
         ref={modalRef}
-        className="munich-card um-modal-panel um-modal-panel--4xl relative overflow-hidden"
+        className="munich-card um-modal-panel um-modal-panel--4xl um-relative um-overflow-hidden"
         style={{
           background: `linear-gradient(135deg, ${colors.white}E8, ${colors.lightGray}E8)`,
         }}
@@ -174,16 +174,16 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
       >
         {/* Header - Glassmorphism */}
         <div 
-          className="p-4 border-b" 
+          className="um-p-4 um-border-b" 
           style={{ 
             backgroundColor: `${colors.lightGray}80`,
             borderColor: `${colors.border}60`,
           }}
         >
-          <div className="flex items-center justify-between">
+          <div className="um-flex um-items-center um-justify-between">
             <h2 
               id="calendly-modal-title"
-              className="text-xl font-bold" 
+              className="um-text-xl um-font-bold" 
               style={{ color: colors.black }}
             >
               Schedule Your Personal Coaching Consultation
@@ -191,7 +191,7 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
             <button
               ref={closeButtonRef}
               onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded"
+              className="text-gray-500 hover:text-gray-700 um-text-2xl um-font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 um-rounded"
               style={{ 
                 focusRingColor: colors.lightBlue,
                 padding: '0.25rem'
@@ -203,7 +203,7 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
           </div>
           <p 
             id="calendly-modal-description"
-            className="text-sm mt-2" 
+            className="um-text-sm um-mt-2" 
             style={{ color: colors.darkGreen }}
           >
             Book a 45-minute consultation to discuss your training goals and get personalized recommendations.
@@ -211,13 +211,13 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
         </div>
 
         {/* Calendly Widget Container */}
-        <div className="p-4">
+        <div className="um-p-4">
           {loadError ? (
-            <div className="text-center py-12" role="alert">
-              <p className="text-lg font-semibold mb-2" style={{ color: colors.black }}>
+            <div className="um-text-center py-12" role="alert">
+              <p className="um-text-lg um-font-semibold um-mb-2" style={{ color: colors.black }}>
                 Unable to load scheduling calendar
               </p>
-              <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+              <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
                 Please try the direct link below or refresh the page.
               </p>
               <a 
@@ -231,9 +231,9 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
               </a>
             </div>
           ) : !isCalendlyLoaded ? (
-            <div className="text-center py-12" aria-live="polite" aria-busy="true">
+            <div className="um-text-center py-12" aria-live="polite" aria-busy="true">
               <div 
-                className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" 
+                className="inline-block animate-spin um-um-rounded-full um-h-8 um-w-8 um-border-b-2" 
                 style={{ borderColor: colors.lightBlue }}
                 role="status"
                 aria-label="Loading"
@@ -252,14 +252,14 @@ const CalendlyModal = ({ isOpen, onClose, colors }) => {
           
           {/* Fallback link if widget doesn't load */}
           {isCalendlyLoaded && !loadError && (
-            <div className="text-center mt-4 pt-4 border-t">
-              <p className="text-sm" style={{ color: colors.darkGreen }}>
+            <div className="um-text-center um-mt-4 pt-4 um-border-t">
+              <p className="um-text-sm" style={{ color: colors.darkGreen }}>
                 Having trouble with the calendar? 
                 <a 
                   href="https://calendly.com/robwistrand" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="ml-1 underline font-semibold focus:outline-none focus:ring-2 focus:ring-offset-1 rounded"
+                  className="ml-1 underline um-font-semibold focus:outline-none focus:ring-2 focus:ring-offset-1 um-rounded"
                   style={{ 
                     color: colors.lightBlue,
                     focusRingColor: colors.lightBlue

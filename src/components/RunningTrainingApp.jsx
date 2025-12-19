@@ -941,7 +941,7 @@ const RunningTrainingApp = () => {
 
   return (
     <div
-      className="min-h-screen relative overflow-hidden pb-20 md:pb-0"
+      className="min-h-screen um-relative um-overflow-hidden um-pb-20 um-md\:pb-0"
       style={{
         backgroundColor: colors.white,
         backgroundImage: `
@@ -954,7 +954,7 @@ const RunningTrainingApp = () => {
       <SkipLinks />
       {/* Enhanced background layers for glassmorphism depth */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="um-absolute um-inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `
             repeating-linear-gradient(45deg, ${colors.black} 0px, ${colors.black} 1px, transparent 1px, transparent 20px),
@@ -994,18 +994,18 @@ const RunningTrainingApp = () => {
       )}
 
       {/* Enhanced geometric background pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-8">
-        <div className="absolute top-20 left-10 w-2 h-2" style={{
+      <div className="um-absolute um-inset-0 pointer-events-none opacity-8">
+        <div className="um-absolute um-top-20 um-left-10 w-2 h-2" style={{
           backgroundColor: colors.lightBlue,
           clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
           filter: 'blur(1px)'
         }}></div>
-        <div className="absolute top-40 right-20 w-3 h-3" style={{
+        <div className="um-absolute toum-p-40 um-right-20 w-3 h-3" style={{
           backgroundColor: colors.lightGreen,
           clipPath: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)',
           filter: 'blur(1px)'
         }}></div>
-        <div className="absolute bottom-40 left-1/4 w-2 h-2" style={{
+        <div className="um-absolute um-bottom-40 um-left-1-4 w-2 h-2" style={{
           backgroundColor: colors.lightBlue,
           clipPath: 'polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)',
           filter: 'blur(1px)'
@@ -1014,19 +1014,19 @@ const RunningTrainingApp = () => {
       {/* Header - Enhanced Glassmorphism */}
       <header
         id="navigation"
-        className="um-app-header relative overflow-hidden"
+        className="um-app-header um-relative um-overflow-hidden"
         aria-label="Main navigation"
       >
         {/* Progressive Melange Background */}
-        <div className="absolute inset-0 progressive-melange opacity-10"></div>
+        <div className="um-absolute um-inset-0 progressive-melange um-opacity-10"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col sm:flex-row justify-between items-center py-4 sm:py-6 space-y-4 sm:space-y-0">
+        <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
+          <div className="um-flex um-flex-col um-sm-flex-row um-justify-between um-items-center um-py-4 um-sm-py-6 um-space-y-4 um-sm\:space-y-0">
             {/* Brand Logo - Enhanced Prominence */}
-            <div className="flex items-center space-x-3">
-              <div className="relative">
+            <div className="um-flex um-items-center um-space-x-3">
+              <div className="um-relative">
                 {/* Geometric logo background */}
-                <div className="w-12 h-12 sm:w-16 sm:h-16 geometric-octagon flex items-center justify-center" style={{ 
+                <div className="w-12 um-h-12 um-sm\:w-16 um-sm\:h-16 geometric-octagon flex um-items-center um-justify-center" style={{ 
                   backgroundColor: colors.lightBlue,
                   boxShadow: '0 6px 12px rgba(30,107,150,0.3)'
                 }}>
@@ -1034,29 +1034,29 @@ const RunningTrainingApp = () => {
                   <img 
                     src="/olympicrunner72icon.png" 
                     alt="Olympic Runner" 
-                    className="w-8 h-8 sm:w-10 sm:h-10 object-contain running-pictogram"
+                    className="w-8 um-h-8 um-sm\:w-10 um-sm\:h-10 um-object-contain running-pictogram"
                     style={{ filter: 'brightness(0) invert(1)' }}
                   />
                 </div>
                 {/* Geometric accent */}
-                <div className="absolute -top-1 -right-1 w-4 h-4 geometric-diamond" style={{ 
+                <div className="um-absolute -top-1 -right-1 w-4 h-4 geometric-diamond" style={{ 
                   backgroundColor: colors.orange
                 }}></div>
               </div>
-              <div className="text-left">
+              <div className="um-text-left">
                 <h1 className="munich-xl font-black tracking-wide leading-tight" style={{ 
                   color: colors.black,
                   textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                 }}>
                   UNFORGIVING MINUTE
                 </h1>
-                <p className="munich-lg font-bold tracking-wider" style={{ 
+                <p className="munich-lg um-font-bold tracking-wider" style={{ 
                   color: colors.lightBlue,
                   letterSpacing: '0.15em'
                 }}>
                   DISTANCE RUNNING
                 </p>
-                <div className="hidden sm:block mt-1">
+                <div className="hidden um-sm\:block um-mt-1">
                   <div className="h-0.5 w-20 bg-gradient-to-r" style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.lightBlue} 0%, ${colors.orange} 50%, ${colors.lightGreen} 100%)`
                   }}></div>
@@ -1067,7 +1067,7 @@ const RunningTrainingApp = () => {
             {/* Navigation - Conditional Mobile/Desktop */}
             {!isMobile ? (
               /* Desktop Navigation - Munich 1972 Style */
-              <nav className="flex flex-wrap justify-center sm:justify-end space-x-1">
+              <nav className="um-flex um-flex-wrap um-justify-center um-sm-justify-end space-x-1">
                 {[
                   { id: 'calculator', label: 'Optimal Progress Pace', icon: Calculator },
                   { id: 'plans', label: 'Training Plans', icon: Target },
@@ -1088,7 +1088,7 @@ const RunningTrainingApp = () => {
                     }}
                     aria-label={`Switch to ${label} tab`}
                     aria-current={activeTab === id ? 'page' : undefined}
-                    className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all duration-200 ${
+                    className={`flex um-items-center space-x-1 sm:space-x-2 px-2 um-sm-px-4 um-py-2 um-font-medium um-text-xs um-sm-text-sm transition-all duration-200 ${
                       activeTab === id
                         ? 'text-white shadow-sm'
                         : 'text-gray-600 hover:text-white hover:shadow-sm'
@@ -1099,15 +1099,15 @@ const RunningTrainingApp = () => {
                     }}
                   >
                     <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span className="hidden sm:inline">{label}</span>
-                    <span className="sm:hidden">{label.split(' ')[0]}</span>
+                    <span className="hidden um-sm\:inline">{label}</span>
+                    <span className="um-sm\:hidden">{label.split(' ')[0]}</span>
                   </button>
                 ))}
 
                 {/* Coach page link */}
                 <a
                   href="/apply"
-                  className="ml-2 sm:ml-3 px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors"
+                  className="ml-2 sm:ml-3 px-2 sm:px-3 um-py-2 um-um-rounded-md um-text-xs um-sm-text-sm um-font-medium transition-colors"
                   style={{
                     color: colors.lightBlue,
                     border: `1px solid ${colors.lightBlue}`,
@@ -1121,7 +1121,7 @@ const RunningTrainingApp = () => {
                 {/* Global Consult CTA */}
                 <a
                   href="/coach"
-                  className="ml-2 sm:ml-4 px-3 sm:px-4 py-2 font-semibold border-2 rounded-md transition-colors"
+                  className="ml-2 sm:ml-4 px-3 um-sm-px-4 um-py-2 um-font-semibold um-border-2 um-um-rounded-md transition-colors"
                   style={{
                     borderColor: colors.lightGreen,
                     color: colors.lightGreen,
@@ -1135,7 +1135,7 @@ const RunningTrainingApp = () => {
                 {/* Dark Mode Toggle */}
                 <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
+                  className="ml-4 p-2 um-um-rounded-full transition-all duration-300 hover:scale-110"
                   style={{
                     backgroundColor: darkMode ? colors.yellow : colors.gray,
                     color: darkMode ? colors.black : colors.lightBlue,
@@ -1145,18 +1145,18 @@ const RunningTrainingApp = () => {
                   aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
                   {darkMode ? (
-                    <span className="text-lg">☀️</span>
+                    <span className="um-text-lg">☀️</span>
                   ) : (
-                    <span className="text-lg">🌙</span>
+                    <span className="um-text-lg">🌙</span>
                   )}
                 </button>
               </nav>
             ) : (
               /* Mobile - Show only brand, navigation will be at bottom */
-              <div className="flex items-center space-x-2">
+              <div className="um-flex um-items-center space-x-2">
                 <a
                   href="/apply"
-                  className="px-3 py-2 font-semibold border-2 rounded-md transition-colors"
+                  className="px-3 um-py-2 um-font-semibold um-border-2 um-um-rounded-md transition-colors"
                   style={{
                     borderColor: colors.lightBlue,
                     color: colors.lightBlue,
@@ -1168,7 +1168,7 @@ const RunningTrainingApp = () => {
                 </a>
                 <a
                   href="/coach"
-                  className="px-3 py-2 font-semibold border-2 rounded-md transition-colors"
+                  className="px-3 um-py-2 um-font-semibold um-border-2 um-um-rounded-md transition-colors"
                   style={{
                     borderColor: colors.lightGreen,
                     color: colors.lightGreen,
@@ -1180,7 +1180,7 @@ const RunningTrainingApp = () => {
                 </a>
                 <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="p-2 rounded-full transition-all duration-300 hover:scale-110"
+                  className="p-2 um-um-rounded-full transition-all duration-300 hover:scale-110"
                   style={{
                     backgroundColor: darkMode ? colors.yellow : colors.gray,
                     color: darkMode ? colors.black : colors.lightBlue,
@@ -1190,9 +1190,9 @@ const RunningTrainingApp = () => {
                   aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
                 >
                   {darkMode ? (
-                    <span className="text-lg">☀️</span>
+                    <span className="um-text-lg">☀️</span>
                   ) : (
-                    <span className="text-lg">🌙</span>
+                    <span className="um-text-lg">🌙</span>
                   )}
                 </button>
               </div>
@@ -1202,34 +1202,34 @@ const RunningTrainingApp = () => {
       </header>
 
       {/* Main Content */}
-      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 relative" style={{ backgroundColor: colors.white, color: colors.black }} role="main">
+      <main id="main-content" className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-py-4 um-sm-py-8 um-relative" style={{ backgroundColor: colors.white, color: colors.black }} role="main">
         {/* Floating runner elements - hidden on mobile for performance */}
-        <div className="hidden sm:block absolute top-20 left-10 w-12 h-12 geometric-float-counterclockwise">
+        <div className="hidden um-sm\:block um-absolute um-top-20 um-left-10 um-w-12 um-h-12 geometric-float-counterclockwise">
           {/* Olympic Runner Icon */}
           <img 
             src="/olympicrunner72icon.png" 
             alt="Olympic Runner" 
-            className="w-full h-full object-contain"
+            className="um-w-full um-h-full um-object-contain"
             style={{ filter: 'brightness(0.8) contrast(1.2)' }}
           />
         </div>
         
-        <div className="hidden sm:block absolute top-40 right-20 w-16 h-16 geometric-float-counterclockwise" style={{ animationDelay: '2s' }}>
+        <div className="hidden um-sm\:block um-absolute toum-p-40 um-right-20 um-w-16 um-h-16 geometric-float-counterclockwise" style={{ animationDelay: '2s' }}>
           {/* Olympic Runner Icon */}
           <img 
             src="/olympicrunner72icon.png" 
             alt="Olympic Runner" 
-            className="w-full h-full object-contain"
+            className="um-w-full um-h-full um-object-contain"
             style={{ filter: 'brightness(0.8) contrast(1.2)' }}
           />
         </div>
         
-        <div className="hidden sm:block absolute bottom-40 left-1/4 w-8 h-8 geometric-float-counterclockwise" style={{ animationDelay: '4s' }}>
+        <div className="hidden um-sm\:block um-absolute um-bottom-40 um-left-1-4 um-w-8 um-h-8 geometric-float-counterclockwise" style={{ animationDelay: '4s' }}>
           {/* Olympic Runner Icon */}
           <img 
             src="/olympicrunner72icon.png" 
             alt="Olympic Runner" 
-            className="w-full h-full object-contain"
+            className="um-w-full um-h-full um-object-contain"
             style={{ filter: 'brightness(0.8) contrast(1.2)' }}
           />
         </div>
@@ -1251,57 +1251,57 @@ const RunningTrainingApp = () => {
 
             {/* Results Section - Munich 1972 Geometric Style */}
             {goldenPace && trainingPaces && (
-              <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6">
+              <div className="max-w-4xl um-mx-auto um-space-y-4 sm:space-y-6">
                 {/* GoldenPace Display */}
-                <div className="text-center p-4 sm:p-6 bg-white shadow-sm border relative overflow-hidden" style={{ borderColor: colors.border }}>
+                <div className="um-text-center um-p-4 um-sm-p-6 bg-white shadow-sm border um-relative um-overflow-hidden" style={{ borderColor: colors.border }}>
                   {/* Progressive Melange Background */}
-                  <div className="absolute inset-0 progressive-melange opacity-5"></div>
+                  <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
                   
                   {/* Geometric border accents */}
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-2 sm:w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-2 sm:w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
+                  <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm\:w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
+                  <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm\:w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
                   
-                  <div className="relative z-10">
-                    <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: colors.lightBlue }}>
+                  <div className="um-relative um-z-10">
+                    <div className="um-text-3xl um-sm-text-4xl um-font-bold um-mb-2" style={{ color: colors.lightBlue }}>
                       {goldenPace}
                     </div>
-                    <div className="text-base sm:text-lg font-medium" style={{ color: colors.black }}>
+                    <div className="um-text-base um-sm-text-lg um-font-medium" style={{ color: colors.black }}>
                       Optimal Progress Pace
                     </div>
-                    <p className="text-xs sm:text-sm mt-2" style={{ color: colors.lightBlue }}>
+                    <p className="um-text-xs um-sm-text-sm um-mt-2" style={{ color: colors.lightBlue }}>
                       The pace that drives maximum improvement when run at the right times
                     </p>
                   </div>
                 </div>
 
                 {/* Training Paces Grid - Munich 1972 Geometric Style */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 um-gap-3 sm:gaum-p-4">
                   {[
                     { name: 'Easy', pace: trainingPaces.easy, icon: Clock, color: colors.gray },
                     { name: 'Threshold', pace: trainingPaces.threshold, icon: TrendingUp, color: colors.lightGreen },
                     { name: 'Interval', pace: trainingPaces.interval, icon: Clock, color: colors.darkGreen },
                     { name: 'Repetition', pace: trainingPaces.repetition, icon: TrendingUp, color: colors.lightBlue }
                   ].map(({ name, pace, icon: Icon, color }, index) => (
-                    <div key={name} className="bg-white shadow-sm border p-3 sm:p-4 text-center relative overflow-hidden" style={{ borderColor: colors.border }}>
+                    <div key={name} className="bg-white shadow-sm border p-3 um-sm-p-4 um-text-center um-relative um-overflow-hidden" style={{ borderColor: colors.border }}>
                       {/* Progressive Melange Background */}
-                      <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                      <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                       
                       {/* Geometric corner accent */}
-                      <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
+                      <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
                         backgroundColor: color,
                         opacity: 0.3,
                         animationDelay: `${index * 0.5}s`
                       }}></div>
                       
-                      <div className="relative z-10">
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 mx-auto mb-2" style={{ color: color }} />
-                        <h4 className="text-sm sm:text-md font-medium mb-1" style={{ color: colors.black }}>
+                      <div className="um-relative um-z-10">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 um-mx-auto um-mb-2" style={{ color: color }} />
+                        <h4 className="um-text-sm sm:text-md um-font-medium mb-1" style={{ color: colors.black }}>
                           {name}
                         </h4>
-                        <div className="text-lg sm:text-xl font-bold font-mono" style={{ color: color }}>
+                        <div className="um-text-lg um-sm-text-xl um-font-bold font-mono" style={{ color: color }}>
                           {pace}
                         </div>
-                        <p className="text-xs mt-1" style={{ color: colors.lightBlue }}>
+                        <p className="um-text-xs um-mt-1" style={{ color: colors.lightBlue }}>
                           per mile
                         </p>
                       </div>
@@ -1312,27 +1312,27 @@ const RunningTrainingApp = () => {
                 {/* Freemium Flow - Post-Calculation User Journey */}
                 <div className="mt-8 space-y-6">
                   {/* Free Training Week Sample */}
-                  <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 border-2 rounded-lg p-6 relative overflow-hidden" style={{ 
+                  <div className="bg-gradient-to-br from-blue-50 via-white to-green-50 um-border-2 um-um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
                     borderColor: colors.lightBlue,
                     boxShadow: '0 10px 25px rgba(30, 107, 150, 0.15)'
                   }}>
-                    <div className="absolute top-0 right-0 w-24 h-24 geometric-diamond" style={{ 
+                    <div className="um-absolute top-0 right-0 w-24 h-24 geometric-diamond" style={{ 
                       backgroundColor: colors.orange,
                       opacity: 0.08
                     }}></div>
                     
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-6">
+                    <div className="um-relative um-z-10">
+                      <div className="um-flex um-items-center um-justify-between um-mb-6">
                         <div>
-                          <h3 className="text-2xl font-bold mb-2" style={{ color: colors.black }}>
+                          <h3 className="um-text-2xl um-font-bold um-mb-2" style={{ color: colors.black }}>
                             Your Personalized Training Week
                           </h3>
-                          <p className="text-sm" style={{ color: colors.darkGreen }}>
+                          <p className="um-text-sm" style={{ color: colors.darkGreen }}>
                             Based on your {goldenPace} GoldenPace • Elite-tested training system
                           </p>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="px-4 py-2 rounded-full text-sm font-bold border-2" style={{ 
+                        <div className="um-flex um-items-center gap-2">
+                          <span className="um-px-4 um-py-2 um-um-rounded-full um-text-sm um-font-bold um-border-2" style={{ 
                             backgroundColor: colors.lightGreen,
                             borderColor: colors.darkGreen,
                             color: 'white'
@@ -1342,46 +1342,46 @@ const RunningTrainingApp = () => {
                         </div>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4 mb-8">
                         <div className="space-y-3">
-                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
-                            <div className="flex items-center gap-3">
-                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
-                              <span className="font-medium" style={{ color: colors.black }}>Monday - Recovery Run</span>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                            <div className="um-flex um-items-center um-gap-3">
+                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                              <span className="um-font-medium" style={{ color: colors.black }}>Monday - Recovery Run</span>
                             </div>
-                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                            <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
                               color: colors.lightBlue,
                               backgroundColor: colors.lightBlue + '15'
                             }}>{trainingPaces.easy}</span>
                           </div>
-                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
-                            <div className="flex items-center gap-3">
-                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
-                              <span className="font-medium" style={{ color: colors.black }}>Wednesday - Threshold Run</span>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightGreen + '40' }}>
+                            <div className="um-flex um-items-center um-gap-3">
+                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                              <span className="um-font-medium" style={{ color: colors.black }}>Wednesday - Threshold Run</span>
                             </div>
-                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                            <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
                               color: colors.lightGreen,
                               backgroundColor: colors.lightGreen + '15'
                             }}>{trainingPaces.threshold}</span>
                           </div>
                         </div>
                         <div className="space-y-3">
-                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
-                            <div className="flex items-center gap-3">
-                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
-                              <span className="font-medium" style={{ color: colors.black }}>Friday - Interval Session</span>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.darkGreen + '40' }}>
+                            <div className="um-flex um-items-center um-gap-3">
+                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.darkGreen }}></div>
+                              <span className="um-font-medium" style={{ color: colors.black }}>Friday - Interval Session</span>
                             </div>
-                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                            <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
                               color: colors.darkGreen,
                               backgroundColor: colors.darkGreen + '15'
                             }}>{trainingPaces.interval}</span>
                           </div>
-                          <div className="flex justify-between items-center p-4 bg-white rounded-lg border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
-                            <div className="flex items-center gap-3">
-                              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
-                              <span className="font-medium" style={{ color: colors.black }}>Sunday - Long Run</span>
+                          <div className="um-flex um-justify-between um-items-center um-p-4 bg-white um-um-rounded-lg um-border-2 shadow-sm" style={{ borderColor: colors.lightBlue + '40' }}>
+                            <div className="um-flex um-items-center um-gap-3">
+                              <div className="w-3 h-3 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }}></div>
+                              <span className="um-font-medium" style={{ color: colors.black }}>Sunday - Long Run</span>
                             </div>
-                            <span className="font-mono font-bold px-2 py-1 rounded" style={{ 
+                            <span className="font-mono um-font-bold px-2 py-1 um-rounded" style={{ 
                               color: colors.lightBlue,
                               backgroundColor: colors.lightBlue + '15'
                             }}>{trainingPaces.easy}</span>
@@ -1390,26 +1390,26 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       {/* Value proposition with urgency */}
-                      <div className="bg-white rounded-lg p-4 mb-6 border" style={{ borderColor: colors.orange + '30' }}>
-                        <div className="flex items-start gap-3">
-                          <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.orange }}>
+                      <div className="bg-white um-um-rounded-lg um-p-4 um-mb-6 border" style={{ borderColor: colors.orange + '30' }}>
+                        <div className="um-flex um-items-start um-gap-3">
+                          <div className="w-5 h-5 um-um-rounded-full flex um-items-center um-justify-center" style={{ backgroundColor: colors.orange }}>
                             <Star className="w-3 h-3 text-white" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium mb-1" style={{ color: colors.black }}>
+                            <p className="um-text-sm um-font-medium mb-1" style={{ color: colors.black }}>
                               This is just week 1 of a 12-week journey to your race goal
                             </p>
-                            <p className="text-xs" style={{ color: colors.darkGreen }}>
+                            <p className="um-text-xs" style={{ color: colors.darkGreen }}>
                               Full programs include progressive build phases, peak training, and race-specific workouts
                             </p>
                           </div>
                         </div>
                       </div>
                       
-                      <div className="flex flex-col sm:flex-row gap-3">
+                      <div className="um-flex um-flex-col um-sm-flex-row um-gap-3">
                         <button
                           onClick={() => setActiveTab('premium')}
-                          className="flex-1 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                          className="flex-1 um-px-8 um-py-4 um-um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                           style={{ 
                             backgroundColor: colors.orange,
                             color: 'white'
@@ -1421,7 +1421,7 @@ const RunningTrainingApp = () => {
                         </button>
                         <button
                           onClick={() => setActiveTab('plans')}
-                          className="flex-1 px-6 py-4 rounded-lg font-medium border-2 transition-all duration-200 flex items-center justify-center"
+                          className="flex-1 um-px-6 um-py-4 um-um-rounded-lg um-font-medium um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
                           style={{ 
                             borderColor: colors.lightBlue,
                             color: colors.lightBlue,
@@ -1438,57 +1438,57 @@ const RunningTrainingApp = () => {
 
                   {/* Profile Creation Prompt */}
                   {!savedProfileData && (
-                    <div className="border-2 rounded-lg p-6 relative overflow-hidden" style={{ 
+                    <div className="um-border-2 um-um-rounded-lg um-p-6 um-relative um-overflow-hidden" style={{ 
                       borderColor: colors.lightGreen + '60',
                       backgroundColor: 'white',
                       boxShadow: '0 8px 25px rgba(46, 139, 87, 0.12)'
                     }}>
-                      <div className="absolute top-0 left-0 w-32 h-32 geometric-octagon" style={{ 
+                      <div className="um-absolute top-0 left-0 w-32 h-32 geometric-octagon" style={{ 
                         backgroundColor: colors.lightGreen,
                         opacity: 0.06
                       }}></div>
                       
-                      <div className="relative z-10">
-                        <div className="flex items-start gap-4 mb-4">
-                          <div className="w-12 h-12 rounded-full flex items-center justify-center" style={{ 
+                      <div className="um-relative um-z-10">
+                        <div className="um-flex um-items-start gaum-p-4 um-mb-4">
+                          <div className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center" style={{ 
                             backgroundColor: colors.lightGreen + '20'
                           }}>
                             <User className="w-6 h-6" style={{ color: colors.lightGreen }} />
                           </div>
                           <div className="flex-1">
-                            <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>
+                            <h3 className="um-text-xl um-font-bold um-mb-2" style={{ color: colors.black }}>
                               Save Your Progress & Get Personalized Coaching
                             </h3>
-                            <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                            <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
                               Create a free profile to unlock AI-powered training recommendations, track your progress, and get access to our community of elite runners.
                             </p>
                           </div>
                         </div>
                         
                         {/* Benefits list */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                          <div className="flex items-center gap-2">
+                        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-gap-3 um-mb-6">
+                          <div className="um-flex um-items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                            <span className="text-sm" style={{ color: colors.black }}>Save your Optimal Progress Pace & training paces</span>
+                            <span className="um-text-sm" style={{ color: colors.black }}>Save your Optimal Progress Pace & training paces</span>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="um-flex um-items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                            <span className="text-sm" style={{ color: colors.black }}>Personal training log & progress tracking</span>
+                            <span className="um-text-sm" style={{ color: colors.black }}>Personal training log & progress tracking</span>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="um-flex um-items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                            <span className="text-sm" style={{ color: colors.black }}>AI-powered workout recommendations</span>
+                            <span className="um-text-sm" style={{ color: colors.black }}>AI-powered workout recommendations</span>
                           </div>
-                          <div className="flex items-center gap-2">
+                          <div className="um-flex um-items-center gap-2">
                             <CheckCircle className="w-4 h-4" style={{ color: colors.lightGreen }} />
-                            <span className="text-sm" style={{ color: colors.black }}>Access to elite coaching insights</span>
+                            <span className="um-text-sm" style={{ color: colors.black }}>Access to elite coaching insights</span>
                           </div>
                         </div>
                         
-                        <div className="flex flex-col sm:flex-row gap-3 items-center">
+                        <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 um-items-center">
                           <button 
                             onClick={() => setActiveTab('profile')}
-                            className="flex-1 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                            className="flex-1 um-px-8 um-py-4 um-um-rounded-lg um-font-bold um-text-lg transition-all duration-200 flex um-items-center um-justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                             style={{ 
                               backgroundColor: colors.lightGreen,
                               color: 'white'
@@ -1498,8 +1498,8 @@ const RunningTrainingApp = () => {
                             <User className="w-6 h-6 mr-3" />
                             Create Free Profile Now
                           </button>
-                          <div className="flex items-center gap-2 text-sm" style={{ color: colors.darkGreen }}>
-                            <div className="w-4 h-4 rounded-full border-2" style={{ borderColor: colors.lightGreen }}>
+                          <div className="um-flex um-items-center gap-2 um-text-sm" style={{ color: colors.darkGreen }}>
+                            <div className="w-4 h-4 um-um-rounded-full um-border-2" style={{ borderColor: colors.lightGreen }}>
                               <CheckCircle className="w-3 h-3 text-green-600" />
                             </div>
                             No credit card • Always free
@@ -1517,8 +1517,8 @@ const RunningTrainingApp = () => {
         {activeTab === 'plans' && (
           <div className="space-y-6">
             {/* Smart Plan Recommendations */}
-            <div className="text-center space-y-4 mb-8">
-              <h2 className="text-2xl font-bold" style={{ color: colors.black }}>
+            <div className="um-text-center um-space-y-4 mb-8">
+              <h2 className="um-text-2xl um-font-bold" style={{ color: colors.black }}>
                 {goldenPace ? 'Personalized Training Plans' : 'Training Plans'}
               </h2>
               {goldenPace && userProfile.goal && (
@@ -1542,8 +1542,8 @@ const RunningTrainingApp = () => {
             ) : (
               /* Fallback to original TrainingPlansSection for users without complete profile */
               <div className="space-y-6">
-                <div className="text-center p-6 rounded-lg" style={{ backgroundColor: colors.gray + '20' }}>
-                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                <div className="um-text-center um-p-6 um-um-rounded-lg" style={{ backgroundColor: colors.gray + '20' }}>
+                  <h3 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     Get Personalized Recommendations
                   </h3>
                   <p className="mb-4" style={{ color: colors.darkGreen }}>
@@ -1580,17 +1580,17 @@ const RunningTrainingApp = () => {
                   }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="p-8">
-                    <div className="flex justify-between items-start mb-6">
+                  <div className="um-p-8">
+                    <div className="um-flex um-justify-between um-items-start um-mb-6">
                       <div>
-                        <h3 className="text-3xl font-bold mb-2" style={{ color: colors.black }}>{selectedPlan.name}</h3>
-                        <div className="flex items-center gap-4 text-sm">
-                          <div className="flex items-center gap-1">
+                        <h3 className="um-text-3xl um-font-bold um-mb-2" style={{ color: colors.black }}>{selectedPlan.name}</h3>
+                        <div className="um-flex um-items-center gaum-p-4 um-text-sm">
+                          <div className="um-flex um-items-center gap-1">
                             <Clock className="w-4 h-4" style={{ color: colors.lightBlue }} />
                             <span style={{ color: colors.darkGreen }}>{selectedPlan.duration} weeks</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                          <div className="um-flex um-items-center gap-1">
+                            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
                             <span style={{ color: colors.darkGreen }}>{selectedPlan.phase} Phase</span>
                           </div>
                         </div>
@@ -1598,7 +1598,7 @@ const RunningTrainingApp = () => {
                       <button
                         type="button"
                         onClick={() => setShowPlanDetails(false)}
-                        className="text-2xl p-2 rounded-full transition-colors"
+                        className="um-text-2xl p-2 um-um-rounded-full transition-colors"
                         style={{ color: colors.darkGreen }}
                         aria-label="Close plan details"
                       >
@@ -1608,59 +1608,59 @@ const RunningTrainingApp = () => {
 
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-lg font-bold mb-2" style={{ color: colors.black }}>Description</h4>
+                        <h4 className="um-text-lg um-font-bold um-mb-2" style={{ color: colors.black }}>Description</h4>
                         <p style={{ color: colors.darkGreen }}>{selectedPlan.description}</p>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="um-grid um-grid-cols-1 um-sm-grid-cols-3 gaum-p-4">
                         <div className="munich-card">
                           <div className="munich-card-body">
-                            <div className="text-xs font-semibold" style={{ color: colors.darkGreen }}>Duration</div>
-                            <div className="text-lg font-bold" style={{ color: colors.black }}>{selectedPlan.duration} weeks</div>
+                            <div className="um-text-xs um-font-semibold" style={{ color: colors.darkGreen }}>Duration</div>
+                            <div className="um-text-lg um-font-bold" style={{ color: colors.black }}>{selectedPlan.duration} weeks</div>
                           </div>
                         </div>
                         <div className="munich-card">
                           <div className="munich-card-body">
-                            <div className="text-xs font-semibold" style={{ color: colors.darkGreen }}>Weekly mileage</div>
-                            <div className="text-lg font-bold" style={{ color: colors.black }}>{selectedPlan.weeklyMileage} mi</div>
+                            <div className="um-text-xs um-font-semibold" style={{ color: colors.darkGreen }}>Weekly mileage</div>
+                            <div className="um-text-lg um-font-bold" style={{ color: colors.black }}>{selectedPlan.weeklyMileage} mi</div>
                           </div>
                         </div>
                         <div className="munich-card">
                           <div className="munich-card-body">
-                            <div className="text-xs font-semibold" style={{ color: colors.darkGreen }}>Phase</div>
-                            <div className="text-lg font-bold" style={{ color: colors.black }}>{selectedPlan.phase}</div>
+                            <div className="um-text-xs um-font-semibold" style={{ color: colors.darkGreen }}>Phase</div>
+                            <div className="um-text-lg um-font-bold" style={{ color: colors.black }}>{selectedPlan.phase}</div>
                           </div>
                         </div>
                       </div>
 
                       {selectedPlan.goldenPaceLevel && selectedPlan.trainingPaces && (
                         <div>
-                          <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+                          <h4 className="um-text-lg um-font-bold um-mb-3" style={{ color: colors.black }}>
                             Training Paces (Optimal Progress Pace {selectedPlan.goldenPaceLevel})
                           </h4>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 gaum-p-4">
                             <div className="munich-card">
                               <div className="munich-card-body">
-                                <div className="text-sm font-semibold" style={{ color: colors.darkGreen }}>Easy / Long</div>
-                                <div className="text-xl font-bold font-mono" style={{ color: colors.lightBlue }}>{selectedPlan.trainingPaces.easy}</div>
+                                <div className="um-text-sm um-font-semibold" style={{ color: colors.darkGreen }}>Easy / Long</div>
+                                <div className="um-text-xl um-font-bold font-mono" style={{ color: colors.lightBlue }}>{selectedPlan.trainingPaces.easy}</div>
                               </div>
                             </div>
                             <div className="munich-card">
                               <div className="munich-card-body">
-                                <div className="text-sm font-semibold" style={{ color: colors.darkGreen }}>Threshold</div>
-                                <div className="text-xl font-bold font-mono" style={{ color: colors.lightGreen }}>{selectedPlan.trainingPaces.threshold}</div>
+                                <div className="um-text-sm um-font-semibold" style={{ color: colors.darkGreen }}>Threshold</div>
+                                <div className="um-text-xl um-font-bold font-mono" style={{ color: colors.lightGreen }}>{selectedPlan.trainingPaces.threshold}</div>
                               </div>
                             </div>
                             <div className="munich-card">
                               <div className="munich-card-body">
-                                <div className="text-sm font-semibold" style={{ color: colors.darkGreen }}>Interval (400m)</div>
-                                <div className="text-xl font-bold font-mono" style={{ color: colors.orange }}>{selectedPlan.trainingPaces.interval}</div>
+                                <div className="um-text-sm um-font-semibold" style={{ color: colors.darkGreen }}>Interval (400m)</div>
+                                <div className="um-text-xl um-font-bold font-mono" style={{ color: colors.orange }}>{selectedPlan.trainingPaces.interval}</div>
                               </div>
                             </div>
                             <div className="munich-card">
                               <div className="munich-card-body">
-                                <div className="text-sm font-semibold" style={{ color: colors.darkGreen }}>Repetition (400m)</div>
-                                <div className="text-xl font-bold font-mono" style={{ color: colors.violet }}>{selectedPlan.trainingPaces.repetition}</div>
+                                <div className="um-text-sm um-font-semibold" style={{ color: colors.darkGreen }}>Repetition (400m)</div>
+                                <div className="um-text-xl um-font-bold font-mono" style={{ color: colors.violet }}>{selectedPlan.trainingPaces.repetition}</div>
                               </div>
                             </div>
                           </div>
@@ -1669,15 +1669,15 @@ const RunningTrainingApp = () => {
 
                       {!!selectedPlan.workouts?.length && (
                         <div>
-                          <h4 className="text-lg font-bold mb-2" style={{ color: colors.black }}>Workout schedule</h4>
+                          <h4 className="um-text-lg um-font-bold um-mb-2" style={{ color: colors.black }}>Workout schedule</h4>
                           <div className="space-y-3">
                             {selectedPlan.workouts.map((workout, weekIndex) => (
                               <div key={weekIndex} className="munich-card">
                                 <div className="munich-card-body">
-                                  <div className="font-bold mb-2" style={{ color: colors.black }}>Week {weekIndex + 1}</div>
-                                  <div className="space-y-1 text-sm" style={{ color: colors.darkGreen }}>
+                                  <div className="um-font-bold um-mb-2" style={{ color: colors.black }}>Week {weekIndex + 1}</div>
+                                  <div className="space-y-1 um-text-sm" style={{ color: colors.darkGreen }}>
                                     {workout?.days?.map((day, dayIndex) => (
-                                      <div key={dayIndex} className="flex gap-2">
+                                      <div key={dayIndex} className="um-flex gap-2">
                                         <span style={{ minWidth: 70, color: colors.black, fontWeight: 600 }}>{day.day}:</span>
                                         <span>{day.type} — {day.distance}{day.notes ? ` (${day.notes})` : ''}</span>
                                       </div>
@@ -1691,7 +1691,7 @@ const RunningTrainingApp = () => {
                       )}
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                    <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 mt-6">
                       <button
                         type="button"
                         onClick={() => {
@@ -1754,18 +1754,18 @@ const RunningTrainingApp = () => {
             />
             
             {/* Quick Actions */}
-            <div className="grid md:grid-cols-3 gap-4 mt-8">
+            <div className="um-grid um-md-grid-cols-3 gaum-p-4 mt-8">
               <div className="munich-card">
-                <div className="munich-card-body text-center">
-                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                <div className="munich-card-body um-text-center">
+                  <h3 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     Log a Run
                   </h3>
-                  <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                  <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
                     Track your training progress
                   </p>
                   <button
                     onClick={() => setShowTrainingLogForm(true)}
-                    className="munich-btn munich-btn-primary w-full"
+                    className="munich-btn munich-btn-primary um-w-full"
                   >
                     Add Activity
                   </button>
@@ -1773,16 +1773,16 @@ const RunningTrainingApp = () => {
               </div>
               
               <div className="munich-card">
-                <div className="munich-card-body text-center">
-                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                <div className="munich-card-body um-text-center">
+                  <h3 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     Update Optimal Progress Pace
                   </h3>
-                  <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                  <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
                     Recalculate based on recent race
                   </p>
                   <button
                     onClick={() => setActiveTab('calculator')}
-                    className="munich-btn munich-btn-outline w-full"
+                    className="munich-btn munich-btn-outline um-w-full"
                   >
                     Recalculate
                   </button>
@@ -1790,16 +1790,16 @@ const RunningTrainingApp = () => {
               </div>
               
               <div className="munich-card">
-                <div className="munich-card-body text-center">
-                  <h3 className="font-bold mb-2" style={{ color: colors.black }}>
+                <div className="munich-card-body um-text-center">
+                  <h3 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     Browse Plans
                   </h3>
-                  <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+                  <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
                     Find your next training goal
                   </p>
                   <button
                     onClick={() => setActiveTab('plans')}
-                    className="munich-btn munich-btn-outline w-full"
+                    className="munich-btn munich-btn-outline um-w-full"
                   >
                     View Plans
                   </button>
@@ -1809,41 +1809,41 @@ const RunningTrainingApp = () => {
           </div>
         )}
           <div className="space-y-8">
-            <div className="text-center space-y-4 relative">
+            <div className="um-text-center um-space-y-4 um-relative">
               {/* Geometric background elements */}
-              <div className="absolute inset-0 progressive-melange opacity-5"></div>
+              <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
               
-              <div className="relative z-10">
-                <h2 className="font-bold" style={{ 
+              <div className="um-relative um-z-10">
+                <h2 className="um-font-bold" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-4xl)'
+                  fontSize: 'var(--um-text-4xl)'
                 }}>Your Profile</h2>
                 <p style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-xl)'
+                  fontSize: 'var(--um-text-xl)'
                 }}>Customize your training experience</p>
               </div>
             </div>
 
             {!showProfileDashboard ? (
               // Profile Creation Form
-              <div className="munich-card max-w-3xl mx-auto">
-                <div className="munich-card-header relative overflow-hidden" style={{ 
+              <div className="munich-card max-w-3xl um-mx-auto">
+                <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
                   backgroundColor: colors.lightBlue 
                 }}>
                   {/* Progressive Melange Background */}
-                  <div className="absolute inset-0 progressive-melange opacity-20"></div>
+                  <div className="um-absolute um-inset-0 progressive-melange opacity-20"></div>
                   
                   {/* Geometric corner accent */}
-                  <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+                  <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                     backgroundColor: colors.lightGreen,
                     opacity: 0.8
                   }}></div>
                   
-                  <div className="relative z-10">
-                    <h3 className="font-bold flex items-center" style={{ 
+                  <div className="um-relative um-z-10">
+                    <h3 className="um-font-bold flex um-items-center" style={{ 
                       color: colors.white,
-                      fontSize: 'var(--text-2xl)'
+                      fontSize: 'var(--um-text-2xl)'
                     }}>
                       <User className="w-6 h-6 mr-3" />
                       Create Your Running Profile
@@ -1852,11 +1852,11 @@ const RunningTrainingApp = () => {
                 </div>
                 
                 <div className="munich-card-body space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
                     <div className="space-y-2">
-                      <label className="block font-medium" style={{ 
+                      <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>Name</label>
                       <input
                         type="text"
@@ -1869,9 +1869,9 @@ const RunningTrainingApp = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <label className="block font-medium" style={{ 
+                      <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>Email</label>
                       <input
                         type="email"
@@ -1884,11 +1884,11 @@ const RunningTrainingApp = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
                     <div className="space-y-2">
-                      <label className="block font-medium" style={{ 
+                      <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>Experience Level</label>
                       <select
                         value={userProfile.experience}
@@ -1903,9 +1903,9 @@ const RunningTrainingApp = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block font-medium" style={{ 
+                      <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>Goal Race Distance</label>
                       <select
                         value={userProfile.goalRaceDistance}
@@ -1920,11 +1920,11 @@ const RunningTrainingApp = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
                     <div className="space-y-2">
-                      <label className="block font-medium" style={{ 
+                      <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>Goal Race Time (optional)</label>
                       <input
                         type="text"
@@ -1937,9 +1937,9 @@ const RunningTrainingApp = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block font-medium" style={{ 
+                      <label className="block um-font-medium" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>Current Weekly Mileage</label>
                       <input
                         type="number"
@@ -1953,9 +1953,9 @@ const RunningTrainingApp = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block font-medium" style={{ 
+                    <label className="block um-font-medium" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-sm)'
+                      fontSize: 'var(--um-text-sm)'
                     }}>Injury History (optional)</label>
                     <textarea
                       value={userProfile.injuryHistory}
@@ -1967,15 +1967,15 @@ const RunningTrainingApp = () => {
                     />
                   </div>
 
-                  <div className="flex gap-4">
+                  <div className="um-flex gaum-p-4">
                     <button
                       onClick={savedProfileData ? updateProfile : saveProfile}
-                      className="munich-btn munich-btn-primary flex-1 relative"
+                      className="munich-btn munich-btn-primary flex-1 um-relative"
                       aria-label={savedProfileData ? 'Update your training profile' : 'Create your training profile'}
                     >
                       {savedProfileData ? 'Update Profile' : 'Create Profile'}
                       {/* Geometric accent on button */}
-                      <div className="absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
+                      <div className="um-absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
                         backgroundColor: colors.lightGreen
                       }}></div>
                     </button>
@@ -2003,22 +2003,22 @@ const RunningTrainingApp = () => {
               // Profile Dashboard
               <div className="space-y-6">
                 <div className="munich-card">
-                  <div className="munich-card-header relative overflow-hidden" style={{ 
+                  <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
                     backgroundColor: colors.lightGreen 
                   }}>
                     {/* Progressive Melange Background */}
-                    <div className="absolute inset-0 progressive-melange opacity-20"></div>
+                    <div className="um-absolute um-inset-0 progressive-melange opacity-20"></div>
                     
                     {/* Geometric corner accent */}
-                    <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                    <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                       backgroundColor: colors.violet,
                       opacity: 0.8
                     }}></div>
                     
-                    <div className="relative z-10">
-                      <h3 className="font-bold flex items-center" style={{ 
+                    <div className="um-relative um-z-10">
+                      <h3 className="um-font-bold flex um-items-center" style={{ 
                         color: colors.white,
-                        fontSize: 'var(--text-2xl)'
+                        fontSize: 'var(--um-text-2xl)'
                       }}>
                         <User className="w-6 h-6 mr-3" />
                         Welcome, {savedProfileData?.name || userProfile.name}!
@@ -2026,43 +2026,43 @@ const RunningTrainingApp = () => {
                       <p className="mt-2" style={{ 
                         color: colors.white,
                         opacity: 0.9,
-                        fontSize: 'var(--text-base)'
+                        fontSize: 'var(--um-text-base)'
                       }}>Your profile has been created successfully</p>
                     </div>
                   </div>
                   
-                  <div className="p-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div className="munich-card relative overflow-hidden">
+                  <div className="um-p-8">
+                    <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
+                      <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
-                        <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                        <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                         
                         {/* Geometric corner accent */}
-                        <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
+                        <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
                           backgroundColor: colors.lightBlue,
                           opacity: 0.3
                         }}></div>
                         
-                        <div className="munich-card-body relative z-10">
-                          <h4 className="font-medium mb-4" style={{ 
+                        <div className="munich-card-body um-relative um-z-10">
+                          <h4 className="um-font-medium um-mb-4" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-lg)'
+                            fontSize: 'var(--um-text-lg)'
                           }}>Personal Info</h4>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>Name: {savedProfileData?.name || userProfile.name}</p>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>Email: {savedProfileData?.email || userProfile.email}</p>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>Experience: {savedProfileData?.experience || userProfile.experience}</p>
                           <p style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>
                             Member since: {savedProfileData?.created_date ? 
                               new Date(savedProfileData.created_date).toLocaleDateString() : 
@@ -2072,33 +2072,33 @@ const RunningTrainingApp = () => {
                         </div>
                       </div>
                       
-                      <div className="munich-card relative overflow-hidden">
+                      <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
-                        <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                        <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                         
                         {/* Geometric corner accent */}
-                        <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
+                        <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
                           backgroundColor: colors.lightGreen,
                           opacity: 0.3,
                           animationDelay: '1s'
                         }}></div>
                         
-                        <div className="munich-card-body relative z-10">
-                          <h4 className="font-medium mb-4" style={{ 
+                        <div className="munich-card-body um-relative um-z-10">
+                          <h4 className="um-font-medium um-mb-4" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-lg)'
+                            fontSize: 'var(--um-text-lg)'
                           }}>Running Goals</h4>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>Goal Race: {savedProfileData?.goalRaceDistance || userProfile.goalRaceDistance}</p>
                           <p className="mb-2" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>Goal Time: {savedProfileData?.goalRaceTime || userProfile.goalRaceTime || <span className="text-gray-500">Not set</span>}</p>
                           <p style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>
                             Weekly Mileage: {savedProfileData?.weekly_mileage || userProfile.weeklyMileage ? 
                               `${savedProfileData?.weekly_mileage || userProfile.weeklyMileage} miles` : 
@@ -2108,43 +2108,43 @@ const RunningTrainingApp = () => {
                         </div>
                       </div>
                       
-                      <div className="munich-card relative overflow-hidden">
+                      <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
-                        <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                        <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                         
                         {/* Geometric corner accent */}
-                        <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
+                        <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
                           backgroundColor: colors.violet,
                           opacity: 0.3,
                           animationDelay: '2s'
                         }}></div>
                         
-                        <div className="munich-card-body relative z-10">
-                          <h4 className="font-medium mb-4 flex items-center" style={{ 
+                        <div className="munich-card-body um-relative um-z-10">
+                          <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-lg)'
+                            fontSize: 'var(--um-text-lg)'
                           }}>
                             <Activity className="w-4 h-4 mr-2" />
                             Optimal Progress Pace Progress
                           </h4>
                           <div className="space-y-3">
-                            <div className="flex justify-between items-center">
+                            <div className="um-flex um-justify-between um-items-center">
                               <span style={{ 
                                 color: colors.black,
-                                fontSize: 'var(--text-sm)'
+                                fontSize: 'var(--um-text-sm)'
                               }}>Current Optimal Progress Pace:</span>
                               {savedProfileData?.currentGoldenPace || goldenPace ? (
-                                <span className="font-bold" style={{ 
+                                <span className="um-font-bold" style={{ 
                                   color: colors.violet,
-                                  fontSize: 'var(--text-lg)'
+                                  fontSize: 'var(--um-text-lg)'
                                 }}>
                                   {savedProfileData?.currentGoldenPace || goldenPace}
                                 </span>
                               ) : (
-                                <div className="flex items-center gap-2">
+                                <div className="um-flex um-items-center gap-2">
                                   <span style={{ 
                                     color: colors.darkGray,
-                                    fontSize: 'var(--text-sm)'
+                                    fontSize: 'var(--um-text-sm)'
                                   }}>Not calculated</span>
                                   {savedProfileData?.goalRaceTime && savedProfileData?.goalRaceDistance && (
                                     <button
@@ -2153,7 +2153,7 @@ const RunningTrainingApp = () => {
                                         setRaceDistance(savedProfileData.goalRaceDistance);
                                         setActiveTab('calculator');
                                       }}
-                                      className="px-2 py-1 text-xs rounded-md hover:opacity-80 transition-opacity"
+                                      className="px-2 py-1 um-text-xs um-um-rounded-md hover:opacity-80 transition-opacity"
                                       style={{ 
                                         backgroundColor: colors.lightBlue,
                                         color: colors.white
@@ -2168,14 +2168,14 @@ const RunningTrainingApp = () => {
                             </div>
                             
                             {savedProfileData?.projectedGoldenPace && (
-                              <div className="flex justify-between items-center">
+                              <div className="um-flex um-justify-between um-items-center">
                                 <span style={{ 
                                   color: colors.black,
-                                  fontSize: 'var(--text-sm)'
+                                  fontSize: 'var(--um-text-sm)'
                                 }}>6-Week Projection:</span>
-                                <span className="font-bold" style={{ 
+                                <span className="um-font-bold" style={{ 
                                   color: colors.lightGreen,
-                                  fontSize: 'var(--text-lg)'
+                                  fontSize: 'var(--um-text-lg)'
                                 }}>
                                   {savedProfileData.projectedGoldenPace}
                                 </span>
@@ -2183,7 +2183,7 @@ const RunningTrainingApp = () => {
                             )}
                             
                             <div className="mt-4 pt-3" style={{ borderTop: `1px solid ${colors.gray}` }}>
-                              <div className="flex justify-between text-xs">
+                              <div className="um-flex um-justify-between um-text-xs">
                                 <span style={{ color: colors.black }}>Training Sessions: {trainingHistory.length}</span>
                                 <span style={{ color: colors.black }}>Personal Bests: {Object.keys(personalBests).length}</span>
                               </div>
@@ -2196,29 +2196,29 @@ const RunningTrainingApp = () => {
                     {/* Optimal Progress Pace Progression Chart */}
                     {savedProfileData?.currentGoldenPace && savedProfileData?.trainingStartDate && (
                       <div className="mt-8">
-                        <div className="munich-card relative overflow-hidden">
-                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                          <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                        <div className="munich-card um-relative um-overflow-hidden">
+                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                          <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                             backgroundColor: colors.lightBlue,
                             opacity: 0.4
                           }}></div>
                           
-                          <div className="munich-card-body relative z-10">
-                            <h4 className="font-medium mb-6 flex items-center" style={{ 
+                          <div className="munich-card-body um-relative um-z-10">
+                            <h4 className="um-font-medium um-mb-6 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--text-xl)'
+                              fontSize: 'var(--um-text-xl)'
                             }}>
                               <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                               Optimal Progress Pace Progression Forecast
                             </h4>
                             
-                            <div className="mb-4 text-sm" style={{ color: colors.darkGreen }}>
+                            <div className="mb-4 um-text-sm" style={{ color: colors.darkGreen }}>
                               <p>Projected improvement: +1 VDOT point every 6 weeks (average training consistency)</p>
                               <p>Based on {savedProfileData.weekly_mileage || 20} miles/week at your experience level</p>
                             </div>
                             
                             {/* Simple ASCII-style progression chart */}
-                            <div className="bg-white p-6 rounded-lg border" style={{ borderColor: colors.gray }}>
+                            <div className="bg-white um-p-6 um-um-rounded-lg border" style={{ borderColor: colors.gray }}>
                               <div className="space-y-2">
                                 {(() => {
                                   const progression = generateGoldenPaceProgression(
@@ -2233,17 +2233,17 @@ const RunningTrainingApp = () => {
                                     const barWidth = Math.min(100, ((point.goldenPace - savedProfileData.currentGoldenPace) / 6) * 100 + 20);
                                     
                                     return (
-                                      <div key={point.week} className="flex items-center space-x-3">
-                                        <div className="w-20 text-xs font-medium" style={{ color: colors.black }}>
+                                      <div key={point.week} className="um-flex um-items-center um-space-x-3">
+                                        <div className="w-20 um-text-xs um-font-medium" style={{ color: colors.black }}>
                                           {point.week === 0 ? 'Current' : `Week ${point.week}`}
                                         </div>
-                                        <div className="flex-1 relative">
-                                          <div className="h-6 rounded" style={{ 
+                                        <div className="flex-1 um-relative">
+                                          <div className="h-6 um-rounded" style={{ 
                                             backgroundColor: colors.lightGray,
                                             border: `1px solid ${colors.gray}`
                                           }}>
                                             <div 
-                                              className="h-full rounded transition-all duration-500"
+                                              className="um-h-full um-rounded transition-all duration-500"
                                               style={{ 
                                                 width: `${barWidth}%`,
                                                 backgroundColor: isCurrentWeek ? colors.violet : colors.lightBlue,
@@ -2251,8 +2251,8 @@ const RunningTrainingApp = () => {
                                               }}
                                             />
                                           </div>
-                                          <div className="absolute right-2 top-0 h-6 flex items-center">
-                                            <span className="text-xs font-bold" style={{ 
+                                          <div className="um-absolute right-2 top-0 h-6 flex um-items-center">
+                                            <span className="um-text-xs um-font-bold" style={{ 
                                               color: colors.black,
                                               textShadow: '0 0 3px white'
                                             }}>
@@ -2260,7 +2260,7 @@ const RunningTrainingApp = () => {
                                             </span>
                                           </div>
                                         </div>
-                                        <div className="w-16 text-xs" style={{ color: colors.darkGreen }}>
+                                        <div className="w-16 um-text-xs" style={{ color: colors.darkGreen }}>
                                           {point.week === 0 ? 'Current' : 
                                             point.goldenPace > savedProfileData.currentGoldenPace ? 
                                             `+${(point.goldenPace - savedProfileData.currentGoldenPace).toFixed(1)}` : '---'}
@@ -2271,7 +2271,7 @@ const RunningTrainingApp = () => {
                                 })()}
                               </div>
                               
-                              <div className="mt-4 pt-4 text-xs" style={{ 
+                              <div className="mt-4 pt-4 um-text-xs" style={{ 
                                 borderTop: `1px solid ${colors.gray}`,
                                 color: colors.darkGreen
                               }}>
@@ -2288,34 +2288,34 @@ const RunningTrainingApp = () => {
                     <div className="mt-8 space-y-6">
                       {/* Personal Bests Section */}
                       {Object.keys(personalBests).length > 0 && (
-                        <div className="munich-card relative overflow-hidden">
-                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                          <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                        <div className="munich-card um-relative um-overflow-hidden">
+                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                          <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                             backgroundColor: colors.orange,
                             opacity: 0.4
                           }}></div>
                           
-                          <div className="munich-card-body relative z-10">
-                            <h4 className="font-medium mb-4 flex items-center" style={{ 
+                          <div className="munich-card-body um-relative um-z-10">
+                            <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--text-lg)'
+                              fontSize: 'var(--um-text-lg)'
                             }}>
                               <Trophy className="w-5 h-5 mr-2" style={{ color: colors.orange }} />
                               Personal Bests
                             </h4>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 gaum-p-4">
                               {Object.entries(personalBests).map(([distance, time]) => (
-                                <div key={distance} className="text-center p-3 rounded" style={{ 
+                                <div key={distance} className="um-text-center p-3 um-rounded" style={{ 
                                   backgroundColor: colors.lightGray,
                                   border: `1px solid ${colors.gray}`
                                 }}>
-                                  <div className="font-medium" style={{ 
+                                  <div className="um-font-medium" style={{ 
                                     color: colors.black,
-                                    fontSize: 'var(--text-sm)'
+                                    fontSize: 'var(--um-text-sm)'
                                   }}>{distance}</div>
-                                  <div className="font-bold" style={{ 
+                                  <div className="um-font-bold" style={{ 
                                     color: colors.orange,
-                                    fontSize: 'var(--text-lg)'
+                                    fontSize: 'var(--um-text-lg)'
                                   }}>{time}</div>
                                 </div>
                               ))}
@@ -2326,41 +2326,41 @@ const RunningTrainingApp = () => {
 
                       {/* Recent Training History */}
                       {trainingHistory.length > 0 && (
-                        <div className="munich-card relative overflow-hidden">
-                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                          <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+                        <div className="munich-card um-relative um-overflow-hidden">
+                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                          <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                             backgroundColor: colors.lightBlue,
                             opacity: 0.4
                           }}></div>
                           
-                          <div className="munich-card-body relative z-10">
-                            <h4 className="font-medium mb-4 flex items-center" style={{ 
+                          <div className="munich-card-body um-relative um-z-10">
+                            <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--text-lg)'
+                              fontSize: 'var(--um-text-lg)'
                             }}>
                               <Calendar className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                               Recent Training History
                             </h4>
                             <div className="space-y-3">
                               {trainingHistory.slice(-5).reverse().map((session, index) => (
-                                <div key={index} className="p-4 rounded" style={{ 
+                                <div key={index} className="um-p-4 um-rounded" style={{ 
                                   backgroundColor: colors.lightGray,
                                   border: `1px solid ${colors.gray}`
                                 }}>
-                                  <div className="flex justify-between items-start mb-2">
-                                    <span className="font-medium" style={{ 
+                                  <div className="um-flex um-justify-between um-items-start um-mb-2">
+                                    <span className="um-font-medium" style={{ 
                                       color: colors.black,
-                                      fontSize: 'var(--text-sm)'
+                                      fontSize: 'var(--um-text-sm)'
                                     }}>{session.type}</span>
                                     <span style={{ 
                                       color: colors.gray,
-                                      fontSize: 'var(--text-xs)'
+                                      fontSize: 'var(--um-text-xs)'
                                     }}>{session.date}</span>
                                   </div>
                                   {session.distance && (
                                     <div style={{ 
                                       color: colors.black,
-                                      fontSize: 'var(--text-sm)'
+                                      fontSize: 'var(--um-text-sm)'
                                     }}>
                                       Distance: {session.distance} • Time: {session.time}
                                     </div>
@@ -2368,7 +2368,7 @@ const RunningTrainingApp = () => {
                                   {(session.feeling || session.effort) && (
                                     <div style={{ 
                                       color: colors.lightBlue,
-                                      fontSize: 'var(--text-sm)'
+                                      fontSize: 'var(--um-text-sm)'
                                     }}>
                                       Felt: {session.feeling} • Effort: {session.effort}
                                     </div>
@@ -2376,7 +2376,7 @@ const RunningTrainingApp = () => {
                                   {session.location && (
                                     <div style={{ 
                                       color: colors.black,
-                                      fontSize: 'var(--text-xs)',
+                                      fontSize: 'var(--um-text-xs)',
                                       opacity: 0.8
                                     }}>
                                       {session.location}
@@ -2386,7 +2386,7 @@ const RunningTrainingApp = () => {
                                   {session.goldenPace && (
                                     <div style={{ 
                                       color: colors.orange,
-                                      fontSize: 'var(--text-sm)',
+                                      fontSize: 'var(--um-text-sm)',
                                       fontWeight: '500'
                                     }}>
                                       GoldenPace: {session.goldenPace}
@@ -2395,7 +2395,7 @@ const RunningTrainingApp = () => {
                                   {session.notes && (
                                     <div className="mt-2" style={{ 
                                       color: colors.gray,
-                                      fontSize: 'var(--text-xs)',
+                                      fontSize: 'var(--um-text-xs)',
                                       fontStyle: 'italic'
                                     }}>
                                       "{session.notes}"
@@ -2410,34 +2410,34 @@ const RunningTrainingApp = () => {
 
                       {/* Completed Training Plans */}
                       {trainingPlansCompleted.length > 0 && (
-                        <div className="munich-card relative overflow-hidden">
-                          <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                          <div className="absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
+                        <div className="munich-card um-relative um-overflow-hidden">
+                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                          <div className="um-absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
                             backgroundColor: colors.violet,
                             opacity: 0.4
                           }}></div>
                           
-                          <div className="munich-card-body relative z-10">
-                            <h4 className="font-medium mb-4 flex items-center" style={{ 
+                          <div className="munich-card-body um-relative um-z-10">
+                            <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                               color: colors.black,
-                              fontSize: 'var(--text-lg)'
+                              fontSize: 'var(--um-text-lg)'
                             }}>
                               <CheckCircle className="w-5 h-5 mr-2" style={{ color: colors.violet }} />
                               Completed Training Plans
                             </h4>
                             <div className="space-y-2">
                               {trainingPlansCompleted.map((plan, index) => (
-                                <div key={index} className="flex justify-between items-center p-3 rounded" style={{ 
+                                <div key={index} className="um-flex um-justify-between um-items-center p-3 um-rounded" style={{ 
                                   backgroundColor: colors.lightGray,
                                   border: `1px solid ${colors.gray}`
                                 }}>
                                   <span style={{ 
                                     color: colors.black,
-                                    fontSize: 'var(--text-sm)'
+                                    fontSize: 'var(--um-text-sm)'
                                   }}>{plan.name}</span>
                                   <span style={{ 
                                     color: colors.gray,
-                                    fontSize: 'var(--text-xs)'
+                                    fontSize: 'var(--um-text-xs)'
                                   }}>{plan.completedDate}</span>
                                 </div>
                               ))}
@@ -2447,7 +2447,7 @@ const RunningTrainingApp = () => {
                       )}
                     </div>
                     
-                    <div className="mt-8 flex flex-wrap gap-4">
+                    <div className="mt-8 flex um-flex-wrap gaum-p-4">
                       <button
                         onClick={() => {
                           // Transfer profile data to calculator
@@ -2459,24 +2459,24 @@ const RunningTrainingApp = () => {
                           }
                           setActiveTab('calculator');
                         }}
-                        className="munich-btn munich-btn-primary relative"
+                        className="munich-btn munich-btn-primary um-relative"
                         aria-label="Go to pace calculator with your goal race"
                       >
                         Calculate GoldenPace
                         {/* Geometric accent on button */}
-                        <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
+                        <div className="um-absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
                           backgroundColor: colors.lightGreen
                         }}></div>
                       </button>
                       
                       <button
                         onClick={() => setActiveTab('plans')}
-                        className="munich-btn munich-btn-secondary relative"
+                        className="munich-btn munich-btn-secondary um-relative"
                         aria-label="View training plans"
                       >
                         Get Training Plans
                         {/* Geometric accent on button */}
-                        <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-octagon" style={{ 
+                        <div className="um-absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-octagon" style={{ 
                           backgroundColor: colors.violet
                         }}></div>
                       </button>
@@ -2493,11 +2493,11 @@ const RunningTrainingApp = () => {
                         onClick={() => {
                           setShowTrainingLogForm(true);
                         }}
-                        className="munich-btn munich-btn-outline relative"
+                        className="munich-btn munich-btn-outline um-relative"
                         style={{ color: colors.lightBlue, borderColor: colors.lightBlue }}
                       >
                         Log Training Session
-                        <div className="absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
+                        <div className="um-absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
                           backgroundColor: colors.lightBlue,
                           opacity: 0.3
                         }}></div>
@@ -2526,11 +2526,11 @@ const RunningTrainingApp = () => {
                           
                           completeTrainingPlan('5K Training Plan - Beginner');
                         }}
-                        className="munich-btn munich-btn-outline relative"
+                        className="munich-btn munich-btn-outline um-relative"
                         style={{ color: colors.orange, borderColor: colors.orange }}
                       >
                         Add Demo Data
-                        <div className="absolute top-0 right-0 w-3 h-3 geometric-octagon" style={{ 
+                        <div className="um-absolute top-0 right-0 w-3 h-3 geometric-octagon" style={{ 
                           backgroundColor: colors.orange,
                           opacity: 0.3
                         }}></div>
@@ -2547,19 +2547,19 @@ const RunningTrainingApp = () => {
         {showTrainingLogForm && (
         <div className="um-modal-overlay um-modal-overlay--dim">
           <div className="munich-card um-modal-panel um-modal-panel--2xl">
-              <div className="munich-card-header relative overflow-hidden" style={{ 
+              <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
                 backgroundColor: colors.lightBlue 
               }}>
               <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
-                <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                   backgroundColor: colors.orange,
                   opacity: 0.8
                 }}></div>
                 
-                <div className="relative z-10">
-                  <h3 className="font-bold flex items-center" style={{ 
+                <div className="um-relative um-z-10">
+                  <h3 className="um-font-bold flex um-items-center" style={{ 
                     color: colors.white,
-                    fontSize: 'var(--text-2xl)'
+                    fontSize: 'var(--um-text-2xl)'
                   }}>
                     <Activity className="w-6 h-6 mr-3" />
                     Log Training Session
@@ -2567,12 +2567,12 @@ const RunningTrainingApp = () => {
                   <p className="mt-2" style={{ 
                     color: colors.white,
                     opacity: 0.9,
-                    fontSize: 'var(--text-base)'
+                    fontSize: 'var(--um-text-base)'
                   }}>Track your workout details and how you felt</p>
                 </div>
               </div>
               
-              <div className="p-8">
+              <div className="um-p-8">
                 <form onSubmit={(e) => {
                   e.preventDefault();
                   
@@ -2609,11 +2609,11 @@ const RunningTrainingApp = () => {
                   });
                   setShowTrainingLogForm(false);
                 }}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-6">
                     <div>
-                      <label className="block font-medium mb-3" style={{ 
+                      <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>
                         Workout Type
                       </label>
@@ -2623,7 +2623,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--text-base)'
+                          fontSize: 'var(--um-text-base)'
                         }}
                       >
                         <option value="Easy Run">Easy Run</option>
@@ -2638,9 +2638,9 @@ const RunningTrainingApp = () => {
                     </div>
                     
                     <div>
-                      <label className="block font-medium mb-3" style={{ 
+                      <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>
                         Distance
                       </label>
@@ -2652,15 +2652,15 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--text-base)'
+                          fontSize: 'var(--um-text-base)'
                         }}
                       />
                     </div>
                     
                     <div>
-                      <label className="block font-medium mb-3" style={{ 
+                      <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>
                         Time
                       </label>
@@ -2672,15 +2672,15 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--text-base)'
+                          fontSize: 'var(--um-text-base)'
                         }}
                       />
                     </div>
                     
                     <div>
-                      <label className="block font-medium mb-3" style={{ 
+                      <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>
                         How did you feel?
                       </label>
@@ -2690,7 +2690,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--text-base)'
+                          fontSize: 'var(--um-text-base)'
                         }}
                       >
                         <option value="Excellent">Excellent</option>
@@ -2702,9 +2702,9 @@ const RunningTrainingApp = () => {
                     </div>
                     
                     <div>
-                      <label className="block font-medium mb-3" style={{ 
+                      <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>
                         Effort Level
                       </label>
@@ -2714,7 +2714,7 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--text-base)'
+                          fontSize: 'var(--um-text-base)'
                         }}
                       >
                         <option value="Easy">Easy</option>
@@ -2727,9 +2727,9 @@ const RunningTrainingApp = () => {
                     </div>
                     
                     <div>
-                      <label className="block font-medium mb-3" style={{ 
+                      <label className="block um-font-medium um-mb-3" style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>
                         Location
                       </label>
@@ -2741,16 +2741,16 @@ const RunningTrainingApp = () => {
                         className="um-field"
                         style={{ 
                           borderColor: colors.gray,
-                          fontSize: 'var(--text-base)'
+                          fontSize: 'var(--um-text-base)'
                         }}
                       />
                     </div>
                   </div>
                   
                   <div className="mt-6">
-                    <label className="block font-medium mb-3" style={{ 
+                    <label className="block um-font-medium um-mb-3" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-sm)'
+                      fontSize: 'var(--um-text-sm)'
                     }}>
                       Weather
                     </label>
@@ -2762,15 +2762,15 @@ const RunningTrainingApp = () => {
                       className="um-field"
                       style={{ 
                         borderColor: colors.gray,
-                        fontSize: 'var(--text-base)'
+                        fontSize: 'var(--um-text-base)'
                       }}
                     />
                   </div>
                   
                   <div className="mt-6">
-                    <label className="block font-medium mb-3" style={{ 
+                    <label className="block um-font-medium um-mb-3" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-sm)'
+                      fontSize: 'var(--um-text-sm)'
                     }}>
                       Notes
                     </label>
@@ -2782,18 +2782,18 @@ const RunningTrainingApp = () => {
                       className="um-field um-textarea"
                       style={{ 
                         borderColor: colors.gray,
-                        fontSize: 'var(--text-base)'
+                        fontSize: 'var(--um-text-base)'
                       }}
                     />
                   </div>
                   
-                  <div className="mt-8 flex flex-wrap gap-4">
+                  <div className="mt-8 flex um-flex-wrap gaum-p-4">
                     <button aria-label="Add activity"
                       type="submit"
-                      className="munich-btn munich-btn-primary relative"
+                      className="munich-btn munich-btn-primary um-relative"
                     >
                       Save Training Session
-                      <div className="absolute top-0 right-0 w-4 h-4 geometric-diamond" style={{ 
+                      <div className="um-absolute top-0 right-0 w-4 h-4 geometric-diamond" style={{ 
                         backgroundColor: colors.lightGreen
                       }}></div>
                     </button>
@@ -2836,25 +2836,25 @@ const RunningTrainingApp = () => {
       </main>
 
       {/* Footer - Munich 1972 Geometric Style */}
-      <footer className="py-6 sm:py-8 relative overflow-hidden" style={{ backgroundColor: colors.gray }}>
+      <footer className="um-py-6 um-sm-py-8 um-relative um-overflow-hidden" style={{ backgroundColor: colors.gray }}>
         {/* Progressive Melange Background */}
-        <div className="absolute inset-0 progressive-melange opacity-5"></div>
+        <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 gaum-p-4 sm:gaum-p-6">
             <div>
-              <h3 className="text-base sm:text-lg font-medium mb-2 sm:mb-3" style={{ color: colors.black }}>
+              <h3 className="um-text-base um-sm-text-lg um-font-medium um-mb-2 sm:mb-3" style={{ color: colors.black }}>
                 Unforgiving Minute Distance Running
               </h3>
-              <p className="text-xs sm:text-sm" style={{ color: colors.darkGreen }}>
+              <p className="um-text-xs um-sm-text-sm" style={{ color: colors.darkGreen }}>
                 Professional distance running training with scientifically-based GoldenPace calculations.
               </p>
             </div>
             <div>
-              <h4 className="text-sm sm:text-md font-medium mb-2 sm:mb-3" style={{ color: colors.black }}>
+              <h4 className="um-text-sm sm:text-md um-font-medium um-mb-2 sm:mb-3" style={{ color: colors.black }}>
                 Quick Links
               </h4>
-              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
+              <ul className="space-y-1 sm:space-y-2 um-text-xs um-sm-text-sm">
                 <li>
                   <button 
                     onClick={() => setActiveTab('calculator')} 
@@ -2903,7 +2903,7 @@ const RunningTrainingApp = () => {
               </ul>
             </div>
             <div>
-              <h4 className="text-sm sm:text-md font-medium mb-2 sm:mb-3" style={{ color: colors.black }}>
+              <h4 className="um-text-sm sm:text-md um-font-medium um-mb-2 sm:mb-3" style={{ color: colors.black }}>
                 Get Started
               </h4>
               <button
@@ -2914,7 +2914,7 @@ const RunningTrainingApp = () => {
               </button>
             </div>
           </div>
-          <div className="border-t mt-4 sm:mt-6 pt-4 sm:pt-6 text-center text-xs sm:text-sm" style={{ borderColor: colors.border }}>
+          <div className="um-border-t um-mt-4 sm:mt-6 pt-4 sm:pt-6 um-text-center um-text-xs um-sm-text-sm" style={{ borderColor: colors.border }}>
             <p style={{ color: colors.darkGreen }}>
               &copy; 2024 Unforgiving Minute Distance Running. All rights reserved.
             </p>
@@ -2926,21 +2926,21 @@ const RunningTrainingApp = () => {
       {showAdminPanel && (
         <div className="um-modal-overlay um-modal-overlay--dim um-modal-overlay--scroll">
           <div className="munich-card um-modal-panel um-modal-panel--6xl">
-            <div className="munich-card-header relative overflow-hidden" style={{ 
+            <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
               backgroundColor: colors.violet 
             }}>
               <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
-              <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+              <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                 backgroundColor: colors.orange,
                 opacity: 0.8
               }}></div>
               
-              <div className="relative z-10">
-                <h3 className="font-bold flex items-center justify-between" style={{ 
+              <div className="um-relative um-z-10">
+                <h3 className="um-font-bold flex um-items-center um-justify-between" style={{ 
                   color: colors.white,
-                  fontSize: 'var(--text-2xl)'
+                  fontSize: 'var(--um-text-2xl)'
                 }}>
-                  <span className="flex items-center">
+                  <span className="um-flex um-items-center">
                     <BookOpen className="w-6 h-6 mr-3" />
                     Content Management Admin Panel
                   </span>
@@ -2954,45 +2954,45 @@ const RunningTrainingApp = () => {
                 <p className="mt-2" style={{ 
                   color: colors.white,
                   opacity: 0.9,
-                  fontSize: 'var(--text-base)'
+                  fontSize: 'var(--um-text-base)'
                 }}>Manage blog posts, premium training plans, and coaching services</p>
               </div>
             </div>
             
-            <div className="p-8">
+            <div className="um-p-8">
               <div className="space-y-8">
                 {/* Blog Posts Management */}
-                <div className="munich-card relative overflow-hidden">
-                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                  <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+                <div className="munich-card um-relative um-overflow-hidden">
+                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                  <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                     backgroundColor: colors.lightBlue,
                     opacity: 0.4
                   }}></div>
                   
-                  <div className="munich-card-body relative z-10">
-                    <h4 className="font-bold mb-4" style={{ 
+                  <div className="munich-card-body um-relative um-z-10">
+                    <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-xl)'
+                      fontSize: 'var(--um-text-xl)'
                     }}>Articles & Training Insights</h4>
                     
-                    <div className="space-y-4">
-                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
+                    <div className="um-space-y-4">
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--um-text-sm)' }}>
                         <strong>Current Location:</strong> Lines 2500-2650 in RunningTrainingApp.jsx
                       </p>
                       
-                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGray }}>
-                        <h5 className="font-medium mb-2" style={{ color: colors.black }}>How to Add Blog Posts:</h5>
-                        <ol className="list-decimal list-inside space-y-2 text-sm" style={{ color: colors.black }}>
+                      <div className="um-p-4 um-rounded" style={{ backgroundColor: colors.lightGray }}>
+                        <h5 className="um-font-medium um-mb-2" style={{ color: colors.black }}>How to Add Blog Posts:</h5>
+                        <ol className="list-decimal list-inside space-y-2 um-text-sm" style={{ color: colors.black }}>
                           <li>Find the "Featured Articles" section around line 2510</li>
                           <li>Copy the existing article card structure</li>
                           <li>Replace the content with your article details:</li>
                         </ol>
                         
-                        <div className="mt-4 p-3 bg-gray-800 rounded text-green-400 font-mono text-xs overflow-x-auto">
-{`<div className="munich-card relative overflow-hidden group">
+                        <div className="mt-4 p-3 bg-gray-800 um-rounded text-green-400 font-mono um-text-xs overflow-x-auto">
+{`<div className="munich-card um-relative um-overflow-hidden group">
   <div className="munich-card-body">
     <div className="mb-4">
-      <span className="text-xs font-medium px-3 py-1" style={{ 
+      <span className="um-text-xs um-font-medium px-3 py-1" style={{ 
         backgroundColor: colors.lightBlue,
         color: colors.white 
       }}>
@@ -3000,19 +3000,19 @@ const RunningTrainingApp = () => {
       </span>
     </div>
     
-    <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+    <h4 className="um-text-lg um-font-bold um-mb-3" style={{ color: colors.black }}>
       Your Article Title
     </h4>
     
-    <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+    <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
       Your article description and preview text...
     </p>
     
-    <div className="flex items-center justify-between">
-      <span className="text-xs" style={{ color: colors.silver }}>
+    <div className="um-flex um-items-center um-justify-between">
+      <span className="um-text-xs" style={{ color: colors.silver }}>
         X min read
       </span>
-      <button className="munich-btn munich-btn-outline text-xs px-3 py-1">
+      <button className="munich-btn munich-btn-outline um-text-xs px-3 py-1">
         Read Article
       </button>
     </div>
@@ -3021,50 +3021,50 @@ const RunningTrainingApp = () => {
                         </div>
                       </div>
                       
-                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGreen, color: colors.white }}>
-                        <h5 className="font-medium mb-2">💡 Pro Tip:</h5>
-                        <p className="text-sm">Use categories like: TRAINING SCIENCE, NUTRITION, RACE STRATEGY, INJURY PREVENTION</p>
+                      <div className="um-p-4 um-rounded" style={{ backgroundColor: colors.lightGreen, color: colors.white }}>
+                        <h5 className="um-font-medium um-mb-2">💡 Pro Tip:</h5>
+                        <p className="um-text-sm">Use categories like: TRAINING SCIENCE, NUTRITION, RACE STRATEGY, INJURY PREVENTION</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Premium Training Plans Management */}
-                <div className="munich-card relative overflow-hidden">
-                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                  <div className="absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
+                <div className="munich-card um-relative um-overflow-hidden">
+                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                  <div className="um-absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
                     backgroundColor: colors.orange,
                     opacity: 0.4
                   }}></div>
                   
-                  <div className="munich-card-body relative z-10">
-                    <h4 className="font-bold mb-4" style={{ 
+                  <div className="munich-card-body um-relative um-z-10">
+                    <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-xl)'
+                      fontSize: 'var(--um-text-xl)'
                     }}>⭐ Premium Training Plans</h4>
                     
-                    <div className="space-y-4">
-                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
+                    <div className="um-space-y-4">
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--um-text-sm)' }}>
                         <strong>Current Location:</strong> Lines 2700-2850 in RunningTrainingApp.jsx
                       </p>
                       
-                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGray }}>
-                        <h5 className="font-medium mb-2" style={{ color: colors.black }}>How to Add Premium Plans:</h5>
-                        <ol className="list-decimal list-inside space-y-2 text-sm" style={{ color: colors.black }}>
+                      <div className="um-p-4 um-rounded" style={{ backgroundColor: colors.lightGray }}>
+                        <h5 className="um-font-medium um-mb-2" style={{ color: colors.black }}>How to Add Premium Plans:</h5>
+                        <ol className="list-decimal list-inside space-y-2 um-text-sm" style={{ color: colors.black }}>
                           <li>Find the "Premium Plans Grid" section around line 2700</li>
                           <li>Copy an existing plan card (like the "5K Mastery Program")</li>
                           <li>Customize the pricing, features, and benefits</li>
                           <li>Add payment integration to the button</li>
                         </ol>
                         
-                        <div className="mt-4 p-3 bg-gray-800 rounded text-green-400 font-mono text-xs overflow-x-auto">
-{`<div className="munich-card relative overflow-hidden group">
+                        <div className="mt-4 p-3 bg-gray-800 um-rounded text-green-400 font-mono um-text-xs overflow-x-auto">
+{`<div className="munich-card um-relative um-overflow-hidden group">
   <div className="munich-card-header">
-    <div className="flex items-center justify-between">
-      <h4 className="text-xl font-bold" style={{ color: colors.black }}>
+    <div className="um-flex um-items-center um-justify-between">
+      <h4 className="um-text-xl um-font-bold" style={{ color: colors.black }}>
         Your Plan Name
       </h4>
-      <span className="text-xs font-medium px-2 py-1" style={{ 
+      <span className="um-text-xs um-font-medium px-2 py-1" style={{ 
         backgroundColor: colors.orange,
         color: colors.white 
       }}>
@@ -3075,22 +3075,22 @@ const RunningTrainingApp = () => {
   
   <div className="munich-card-body">
     <div className="mb-4">
-      <div className="flex items-baseline">
-        <span className="text-3xl font-bold" style={{ color: colors.black }}>$XX</span>
-        <span className="text-lg line-through ml-2" style={{ color: colors.silver }}>$XX</span>
+      <div className="um-flex items-baseline">
+        <span className="um-text-3xl um-font-bold" style={{ color: colors.black }}>$XX</span>
+        <span className="um-text-lg line-through ml-2" style={{ color: colors.silver }}>$XX</span>
       </div>
-      <p className="text-sm" style={{ color: colors.darkGreen }}>XX-week program</p>
+      <p className="um-text-sm" style={{ color: colors.darkGreen }}>XX-week program</p>
     </div>
     
-    <ul className="space-y-2 mb-6 text-sm">
-      <li className="flex items-start">
+    <ul className="space-y-2 um-mb-6 um-text-sm">
+      <li className="um-flex um-items-start">
         <span style={{ color: colors.lightBlue }}>✓</span>
         <span className="ml-2" style={{ color: colors.black }}>Feature 1</span>
       </li>
       <!-- Add more features -->
     </ul>
     
-    <button className="munich-btn munich-btn-primary w-full">
+    <button className="munich-btn munich-btn-primary um-w-full">
       Get Plan Name
     </button>
   </div>
@@ -3102,35 +3102,35 @@ const RunningTrainingApp = () => {
                 </div>
 
                 {/* Personal Coaching Management */}
-                <div className="munich-card relative overflow-hidden">
-                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                  <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+                <div className="munich-card um-relative um-overflow-hidden">
+                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                  <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                     backgroundColor: colors.yellow,
                     opacity: 0.4
                   }}></div>
                   
-                  <div className="munich-card-body relative z-10">
-                    <h4 className="font-bold mb-4" style={{ 
+                  <div className="munich-card-body um-relative um-z-10">
+                    <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-xl)'
+                      fontSize: 'var(--um-text-xl)'
                     }}>Personal Coaching Services</h4>
                     
-                    <div className="space-y-4">
-                      <p style={{ color: colors.darkGreen, fontSize: 'var(--text-sm)' }}>
+                    <div className="um-space-y-4">
+                      <p style={{ color: colors.darkGreen, fontSize: 'var(--um-text-sm)' }}>
                         <strong>Current Location:</strong> Lines 2825-2870 in RunningTrainingApp.jsx
                       </p>
                       
-                      <div className="p-4 rounded" style={{ backgroundColor: colors.lightGray }}>
-                        <h5 className="font-medium mb-2" style={{ color: colors.black }}>Personal Coaching Features:</h5>
-                        <ul className="list-disc list-inside space-y-1 text-sm" style={{ color: colors.black }}>
+                      <div className="um-p-4 um-rounded" style={{ backgroundColor: colors.lightGray }}>
+                        <h5 className="um-font-medium um-mb-2" style={{ color: colors.black }}>Personal Coaching Features:</h5>
+                        <ul className="list-disc list-inside space-y-1 um-text-sm" style={{ color: colors.black }}>
                           <li>Monthly pricing: $297/month (currently set)</li>
                           <li>Features: Weekly sessions, custom plans, 24/7 support</li>
                           <li>Call-to-action: "Schedule Consultation" button</li>
                         </ul>
                         
                         <div className="mt-3 p-3" style={{ backgroundColor: colors.yellow, color: colors.black }}>
-                          <h6 className="font-medium">💰 Payment Integration Needed:</h6>
-                          <p className="text-sm mt-1">Add Stripe/PayPal integration to the coaching consultation button</p>
+                          <h6 className="um-font-medium">💰 Payment Integration Needed:</h6>
+                          <p className="um-text-sm um-mt-1">Add Stripe/PayPal integration to the coaching consultation button</p>
                         </div>
                       </div>
                     </div>
@@ -3138,19 +3138,19 @@ const RunningTrainingApp = () => {
                 </div>
 
                 {/* Quick Actions */}
-                <div className="munich-card relative overflow-hidden">
-                  <div className="absolute inset-0 progressive-melange opacity-3"></div>
+                <div className="munich-card um-relative um-overflow-hidden">
+                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                   
-                  <div className="munich-card-body relative z-10">
-                    <h4 className="font-bold mb-4" style={{ 
+                  <div className="munich-card-body um-relative um-z-10">
+                    <h4 className="um-font-bold um-mb-4" style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-xl)'
+                      fontSize: 'var(--um-text-xl)'
                     }}>Quick Actions</h4>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4">
                       <div className="space-y-3">
-                        <h5 className="font-medium" style={{ color: colors.black }}>Development Tasks:</h5>
-                        <ul className="space-y-2 text-sm" style={{ color: colors.darkGreen }}>
+                        <h5 className="um-font-medium" style={{ color: colors.black }}>Development Tasks:</h5>
+                        <ul className="space-y-2 um-text-sm" style={{ color: colors.darkGreen }}>
                           <li>• Set up Django backend for dynamic content</li>
                           <li>• Add Stripe payment integration</li>
                           <li>• Create content upload interface</li>
@@ -3159,8 +3159,8 @@ const RunningTrainingApp = () => {
                       </div>
                       
                       <div className="space-y-3">
-                        <h5 className="font-medium" style={{ color: colors.black }}>Content Strategy:</h5>
-                        <ul className="space-y-2 text-sm" style={{ color: colors.darkGreen }}>
+                        <h5 className="um-font-medium" style={{ color: colors.black }}>Content Strategy:</h5>
+                        <ul className="space-y-2 um-text-sm" style={{ color: colors.darkGreen }}>
                           <li>• Write 5-10 foundational articles</li>
                           <li>• Create 3-5 premium training plans</li>
                           <li>• Set up coaching intake form</li>
@@ -3172,7 +3172,7 @@ const RunningTrainingApp = () => {
                 </div>
               </div>
               
-              <div className="mt-8 flex justify-center">
+              <div className="mt-8 flex um-justify-center">
                 <button aria-label="Recalculate GoldenPace"
                   onClick={() => setShowAdminPanel(false)}
                   className="munich-btn munich-btn-primary"
@@ -3187,12 +3187,12 @@ const RunningTrainingApp = () => {
 
       {/* Purchase Modal */}
       {showPurchaseModal && selectedPlanForPurchase && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="munich-card w-full max-w-lg relative max-h-[90vh] overflow-y-auto">
-            <div className="absolute top-4 right-4 z-10">
+        <div className="um-fixed um-inset-0 bg-black bg-opacity-50 flex um-items-center um-justify-center z-50 um-p-4">
+          <div className="munich-card um-w-full max-w-lg um-relative max-h-[90vh] overflow-y-auto">
+            <div className="um-absolute toum-p-4 right-4 um-z-10">
               <button
                 onClick={closePurchaseModal}
-                className="text-2xl font-bold leading-none hover:opacity-70 transition-opacity"
+                className="um-text-2xl um-font-bold leading-none hover:opacity-70 transition-opacity"
                 style={{ color: colors.silver }}
                 disabled={purchaseLoading}
               >
@@ -3201,7 +3201,7 @@ const RunningTrainingApp = () => {
             </div>
             
             <div className="munich-card-header">
-              <h3 className="text-xl font-bold pr-8" style={{ color: colors.black }}>
+              <h3 className="um-text-xl um-font-bold pr-8" style={{ color: colors.black }}>
                 Purchase {selectedPlanForPurchase.name}
               </h3>
             </div>
@@ -3218,10 +3218,10 @@ const RunningTrainingApp = () => {
                 />
               </Elements>
               
-              <div className="mt-6 pt-4 border-t" style={{ borderColor: colors.gray }}>
+              <div className="mt-6 pt-4 um-border-t" style={{ borderColor: colors.gray }}>
                 <button
                   onClick={closePurchaseModal}
-                  className="munich-btn munich-btn-outline w-full"
+                  className="munich-btn munich-btn-outline um-w-full"
                   disabled={purchaseLoading}
                 >
                   Cancel
@@ -3234,14 +3234,14 @@ const RunningTrainingApp = () => {
 
       {/* Purchase Success Message */}
       {purchaseSuccess && (
-        <div className="fixed top-4 right-4 z-50 animate-fade-in">
+        <div className="um-fixed toum-p-4 right-4 z-50 animate-fade-in">
           <div className="munich-card" style={{ backgroundColor: colors.darkGreen }}>
-            <div className="p-4 text-center">
-              <p className="font-bold text-white flex items-center justify-center">
+            <div className="um-p-4 um-text-center">
+              <p className="um-font-bold text-white flex um-items-center um-justify-center">
                 <CheckCircle className="w-5 h-5 mr-2" />
                 Purchase Successful!
               </p>
-              <p className="text-sm text-white opacity-90 mt-1">
+              <p className="um-text-sm text-white um-opacity-90 um-mt-1">
                 Check your profile for access
               </p>
             </div>

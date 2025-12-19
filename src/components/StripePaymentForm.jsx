@@ -97,14 +97,14 @@ const StripePaymentForm = ({
   return (
     <section aria-labelledby="payment-form-heading">
       <h2 id="payment-form-heading" className="sr-only">Payment Information</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="um-space-y-4">
         <div className="space-y-3">
-          <label className="block font-medium" style={{ color: colors.black }}>
+          <label className="block um-font-medium" style={{ color: colors.black }}>
             Payment Information
           </label>
           
           <div 
-            className="p-4 border-2 rounded-lg transition-colors focus-within:border-blue-500"
+            className="um-p-4 um-border-2 um-um-rounded-lg transition-colors focus-within:um-border-blue-500"
             style={{ borderColor: colors.gray }}
             role="textbox"
             aria-label="Credit card information"
@@ -114,7 +114,7 @@ const StripePaymentForm = ({
 
           {paymentError && (
             <div 
-              className="p-3 rounded-lg text-sm"
+              className="p-3 um-um-rounded-lg um-text-sm"
               style={{ backgroundColor: '#fee2e2', color: '#dc2626' }}
               role="alert"
               aria-live="polite"
@@ -125,23 +125,23 @@ const StripePaymentForm = ({
         </div>
 
       <div 
-        className="p-4 rounded-lg"
+        className="um-p-4 um-um-rounded-lg"
         style={{ backgroundColor: colors.lightBlue + '20' }}
       >
-        <div className="space-y-2 text-sm">
-          <div className="flex justify-between">
+        <div className="space-y-2 um-text-sm">
+          <div className="um-flex um-justify-between">
             <span style={{ color: colors.black }}>Plan:</span>
             <span style={{ color: colors.black, fontWeight: '600' }}>{selectedPlan.name}</span>
           </div>
-          <div className="flex justify-between">
+          <div className="um-flex um-justify-between">
             <span style={{ color: colors.black }}>Price:</span>
             <span style={{ color: colors.black, fontWeight: '600' }}>
               ${selectedPlan.price}
               {selectedPlan.id === 'personal-coaching' && '/month'}
             </span>
           </div>
-          <div className="border-t pt-2 mt-2" style={{ borderColor: colors.gray }}>
-            <div className="flex justify-between font-bold">
+          <div className="um-border-t pt-2 um-mt-2" style={{ borderColor: colors.gray }}>
+            <div className="um-flex um-justify-between um-font-bold">
               <span style={{ color: colors.black }}>Total:</span>
               <span style={{ color: colors.black }}>
                 ${selectedPlan.price}
@@ -156,7 +156,7 @@ const StripePaymentForm = ({
         <button
           type="submit"
           disabled={!stripe || loading}
-          className="w-full munich-btn munich-btn-primary"
+          className="um-w-full munich-btn munich-btn-primary"
           style={{ 
             opacity: (!stripe || loading) ? 0.6 : 1,
             cursor: (!stripe || loading) ? 'not-allowed' : 'pointer'
@@ -164,7 +164,7 @@ const StripePaymentForm = ({
           aria-label={`Pay ${selectedPlan.price} dollars for ${selectedPlan.name}${selectedPlan.id === 'personal-coaching' ? ' per month' : ''}`}
         >
           {loading ? (
-            <span className="flex items-center justify-center">
+            <span className="um-flex um-items-center um-justify-center">
               <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -176,7 +176,7 @@ const StripePaymentForm = ({
           )}
         </button>
 
-        <div className="text-xs text-center space-y-1" style={{ color: colors.silver }}>
+        <div className="um-text-xs um-text-center space-y-1" style={{ color: colors.silver }}>
           <p>🔒 Secure payment processing powered by Stripe</p>
           <p>💳 All major credit cards accepted</p>
           <p>🛡️ Your payment information is encrypted and secure</p>

@@ -147,7 +147,7 @@ const TimeInput = ({ value, onChange, onBlur, distance, colors, error }) => {
   };
   
   return (
-    <div className="flex items-center gap-2">
+    <div className="um-flex um-items-center gap-2">
       {showHours && (
         <>
           <input
@@ -166,7 +166,7 @@ const TimeInput = ({ value, onChange, onBlur, distance, colors, error }) => {
             aria-invalid={error ? 'true' : 'false'}
             className="flex-1"
           />
-          <span className="text-sm font-semibold" style={{ color: colors.textSecondary || colors.darkGray }}>
+          <span className="um-text-sm um-font-semibold" style={{ color: colors.textSecondary || colors.darkGray }}>
             :
           </span>
         </>
@@ -187,7 +187,7 @@ const TimeInput = ({ value, onChange, onBlur, distance, colors, error }) => {
         aria-invalid={error ? 'true' : 'false'}
         className="flex-1"
       />
-      <span className="text-sm font-semibold" style={{ color: colors.textSecondary || colors.darkGray }}>
+      <span className="um-text-sm um-font-semibold" style={{ color: colors.textSecondary || colors.darkGray }}>
         :
       </span>
       <input

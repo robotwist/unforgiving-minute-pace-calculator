@@ -21,9 +21,9 @@ const CoachBio = ({ colors }) => {
   ];
 
   return (
-    <div className="max-w-2xl text-base space-y-4 leading-relaxed" style={{ color: colors.black }}>
+    <div className="max-w-2xl um-text-base um-space-y-4 leading-relaxed" style={{ color: colors.black }}>
       {bioParagraphs.map((paragraph, index) => (
-        <p key={index} className={index === 0 ? 'font-medium' : ''}>
+        <p key={index} className={index === 0 ? 'um-font-medium' : ''}>
           {paragraph}
         </p>
       ))}

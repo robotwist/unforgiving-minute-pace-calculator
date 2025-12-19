@@ -38,8 +38,8 @@ const PRProfileGraph = ({ prs, colors }) => {
   
   if (dataPoints.length === 0) {
     return (
-      <div className="munich-card p-8 text-center" style={{ borderColor: colors.border }}>
-        <p className="text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
+      <div className="munich-card um-p-8 um-text-center" style={{ borderColor: colors.border }}>
+        <p className="um-text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
           Enter at least one PR to see your profile graph
         </p>
       </div>
@@ -87,11 +87,11 @@ const PRProfileGraph = ({ prs, colors }) => {
   };
   
   return (
-    <div className="munich-card p-6" style={{ borderColor: colors.border }}>
-      <h3 className="text-lg font-bold mb-4" style={{ color: colors.black }}>
+    <div className="munich-card um-p-6" style={{ borderColor: colors.border }}>
+      <h3 className="um-text-lg um-font-bold um-mb-4" style={{ color: colors.black }}>
         Your PR Profile
       </h3>
-      <p className="text-xs mb-4" style={{ color: colors.textSecondary || colors.darkGray }}>
+      <p className="um-text-xs um-mb-4" style={{ color: colors.textSecondary || colors.darkGray }}>
         Pace per mile across race distances. Actual PRs shown in blue, projected times in green.
       </p>
       
@@ -99,7 +99,7 @@ const PRProfileGraph = ({ prs, colors }) => {
         <svg
           width={chartWidth}
           height={chartHeight}
-          className="w-full"
+          className="um-w-full"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
         >
           {/* Grid lines */}
@@ -218,17 +218,17 @@ const PRProfileGraph = ({ prs, colors }) => {
       </div>
       
       {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mt-4 text-xs">
-        <div className="flex items-center gap-2">
+      <div className="um-flex um-items-center um-justify-center gaum-p-6 um-mt-4 um-text-xs">
+        <div className="um-flex um-items-center gap-2">
           <div
-            className="w-3 h-3 rounded-full"
+            className="w-3 h-3 um-um-rounded-full"
             style={{ backgroundColor: colors.lightBlue }}
           />
           <span style={{ color: colors.textSecondary || colors.darkGray }}>Actual PR</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="um-flex um-items-center gap-2">
           <div
-            className="w-3 h-3 rounded-full"
+            className="w-3 h-3 um-um-rounded-full"
             style={{ backgroundColor: colors.lightGreen }}
           />
           <span style={{ color: colors.textSecondary || colors.darkGray }}>Projected</span>

@@ -18,15 +18,15 @@ const ArticleCard = ({ article, colors, onReadArticle }) => {
   };
 
   return (
-    <div className="munich-card relative overflow-hidden group">
-      <div className={`absolute top-2 right-2 w-6 h-6 ${getGeometricShape(0)}`} style={{ 
+    <div className="munich-card um-relative um-overflow-hidden group">
+      <div className={`um-absolute top-2 right-2 w-6 h-6 ${getGeometricShape(0)}`} style={{ 
         backgroundColor: getCategoryColor(article.category),
         opacity: 0.7
       }}></div>
       
       <div className="munich-card-body">
         <div className="mb-4">
-          <span className="text-xs font-medium px-3 py-1" style={{ 
+          <span className="um-text-xs um-font-medium px-3 py-1" style={{ 
             backgroundColor: getCategoryColor(article.category),
             color: colors.white 
           }}>
@@ -34,21 +34,21 @@ const ArticleCard = ({ article, colors, onReadArticle }) => {
           </span>
         </div>
         
-        <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+        <h4 className="um-text-lg um-font-bold um-mb-3" style={{ color: colors.black }}>
           {article.title}
         </h4>
         
-        <p className="text-sm mb-4" style={{ color: colors.darkGreen }}>
+        <p className="um-text-sm um-mb-4" style={{ color: colors.darkGreen }}>
           {article.excerpt}
         </p>
         
-        <div className="flex items-center justify-between">
-          <span className="text-xs" style={{ color: colors.silver }}>
+        <div className="um-flex um-items-center um-justify-between">
+          <span className="um-text-xs" style={{ color: colors.silver }}>
             {article.readTime}
           </span>
           <button 
             onClick={() => onReadArticle(article)}
-            className="munich-btn munich-btn-outline text-xs px-3 py-1"
+            className="munich-btn munich-btn-outline um-text-xs px-3 py-1"
           >
             Read Article
           </button>

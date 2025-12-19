@@ -92,7 +92,7 @@ const PlanRecommendationEngine = ({
   if (!topRecommendation) {
     return (
       <div className="munich-card">
-        <div className="munich-card-body text-center">
+        <div className="munich-card-body um-text-center">
           <p style={{ color: colors.darkGreen }}>
             Complete your profile to get personalized plan recommendations
           </p>
@@ -104,19 +104,19 @@ const PlanRecommendationEngine = ({
   return (
     <div className="space-y-6">
       {/* Top Recommendation - Featured */}
-      <div className="munich-card relative overflow-hidden" style={{ 
+      <div className="munich-card um-relative um-overflow-hidden" style={{ 
         border: `3px solid ${colors.lightGreen}`,
         background: `linear-gradient(135deg, ${colors.lightGreen}05, ${colors.lightBlue}05)`
       }}>
         <div 
-          className="absolute top-4 right-4"
+          className="um-absolute toum-p-4 right-4"
           style={{ 
             zIndex: 1,
             pointerEvents: 'none'
           }}
         >
           <div 
-            className="px-3 py-1 rounded-full text-xs font-bold"
+            className="px-3 py-1 um-um-rounded-full um-text-xs um-font-bold"
             style={{ 
               backgroundColor: colors.lightGreen,
               color: colors.white
@@ -127,37 +127,37 @@ const PlanRecommendationEngine = ({
         </div>
 
         <div className="munich-card-body">
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="um-grid um-md-grid-cols-3 gaum-p-6">
             {/* Plan Overview */}
             <div className="md:col-span-2">
-              <div className="flex items-start space-x-4">
+              <div className="um-flex um-items-start space-x-4">
                 <div 
-                  className="w-16 h-16 rounded-full flex items-center justify-center"
+                  className="w-16 um-h-16 um-um-rounded-full flex um-items-center um-justify-center"
                   style={{ backgroundColor: colors.lightGreen + '20' }}
                 >
                   {React.createElement(getPlanIcon(topRecommendation), {
-                    className: "w-8 h-8",
+                    className: "w-8 um-h-8",
                     style: { color: colors.lightGreen }
                   })}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>
+                  <h3 className="um-text-xl um-font-bold um-mb-2" style={{ color: colors.black }}>
                     {topRecommendation.name}
                   </h3>
                   <p className="mb-3" style={{ color: colors.darkGreen }}>
                     {topRecommendation.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-4 text-sm">
-                    <div className="flex items-center space-x-1">
+                  <div className="um-flex um-flex-wrap gaum-p-4 um-text-sm">
+                    <div className="um-flex um-items-center space-x-1">
                       <Clock className="w-4 h-4" style={{ color: colors.lightBlue }} />
                       <span style={{ color: colors.black }}>{topRecommendation.duration} weeks</span>
                     </div>
-                    <div className="flex items-center space-x-1">
+                    <div className="um-flex um-items-center space-x-1">
                       <Target className="w-4 h-4" style={{ color: colors.orange }} />
                       <span style={{ color: colors.black }}>{topRecommendation.weeklyMileage} miles/week</span>
                     </div>
-                    <div className="flex items-center space-x-1">
+                    <div className="um-flex um-items-center space-x-1">
                       <TrendingUp className="w-4 h-4" style={{ color: colors.violet }} />
                       <span style={{ color: colors.black }}>{topRecommendation.phase} Phase</span>
                     </div>
@@ -167,25 +167,25 @@ const PlanRecommendationEngine = ({
             </div>
 
             {/* Match Confidence */}
-            <div className="space-y-4">
+            <div className="um-space-y-4">
               <div>
-                <h4 className="font-bold mb-2" style={{ color: colors.black }}>
+                <h4 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                   Match Confidence
                 </h4>
                 {(() => {
                   const confidence = getConfidenceLevel(topRecommendation.score);
                   return (
                     <div>
-                      <div className="flex justify-between text-sm mb-1">
+                      <div className="um-flex um-justify-between um-text-sm mb-1">
                         <span style={{ color: colors.darkGreen }}>Compatibility</span>
                         <span style={{ color: confidence.color }}>{confidence.level}</span>
                       </div>
                       <div 
-                        className="w-full h-2 rounded-full"
+                        className="um-w-full h-2 um-um-rounded-full"
                         style={{ backgroundColor: colors.gray + '30' }}
                       >
                         <div 
-                          className="h-2 rounded-full transition-all duration-1000"
+                          className="h-2 um-um-rounded-full transition-all duration-1000"
                           style={{ 
                             backgroundColor: confidence.color,
                             width: `${confidence.percentage}%`
@@ -197,7 +197,7 @@ const PlanRecommendationEngine = ({
                 })()}
               </div>
 
-              <div className="text-sm" style={{ color: colors.darkGreen }}>
+              <div className="um-text-sm" style={{ color: colors.darkGreen }}>
                 <strong>Why this matches:</strong><br />
                 {topRecommendation.matchReason}
               </div>
@@ -212,7 +212,7 @@ const PlanRecommendationEngine = ({
                     console.error('Missing onPlanSelect or topRecommendation', { onPlanSelect, topRecommendation });
                   }
                 }}
-                className="w-full munich-btn munich-btn-primary"
+                className="um-w-full munich-btn munich-btn-primary"
                 style={{ 
                   backgroundColor: colors.lightBlue,
                   color: colors.white,
@@ -230,11 +230,11 @@ const PlanRecommendationEngine = ({
 
       {/* Other Good Options */}
       <div>
-        <h3 className="text-lg font-bold mb-4" style={{ color: colors.black }}>
+        <h3 className="um-text-lg um-font-bold um-mb-4" style={{ color: colors.black }}>
           Other Great Options
         </h3>
         
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="um-grid um-md-grid-cols-3 gaum-p-4">
           {otherRecommendations.map((plan, index) => {
             const IconComponent = getPlanIcon(plan);
             const confidence = getConfidenceLevel(plan.score);
@@ -242,33 +242,33 @@ const PlanRecommendationEngine = ({
             return (
               <div key={index} className="munich-card hover:shadow-lg transition-all">
                 <div className="munich-card-body">
-                  <div className="flex items-start space-x-3 mb-4">
+                  <div className="um-flex um-items-start um-space-x-3 um-mb-4">
                     <div 
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      className="w-10 um-h-10 um-um-rounded-full flex um-items-center um-justify-center"
                       style={{ backgroundColor: confidence.color + '20' }}
                     >
                       <IconComponent className="w-5 h-5" style={{ color: confidence.color }} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-sm mb-1 truncate" style={{ color: colors.black }}>
+                      <h4 className="um-font-bold um-text-sm mb-1 truncate" style={{ color: colors.black }}>
                         {plan.name}
                       </h4>
-                      <p className="text-xs mb-2" style={{ color: colors.darkGreen }}>
+                      <p className="um-text-xs um-mb-2" style={{ color: colors.darkGreen }}>
                         {plan.matchReason}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="space-y-2 text-xs">
-                    <div className="flex justify-between">
+                  <div className="space-y-2 um-text-xs">
+                    <div className="um-flex um-justify-between">
                       <span style={{ color: colors.darkGreen }}>Duration:</span>
                       <span style={{ color: colors.black }}>{plan.duration} weeks</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="um-flex um-justify-between">
                       <span style={{ color: colors.darkGreen }}>Miles/week:</span>
                       <span style={{ color: colors.black }}>{plan.weeklyMileage}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="um-flex um-justify-between">
                       <span style={{ color: colors.darkGreen }}>Match:</span>
                       <span style={{ color: confidence.color }}>{confidence.level}</span>
                     </div>
@@ -282,7 +282,7 @@ const PlanRecommendationEngine = ({
                         onPlanSelect(plan, 'alternative');
                       }
                     }}
-                    className="w-full mt-4 munich-btn munich-btn-outline text-sm"
+                    className="um-w-full um-mt-4 munich-btn munich-btn-outline um-text-sm"
                     style={{ 
                       cursor: 'pointer',
                       pointerEvents: 'auto'
@@ -299,7 +299,7 @@ const PlanRecommendationEngine = ({
       </div>
 
       {/* Show All Plans Option */}
-      <div className="text-center">
+      <div className="um-text-center">
         <button
           type="button"
           onClick={() => setShowAllPlans(!showAllPlans)}
@@ -313,17 +313,17 @@ const PlanRecommendationEngine = ({
       {/* All Plans Grid (when expanded) */}
       {showAllPlans && (
         <div className="mt-6">
-          <h3 className="text-lg font-bold mb-4" style={{ color: colors.black }}>
+          <h3 className="um-text-lg um-font-bold um-mb-4" style={{ color: colors.black }}>
             All Available Plans
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="um-grid um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-4">
             {getRecommendations.slice(4).map((plan, index) => (
               <div key={index} className="munich-card">
                 <div className="munich-card-body">
-                  <h4 className="font-bold mb-2" style={{ color: colors.black }}>
+                  <h4 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     {plan.name}
                   </h4>
-                  <p className="text-sm mb-3" style={{ color: colors.darkGreen }}>
+                  <p className="um-text-sm um-mb-3" style={{ color: colors.darkGreen }}>
                     {plan.distance} • {plan.duration} weeks • {plan.phase}
                   </p>
                   <button
@@ -334,7 +334,7 @@ const PlanRecommendationEngine = ({
                         onPlanSelect(plan, 'browse');
                       }
                     }}
-                    className="w-full munich-btn munich-btn-outline text-sm"
+                    className="um-w-full munich-btn munich-btn-outline um-text-sm"
                     style={{ 
                       cursor: 'pointer',
                       pointerEvents: 'auto'

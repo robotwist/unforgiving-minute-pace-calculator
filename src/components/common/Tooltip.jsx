@@ -18,15 +18,15 @@ const Tooltip = ({
   const [show, setShow] = useState(false);
 
   const positionClasses = {
-    top: 'bottom-full left-1/2 transform -translate-x-1/2 mb-2',
-    bottom: 'top-full left-1/2 transform -translate-x-1/2 mt-2',
+    top: 'bottom-full left-1/2 transform -translate-x-1/2 um-mb-2',
+    bottom: 'top-full left-1/2 transform -translate-x-1/2 um-mt-2',
     left: 'right-full top-1/2 transform -translate-y-1/2 mr-2',
     right: 'left-full top-1/2 transform -translate-y-1/2 ml-2'
   };
 
   return (
     <div 
-      className="relative inline-block"
+      className="um-relative inline-block"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       onFocus={() => setShow(true)}
@@ -35,7 +35,7 @@ const Tooltip = ({
       {children}
       {show && content && (
         <div
-          className={`absolute z-50 px-3 py-2 text-sm rounded-lg shadow-lg max-w-xs ${positionClasses[position]}`}
+          className={`um-absolute z-50 px-3 um-py-2 um-text-sm um-um-rounded-lg shadow-lg max-w-xs ${positionClasses[position]}`}
           style={{
             backgroundColor: colors?.black || '#1A1A1A',
             color: colors?.white || '#FFFFFF',
@@ -46,7 +46,7 @@ const Tooltip = ({
           <div className="whitespace-normal">{content}</div>
           {/* Arrow */}
           <div
-            className="absolute w-2 h-2 transform rotate-45"
+            className="um-absolute w-2 h-2 transform rotate-45"
             style={{
               backgroundColor: colors?.black || '#1A1A1A',
               [position === 'top' ? 'bottom' : position === 'bottom' ? 'top' : position === 'left' ? 'right' : 'left']: '-4px',
@@ -69,7 +69,7 @@ export const HelpIcon = ({ content, colors, className = '' }) => {
     <Tooltip content={content} colors={colors}>
       <button
         type="button"
-        className={`inline-flex items-center justify-center w-4 h-4 rounded-full ${className}`}
+        className={`inline-flex um-items-center um-justify-center w-4 h-4 um-um-rounded-full ${className}`}
         style={{
           backgroundColor: `${colors?.lightBlue || '#1E6B96'}20`,
           color: colors?.lightBlue || '#1E6B96'

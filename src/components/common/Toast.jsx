@@ -43,7 +43,7 @@ const Toast = ({ id, message, type = 'info', duration = 5000, onClose, colors })
 
   return (
     <div
-      className="flex items-start gap-3 p-4 rounded-lg shadow-lg border-2 mb-3 animate-slide-in"
+      className="um-flex um-items-start um-gap-3 um-p-4 um-um-rounded-lg shadow-lg um-border-2 um-mb-3 animate-slide-in"
       style={{
         backgroundColor: config.bgColor,
         borderColor: config.borderColor,
@@ -55,10 +55,10 @@ const Toast = ({ id, message, type = 'info', duration = 5000, onClose, colors })
       aria-live="polite"
     >
       <Icon className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: config.iconColor }} />
-      <p className="flex-1 text-sm font-medium">{message}</p>
+      <p className="flex-1 um-text-sm um-font-medium">{message}</p>
       <button
         onClick={() => onClose(id)}
-        className="flex-shrink-0 p-1 rounded hover:bg-white hover:bg-opacity-20 transition-colors"
+        className="flex-shrink-0 p-1 um-rounded hover:bg-white hover:bg-opacity-20 transition-colors"
         aria-label="Close notification"
       >
         <X className="w-4 h-4" />

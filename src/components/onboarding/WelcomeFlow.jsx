@@ -87,13 +87,13 @@ const WelcomeFlow = ({ colors, onComplete }) => {
     <div className="um-modal-overlay um-modal-overlay--dim">
       <div className="munich-card um-modal-panel um-modal-panel--2xl">
         <div className="munich-card-header" style={{ backgroundColor: colors.lightBlue }}>
-          <div className="relative">
-            <div className="absolute top-0 right-0 w-8 h-8 geometric-diamond" style={{ 
+          <div className="um-relative">
+            <div className="um-absolute top-0 right-0 um-w-8 um-h-8 geometric-diamond" style={{ 
               backgroundColor: colors.orange,
               opacity: 0.8
             }}></div>
-            <div className="text-center">
-              <h2 className="text-2xl font-bold" style={{ color: colors.white }}>
+            <div className="um-text-center">
+              <h2 className="um-text-2xl um-font-bold" style={{ color: colors.white }}>
                 Welcome to Unforgiving Minute
               </h2>
               <p className="mt-2" style={{ color: colors.white, opacity: 0.9 }}>
@@ -105,11 +105,11 @@ const WelcomeFlow = ({ colors, onComplete }) => {
 
         <div className="munich-card-body space-y-6">
           {/* Progress Indicator */}
-          <div className="flex justify-center space-x-2">
+          <div className="um-flex um-justify-center space-x-2">
             {[1, 2, 3].map((step) => (
               <div
                 key={step}
-                className="w-3 h-3 rounded-full transition-all"
+                className="w-3 h-3 um-um-rounded-full transition-all"
                 style={{
                   backgroundColor: currentStep >= step ? colors.lightBlue : colors.gray,
                   opacity: currentStep >= step ? 1 : 0.3
@@ -121,8 +121,8 @@ const WelcomeFlow = ({ colors, onComplete }) => {
           {/* Step 1: Goal Selection */}
           {currentStep === 1 && (
             <div className="space-y-6">
-              <div className="text-center">
-                <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>
+              <div className="um-text-center">
+                <h3 className="um-text-xl um-font-bold um-mb-2" style={{ color: colors.black }}>
                   What's your main running goal?
                 </h3>
                 <p style={{ color: colors.darkGreen }}>
@@ -130,38 +130,38 @@ const WelcomeFlow = ({ colors, onComplete }) => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-4">
+              <div className="um-grid um-grid-cols-1 gaum-p-4">
                 {goals.map((goal) => {
                   const IconComponent = goal.icon;
                   return (
                     <button
                       key={goal.id}
                       onClick={() => handleGoalSelect(goal)}
-                      className="munich-card text-left hover:shadow-lg transition-all group"
+                      className="munich-card um-text-left hover:shadow-lg transition-all group"
                       style={{ border: `2px solid ${goal.color}20` }}
                     >
                       <div className="munich-card-body">
-                        <div className="flex items-start space-x-4">
+                        <div className="um-flex um-items-start space-x-4">
                           <div 
-                            className="w-12 h-12 rounded-full flex items-center justify-center"
+                            className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center"
                             style={{ backgroundColor: goal.color + '20' }}
                           >
                             <IconComponent className="w-6 h-6" style={{ color: goal.color }} />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-bold mb-1" style={{ color: colors.black }}>
+                            <h4 className="um-font-bold mb-1" style={{ color: colors.black }}>
                               {goal.title}
                             </h4>
-                            <p className="text-sm mb-2" style={{ color: colors.darkGreen }}>
+                            <p className="um-text-sm um-mb-2" style={{ color: colors.darkGreen }}>
                               {goal.description}
                             </p>
-                            <p className="text-xs" style={{ color: colors.silver }}>
+                            <p className="um-text-xs" style={{ color: colors.silver }}>
                               {goal.targetUsers}
                             </p>
                           </div>
-                          <div className="text-right">
+                          <div className="um-text-right">
                             <span 
-                              className="text-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+                              className="um-text-2xl opacity-0 group-hover:um-opacity-100 transition-opacity"
                               style={{ color: goal.color }}
                             >
                               →
@@ -179,8 +179,8 @@ const WelcomeFlow = ({ colors, onComplete }) => {
           {/* Step 2: Experience Level */}
           {currentStep === 2 && (
             <div className="space-y-6">
-              <div className="text-center">
-                <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>
+              <div className="um-text-center">
+                <h3 className="um-text-xl um-font-bold um-mb-2" style={{ color: colors.black }}>
                   What's your training experience?
                 </h3>
                 <p style={{ color: colors.darkGreen }}>
@@ -193,19 +193,19 @@ const WelcomeFlow = ({ colors, onComplete }) => {
                   <button
                     key={level.id}
                     onClick={() => handleExperienceSelect(level)}
-                    className="w-full munich-card text-left hover:shadow-lg transition-all"
+                    className="um-w-full munich-card um-text-left hover:shadow-lg transition-all"
                     style={{ border: `2px solid ${colors.lightBlue}20` }}
                   >
                     <div className="munich-card-body">
-                      <div className="flex justify-between items-start">
+                      <div className="um-flex um-justify-between um-items-start">
                         <div>
-                          <h4 className="font-bold mb-1" style={{ color: colors.black }}>
+                          <h4 className="um-font-bold mb-1" style={{ color: colors.black }}>
                             {level.title}
                           </h4>
-                          <p className="text-sm mb-1" style={{ color: colors.darkGreen }}>
+                          <p className="um-text-sm mb-1" style={{ color: colors.darkGreen }}>
                             {level.description}
                           </p>
-                          <p className="text-xs" style={{ color: colors.silver }}>
+                          <p className="um-text-xs" style={{ color: colors.silver }}>
                             Typically {level.weeklyMiles}
                           </p>
                         </div>
@@ -220,13 +220,13 @@ const WelcomeFlow = ({ colors, onComplete }) => {
 
           {/* Step 3: Ready to Start */}
           {currentStep === 3 && (
-            <div className="space-y-6 text-center">
-              <div className="w-16 h-16 mx-auto geometric-octagon" style={{ 
+            <div className="space-y-6 um-text-center">
+              <div className="w-16 um-h-16 um-mx-auto geometric-octagon" style={{ 
                 backgroundColor: colors.lightGreen 
               }}></div>
               
               <div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: colors.black }}>
+                <h3 className="um-text-xl um-font-bold um-mb-2" style={{ color: colors.black }}>
                   Perfect! Let's Get Started
                 </h3>
                 <p style={{ color: colors.darkGreen }}>
@@ -236,19 +236,19 @@ const WelcomeFlow = ({ colors, onComplete }) => {
 
               <div className="munich-card" style={{ backgroundColor: colors.lightBlue + '10' }}>
                 <div className="munich-card-body">
-                  <h4 className="font-bold mb-2" style={{ color: colors.black }}>
+                  <h4 className="um-font-bold um-mb-2" style={{ color: colors.black }}>
                     Your Personalized Setup:
                   </h4>
-                  <div className="text-left space-y-2">
-                    <div className="flex justify-between">
+                  <div className="um-text-left space-y-2">
+                    <div className="um-flex um-justify-between">
                       <span style={{ color: colors.darkGreen }}>Goal:</span>
                       <span style={{ color: colors.black }}>{selectedGoal?.title}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="um-flex um-justify-between">
                       <span style={{ color: colors.darkGreen }}>Experience:</span>
                       <span style={{ color: colors.black }}>{experience?.title}</span>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="um-flex um-justify-between">
                       <span style={{ color: colors.darkGreen }}>Approach:</span>
                       <span style={{ color: colors.black }}>Individual Factor Training</span>
                     </div>
@@ -258,12 +258,12 @@ const WelcomeFlow = ({ colors, onComplete }) => {
 
               <button
                 onClick={handleComplete}
-                className="munich-btn munich-btn-primary w-full text-lg"
+                className="munich-btn munich-btn-primary um-w-full um-text-lg"
               >
                 Start My Personalized Calculator
               </button>
 
-              <p className="text-xs" style={{ color: colors.silver }}>
+              <p className="um-text-xs" style={{ color: colors.silver }}>
                 We'll remember your preferences for future visits
               </p>
             </div>

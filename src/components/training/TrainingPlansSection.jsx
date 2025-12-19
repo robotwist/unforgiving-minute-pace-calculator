@@ -10,12 +10,12 @@ const TrainingPlansSection = memo(({
 }) => {
   return (
     <div className="space-y-8">
-      <div className="text-center space-y-4">
-        <h2 className="text-4xl font-bold" style={{ color: colors.black }}>Coach-built Training Plans</h2>
-        <p className="text-xl" style={{ color: colors.darkGreen }}>
+      <div className="um-text-center um-space-y-4">
+        <h2 className="um-text-4xl um-font-bold" style={{ color: colors.black }}>Coach-built Training Plans</h2>
+        <p className="um-text-xl" style={{ color: colors.darkGreen }}>
           Use these as a sample of how I structure training—then apply if you want a plan built around you.
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+        <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 um-justify-center pt-2">
           <Link to="/apply" className="munich-btn munich-btn-primary um-cta" style={{ textAlign: 'center' }}>
             Apply for coaching
           </Link>
@@ -25,34 +25,34 @@ const TrainingPlansSection = memo(({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-8">
         {trainingPlans.map((plan, index) => (
           <div
             key={plan.id}
-            className="munich-card overflow-hidden hover:scale-[1.02] transition-all duration-500 um-radius-lg"
+            className="munich-card um-overflow-hidden hover:scale-[1.02] transition-all duration-500 um-radius-lg"
             style={{
               background: `linear-gradient(135deg, ${colors.white}E6, ${colors.lightGray}E6)`,
               border: `1px solid ${colors.border}60`,
             }}
           >
-            <div className="p-8">
-              <div className="flex items-start justify-between mb-6">
+            <div className="um-p-8">
+              <div className="um-flex um-items-start um-justify-between um-mb-6">
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-2" style={{ color: colors.black }}>{plan.name}</h3>
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-1">
+                  <h3 className="um-text-2xl um-font-bold um-mb-2" style={{ color: colors.black }}>{plan.name}</h3>
+                  <div className="um-flex um-items-center gaum-p-4 um-text-sm">
+                    <div className="um-flex um-items-center gap-1">
                       <Clock className="w-4 h-4" style={{ color: colors.lightBlue }} />
                       <span style={{ color: colors.darkGreen }}>{plan.duration} weeks</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
+                    <div className="um-flex um-items-center gap-1">
+                      <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }}></div>
                       <span style={{ color: colors.darkGreen }}>{plan.phase} Phase</span>
                     </div>
                   </div>
                 </div>
                 <div className="ml-4">
                   <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center"
+                    className="w-12 um-h-12 um-um-rounded-full flex um-items-center um-justify-center"
                     style={{
                       backgroundColor: `${colors.lightBlue}20`,
                       backdropFilter: 'blur(10px)',
@@ -68,7 +68,7 @@ const TrainingPlansSection = memo(({
 
               {plan.goldenPaceLevel && (
                 <div
-                  className="munich-alert munich-alert-info mb-6 relative p-4 rounded-lg"
+                  className="munich-alert munich-alert-info um-mb-6 um-relative um-p-4 um-um-rounded-lg"
                   style={{
                     backgroundColor: `${colors.lightBlue}10`,
                     border: `1px solid ${colors.lightBlue}30`,
@@ -76,16 +76,16 @@ const TrainingPlansSection = memo(({
                   }}
                 >
                   <div
-                    className="absolute top-2 right-2 w-4 h-4 geometric-diamond"
+                    className="um-absolute top-2 right-2 w-4 h-4 geometric-diamond"
                     style={{
                       background: `linear-gradient(135deg, ${colors.lightBlue}, ${colors.lightGreen})`,
                       opacity: 0.6
                     }}
                   ></div>
-                  <p className="font-semibold mb-1" style={{ color: colors.black }}>
+                  <p className="um-font-semibold mb-1" style={{ color: colors.black }}>
                     Personalized for Optimal Progress Pace {plan.goldenPaceLevel}
                   </p>
-                  <div className="flex gap-4 text-sm">
+                  <div className="um-flex gaum-p-4 um-text-sm">
                     <span style={{ color: colors.darkGreen }}>
                       Easy: <span style={{ color: colors.lightBlue, fontMono: true }}>{plan.trainingPaces?.easy}</span>
                     </span>
@@ -96,7 +96,7 @@ const TrainingPlansSection = memo(({
                 </div>
               )}
 
-              <div className="flex gap-3">
+              <div className="um-flex um-gap-3">
                 <button
                   type="button"
                   onClick={() => {

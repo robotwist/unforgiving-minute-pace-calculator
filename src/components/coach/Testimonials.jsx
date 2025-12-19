@@ -24,20 +24,20 @@ const Testimonials = ({ colors }) => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-3" style={{ color: colors.black }}>
+      <h2 className="um-text-2xl um-font-bold um-mb-3" style={{ color: colors.black }}>
         Athlete Feedback
       </h2>
       <div className="space-y-3">
         {testimonials.map((testimonial, index) => (
           <blockquote
             key={index}
-            className="munich-card p-4"
+            className="munich-card um-p-4"
             style={{ borderColor: testimonial.borderColor }}
           >
-            <p className="text-sm" style={{ color: colors.black }}>
+            <p className="um-text-sm" style={{ color: colors.black }}>
               "{testimonial.quote}"
             </p>
-            <cite className="text-xs" style={{ color: colors.darkGreen }}>
+            <cite className="um-text-xs" style={{ color: colors.darkGreen }}>
               — {testimonial.author}
             </cite>
           </blockquote>

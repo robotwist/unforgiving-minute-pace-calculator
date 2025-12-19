@@ -37,8 +37,8 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="munich-card p-8 text-center" style={{ backgroundColor: colors.white }}>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: colors.black }}>
+        <div className="munich-card um-p-8 um-text-center" style={{ backgroundColor: colors.white }}>
+          <h2 className="um-text-2xl um-font-bold um-mb-4" style={{ color: colors.black }}>
             Something went wrong
           </h2>
           <p className="mb-4" style={{ color: colors.darkGreen }}>

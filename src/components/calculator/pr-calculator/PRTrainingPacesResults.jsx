@@ -30,24 +30,24 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
     <div className="space-y-8">
       {/* Consistency Warnings */}
       {consistencyIssues.length > 0 && (
-        <div className="munich-card p-4" style={{ borderColor: colors.orange }}>
-          <div className="flex items-start gap-3">
+        <div className="munich-card um-p-4" style={{ borderColor: colors.orange }}>
+          <div className="um-flex um-items-start um-gap-3">
             <AlertTriangle className="w-5 h-5 flex-shrink-0" style={{ color: colors.orange }} />
             <div className="flex-1">
-              <h4 className="font-semibold mb-2" style={{ color: colors.black }}>
+              <h4 className="um-font-semibold um-mb-2" style={{ color: colors.black }}>
                 PR Consistency Check
               </h4>
-              <p className="text-sm mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
+              <p className="um-text-sm um-mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
                 Some of your PRs are inconsistent with others. This may indicate:
               </p>
-              <ul className="text-sm space-y-1 mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
+              <ul className="um-text-sm space-y-1 um-mb-3" style={{ color: colors.textSecondary || colors.darkGray }}>
                 {consistencyIssues.map((issue, idx) => (
                   <li key={idx}>
                     • <strong style={{ color: colors.text || colors.black }}>{issue.distance}</strong> is {issue.type} than expected based on your other PRs
                   </li>
                 ))}
               </ul>
-              <p className="text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
+              <p className="um-text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
                 Training paces use your actual PRs. If a PR seems off, consider retesting that distance.
               </p>
             </div>
@@ -57,14 +57,14 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
       
       {/* Training Paces Grid */}
       <div>
-        <h3 className="text-xl font-bold mb-4" style={{ color: colors.black }}>
+        <h3 className="um-text-xl um-font-bold um-mb-4" style={{ color: colors.black }}>
           Your Training Paces
         </h3>
-        <p className="text-sm mb-6" style={{ color: colors.textSecondary || colors.darkGray }}>
+        <p className="um-text-sm um-mb-6" style={{ color: colors.textSecondary || colors.darkGray }}>
           Based on your actual PRs. These are proven paces you can run—use them directly in training.
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-5 gaum-p-4 sm:gaum-p-6">
           {paceCards.map((cardData, index) => (
             <PRPaceCard
               key={cardData.zone}
@@ -80,32 +80,32 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
       </div>
       
       {/* Key Insight */}
-      <div className="munich-card p-6" style={{ borderColor: colors.lightBlue }}>
+      <div className="munich-card um-p-6" style={{ borderColor: colors.lightBlue }}>
         <div className="progressive-melange um-melange-overlay um-melange-overlay--05"></div>
-        <div className="relative z-10">
-          <h4 className="text-lg font-bold mb-3" style={{ color: colors.black }}>
+        <div className="um-relative um-z-10">
+          <h4 className="um-text-lg um-font-bold um-mb-3" style={{ color: colors.black }}>
             The PR-Based Approach
           </h4>
-          <p className="text-sm mb-4 leading-relaxed" style={{ color: colors.textSecondary || colors.darkGray }}>
+          <p className="um-text-sm um-mb-4 leading-relaxed" style={{ color: colors.textSecondary || colors.darkGray }}>
             Unlike formula-based systems, these paces come directly from your actual race performances. 
             If you can run a {trainingPaces.sources.marathon || 'marathon'} at a certain pace, that pace 
             is your proven aerobic capacity. Use it. No calculations needed.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
+          <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 gaum-p-4 um-text-sm" style={{ color: colors.textSecondary || colors.darkGray }}>
             <div>
-              <p className="font-semibold mb-1" style={{ color: colors.black }}>✓ Accurate</p>
+              <p className="um-font-semibold mb-1" style={{ color: colors.black }}>✓ Accurate</p>
               <p>Uses your actual performance, not theoretical calculations</p>
             </div>
             <div>
-              <p className="font-semibold mb-1" style={{ color: colors.black }}>✓ Simple</p>
+              <p className="um-font-semibold mb-1" style={{ color: colors.black }}>✓ Simple</p>
               <p>No complex formulas—just your proven race paces</p>
             </div>
             <div>
-              <p className="font-semibold mb-1" style={{ color: colors.black }}>✓ Adaptive</p>
+              <p className="um-font-semibold mb-1" style={{ color: colors.black }}>✓ Adaptive</p>
               <p>Training paces automatically update as you set new PRs</p>
             </div>
             <div>
-              <p className="font-semibold mb-1" style={{ color: colors.black }}>✓ Multi-Distance</p>
+              <p className="um-font-semibold mb-1" style={{ color: colors.black }}>✓ Multi-Distance</p>
               <p>Maintains fitness across all distances simultaneously</p>
             </div>
           </div>
@@ -113,10 +113,10 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
       </div>
       
       {/* CTAs */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="um-flex um-flex-col um-sm-flex-row um-gap-3">
         <Link
           to="/apply"
-          className="flex-1 px-6 py-4 rounded-lg font-semibold border-2 transition-all duration-200 flex items-center justify-center"
+          className="flex-1 um-px-6 um-py-4 um-um-rounded-lg um-font-semibold um-border-2 transition-all duration-200 flex um-items-center um-justify-center"
           style={{
             borderColor: colors.lightGreen,
             color: colors.lightGreen,

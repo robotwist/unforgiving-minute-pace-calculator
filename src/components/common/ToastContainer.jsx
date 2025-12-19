@@ -12,7 +12,7 @@ const ToastContainer = ({ toasts, onClose }) => {
 
   return (
     <div
-      className="fixed top-4 right-4 z-50 flex flex-col items-end"
+      className="um-fixed toum-p-4 right-4 z-50 flex um-flex-col um-items-end"
       aria-live="polite"
       aria-atomic="true"
     >

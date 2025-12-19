@@ -9,7 +9,7 @@ const getProgressColor = (colors, percentage) => {
 
 const MetricCard = ({ colors, icon: Icon, title, value, subtitle, progress, activeMetric, onActivate }) => (
   <div
-    className={`munich-card cursor-pointer transition-all ${
+    className={`munich-card um-cursor-pointer transition-all ${
       activeMetric === title.toLowerCase() ? 'ring-2' : ''
     }`}
     style={{
@@ -18,17 +18,17 @@ const MetricCard = ({ colors, icon: Icon, title, value, subtitle, progress, acti
     onClick={() => onActivate(title.toLowerCase())}
   >
     <div className="munich-card-body">
-      <div className="flex items-center justify-between mb-3">
+      <div className="um-flex um-items-center um-justify-between um-mb-3">
         <div
-          className="w-10 h-10 rounded-full flex items-center justify-center"
+          className="w-10 um-h-10 um-um-rounded-full flex um-items-center um-justify-center"
           style={{ backgroundColor: colors.lightBlue + '20' }}
         >
           <Icon className="w-5 h-5" style={{ color: colors.lightBlue }} />
         </div>
         {typeof progress === 'number' && (
-          <div className="text-right">
+          <div className="um-text-right">
             <div
-              className="text-xs px-2 py-1 rounded-full"
+              className="um-text-xs px-2 py-1 um-um-rounded-full"
               style={{
                 backgroundColor: getProgressColor(colors, progress) + '20',
                 color: getProgressColor(colors, progress)
@@ -41,14 +41,14 @@ const MetricCard = ({ colors, icon: Icon, title, value, subtitle, progress, acti
       </div>
 
       <div>
-        <div className="text-2xl font-bold mb-1" style={{ color: colors.black }}>
+        <div className="um-text-2xl um-font-bold mb-1" style={{ color: colors.black }}>
           {value}
         </div>
-        <div className="text-sm" style={{ color: colors.darkGreen }}>
+        <div className="um-text-sm" style={{ color: colors.darkGreen }}>
           {title}
         </div>
         {subtitle && (
-          <div className="text-xs mt-1" style={{ color: colors.gray }}>
+          <div className="um-text-xs um-mt-1" style={{ color: colors.gray }}>
             {subtitle}
           </div>
         )}
@@ -57,11 +57,11 @@ const MetricCard = ({ colors, icon: Icon, title, value, subtitle, progress, acti
       {typeof progress === 'number' && (
         <div className="mt-3">
           <div
-            className="w-full h-1.5 rounded-full"
+            className="um-w-full h-1.5 um-um-rounded-full"
             style={{ backgroundColor: colors.gray + '30' }}
           >
             <div
-              className="h-1.5 rounded-full transition-all duration-500"
+              className="h-1.5 um-um-rounded-full transition-all duration-500"
               style={{
                 backgroundColor: getProgressColor(colors, progress),
                 width: `${progress}%`

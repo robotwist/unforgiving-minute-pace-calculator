@@ -20,7 +20,7 @@ export const LoadingSpinner = ({
 
   return (
     <div
-      className={`animate-spin rounded-full border-2 border-t-transparent ${sizeClasses[size]} ${className}`}
+      className={`animate-spin um-um-rounded-full um-border-2 um-border-t-transparent ${sizeClasses[size]} ${className}`}
       style={{
         borderColor: MUNICH_COLORS[color],
         borderTopColor: 'transparent'
@@ -50,7 +50,7 @@ export const Button = ({
   className = '',
   type = 'button'
 }) => {
-  const baseClasses = 'munich-btn relative transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseClasses = 'munich-btn um-relative transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   const variantClasses = {
     primary: 'munich-btn-primary',
@@ -59,9 +59,9 @@ export const Button = ({
   };
 
   const sizeClasses = {
-    sm: 'px-3 py-1 text-xs',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base'
+    sm: 'px-3 py-1 um-text-xs',
+    md: 'um-px-4 um-py-2 um-text-sm',
+    lg: 'um-px-6 py-3 um-text-base'
   };
 
   return (
@@ -147,11 +147,11 @@ export const Input = ({
         className={`um-field ${error ? 'um-field--error' : ''}`}
         style={{
           borderColor: error ? '#ef4444' : MUNICH_COLORS.gray,
-          fontSize: 'var(--text-base)'
+          fontSize: 'var(--um-text-base)'
         }}
       />
       {error && (
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="um-text-sm text-red-500">{error}</p>
       )}
     </div>
   );
@@ -193,7 +193,7 @@ export const Select = ({
         className={`um-field ${error ? 'um-field--error' : ''}`}
         style={{
           borderColor: error ? '#ef4444' : MUNICH_COLORS.gray,
-          fontSize: 'var(--text-base)'
+          fontSize: 'var(--um-text-base)'
         }}
       >
         {options.map((option) => (
@@ -203,7 +203,7 @@ export const Select = ({
         ))}
       </select>
       {error && (
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="um-text-sm text-red-500">{error}</p>
       )}
     </div>
   );
@@ -227,8 +227,8 @@ export class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <Card className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: MUNICH_COLORS.black }}>
+        <Card className="um-p-8 um-text-center">
+          <h2 className="um-text-2xl um-font-bold mb-4" style={{ color: MUNICH_COLORS.black }}>
             Something went wrong
           </h2>
           <p className="mb-4" style={{ color: MUNICH_COLORS.darkGreen }}>

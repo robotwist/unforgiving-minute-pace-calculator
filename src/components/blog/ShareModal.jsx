@@ -117,7 +117,7 @@ const ShareModal = ({ isOpen, onClose, article, url }) => {
           <button
             className={styles.copyButton}
             onClick={handleCopyLink}
-            style={{ position: 'relative' }}
+            style={{ position: 'um-relative' }}
           >
             {showCopyFeedback && (
               <span className={styles.copyFeedbackMessage}>

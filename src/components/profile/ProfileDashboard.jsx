@@ -56,22 +56,22 @@ const ProfileDashboard = ({
   return (
     <div className="space-y-6">
       <div className="munich-card">
-        <div className="munich-card-header relative overflow-hidden" style={{ 
+        <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
           backgroundColor: colors.lightGreen 
         }}>
           {/* Progressive Melange Background */}
-          <div className="absolute inset-0 progressive-melange opacity-20"></div>
+          <div className="um-absolute um-inset-0 progressive-melange opacity-20"></div>
           
           {/* Geometric corner accent */}
-          <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+          <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
             backgroundColor: colors.violet,
             opacity: 0.8
           }}></div>
           
-          <div className="relative z-10">
-            <h3 className="font-bold flex items-center" style={{ 
+          <div className="um-relative um-z-10">
+            <h3 className="um-font-bold flex um-items-center" style={{ 
               color: colors.white,
-              fontSize: 'var(--text-2xl)'
+              fontSize: 'var(--um-text-2xl)'
             }}>
               <User className="w-6 h-6 mr-3" />
               Welcome, {displayProfile?.name}!
@@ -79,109 +79,109 @@ const ProfileDashboard = ({
             <p className="mt-2" style={{ 
               color: colors.white,
               opacity: 0.9,
-              fontSize: 'var(--text-base)'
+              fontSize: 'var(--um-text-base)'
             }}>Your profile has been created successfully</p>
           </div>
         </div>
         
-        <div className="p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="um-p-8">
+          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 gaum-p-6">
             {/* Personal Info Card */}
-            <div className="munich-card relative overflow-hidden">
-              <div className="absolute inset-0 progressive-melange opacity-3"></div>
-              <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
+            <div className="munich-card um-relative um-overflow-hidden">
+              <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+              <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
                 backgroundColor: colors.lightBlue,
                 opacity: 0.3
               }}></div>
               
-              <div className="munich-card-body relative z-10">
-                <h4 className="font-medium mb-4" style={{ 
+              <div className="munich-card-body um-relative um-z-10">
+                <h4 className="um-font-medium um-mb-4" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-lg)'
+                  fontSize: 'var(--um-text-lg)'
                 }}>Personal Info</h4>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Name: {displayProfile?.name}</p>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Email: {displayProfile?.email}</p>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Experience: {displayProfile?.experience}</p>
                 <p style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Member since: {displayProfile?.created_date || new Date().toISOString().split('T')[0]}</p>
               </div>
             </div>
             
             {/* Running Goals Card */}
-            <div className="munich-card relative overflow-hidden">
-              <div className="absolute inset-0 progressive-melange opacity-3"></div>
-              <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
+            <div className="munich-card um-relative um-overflow-hidden">
+              <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+              <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
                 backgroundColor: colors.lightGreen,
                 opacity: 0.3,
                 animationDelay: '1s'
               }}></div>
               
-              <div className="munich-card-body relative z-10">
-                <h4 className="font-medium mb-4" style={{ 
+              <div className="munich-card-body um-relative um-z-10">
+                <h4 className="um-font-medium um-mb-4" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-lg)'
+                  fontSize: 'var(--um-text-lg)'
                 }}>Running Goals</h4>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Goal Race: {displayProfile?.goalRaceDistance}</p>
                 <p className="mb-2" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Goal Time: {displayProfile?.goalRaceTime || 'Not set'}</p>
                 <p style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-sm)'
+                  fontSize: 'var(--um-text-sm)'
                 }}>Weekly Mileage: {displayProfile?.weekly_mileage || displayProfile?.weeklyMileage || 'Not set'} miles</p>
               </div>
             </div>
             
             {/* Optimal Progress Pace Progress Card */}
-            <div className="munich-card relative overflow-hidden">
-              <div className="absolute inset-0 progressive-melange opacity-3"></div>
-              <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
+            <div className="munich-card um-relative um-overflow-hidden">
+              <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+              <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
                 backgroundColor: colors.violet,
                 opacity: 0.3,
                 animationDelay: '2s'
               }}></div>
               
-              <div className="munich-card-body relative z-10">
-                <h4 className="font-medium mb-4 flex items-center" style={{ 
+              <div className="munich-card-body um-relative um-z-10">
+                <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                   color: colors.black,
-                  fontSize: 'var(--text-lg)'
+                  fontSize: 'var(--um-text-lg)'
                 }}>
                   <Activity className="w-4 h-4 mr-2" />
                   Optimal Progress Pace Progress
                 </h4>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center">
+                  <div className="um-flex um-justify-between um-items-center">
                     <span style={{ 
                       color: colors.black,
-                      fontSize: 'var(--text-sm)'
+                      fontSize: 'var(--um-text-sm)'
                     }}>Current Optimal Progress Pace:</span>
                     {displayProfile?.currentGoldenPace || goldenPace ? (
-                      <span className="font-bold" style={{ 
+                      <span className="um-font-bold" style={{ 
                         color: colors.violet,
-                        fontSize: 'var(--text-lg)'
+                        fontSize: 'var(--um-text-lg)'
                       }}>
                         {displayProfile?.currentGoldenPace || goldenPace}
                       </span>
                     ) : (
-                      <div className="flex items-center gap-2">
+                      <div className="um-flex um-items-center gap-2">
                         <span style={{ 
                           color: colors.darkGray,
-                          fontSize: 'var(--text-sm)'
+                          fontSize: 'var(--um-text-sm)'
                         }}>Not calculated</span>
                         {displayProfile?.goalRaceTime && displayProfile?.goalRaceDistance && (
                           <button
@@ -190,7 +190,7 @@ const ProfileDashboard = ({
                               setRaceDistance(displayProfile.goalRaceDistance);
                               setActiveTab('calculator');
                             }}
-                            className="px-2 py-1 text-xs rounded-md hover:opacity-80 transition-opacity"
+                            className="px-2 py-1 um-text-xs um-um-rounded-md hover:opacity-80 transition-opacity"
                             style={{ 
                               backgroundColor: colors.lightBlue,
                               color: colors.white
@@ -205,14 +205,14 @@ const ProfileDashboard = ({
                   </div>
                   
                   {displayProfile?.projectedGoldenPace && (
-                    <div className="flex justify-between items-center">
+                    <div className="um-flex um-justify-between um-items-center">
                       <span style={{ 
                         color: colors.black,
-                        fontSize: 'var(--text-sm)'
+                        fontSize: 'var(--um-text-sm)'
                       }}>6-Week Projection:</span>
-                      <span className="font-bold" style={{ 
+                      <span className="um-font-bold" style={{ 
                         color: colors.lightGreen,
-                        fontSize: 'var(--text-lg)'
+                        fontSize: 'var(--um-text-lg)'
                       }}>
                         {displayProfile.projectedGoldenPace}
                       </span>
@@ -220,7 +220,7 @@ const ProfileDashboard = ({
                   )}
                   
                   <div className="mt-4 pt-3" style={{ borderTop: `1px solid ${colors.gray}` }}>
-                    <div className="flex justify-between text-xs">
+                    <div className="um-flex um-justify-between um-text-xs">
                       <span style={{ color: colors.black }}>Training Sessions: {trainingHistory.length}</span>
                       <span style={{ color: colors.black }}>Personal Bests: {Object.keys(personalBests).length}</span>
                     </div>
@@ -233,29 +233,29 @@ const ProfileDashboard = ({
           {/* Optimal Progress Pace Progression Chart */}
           {displayProfile?.currentGoldenPace && displayProfile?.trainingStartDate && generateGoldenPaceProgression && (
             <div className="mt-8">
-              <div className="munich-card relative overflow-hidden">
-                <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+              <div className="munich-card um-relative um-overflow-hidden">
+                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                   backgroundColor: colors.lightBlue,
                   opacity: 0.4
                 }}></div>
                 
-                <div className="munich-card-body relative z-10">
-                  <h4 className="font-medium mb-6 flex items-center" style={{ 
+                <div className="munich-card-body um-relative um-z-10">
+                  <h4 className="um-font-medium um-mb-6 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--text-xl)'
+                    fontSize: 'var(--um-text-xl)'
                   }}>
                     <TrendingUp className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                     Optimal Progress Pace Progression Forecast
                   </h4>
                   
-                  <div className="mb-4 text-sm" style={{ color: colors.darkGreen }}>
+                  <div className="mb-4 um-text-sm" style={{ color: colors.darkGreen }}>
                     <p>Projected improvement: +1 VDOT point every 6 weeks (average training consistency)</p>
                     <p>Based on {displayProfile.weekly_mileage || 20} miles/week at your experience level</p>
                   </div>
                   
                   {/* Simple ASCII-style progression chart */}
-                  <div className="bg-white p-6 rounded-lg border" style={{ borderColor: colors.gray }}>
+                  <div className="bg-white um-p-6 um-um-rounded-lg border" style={{ borderColor: colors.gray }}>
                     <div className="space-y-2">
                       {(() => {
                         const progression = generateGoldenPaceProgression(
@@ -270,17 +270,17 @@ const ProfileDashboard = ({
                           const barWidth = Math.min(100, ((point.goldenPace - displayProfile.currentGoldenPace) / 6) * 100 + 20);
                           
                           return (
-                            <div key={point.week} className="flex items-center space-x-3">
-                              <div className="w-20 text-xs font-medium" style={{ color: colors.black }}>
+                            <div key={point.week} className="um-flex um-items-center um-space-x-3">
+                              <div className="w-20 um-text-xs um-font-medium" style={{ color: colors.black }}>
                                 {point.week === 0 ? 'Current' : `Week ${point.week}`}
                               </div>
-                              <div className="flex-1 relative">
-                                <div className="h-6 rounded" style={{ 
+                              <div className="flex-1 um-relative">
+                                <div className="h-6 um-rounded" style={{ 
                                   backgroundColor: colors.lightGray,
                                   border: `1px solid ${colors.gray}`
                                 }}>
                                   <div 
-                                    className="h-full rounded transition-all duration-500"
+                                    className="um-h-full um-rounded transition-all duration-500"
                                     style={{ 
                                       width: `${barWidth}%`,
                                       backgroundColor: isCurrentWeek ? colors.violet : colors.lightBlue,
@@ -288,8 +288,8 @@ const ProfileDashboard = ({
                                     }}
                                   />
                                 </div>
-                                <div className="absolute right-2 top-0 h-6 flex items-center">
-                                  <span className="text-xs font-bold" style={{ 
+                                <div className="um-absolute right-2 top-0 h-6 flex um-items-center">
+                                  <span className="um-text-xs um-font-bold" style={{ 
                                     color: colors.black,
                                     textShadow: '0 0 3px white'
                                   }}>
@@ -297,7 +297,7 @@ const ProfileDashboard = ({
                                   </span>
                                 </div>
                               </div>
-                              <div className="w-16 text-xs" style={{ color: colors.darkGreen }}>
+                              <div className="w-16 um-text-xs" style={{ color: colors.darkGreen }}>
                                 {point.week === 0 ? 'Current' : 
                                   point.goldenPace > displayProfile.currentGoldenPace ? 
                                   `+${(point.goldenPace - displayProfile.currentGoldenPace).toFixed(1)}` : '---'}
@@ -308,7 +308,7 @@ const ProfileDashboard = ({
                       })()}
                     </div>
                     
-                    <div className="mt-4 pt-4 text-xs" style={{ 
+                    <div className="mt-4 pt-4 um-text-xs" style={{ 
                       borderTop: `1px solid ${colors.gray}`,
                       color: colors.darkGreen
                     }}>
@@ -325,34 +325,34 @@ const ProfileDashboard = ({
           <div className="mt-8 space-y-6">
             {/* Personal Bests Section */}
             {Object.keys(personalBests).length > 0 && (
-              <div className="munich-card relative overflow-hidden">
-                <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                <div className="absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
+              <div className="munich-card um-relative um-overflow-hidden">
+                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                   backgroundColor: colors.orange,
                   opacity: 0.4
                 }}></div>
                 
-                <div className="munich-card-body relative z-10">
-                  <h4 className="font-medium mb-4 flex items-center" style={{ 
+                <div className="munich-card-body um-relative um-z-10">
+                  <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--text-lg)'
+                    fontSize: 'var(--um-text-lg)'
                   }}>
                     <Trophy className="w-5 h-5 mr-2" style={{ color: colors.orange }} />
                     Personal Bests
                   </h4>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="um-grid um-grid-cols-2 um-md-grid-cols-4 gaum-p-4">
                     {Object.entries(personalBests).map(([distance, time]) => (
-                      <div key={distance} className="text-center p-3 rounded" style={{ 
+                      <div key={distance} className="um-text-center p-3 um-rounded" style={{ 
                         backgroundColor: colors.lightGray,
                         border: `1px solid ${colors.gray}`
                       }}>
-                        <div className="font-medium" style={{ 
+                        <div className="um-font-medium" style={{ 
                           color: colors.black,
-                          fontSize: 'var(--text-sm)'
+                          fontSize: 'var(--um-text-sm)'
                         }}>{distance}</div>
-                        <div className="font-bold" style={{ 
+                        <div className="um-font-bold" style={{ 
                           color: colors.orange,
-                          fontSize: 'var(--text-lg)'
+                          fontSize: 'var(--um-text-lg)'
                         }}>{time}</div>
                       </div>
                     ))}
@@ -363,41 +363,41 @@ const ProfileDashboard = ({
 
             {/* Recent Training History */}
             {trainingHistory.length > 0 && (
-              <div className="munich-card relative overflow-hidden">
-                <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                <div className="absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
+              <div className="munich-card um-relative um-overflow-hidden">
+                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                   backgroundColor: colors.lightBlue,
                   opacity: 0.4
                 }}></div>
                 
-                <div className="munich-card-body relative z-10">
-                  <h4 className="font-medium mb-4 flex items-center" style={{ 
+                <div className="munich-card-body um-relative um-z-10">
+                  <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--text-lg)'
+                    fontSize: 'var(--um-text-lg)'
                   }}>
                     <Calendar className="w-5 h-5 mr-2" style={{ color: colors.lightBlue }} />
                     Recent Training History
                   </h4>
                   <div className="space-y-3">
                     {trainingHistory.slice(-5).reverse().map((session, index) => (
-                      <div key={index} className="p-4 rounded" style={{ 
+                      <div key={index} className="um-p-4 um-rounded" style={{ 
                         backgroundColor: colors.lightGray,
                         border: `1px solid ${colors.gray}`
                       }}>
-                        <div className="flex justify-between items-start mb-2">
-                          <span className="font-medium" style={{ 
+                        <div className="um-flex um-justify-between um-items-start um-mb-2">
+                          <span className="um-font-medium" style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>{session.type}</span>
                           <span style={{ 
                             color: colors.gray,
-                            fontSize: 'var(--text-xs)'
+                            fontSize: 'var(--um-text-xs)'
                           }}>{session.date}</span>
                         </div>
                         {session.distance && (
                           <div style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>
                             Distance: {session.distance} • Time: {session.time}
                           </div>
@@ -405,7 +405,7 @@ const ProfileDashboard = ({
                         {(session.feeling || session.effort) && (
                           <div style={{ 
                             color: colors.lightBlue,
-                            fontSize: 'var(--text-sm)'
+                            fontSize: 'var(--um-text-sm)'
                           }}>
                             Felt: {session.feeling} • Effort: {session.effort}
                           </div>
@@ -413,7 +413,7 @@ const ProfileDashboard = ({
                         {session.location && (
                           <div style={{ 
                             color: colors.black,
-                            fontSize: 'var(--text-xs)',
+                            fontSize: 'var(--um-text-xs)',
                             opacity: 0.8
                           }}>
                             {session.location}
@@ -423,7 +423,7 @@ const ProfileDashboard = ({
                         {session.goldenPace && (
                           <div style={{ 
                             color: colors.orange,
-                            fontSize: 'var(--text-sm)',
+                            fontSize: 'var(--um-text-sm)',
                             fontWeight: '500'
                           }}>
                             Optimal Progress Pace: {session.goldenPace}
@@ -432,7 +432,7 @@ const ProfileDashboard = ({
                         {session.notes && (
                           <div className="mt-2" style={{ 
                             color: colors.gray,
-                            fontSize: 'var(--text-xs)',
+                            fontSize: 'var(--um-text-xs)',
                             fontStyle: 'italic'
                           }}>
                             "{session.notes}"
@@ -447,34 +447,34 @@ const ProfileDashboard = ({
 
             {/* Completed Training Plans */}
             {trainingPlansCompleted.length > 0 && (
-              <div className="munich-card relative overflow-hidden">
-                <div className="absolute inset-0 progressive-melange opacity-3"></div>
-                <div className="absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
+              <div className="munich-card um-relative um-overflow-hidden">
+                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
+                <div className="um-absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
                   backgroundColor: colors.violet,
                   opacity: 0.4
                 }}></div>
                 
-                <div className="munich-card-body relative z-10">
-                  <h4 className="font-medium mb-4 flex items-center" style={{ 
+                <div className="munich-card-body um-relative um-z-10">
+                  <h4 className="um-font-medium um-mb-4 flex um-items-center" style={{ 
                     color: colors.black,
-                    fontSize: 'var(--text-lg)'
+                    fontSize: 'var(--um-text-lg)'
                   }}>
                     <CheckCircle className="w-5 h-5 mr-2" style={{ color: colors.violet }} />
                     Completed Training Plans
                   </h4>
                   <div className="space-y-2">
                     {trainingPlansCompleted.map((plan, index) => (
-                      <div key={index} className="flex justify-between items-center p-3 rounded" style={{ 
+                      <div key={index} className="um-flex um-justify-between um-items-center p-3 um-rounded" style={{ 
                         backgroundColor: colors.lightGray,
                         border: `1px solid ${colors.gray}`
                       }}>
                         <span style={{ 
                           color: colors.black,
-                          fontSize: 'var(--text-sm)'
+                          fontSize: 'var(--um-text-sm)'
                         }}>{plan.name}</span>
                         <span style={{ 
                           color: colors.gray,
-                          fontSize: 'var(--text-xs)'
+                          fontSize: 'var(--um-text-xs)'
                         }}>{plan.completedDate}</span>
                       </div>
                     ))}
@@ -485,7 +485,7 @@ const ProfileDashboard = ({
           </div>
           
           {/* Action Buttons */}
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex um-flex-wrap gaum-p-4">
             <button
               onClick={() => {
                 // Transfer profile data to calculator
@@ -497,22 +497,22 @@ const ProfileDashboard = ({
                 }
                 setActiveTab('calculator');
               }}
-              className="munich-btn munich-btn-primary relative"
+              className="munich-btn munich-btn-primary um-relative"
               aria-label="Go to pace calculator with your goal race"
             >
               Calculate GoldenPace
-              <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
+              <div className="um-absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond" style={{ 
                 backgroundColor: colors.lightGreen
               }}></div>
             </button>
             
             <button
               onClick={() => setActiveTab('plans')}
-              className="munich-btn munich-btn-secondary relative"
+              className="munich-btn munich-btn-secondary um-relative"
               aria-label="View training plans"
             >
               Get Training Plans
-              <div className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-octagon" style={{ 
+              <div className="um-absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-octagon" style={{ 
                 backgroundColor: colors.violet
               }}></div>
             </button>
@@ -527,11 +527,11 @@ const ProfileDashboard = ({
             
             <button
               onClick={() => setShowTrainingLogForm(true)}
-              className="munich-btn munich-btn-outline relative"
+              className="munich-btn munich-btn-outline um-relative"
               style={{ color: colors.lightBlue, borderColor: colors.lightBlue }}
             >
               Log Training Session
-              <div className="absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
+              <div className="um-absolute top-0 right-0 w-3 h-3 geometric-diamond" style={{ 
                 backgroundColor: colors.lightBlue,
                 opacity: 0.3
               }}></div>
@@ -539,12 +539,12 @@ const ProfileDashboard = ({
             
             <button
               onClick={addDemoData}
-              className="munich-btn munich-btn-outline relative"
+              className="munich-btn munich-btn-outline um-relative"
               style={{ color: colors.orange, borderColor: colors.orange }}
             >
               <Clock className="w-4 h-4 mr-2" />
               Add Demo Data
-              <div className="absolute top-0 right-0 w-3 h-3 geometric-square" style={{ 
+              <div className="um-absolute top-0 right-0 w-3 h-3 geometric-square" style={{ 
                 backgroundColor: colors.orange,
                 opacity: 0.3
               }}></div>

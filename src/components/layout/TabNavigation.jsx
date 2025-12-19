@@ -11,28 +11,28 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
   ];
 
   return (
-    <div className="relative">
+    <div className="um-relative">
       {/* Header Section with Olympic-inspired design */}
-      <div className="text-center py-4 sm:py-8 relative overflow-hidden">
+      <div className="um-text-center um-py-4 um-sm-py-8 um-relative um-overflow-hidden">
         {/* Geometric background elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-4 left-4 w-8 h-8 geometric-diamond" style={{ backgroundColor: colors.lightBlue }}></div>
-          <div className="absolute top-8 right-8 w-6 h-6 geometric-octagon" style={{ backgroundColor: colors.lightGreen }}></div>
-          <div className="absolute bottom-4 left-8 w-10 h-10 geometric-square" style={{ backgroundColor: colors.orange }}></div>
-          <div className="absolute bottom-8 right-4 w-7 h-7 geometric-diamond" style={{ backgroundColor: colors.violet }}></div>
+        <div className="um-absolute um-inset-0 opacity-5">
+          <div className="um-absolute toum-p-4 left-4 um-w-8 um-h-8 geometric-diamond" style={{ backgroundColor: colors.lightBlue }}></div>
+          <div className="um-absolute toum-p-8 right-8 w-6 h-6 geometric-octagon" style={{ backgroundColor: colors.lightGreen }}></div>
+          <div className="um-absolute bottom-4 left-8 w-10 um-h-10 geometric-square" style={{ backgroundColor: colors.orange }}></div>
+          <div className="um-absolute bottom-8 right-4 w-7 h-7 geometric-diamond" style={{ backgroundColor: colors.violet }}></div>
         </div>
         
-        <h1 className="text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 tracking-tight relative z-10" style={{ color: colors.black }}>
+        <h1 className="um-text-2xl um-sm-text-4xl um-font-bold um-mb-2 sm:mb-4 tracking-tight um-relative um-z-10" style={{ color: colors.black }}>
           Unforgiving Minute
         </h1>
-        <p className="text-sm sm:text-lg mb-4 sm:mb-8 max-w-2xl mx-auto relative z-10" style={{ color: colors.darkGreen }}>
+        <p className="um-text-sm um-sm-text-lg um-mb-4 sm:mb-8 max-w-2xl um-mx-auto um-relative um-z-10" style={{ color: colors.darkGreen }}>
           Professional pace calculation and training plans based on Jack Daniels Running Formula
         </p>
       </div>
 
       {/* Navigation */}
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 px-2 sm:px-4 relative">
-        <div className="flex flex-wrap justify-center gap-1 sm:gap-2">
+      <div className="um-flex um-flex-wrap um-justify-center gap-2 sm:gaum-p-4 px-2 um-sm-px-4 um-relative">
+        <div className="um-flex um-flex-wrap um-justify-center gap-1 sm:gap-2">
           {tabs.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -46,7 +46,7 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
               }}
               aria-label={`Switch to ${label} tab`}
               aria-current={activeTab === id ? 'page' : undefined}
-              className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-2 font-medium text-xs sm:text-sm transition-all duration-200 ${
+              className={`flex um-items-center space-x-1 sm:space-x-2 px-2 um-sm-px-4 um-py-2 um-font-medium um-text-xs um-sm-text-sm transition-all duration-200 ${
                 activeTab === id
                   ? 'transform translate-y-[-2px] shadow-lg'
                   : 'hover:transform hover:translate-y-[-1px] hover:shadow-md'
@@ -58,8 +58,8 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
               }}
             >
               <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="hidden sm:inline">{label}</span>
-              <span className="sm:hidden">{label.split(' ')[0]}</span>
+              <span className="hidden um-sm\:inline">{label}</span>
+              <span className="um-sm\:hidden">{label.split(' ')[0]}</span>
             </button>
           ))}
         </div>
@@ -67,7 +67,7 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
         {/* Dark Mode Toggle */}
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="ml-4 p-2 rounded-full transition-all duration-300 hover:scale-110"
+          className="ml-4 p-2 um-um-rounded-full transition-all duration-300 hover:scale-110"
           style={{
             backgroundColor: darkMode ? colors.yellow : colors.gray,
             color: darkMode ? colors.black : colors.lightBlue,

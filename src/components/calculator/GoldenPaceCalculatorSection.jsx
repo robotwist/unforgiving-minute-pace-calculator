@@ -19,14 +19,14 @@ export default function GoldenPaceCalculatorSection({
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Hero Section - Munich 1972 Style */}
-      <div className="text-center space-y-4 sm:space-y-6">
+      <div className="um-text-center um-space-y-4 sm:space-y-6">
         {/* Track -> Stopwatch -> Calculator Design */}
-        <div className="inline-block relative">
+        <div className="inline-block um-relative">
           {/* 8-Lane Oval Track - Vertical orientation (elongated 10%) */}
-          <div className="relative w-44 h-24 sm:w-52 sm:h-32" style={{ transform: 'rotate(0deg)' }}>
+          <div className="um-relative w-44 h-24 sm:w-52 sm:h-32" style={{ transform: 'rotate(0deg)' }}>
             {/* Lane 8 (outermost) */}
             <div
-              className="absolute inset-0 border-2 rounded-full"
+              className="um-absolute um-inset-0 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -34,7 +34,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 7 */}
             <div
-              className="absolute inset-1 border-2 rounded-full"
+              className="um-absolute inset-1 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -42,7 +42,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 6 */}
             <div
-              className="absolute inset-2 border-2 rounded-full"
+              className="um-absolute inset-2 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -50,7 +50,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 5 */}
             <div
-              className="absolute inset-3 border-2 rounded-full"
+              className="um-absolute inset-3 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -58,7 +58,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 4 */}
             <div
-              className="absolute inset-4 border-2 rounded-full"
+              className="um-absolute inset-4 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -66,7 +66,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 3 */}
             <div
-              className="absolute inset-5 border-2 rounded-full"
+              className="um-absolute inset-5 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -74,7 +74,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 2 */}
             <div
-              className="absolute inset-6 border-2 rounded-full"
+              className="um-absolute inset-6 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightBlue,
                 background: `conic-gradient(from 0deg, ${colors.lightBlue} 0deg, ${colors.lightGreen} 90deg, ${colors.lightBlue} 180deg, ${colors.lightGreen} 270deg, ${colors.lightBlue} 360deg)`,
@@ -82,7 +82,7 @@ export default function GoldenPaceCalculatorSection({
             />
             {/* Lane 1 (innermost) */}
             <div
-              className="absolute inset-7 border-2 rounded-full"
+              className="um-absolute inset-7 um-border-2 um-um-rounded-full"
               style={{
                 borderColor: colors.lightGreen,
                 background: `conic-gradient(from 0deg, ${colors.lightGreen} 0deg, ${colors.lightBlue} 90deg, ${colors.lightGreen} 180deg, ${colors.lightBlue} 270deg, ${colors.lightGreen} 360deg)`,
@@ -91,7 +91,7 @@ export default function GoldenPaceCalculatorSection({
           </div>
         </div>
 
-        <h2 className="munich-3xl font-bold tracking-tight mb-4 flex items-center justify-center gap-3" style={{ color: colors.black }}>
+        <h2 className="munich-3xl um-font-bold tracking-tight um-mb-4 flex um-items-center um-justify-center um-gap-3" style={{ color: colors.black }}>
           <span>Optimal Progress Pace Calculator</span>
           <HelpIcon 
             content="Optimal Progress Pace is the pace that gives you maximum improvement when run at the right times. Based on Jack Daniels' Running Formula."
@@ -102,62 +102,62 @@ export default function GoldenPaceCalculatorSection({
         {/* Show helpful message if race data is pre-populated from profile */}
         {savedProfileData && (raceTime || raceDistance !== '5K') && (
           <div
-            className="inline-flex items-center px-4 py-2 bg-opacity-10 rounded-lg mb-4"
+            className="inline-flex um-items-center um-px-4 um-py-2 bg-um-opacity-10 um-um-rounded-lg um-mb-4"
             style={{
               backgroundColor: colors.lightBlue,
               color: colors.darkBlue,
             }}
           >
             <Target className="w-4 h-4 mr-2" />
-            <span className="text-sm">
+            <span className="um-text-sm">
               Using your goal race from profile: {raceDistance}
               {raceTime ? ` in ${raceTime}` : ''}
             </span>
           </div>
         )}
 
-        <p className="text-lg sm:text-xl max-w-3xl mx-auto px-4 leading-relaxed" style={{ color: colors.black }}>
+        <p className="um-text-lg um-sm-text-xl max-w-3xl um-mx-auto um-px-4 leading-relaxed" style={{ color: colors.black }}>
           Enter a recent race time to get coach-grade training paces. These are the same inputs I use when I build personalized plans.
         </p>
 
         {/* Value proposition badges */}
-        <div className="flex flex-wrap justify-center gap-3 mt-6 px-4">
+        <div className="um-flex um-flex-wrap um-justify-center um-gap-3 mt-6 um-px-4">
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
             style={{
               borderColor: colors.lightBlue,
               backgroundColor: colors.lightBlue + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightBlue }} />
-            <span className="text-sm font-medium">Elite-Tested</span>
+            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightBlue }} />
+            <span className="um-text-sm um-font-medium">Elite-Tested</span>
           </div>
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
             style={{
               borderColor: colors.lightGreen,
               backgroundColor: colors.lightGreen + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.lightGreen }} />
-            <span className="text-sm font-medium">Instant Results</span>
+            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.lightGreen }} />
+            <span className="um-text-sm um-font-medium">Instant Results</span>
           </div>
           <div
-            className="flex items-center gap-2 px-3 py-2 rounded-full border"
+            className="um-flex um-items-center gap-2 px-3 um-py-2 um-um-rounded-full border"
             style={{
               borderColor: colors.orange,
               backgroundColor: colors.orange + '10',
               color: colors.black,
             }}
           >
-            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.orange }} />
-            <span className="text-sm font-medium">Coach-built sample</span>
+            <div className="w-2 h-2 um-um-rounded-full" style={{ backgroundColor: colors.orange }} />
+            <span className="um-text-sm um-font-medium">Coach-built sample</span>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-4">
+        <div className="mt-6 flex um-flex-col um-sm-flex-row um-gap-3 um-justify-center um-px-4">
           <Link
             to="/apply"
             className="munich-btn munich-btn-primary um-cta"
@@ -176,10 +176,10 @@ export default function GoldenPaceCalculatorSection({
           </Link>
         </div>
         
-        <div className="mt-4 text-center">
+        <div className="mt-4 um-text-center">
           <Link
             to="/calculator/pr"
-            className="text-sm font-medium underline"
+            className="um-text-sm um-font-medium underline"
             style={{ color: colors.lightBlue }}
             aria-label="Try PR-based training calculator"
           >
@@ -189,24 +189,24 @@ export default function GoldenPaceCalculatorSection({
       </div>
 
       {/* Calculator Card - Munich 1972 Geometric Style */}
-      <div className="max-w-2xl mx-auto">
-        <div className="shadow-sm border relative overflow-hidden" style={{ borderColor: colors.border, backgroundColor: colors.white }}>
+      <div className="max-w-2xl um-mx-auto">
+        <div className="shadow-sm border um-relative um-overflow-hidden" style={{ borderColor: colors.border, backgroundColor: colors.white }}>
           {/* Progressive Melange Background */}
-          <div className="absolute inset-0 progressive-melange opacity-5" />
+          <div className="um-absolute um-inset-0 progressive-melange opacity-5" />
 
           {/* Subtle geometric corner accents */}
-          <div className="absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 border-t-2" style={{ borderColor: colors.lightBlue }} />
-          <div className="absolute top-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-r-2 border-t-2" style={{ borderColor: colors.lightGreen }} />
-          <div className="absolute bottom-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 border-b-2" style={{ borderColor: colors.lightGreen }} />
-          <div className="absolute bottom-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-r-2 border-b-2" style={{ borderColor: colors.lightBlue }} />
+          <div className="um-absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 um-border-t-2" style={{ borderColor: colors.lightBlue }} />
+          <div className="um-absolute top-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-r-2 um-border-t-2" style={{ borderColor: colors.lightGreen }} />
+          <div className="um-absolute bottom-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 um-border-b-2" style={{ borderColor: colors.lightGreen }} />
+          <div className="um-absolute bottom-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-r-2 um-border-b-2" style={{ borderColor: colors.lightBlue }} />
 
-          <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 relative z-10">
-            <h3 className="text-lg sm:text-xl font-bold flex items-center" style={{ color: colors.black }}>
+          <div className="um-p-4 um-sm-p-8 um-space-y-4 sm:space-y-6 um-relative um-z-10">
+            <h3 className="um-text-lg um-sm-text-xl um-font-bold flex um-items-center" style={{ color: colors.black }}>
               <Calculator className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" style={{ color: colors.lightBlue }} />
               Optimal Progress Pace Calculator
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 gaum-p-4 sm:gaum-p-6">
               <div>
                 <label className="um-label" style={{ color: colors.black }}>
                   Race Time
@@ -239,7 +239,7 @@ export default function GoldenPaceCalculatorSection({
                   value={raceDistance}
                   onChange={(e) => setRaceDistance(e.target.value)}
                   aria-label="Select race distance"
-                  className="w-full px-3 sm:px-4 py-3 border-2 font-medium text-center"
+                  className="um-w-full px-3 um-sm-px-4 py-3 um-border-2 um-font-medium um-text-center"
                   style={{
                     borderColor: colors.border,
                     color: colors.black,
@@ -257,8 +257,8 @@ export default function GoldenPaceCalculatorSection({
 
             {/* Error Display */}
             {profileError && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-sm text-red-700 flex items-center">
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 um-um-rounded-lg">
+                <p className="um-text-sm text-red-700 flex um-items-center">
                   <span className="inline-block w-4 h-4 mr-2 text-red-500">⚠</span>
                   {profileError}
                 </p>
@@ -269,7 +269,7 @@ export default function GoldenPaceCalculatorSection({
               onClick={handleCalculate}
               title="Calculate GoldenPace"
               aria-label="Calculate training paces from race time"
-              className="w-full py-3 px-6 font-semibold munich-base transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg relative btn-high-contrast"
+              className="um-w-full py-3 um-px-6 um-font-semibold munich-base transition-all duration-300 hover:transform hover:translate-y-[-2px] hover:shadow-lg um-relative btn-high-contrast"
               style={{
                 backgroundColor: colors.lightBlue,
                 color: colors.white,
@@ -279,7 +279,7 @@ export default function GoldenPaceCalculatorSection({
               Calculate Optimal Progress Pace
               {/* Geometric accent on button */}
               <div
-                className="absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond"
+                className="um-absolute top-0 right-0 w-3 h-3 sm:w-4 sm:h-4 geometric-diamond"
                 style={{
                   backgroundColor: colors.lightGreen,
                 }}

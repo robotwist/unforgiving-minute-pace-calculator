@@ -51,10 +51,10 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
     
     return (
       <div key={distance} className="space-y-2">
-        <label className="um-label text-sm font-medium" style={{ color: colors.black }}>
+        <label className="um-label um-text-sm um-font-medium" style={{ color: colors.black }}>
           {distance}
         </label>
-        <div className="relative">
+        <div className="um-relative">
           <TimeInput
             value={value}
             onChange={(formattedTime) => handlePRChange(distance, formattedTime)}
@@ -64,7 +64,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
             error={error}
           />
           {error && (
-            <div id={`${distance}-error`} className="text-xs mt-2 text-red-600 flex items-center gap-1">
+            <div id={`${distance}-error`} className="um-text-xs um-mt-2 text-red-600 flex um-items-center gap-1">
               <AlertCircle className="w-3 h-3" />
               {error}
             </div>
@@ -78,7 +78,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
     <div className="space-y-6">
       {/* Goal Distance Selector */}
       <div>
-        <label className="um-label font-semibold flex items-center gap-2" style={{ color: colors.black }}>
+        <label className="um-label um-font-semibold flex um-items-center gap-2" style={{ color: colors.black }}>
           <span>Primary Goal Distance</span>
           <HelpIcon 
             content="Training zones will be mapped based on this distance. For example, if training for a 5K, your aerobic pace will be your marathon PR pace."
@@ -88,7 +88,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
         <select
           value={goalDistance}
           onChange={(e) => setGoalDistance(e.target.value)}
-          className="w-full px-4 py-3 border-2 font-medium text-center"
+          className="um-w-full um-px-4 py-3 um-border-2 um-font-medium um-text-center"
           style={{
             borderColor: colors.border,
             color: colors.black,
@@ -103,17 +103,17 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
           <option value="50K">50K</option>
           <option value="50 Mile">50 Mile</option>
         </select>
-        <p className="text-xs mt-1" style={{ color: colors.textSecondary || colors.darkGray }}>
+        <p className="um-text-xs um-mt-1" style={{ color: colors.textSecondary || colors.darkGray }}>
           Training zones will be mapped based on this goal distance
         </p>
       </div>
       
       {/* Default Distances */}
       <div>
-        <h3 className="text-sm font-semibold mb-3" style={{ color: colors.black }}>
+        <h3 className="um-text-sm um-font-semibold um-mb-3" style={{ color: colors.black }}>
           Personal Records
         </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="um-grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 gaum-p-4">
           {DEFAULT_DISTANCES.map(distance => renderDistanceInput(distance))}
         </div>
       </div>
@@ -123,7 +123,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="flex items-center justify-between w-full px-4 py-2 border-2 rounded"
+          className="um-flex um-items-center um-justify-between um-w-full um-px-4 um-py-2 um-border-2 um-rounded"
           style={{
             borderColor: colors.border,
             color: colors.lightBlue,
@@ -132,7 +132,7 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
           aria-expanded={showAdvanced}
           aria-label={showAdvanced ? 'Hide advanced distances' : 'Show advanced distances'}
         >
-          <span className="font-medium">Add More Distances</span>
+          <span className="um-font-medium">Add More Distances</span>
           {showAdvanced ? (
             <ChevronUp className="w-4 h-4" />
           ) : (
@@ -141,18 +141,18 @@ const PRInputForm = ({ prs, setPRs, goalDistance, setGoalDistance, colors, error
         </button>
         
         {showAdvanced && (
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="mt-4 grid um-grid-cols-1 um-sm-grid-cols-2 um-lg-grid-cols-3 gaum-p-4">
             {ADVANCED_DISTANCES.map(distance => renderDistanceInput(distance))}
           </div>
         )}
       </div>
       
       {/* Help Text */}
-      <div className="p-3 rounded" style={{ backgroundColor: `${colors.lightBlue}10`, border: `1px solid ${colors.lightBlue}30` }}>
-        <div className="flex items-start gap-2">
+      <div className="p-3 um-rounded" style={{ backgroundColor: `${colors.lightBlue}10`, border: `1px solid ${colors.lightBlue}30` }}>
+        <div className="um-flex um-items-start gap-2">
           <Clock className="w-4 h-4 mt-0.5" style={{ color: colors.lightBlue }} />
-          <div className="text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
-            <p className="font-medium mb-1">Time Entry:</p>
+          <div className="um-text-xs" style={{ color: colors.textSecondary || colors.darkGray }}>
+            <p className="um-font-medium mb-1">Time Entry:</p>
             <p>Enter your race time using the separate hour, minute, and second fields. Hours field will appear automatically for longer distances.</p>
             <p className="mt-2">You only need one PR to get started. Additional PRs improve accuracy.</p>
           </div>
