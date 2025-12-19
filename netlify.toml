@@ -2,8 +2,8 @@
   base = "."
   publish = "build"
   command = "npm ci --legacy-peer-deps --production=false && npm run build"
-  # Temporarily disabled to force rebuild
-  # ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF src/ public/ package.json package-lock.json"
+  # Re-enabled: Skip builds when only irrelevant files change (saves build minutes)
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF src/ public/ package.json package-lock.json netlify.toml"
 
 [build.processing]
   skip_processing = false
