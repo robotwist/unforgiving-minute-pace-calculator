@@ -50,7 +50,6 @@ const ArticleModal = ({ article, colors, onClose }) => {
         <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
           backgroundColor: colors.lightBlue 
         }}>
-          <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
             backgroundColor: colors.orange,
             opacity: 0.8

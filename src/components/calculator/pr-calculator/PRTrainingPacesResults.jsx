@@ -81,7 +81,6 @@ const PRTrainingPacesResults = memo(({ trainingPaces, colors, goalDistance, prs 
       
       {/* Key Insight */}
       <div className="munich-card um-p-6" style={{ borderColor: colors.lightBlue }}>
-        <div className="progressive-melange um-melange-overlay um-melange-overlay--05"></div>
         <div className="um-relative um-z-10">
           <h4 className="um-text-lg um-font-bold um-mb-3" style={{ color: colors.black }}>
             The PR-Based Approach

@@ -60,7 +60,6 @@ const ProfileDashboard = ({
           backgroundColor: colors.lightGreen 
         }}>
           {/* Progressive Melange Background */}
-          <div className="um-absolute um-inset-0 progressive-melange opacity-20"></div>
           
           {/* Geometric corner accent */}
           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
@@ -88,7 +87,6 @@ const ProfileDashboard = ({
           <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
             {/* Personal Info Card */}
             <div className="munich-card um-relative um-overflow-hidden">
-              <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
               <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
                 backgroundColor: colors.lightBlue,
                 opacity: 0.3
@@ -120,7 +118,6 @@ const ProfileDashboard = ({
             
             {/* Running Goals Card */}
             <div className="munich-card um-relative um-overflow-hidden">
-              <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
               <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
                 backgroundColor: colors.lightGreen,
                 opacity: 0.3,
@@ -149,7 +146,6 @@ const ProfileDashboard = ({
             
             {/* Optimal Progress Pace Progress Card */}
             <div className="munich-card um-relative um-overflow-hidden">
-              <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
               <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
                 backgroundColor: colors.violet,
                 opacity: 0.3,
@@ -234,7 +230,6 @@ const ProfileDashboard = ({
           {displayProfile?.currentGoldenPace && displayProfile?.trainingStartDate && generateGoldenPaceProgression && (
             <div className="mt-8">
               <div className="munich-card um-relative um-overflow-hidden">
-                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                 <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                   backgroundColor: colors.lightBlue,
                   opacity: 0.4
@@ -326,7 +321,6 @@ const ProfileDashboard = ({
             {/* Personal Bests Section */}
             {Object.keys(personalBests).length > 0 && (
               <div className="munich-card um-relative um-overflow-hidden">
-                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                 <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                   backgroundColor: colors.orange,
                   opacity: 0.4
@@ -364,7 +358,6 @@ const ProfileDashboard = ({
             {/* Recent Training History */}
             {trainingHistory.length > 0 && (
               <div className="munich-card um-relative um-overflow-hidden">
-                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                 <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                   backgroundColor: colors.lightBlue,
                   opacity: 0.4
@@ -448,7 +441,6 @@ const ProfileDashboard = ({
             {/* Completed Training Plans */}
             {trainingPlansCompleted.length > 0 && (
               <div className="munich-card um-relative um-overflow-hidden">
-                <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                 <div className="um-absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
                   backgroundColor: colors.violet,
                   opacity: 0.4

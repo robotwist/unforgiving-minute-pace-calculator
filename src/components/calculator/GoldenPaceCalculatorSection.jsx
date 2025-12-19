@@ -192,7 +192,6 @@ export default function GoldenPaceCalculatorSection({
       <div className="max-w-2xl um-mx-auto">
         <div className="shadow-sm border um-relative um-overflow-hidden" style={{ borderColor: colors.border, backgroundColor: colors.white }}>
           {/* Progressive Melange Background */}
-          <div className="um-absolute um-inset-0 progressive-melange opacity-5" />
 
           {/* Subtle geometric corner accents */}
           <div className="um-absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 um-border-t-2" style={{ borderColor: colors.lightBlue }} />

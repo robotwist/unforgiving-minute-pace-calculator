@@ -67,7 +67,6 @@ const GoldenPaceResults = memo(({
         }}
       >
         {/* Progressive Melange Background */}
-        <div className="progressive-melange um-melange-overlay um-melange-overlay--05"></div>
 
         {/* Enhanced geometric border accents */}
         <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2 um-rounded-full"
@@ -134,7 +133,6 @@ const GoldenPaceResults = memo(({
             }}
           >
             {/* Progressive Melange Background */}
-            <div className="progressive-melange um-melange-overlay um-melange-overlay--03"></div>
 
             {/* Enhanced geometric corner accent */}
             <div

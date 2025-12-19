@@ -1018,7 +1018,6 @@ const RunningTrainingApp = () => {
         aria-label="Main navigation"
       >
         {/* Progressive Melange Background */}
-        <div className="um-absolute um-inset-0 progressive-melange um-opacity-10"></div>
         
         <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
           <div className="um-flex um-flex-col um-sm-flex-row um-justify-between um-items-center um-py-4 um-sm-py-6 um-space-y-4 um-sm-space-y-0">
@@ -1255,7 +1254,6 @@ const RunningTrainingApp = () => {
                 {/* GoldenPace Display */}
                 <div className="um-text-center um-p-4 um-sm-p-6 bg-white shadow-sm border um-relative um-overflow-hidden" style={{ borderColor: colors.border }}>
                   {/* Progressive Melange Background */}
-                  <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
                   
                   {/* Geometric border accents */}
                   <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
@@ -1284,7 +1282,6 @@ const RunningTrainingApp = () => {
                   ].map(({ name, pace, icon: Icon, color }, index) => (
                     <div key={name} className="bg-white shadow-sm border p-3 um-sm-p-4 um-text-center um-relative um-overflow-hidden" style={{ borderColor: colors.border }}>
                       {/* Progressive Melange Background */}
-                      <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                       
                       {/* Geometric corner accent */}
                       <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
@@ -1811,7 +1808,6 @@ const RunningTrainingApp = () => {
           <div className="space-y-8">
             <div className="um-text-center um-space-y-4 um-relative">
               {/* Geometric background elements */}
-              <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
               
               <div className="um-relative um-z-10">
                 <h2 className="um-font-bold" style={{ 
@@ -1832,7 +1828,6 @@ const RunningTrainingApp = () => {
                   backgroundColor: colors.lightBlue 
                 }}>
                   {/* Progressive Melange Background */}
-                  <div className="um-absolute um-inset-0 progressive-melange opacity-20"></div>
                   
                   {/* Geometric corner accent */}
                   <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
@@ -2007,7 +2002,6 @@ const RunningTrainingApp = () => {
                     backgroundColor: colors.lightGreen 
                   }}>
                     {/* Progressive Melange Background */}
-                    <div className="um-absolute um-inset-0 progressive-melange opacity-20"></div>
                     
                     {/* Geometric corner accent */}
                     <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
@@ -2035,7 +2029,6 @@ const RunningTrainingApp = () => {
                     <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
                       <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
-                        <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                         
                         {/* Geometric corner accent */}
                         <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-diamond geometric-float-counterclockwise" style={{ 
@@ -2074,7 +2067,6 @@ const RunningTrainingApp = () => {
                       
                       <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
-                        <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                         
                         {/* Geometric corner accent */}
                         <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-octagon geometric-float-counterclockwise" style={{ 
@@ -2110,7 +2102,6 @@ const RunningTrainingApp = () => {
                       
                       <div className="munich-card um-relative um-overflow-hidden">
                         {/* Progressive Melange Background */}
-                        <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                         
                         {/* Geometric corner accent */}
                         <div className="um-absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 geometric-square geometric-float-counterclockwise" style={{ 
@@ -2197,7 +2188,6 @@ const RunningTrainingApp = () => {
                     {savedProfileData?.currentGoldenPace && savedProfileData?.trainingStartDate && (
                       <div className="mt-8">
                         <div className="munich-card um-relative um-overflow-hidden">
-                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                             backgroundColor: colors.lightBlue,
                             opacity: 0.4
@@ -2289,7 +2279,6 @@ const RunningTrainingApp = () => {
                       {/* Personal Bests Section */}
                       {Object.keys(personalBests).length > 0 && (
                         <div className="munich-card um-relative um-overflow-hidden">
-                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                             backgroundColor: colors.orange,
                             opacity: 0.4
@@ -2327,7 +2316,6 @@ const RunningTrainingApp = () => {
                       {/* Recent Training History */}
                       {trainingHistory.length > 0 && (
                         <div className="munich-card um-relative um-overflow-hidden">
-                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                             backgroundColor: colors.lightBlue,
                             opacity: 0.4
@@ -2411,7 +2399,6 @@ const RunningTrainingApp = () => {
                       {/* Completed Training Plans */}
                       {trainingPlansCompleted.length > 0 && (
                         <div className="munich-card um-relative um-overflow-hidden">
-                          <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
                             backgroundColor: colors.violet,
                             opacity: 0.4
@@ -2550,7 +2537,6 @@ const RunningTrainingApp = () => {
               <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
                 backgroundColor: colors.lightBlue 
               }}>
-              <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
                 <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                   backgroundColor: colors.orange,
                   opacity: 0.8
@@ -2838,7 +2824,6 @@ const RunningTrainingApp = () => {
       {/* Footer - Munich 1972 Geometric Style */}
       <footer className="um-py-6 um-sm-py-8 um-relative um-overflow-hidden" style={{ backgroundColor: colors.gray }}>
         {/* Progressive Melange Background */}
-        <div className="um-absolute um-inset-0 progressive-melange opacity-5"></div>
         
         <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
           <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-4 sm:um-gap-6">
@@ -2929,7 +2914,6 @@ const RunningTrainingApp = () => {
             <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
               backgroundColor: colors.violet 
             }}>
-              <div className="progressive-melange um-melange-overlay um-melange-overlay--20"></div>
               <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                 backgroundColor: colors.orange,
                 opacity: 0.8
@@ -2963,7 +2947,6 @@ const RunningTrainingApp = () => {
               <div className="space-y-8">
                 {/* Blog Posts Management */}
                 <div className="munich-card um-relative um-overflow-hidden">
-                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                   <div className="um-absolute top-0 right-0 w-6 h-6 geometric-octagon" style={{ 
                     backgroundColor: colors.lightBlue,
                     opacity: 0.4
@@ -3031,7 +3014,6 @@ const RunningTrainingApp = () => {
 
                 {/* Premium Training Plans Management */}
                 <div className="munich-card um-relative um-overflow-hidden">
-                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                   <div className="um-absolute top-0 right-0 w-6 h-6 geometric-square" style={{ 
                     backgroundColor: colors.orange,
                     opacity: 0.4
@@ -3103,7 +3085,6 @@ const RunningTrainingApp = () => {
 
                 {/* Personal Coaching Management */}
                 <div className="munich-card um-relative um-overflow-hidden">
-                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                   <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
                     backgroundColor: colors.yellow,
                     opacity: 0.4
@@ -3139,7 +3120,6 @@ const RunningTrainingApp = () => {
 
                 {/* Quick Actions */}
                 <div className="munich-card um-relative um-overflow-hidden">
-                  <div className="um-absolute um-inset-0 progressive-melange opacity-3"></div>
                   
                   <div className="munich-card-body um-relative um-z-10">
                     <h4 className="um-font-bold um-mb-4" style={{ 

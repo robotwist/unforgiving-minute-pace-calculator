@@ -46,7 +46,6 @@ const PRPaceCard = ({ zone, pace, sourceDistance, isProjected, description, colo
       }}
     >
       {/* Progressive Melange Background */}
-      <div className="progressive-melange um-melange-overlay um-melange-overlay--03"></div>
 
       {/* Projected badge */}
       {isProjected && (
