@@ -42,7 +42,7 @@ function App() {
               <div className="max-w-7xl mx-auto flex items-center gap-4 text-sm">
                 <Link to="/" className="munich-btn munich-btn-outline" style={{ padding: '0.5rem 0.75rem' }}>Home</Link>
                 <Link to="/calculator" className="munich-btn munich-btn-outline" style={{ padding: '0.5rem 0.75rem' }}>Optimal Progress Pace</Link>
-                <Link to="/calculator/pr" className="munich-btn munich-btn-outline" style={{ padding: '0.5rem 0.75rem' }}>PR Calculator</Link>
+                <Link to="/calculator/pr" className="munich-btn munich-btn-outline" style={{ padding: '0.5rem 0.75rem' }}>Race Pace Training</Link>
                 <Link to="/apply" className="munich-btn munich-btn-primary" style={{ padding: '0.5rem 0.75rem' }}>Apply</Link>
                 <Link to="/coach" className="munich-btn munich-btn-outline" style={{ padding: '0.5rem 0.75rem' }}>About</Link>
               </div>

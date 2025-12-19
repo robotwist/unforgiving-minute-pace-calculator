@@ -83,7 +83,7 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
         </div>
 
         <h2 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black tracking-tight um-mb-6" style={{ color: colors.black, lineHeight: '1.1' }}>
-          PR-Based Training Calculator
+          Race Pace Training Plan
         </h2>
 
         <p className="um-text-xl um-sm-text-2xl um-lg-text-3xl max-w-4xl um-mx-auto um-px-4 leading-relaxed um-font-medium um-mb-8" style={{ color: colors.black, lineHeight: '1.4' }}>

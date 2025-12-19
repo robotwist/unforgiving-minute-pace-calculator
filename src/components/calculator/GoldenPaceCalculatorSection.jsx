@@ -181,9 +181,9 @@ export default function GoldenPaceCalculatorSection({
             to="/calculator/pr"
             className="um-text-sm um-font-medium underline"
             style={{ color: colors.lightBlue }}
-            aria-label="Try PR-based training calculator"
+            aria-label="Try Race Pace Training Plan"
           >
-            Or try the PR-Based Training Calculator →
+            Or try the Race Pace Training Plan →
           </Link>
         </div>
       </div>

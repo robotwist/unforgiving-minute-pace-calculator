@@ -44,10 +44,16 @@
   --space-12: 3rem;        /* 48px */
   --space-16: 4rem;        /* 64px */
   
-  /* Munich Design Tokens */
+  /* Munich Design Tokens - Enhanced Depth */
   --border-radius-geometric: 0;
-  --shadow-geometric: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-geometric-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-geometric: 0 8px 16px -4px rgba(0, 0, 0, 0.15), 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+  --shadow-geometric-hover: 0 20px 40px -8px rgba(0, 0, 0, 0.2), 0 12px 16px -4px rgba(0, 0, 0, 0.1);
+  --shadow-geometric-deep: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Hero Gradient Backgrounds */
+  --gradient-munich: linear-gradient(135deg, #2563EB 0%, #4338CA 50%, #16A34A 100%);
+  --gradient-olympic: linear-gradient(135deg, #2563EB 0%, #C2410C 25%, #CA8A04 50%, #16A34A 75%, #4338CA 100%);
+  --gradient-vibrant: linear-gradient(135deg, #C2410C 0%, #CA8A04 33%, #16A34A 66%, #2563EB 100%);
   
   /* Munich Button Styles - Enhanced for prominence */
   --button-padding: var(--space-5) var(--space-8); /* Increased padding for larger buttons */
@@ -347,37 +353,37 @@ h6 {
   transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
 
-/* Munich 1972 Theme - Primary brand theme */
+/* Munich 1972 Theme - Primary brand theme (VIBRANT) */
 .olympic-theme--munich::before {
   background-image: url('./assets/munichcolorgradient.avif');
-  opacity: 0.08;
+  opacity: 0.35;
 }
 
 .olympic-theme--munich-strong::before {
   background-image: url('./assets/munichcolorgradient.avif');
-  opacity: 0.15;
+  opacity: 0.55;
 }
 
-/* Sapporo 1972 Theme - Cool, athletic vibe */
+/* Sapporo 1972 Theme - Cool, athletic vibe (VIBRANT) */
 .olympic-theme--sapporo::before {
   background-image: url('./assets/sapporoolys.avif');
-  opacity: 0.08;
+  opacity: 0.35;
 }
 
 .olympic-theme--sapporo-strong::before {
   background-image: url('./assets/sapporoolys.avif');
-  opacity: 0.15;
+  opacity: 0.55;
 }
 
-/* Winter 1976 Theme - Energetic, vibrant */
+/* Winter 1976 Theme - Energetic, vibrant (VIBRANT) */
 .olympic-theme--winter76::before {
   background-image: url('./assets/winter1976colors.avif');
-  opacity: 0.08;
+  opacity: 0.35;
 }
 
 .olympic-theme--winter76-strong::before {
   background-image: url('./assets/winter1976colors.avif');
-  opacity: 0.15;
+  opacity: 0.55;
 }
 
 /* Animated Theme Transitions on Scroll */
@@ -387,17 +393,17 @@ h6 {
     transform: scale(1.05);
   }
   to {
-    opacity: 0.1;
+    opacity: 0.4;
     transform: scale(1);
   }
 }
 
 @keyframes theme-pulse {
   0%, 100% {
-    opacity: 0.08;
+    opacity: 0.35;
   }
   50% {
-    opacity: 0.12;
+    opacity: 0.5;
   }
 }
 
@@ -572,12 +578,69 @@ h6 {
 .munich-btn-secondary {
   background-color: var(--munich-light-green);
   color: var(--munich-white);
-  border-color: var(--munich-light-blue);
+  border-color: var(--munich-light-green);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
 }
 
 .munich-btn-secondary:hover {
   background-color: var(--munich-dark-green);
+  border-color: var(--munich-dark-green);
+  box-shadow: 0 6px 20px rgba(4, 120, 87, 0.4);
+}
+
+/* Orange accent button - Energetic CTA */
+.munich-btn-orange {
+  background-color: var(--munich-orange);
+  color: var(--munich-white);
+  border-color: var(--munich-orange);
+  box-shadow: 0 4px 14px rgba(194, 65, 12, 0.3);
+}
+
+.munich-btn-orange:hover {
+  background-color: #9A3412;
+  border-color: #9A3412;
+  box-shadow: 0 6px 20px rgba(194, 65, 12, 0.4);
+}
+
+/* Violet accent button - Premium feel */
+.munich-btn-violet {
+  background-color: var(--munich-violet);
+  color: var(--munich-white);
   border-color: var(--munich-violet);
+  box-shadow: 0 4px 14px rgba(67, 56, 202, 0.3);
+}
+
+.munich-btn-violet:hover {
+  background-color: #3730A3;
+  border-color: #3730A3;
+  box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
+}
+
+/* Gold/Yellow accent button - Achievement feel */
+.munich-btn-gold {
+  background-color: var(--munich-yellow);
+  color: var(--munich-white);
+  border-color: var(--munich-yellow);
+  box-shadow: 0 4px 14px rgba(202, 138, 4, 0.3);
+}
+
+.munich-btn-gold:hover {
+  background-color: #A16207;
+  border-color: #A16207;
+  box-shadow: 0 6px 20px rgba(202, 138, 4, 0.4);
+}
+
+/* Gradient button - Maximum impact */
+.munich-btn-gradient {
+  background: var(--gradient-olympic);
+  color: var(--munich-white);
+  border: none;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.munich-btn-gradient:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
 }
 
 .munich-btn-outline {
@@ -591,7 +654,7 @@ h6 {
   border-color: var(--munich-light-blue);
 }
 
-/* Munich Card Component */
+/* Munich Card Component - Enhanced Depth */
 .munich-card {
   background-color: var(--munich-white);
   border: 1px solid var(--munich-border);
@@ -599,6 +662,12 @@ h6 {
   box-shadow: var(--shadow-geometric);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.munich-card:hover {
+  box-shadow: var(--shadow-geometric-hover);
+  transform: translateY(-4px);
 }
 
 /* Dark mode support for Munich Card */
@@ -632,6 +701,56 @@ h6 {
 .dark .munich-card-footer {
   border-top-color: #374151;
   background-color: #111827;
+}
+
+/* ============================================
+   Hero & Section Gradient Backgrounds
+   Munich Olympic Vibrant Color System
+   ============================================ */
+
+.hero-gradient-munich {
+  background: var(--gradient-munich);
+}
+
+.hero-gradient-olympic {
+  background: var(--gradient-olympic);
+}
+
+.hero-gradient-vibrant {
+  background: var(--gradient-vibrant);
+}
+
+/* Gradient text effect */
+.text-gradient-olympic {
+  background: var(--gradient-olympic);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section dividers with Olympic colors */
+.section-divider-olympic {
+  height: 4px;
+  background: var(--gradient-olympic);
+  border: none;
+  margin: var(--space-8) 0;
+}
+
+/* Accent border with gradient */
+.border-gradient-olympic {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--munich-white), var(--munich-white)) padding-box,
+              var(--gradient-olympic) border-box;
+}
+
+/* Vibrant accent bar */
+.accent-bar-olympic {
+  width: 100%;
+  height: 6px;
+  background: var(--gradient-olympic);
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 /* ========================================
