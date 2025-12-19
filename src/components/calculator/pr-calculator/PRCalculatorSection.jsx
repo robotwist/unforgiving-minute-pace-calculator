@@ -82,11 +82,11 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
           </div>
         </div>
 
-        <h2 className="munich-3xl um-font-bold tracking-tight um-mb-4" style={{ color: colors.black }}>
+        <h2 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black tracking-tight um-mb-6" style={{ color: colors.black, lineHeight: '1.1' }}>
           PR-Based Training Calculator
         </h2>
 
-        <p className="um-text-lg um-sm-text-xl max-w-3xl um-mx-auto um-px-4 leading-relaxed" style={{ color: colors.black }}>
+        <p className="um-text-xl um-sm-text-2xl um-lg-text-3xl max-w-4xl um-mx-auto um-px-4 leading-relaxed um-font-medium um-mb-8" style={{ color: colors.black, lineHeight: '1.4' }}>
           Use your actual race performances to set training paces. No formulas. No guessing. 
           Just your proven PRs mapped directly to training zones.
         </p>
@@ -128,10 +128,10 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
           </div>
         </div>
 
-        <div className="mt-6 flex um-flex-col um-sm-flex-row um-gap-3 um-justify-center um-px-4">
+        <div className="um-mt-10 um-flex um-flex-col um-sm-flex-row um-gap-4 um-justify-center um-px-4">
           <Link
             to="/apply"
-            className="munich-btn munich-btn-primary um-cta"
+            className="munich-btn munich-btn-primary um-cta um-px-10 um-py-5 um-text-xl um-font-bold"
             style={{ textAlign: 'center' }}
             aria-label="Apply for personalized coaching"
           >
@@ -139,7 +139,7 @@ const PRCalculatorSection = ({ colors, savedProfileData }) => {
           </Link>
           <Link
             to="/coach"
-            className="munich-btn munich-btn-outline"
+            className="munich-btn munich-btn-outline um-px-10 um-py-5 um-text-xl um-font-bold"
             style={{ textAlign: 'center' }}
             aria-label="Meet the coach"
           >

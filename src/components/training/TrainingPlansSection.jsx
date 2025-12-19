@@ -15,11 +15,19 @@ const TrainingPlansSection = memo(({
         <p className="um-text-xl" style={{ color: colors.darkGreen }}>
           Use these as a sample of how I structure training—then apply if you want a plan built around you.
         </p>
-        <div className="um-flex um-flex-col um-sm-flex-row um-gap-3 um-justify-center pt-2">
-          <Link to="/apply" className="munich-btn munich-btn-primary um-cta" style={{ textAlign: 'center' }}>
+        <div className="um-flex um-flex-col um-sm-flex-row um-gap-4 um-justify-center um-mt-8">
+          <Link 
+            to="/apply" 
+            className="munich-btn munich-btn-primary um-cta um-px-10 um-py-5 um-text-xl um-font-bold" 
+            style={{ textAlign: 'center' }}
+          >
             Apply for coaching
           </Link>
-          <Link to="/coach" className="munich-btn munich-btn-outline" style={{ textAlign: 'center' }}>
+          <Link 
+            to="/coach" 
+            className="munich-btn munich-btn-outline um-px-10 um-py-5 um-text-xl um-font-bold" 
+            style={{ textAlign: 'center' }}
+          >
             Meet the coach
           </Link>
         </div>

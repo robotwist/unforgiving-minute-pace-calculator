@@ -53,11 +53,11 @@ const PostCalculatorModal = ({
               <Target className="w-8 um-h-8" style={{ color: colors.lightGreen }} />
             </div>
 
-            <h2 id="modal-title" className="um-text-2xl um-sm-text-3xl um-font-bold um-mb-3" style={{ color: colors.black }}>
+            <h2 id="modal-title" className="um-text-3xl um-sm-text-4xl um-lg-text-5xl um-font-black um-mb-4" style={{ color: colors.black, lineHeight: '1.1' }}>
               Your Optimal Progress Pace: {goldenPace}
             </h2>
 
-            <p className="um-text-base um-sm-text-lg um-mb-2" style={{ color: colors.darkGreen }}>
+            <p className="um-text-lg um-sm-text-xl um-lg-text-2xl um-mb-4 um-font-medium" style={{ color: colors.darkGreen, lineHeight: '1.4' }}>
               Congratulations! You now have personalized training paces based on your {raceDistance} performance.
             </p>
           </div>

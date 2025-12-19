@@ -22,10 +22,10 @@ const TabNavigation = ({ activeTab, setActiveTab, colors, setShowAdminPanel, dar
           <div className="um-absolute bottom-8 right-4 w-7 h-7 geometric-diamond" style={{ backgroundColor: colors.violet }}></div>
         </div>
         
-        <h1 className="um-text-2xl um-sm-text-4xl um-font-bold um-mb-2 sm:mb-4 tracking-tight um-relative um-z-10" style={{ color: colors.black }}>
+        <h1 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-mb-4 um-sm-mb-6 tracking-tight um-relative um-z-10" style={{ color: colors.black, lineHeight: '1.1' }}>
           Unforgiving Minute
         </h1>
-        <p className="um-text-sm um-sm-text-lg um-mb-4 sm:mb-8 max-w-2xl um-mx-auto um-relative um-z-10" style={{ color: colors.darkGreen }}>
+        <p className="um-text-lg um-sm-text-xl um-lg-text-2xl um-mb-6 um-sm-mb-10 max-w-3xl um-mx-auto um-relative um-z-10" style={{ color: colors.darkGreen, lineHeight: '1.5' }}>
           Professional pace calculation and training plans based on Jack Daniels Running Formula
         </p>
       </div>

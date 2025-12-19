@@ -91,7 +91,7 @@ export default function GoldenPaceCalculatorSection({
           </div>
         </div>
 
-        <h2 className="munich-3xl um-font-bold tracking-tight um-mb-4 flex um-items-center um-justify-center um-gap-3" style={{ color: colors.black }}>
+        <h2 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black tracking-tight um-mb-6 flex um-items-center um-justify-center um-gap-3" style={{ color: colors.black, lineHeight: '1.1' }}>
           <span>Optimal Progress Pace Calculator</span>
           <HelpIcon 
             content="Optimal Progress Pace is the pace that gives you maximum improvement when run at the right times. Based on Jack Daniels' Running Formula."
@@ -102,7 +102,7 @@ export default function GoldenPaceCalculatorSection({
         {/* Show helpful message if race data is pre-populated from profile */}
         {savedProfileData && (raceTime || raceDistance !== '5K') && (
           <div
-            className="inline-flex um-items-center um-px-4 um-py-2 bg-um-opacity-10 um-rounded-lg um-mb-4"
+            className="inline-flex um-items-center um-px-4 um-py-2 bg-um-opacity-10 um-rounded-lg um-mb-6"
             style={{
               backgroundColor: colors.lightBlue,
               color: colors.darkBlue,
@@ -116,7 +116,7 @@ export default function GoldenPaceCalculatorSection({
           </div>
         )}
 
-        <p className="um-text-lg um-sm-text-xl max-w-3xl um-mx-auto um-px-4 leading-relaxed" style={{ color: colors.black }}>
+        <p className="um-text-xl um-sm-text-2xl um-lg-text-3xl max-w-4xl um-mx-auto um-px-4 leading-relaxed um-font-medium um-mb-8" style={{ color: colors.black, lineHeight: '1.4' }}>
           Enter a recent race time to get coach-grade training paces. These are the same inputs I use when I build personalized plans.
         </p>
 

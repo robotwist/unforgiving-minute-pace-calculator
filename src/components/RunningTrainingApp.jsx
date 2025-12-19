@@ -1044,15 +1044,15 @@ const RunningTrainingApp = () => {
                 }}></div>
               </div>
               <div className="um-text-left">
-                <h1 className="munich-xl font-black tracking-wide leading-tight" style={{ 
+                <h1 className="um-text-3xl um-sm-text-4xl um-lg-text-5xl um-font-black tracking-tight leading-tight" style={{ 
                   color: colors.black,
-                  textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                  textShadow: '0 2px 4px rgba(0,0,0,0.05)'
                 }}>
                   UNFORGIVING MINUTE
                 </h1>
-                <p className="munich-lg um-font-bold tracking-wider" style={{ 
+                <p className="um-text-base um-sm-text-lg um-lg-text-xl um-font-bold tracking-wide" style={{ 
                   color: colors.lightBlue,
-                  letterSpacing: '0.15em'
+                  letterSpacing: '0.1em'
                 }}>
                   DISTANCE RUNNING
                 </p>
@@ -1262,13 +1262,13 @@ const RunningTrainingApp = () => {
                   <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
                   
                   <div className="um-relative um-z-10">
-                    <div className="um-text-3xl um-sm-text-4xl um-font-bold um-mb-2" style={{ color: colors.lightBlue }}>
+                    <div className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-mb-4" style={{ color: colors.lightBlue, lineHeight: '1.1' }}>
                       {goldenPace}
                     </div>
-                    <div className="um-text-base um-sm-text-lg um-font-medium" style={{ color: colors.black }}>
+                    <div className="um-text-xl um-sm-text-2xl um-lg-text-3xl um-font-bold um-mb-3" style={{ color: colors.black }}>
                       Optimal Progress Pace
                     </div>
-                    <p className="um-text-xs um-sm-text-sm um-mt-2" style={{ color: colors.lightBlue }}>
+                    <p className="um-text-base um-sm-text-lg um-lg-text-xl um-mt-4" style={{ color: colors.lightBlue, lineHeight: '1.5' }}>
                       The pace that drives maximum improvement when run at the right times
                     </p>
                   </div>

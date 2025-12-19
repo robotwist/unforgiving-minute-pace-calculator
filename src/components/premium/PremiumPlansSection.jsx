@@ -18,31 +18,63 @@ const PremiumPlansSection = ({
     }
   };
   return (
-    <div className="space-y-8">
-      <div className="um-text-center um-space-y-4">
-        <h2 className="um-text-4xl um-font-bold" style={{ color: colors.black }}>
+    <div className="space-y-16">
+      <div className="um-text-center um-space-y-6 um-mb-16">
+        <h2 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-mb-4" style={{ color: colors.black, lineHeight: '1.1' }}>
           Premium Training Plans
         </h2>
-        <p className="um-text-xl" style={{ color: colors.darkGreen }}>
+        <p className="um-text-xl um-sm-text-2xl um-lg-text-3xl um-font-medium max-w-4xl um-mx-auto um-mb-8" style={{ color: colors.darkGreen, lineHeight: '1.4' }}>
           Comprehensive, professionally-designed training programs for serious athletes
         </p>
         <a
           href="/apply"
-          className="inline-flex um-items-center um-justify-center um-px-6 py-3 um-rounded-lg um-font-semibold um-border-2"
-          style={{ borderColor: colors.lightGreen, color: colors.lightGreen, backgroundColor: 'transparent' }}
+          className="inline-flex um-items-center um-justify-center um-px-10 um-py-5 um-text-xl um-font-bold um-border-2 um-rounded-lg transition-all duration-200"
+          style={{ 
+            borderColor: colors.lightGreen, 
+            color: colors.lightGreen, 
+            backgroundColor: 'transparent',
+            boxShadow: `0 4px 14px ${colors.lightGreen}40`
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-3px)';
+            e.currentTarget.style.boxShadow = `0 6px 20px ${colors.lightGreen}50`;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = `0 4px 14px ${colors.lightGreen}40`;
+          }}
           aria-label="Apply for coaching"
         >
           Apply for coaching
         </a>
       </div>
 
+      {/* Trust Indicators / Social Proof */}
+      <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-6 um-mb-16">
+        <div className="um-text-center um-p-6" style={{ backgroundColor: `${colors.lightBlue}10` }}>
+          <div className="um-text-4xl um-sm-text-5xl um-font-black um-mb-2" style={{ color: colors.lightBlue }}>100%</div>
+          <div className="um-text-lg um-font-semibold" style={{ color: colors.black }}>Personalized</div>
+          <div className="um-text-sm um-mt-1" style={{ color: colors.darkGreen }}>Every plan tailored to you</div>
+        </div>
+        <div className="um-text-center um-p-6" style={{ backgroundColor: `${colors.lightGreen}10` }}>
+          <div className="um-text-4xl um-sm-text-5xl um-font-black um-mb-2" style={{ color: colors.lightGreen }}>Elite-Tested</div>
+          <div className="um-text-lg um-font-semibold" style={{ color: colors.black }}>Training System</div>
+          <div className="um-text-sm um-mt-1" style={{ color: colors.darkGreen }}>Based on proven science</div>
+        </div>
+        <div className="um-text-center um-p-6" style={{ backgroundColor: `${colors.violet}10` }}>
+          <div className="um-text-4xl um-sm-text-5xl um-font-black um-mb-2" style={{ color: colors.violet }}>1-on-1</div>
+          <div className="um-text-lg um-font-semibold" style={{ color: colors.black }}>Coaching Available</div>
+          <div className="um-text-sm um-mt-1" style={{ color: colors.darkGreen }}>Direct access to your coach</div>
+        </div>
+      </div>
+
       {/* Who am I? Section */}
-      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.yellow}10, ${colors.lightBlue}10)` }}>
+      <div className="munich-card um-mb-16" style={{ background: `linear-gradient(135deg, ${colors.yellow}10, ${colors.lightBlue}10)` }}>
         <div className="munich-card-body um-text-center">
-          <h3 className="um-text-2xl um-font-bold um-mb-2" style={{ color: colors.black }}>
+          <h3 className="um-text-3xl um-sm-text-4xl um-font-black um-mb-4" style={{ color: colors.black, lineHeight: '1.2' }}>
             Your Coach
           </h3>
-          <div className="max-w-2xl um-mx-auto um-text-base space-y-3 leading-relaxed" style={{ color: colors.black }}>
+          <div className="max-w-3xl um-mx-auto um-text-lg um-sm-text-xl space-y-4 leading-relaxed" style={{ color: colors.black }}>
             <p className="mb-2 um-font-medium">Rob Wistrand — Coach, founder, and lifelong athlete</p>
             <p className="mb-2">
               I grew up obsessed with the clock—first as a kid with a stopwatch, later as an athlete chasing the edge of what I thought was possible.
@@ -61,12 +93,12 @@ const PremiumPlansSection = ({
       </div>
 
       {/* Why Personal Coaching / IFTS Value Section */}
-      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightGreen}10, ${colors.violet}10)` }}>
+      <div className="munich-card um-mb-16" style={{ background: `linear-gradient(135deg, ${colors.lightGreen}10, ${colors.violet}10)` }}>
         <div className="munich-card-body um-text-center">
-          <h3 className="um-text-2xl um-font-bold um-mb-2" style={{ color: colors.black }}>
+          <h3 className="um-text-3xl um-sm-text-4xl um-font-black um-mb-6" style={{ color: colors.black, lineHeight: '1.2' }}>
             Why Personal Coaching?
           </h3>
-          <div className="max-w-2xl um-mx-auto um-text-base" style={{ color: colors.black }}>
+          <div className="max-w-3xl um-mx-auto um-text-lg um-sm-text-xl space-y-4" style={{ color: colors.black, lineHeight: '1.6' }}>
             <p className="mb-2 um-font-medium">The IFTS System: Individual Factor Training Synthesis</p>
             <p className="mb-2">Most plans treat you like a number. Our IFTS system is different: it’s a dynamic, science-based approach that adapts to <span className="um-font-bold">your</span> age, experience, recovery, and goals. We analyze your unique profile and build a plan that evolves with you — not just a template, but a living roadmap.</p>
             <p className="mb-2">With personal coaching, you get real-time adjustments, direct access to your coach, and a partnership focused on your long-term growth. This is the gold standard for athletes who want more than a generic plan — it’s for those who want to maximize their potential, avoid injury, and enjoy the journey.</p>
@@ -76,9 +108,9 @@ const PremiumPlansSection = ({
       </div>
 
       {/* Value Proposition */}
-      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
+      <div className="munich-card um-mb-16" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
         <div className="munich-card-body um-text-center">
-          <h3 className="um-text-2xl um-font-bold um-mb-4" style={{ color: colors.black }}>
+          <h3 className="um-text-3xl um-sm-text-4xl um-font-black um-mb-8" style={{ color: colors.black, lineHeight: '1.2' }}>
             Why Premium Plans?
           </h3>
           <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-6">
@@ -483,9 +515,9 @@ const PremiumPlansSection = ({
       </div>
 
       {/* Testimonials */}
-      <div className="munich-card">
+      <div className="munich-card um-mb-16">
         <div className="munich-card-header">
-          <h3 className="um-text-2xl um-font-bold" style={{ color: colors.black }}>
+          <h3 className="um-text-3xl um-sm-text-4xl um-font-black um-mb-2" style={{ color: colors.black, lineHeight: '1.2' }}>
             Success Stories
           </h3>
         </div>
@@ -495,11 +527,11 @@ const PremiumPlansSection = ({
               <div className="mb-4">
                 <div className="w-16 um-h-16 geometric-diamond um-mx-auto" style={{ backgroundColor: colors.lightBlue }}></div>
               </div>
-              <blockquote className="um-text-sm um-mb-4" style={{ color: colors.black }}>
+              <blockquote className="um-text-base um-sm-text-lg um-mb-4 um-font-medium" style={{ color: colors.black, lineHeight: '1.6' }}>
                 "The 5K Mastery Program helped me break 20 minutes for the first time in my running career. The individual factor assessment was a game-changer."
               </blockquote>
               <div>
-                <div className="um-font-bold" style={{ color: colors.black }}>Sarah M.</div>
+                <div className="um-font-bold um-text-lg" style={{ color: colors.black }}>Sarah M.</div>
                 <div className="um-text-sm" style={{ color: colors.darkGreen }}>Boston, MA • 19:47 5K PR</div>
               </div>
             </div>
@@ -508,11 +540,11 @@ const PremiumPlansSection = ({
               <div className="mb-4">
                 <div className="w-16 um-h-16 geometric-octagon um-mx-auto" style={{ backgroundColor: colors.lightGreen }}></div>
               </div>
-              <blockquote className="um-text-sm um-mb-4" style={{ color: colors.black }}>
+              <blockquote className="um-text-base um-sm-text-lg um-mb-4 um-font-medium" style={{ color: colors.black, lineHeight: '1.6' }}>
                 "After struggling with VDOT for years, the Marathon Breakthrough plan got me to Boston with a 2:58 finish. The pacing strategy was perfect."
               </blockquote>
               <div>
-                <div className="um-font-bold" style={{ color: colors.black }}>Mike T.</div>
+                <div className="um-font-bold um-text-lg" style={{ color: colors.black }}>Mike T.</div>
                 <div className="um-text-sm" style={{ color: colors.darkGreen }}>Denver, CO • 2:58:23 Boston Qualifier</div>
               </div>
             </div>
@@ -521,7 +553,7 @@ const PremiumPlansSection = ({
               <div className="mb-4">
                 <div className="w-16 um-h-16 geometric-square um-mx-auto" style={{ backgroundColor: colors.violet }}></div>
               </div>
-              <blockquote className="um-text-sm um-mb-4" style={{ color: colors.black }}>
+              <blockquote className="um-text-base um-sm-text-lg um-mb-4 um-font-medium" style={{ color: colors.black, lineHeight: '1.6' }}>
                 "Personal coaching transformed my running. Understanding my individual factors made all the difference in my training."
               </blockquote>
               <div>
@@ -534,9 +566,9 @@ const PremiumPlansSection = ({
       </div>
 
       {/* How It Works Section */}
-      <div className="munich-card" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
+      <div className="munich-card um-mb-16" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
         <div className="munich-card-body um-text-center">
-          <h3 className="um-text-2xl um-font-bold um-mb-6" style={{ color: colors.black }}>
+          <h3 className="um-text-3xl um-sm-text-4xl um-font-black um-mb-10" style={{ color: colors.black, lineHeight: '1.2' }}>
             How Our System Works
           </h3>
           <div className="um-grid um-grid-cols-1 um-md-grid-cols-3 um-gap-8">
