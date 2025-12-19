@@ -2,14 +2,16 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
 import { getAdaptiveColors } from '../data/colors';
+import useScrollTheme from '../hooks/useScrollTheme';
 
 export default function ApplyThanks() {
   const isDark = localStorage.getItem('dark_mode_enabled') === 'true';
   const uiColors = useMemo(() => getAdaptiveColors(isDark), [isDark]);
+  const { getThemeClass } = useScrollTheme();
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 py-12">
+    <div className={`min-h-screen relative overflow-hidden ${getThemeClass('coaching', true)}`} style={{ backgroundColor: uiColors.white }}>
+      <div className="max-w-3xl mx-auto px-4 py-12 relative z-10">
         <div className="munich-card">
           <div className="munich-card-body text-center">
             <div className="inline-flex items-center justify-center mb-4">
@@ -21,7 +23,7 @@ export default function ApplyThanks() {
               Application received
             </h1>
             <p className="mb-5" style={{ color: uiColors.darkGreen }}>
-              I’ll review your intake and get back to you soon. If it’s a fit, I’ll invite you to a quick call.
+              I'll review your intake and get back to you soon. If it's a fit, I'll invite you to a quick call.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/coach" className="munich-btn munich-btn-primary um-cta" style={{ textAlign: 'center' }}>

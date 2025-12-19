@@ -9,7 +9,9 @@ const TrainingPlansSection = memo(({
   setShowPlanDetails
 }) => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 olympic-theme olympic-theme--winter76"
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
       <div className="um-text-center um-space-y-4">
         <h2 className="um-text-4xl um-font-bold" style={{ color: colors.black }}>Coach-built Training Plans</h2>
         <p className="um-text-xl" style={{ color: colors.darkGreen }}>

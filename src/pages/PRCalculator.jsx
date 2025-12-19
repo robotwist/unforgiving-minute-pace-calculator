@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PRCalculatorSection from '../components/calculator/pr-calculator/PRCalculatorSection';
+import useScrollTheme from '../hooks/useScrollTheme';
 
 const PRCalculator = () => {
   const [darkMode] = useState(() => {
@@ -8,6 +9,7 @@ const PRCalculator = () => {
   });
   
   const [savedProfileData, setSavedProfileData] = useState(null);
+  const { getThemeClass } = useScrollTheme();
   
   // Load saved profile data
   useEffect(() => {
@@ -45,8 +47,8 @@ const PRCalculator = () => {
   };
   
   return (
-    <div className="min-h-screen" style={{ backgroundColor: colors.white }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className={`min-h-screen relative overflow-hidden ${getThemeClass('calculator', true)}`} style={{ backgroundColor: colors.white }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
         <PRCalculatorSection colors={colors} savedProfileData={savedProfileData} />
       </div>
     </div>

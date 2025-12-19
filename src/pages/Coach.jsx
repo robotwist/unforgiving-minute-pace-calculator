@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy, Award, Users, Clock, TrendingUp } from 'lucide-react';
 import colors, { getAdaptiveColors } from '../data/colors';
+import useScrollTheme from '../hooks/useScrollTheme';
 import CalendlyModal from '../components/consultation/CalendlyModal';
 import Testimonials from '../components/coach/Testimonials';
 import CoachBio from '../components/coach/CoachBio';
@@ -17,6 +18,7 @@ const Coach = () => {
   const [isVisible, setIsVisible] = useState(false);
   const isDark = localStorage.getItem('dark_mode_enabled') === 'true';
   const uiColors = getAdaptiveColors(isDark);
+  const { getThemeClass } = useScrollTheme();
 
   useEffect(() => {
     document.title = 'Coach | Unforgiving Minute';
@@ -41,26 +43,11 @@ const Coach = () => {
 
   return (
     <div 
-      className="min-h-screen relative overflow-hidden"
+      className={`min-h-screen relative overflow-hidden ${getThemeClass('coaching', true)}`}
       style={{ 
-        backgroundColor: 'transparent',
-        backgroundImage: `
-          radial-gradient(circle at 20% 50%, ${uiColors.lightBlue}12 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, ${uiColors.lightGreen}12 0%, transparent 50%),
-          radial-gradient(circle at 40% 20%, ${uiColors.yellow}08 0%, transparent 50%),
-          radial-gradient(circle at 60% 40%, ${uiColors.orange}06 0%, transparent 50%)
-        `
+        backgroundColor: uiColors.white
       }}
     >
-      {/* Subtle depth layer with blur effect */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse at top, ${colors.lightBlue}15 0%, transparent 70%)`,
-          filter: 'blur(60px)',
-          transform: 'translateY(-20%)',
-        }}
-      />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         {/* Hero Section */}

@@ -17,7 +17,7 @@ export default function GoldenPaceCalculatorSection({
   handleCalculate,
 }) {
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-6 sm:space-y-8 olympic-theme olympic-theme--sapporo" style={{ position: 'relative', overflow: 'hidden' }}>
       {/* Hero Section - Munich 1972 Style */}
       <div className="um-text-center um-space-y-4 sm:space-y-6">
         {/* Track -> Stopwatch -> Calculator Design */}

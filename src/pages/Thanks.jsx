@@ -1,13 +1,15 @@
 import React from 'react';
 import { getAdaptiveColors } from '../data/colors';
+import useScrollTheme from '../hooks/useScrollTheme';
 
 const Thanks = () => {
   const isDark = localStorage.getItem('dark_mode_enabled') === 'true';
   const uiColors = getAdaptiveColors(isDark);
+  const { getThemeClass } = useScrollTheme();
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 py-12">
+    <div className={`min-h-screen relative overflow-hidden ${getThemeClass('coaching', true)}`} style={{ backgroundColor: uiColors.white }}>
+      <div className="max-w-3xl mx-auto px-4 py-12 relative z-10">
         <div className="munich-card">
           <div className="munich-card-body text-center">
             <h1 className="text-3xl font-bold mb-3" style={{ color: uiColors.black }}>Check Your Email</h1>

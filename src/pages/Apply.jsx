@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ClipboardList, ShieldCheck, Sparkles } from 'lucide-react';
 import colors, { getAdaptiveColors } from '../data/colors';
+import useScrollTheme from '../hooks/useScrollTheme';
 import { useToast } from '../context/ToastContext';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
@@ -28,6 +29,7 @@ export default function Apply() {
   const { showToast } = useToast();
   const isDark = localStorage.getItem('dark_mode_enabled') === 'true';
   const uiColors = useMemo(() => getAdaptiveColors(isDark), [isDark]);
+  const { getThemeClass } = useScrollTheme();
 
   // Form validation with real-time feedback
   const {
@@ -150,8 +152,8 @@ export default function Apply() {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14">
+    <div className={`min-h-screen relative overflow-hidden ${getThemeClass('training', true)}`} style={{ backgroundColor: uiColors.white }}>
+      <div className="max-w-5xl mx-auto px-4 py-10 sm:py-14 relative z-10">
         <div className="mb-6 flex items-center justify-between gap-3">
           <Link to="/coach" className="munich-btn munich-btn-outline" style={{ padding: '0.5rem 0.75rem' }}>
             Back

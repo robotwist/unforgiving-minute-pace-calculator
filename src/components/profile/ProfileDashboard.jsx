@@ -54,13 +54,11 @@ const ProfileDashboard = ({
   };
 
   return (
-    <div className="space-y-6">
-      <div className="munich-card">
-        <div className="munich-card-header um-relative um-overflow-hidden" style={{ 
+    <div className="space-y-6 olympic-theme olympic-theme--sapporo" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="munich-card relative z-10">
+        <div className="munich-card-header um-relative um-overflow-hidden olympic-theme olympic-theme--munich-strong" style={{ 
           backgroundColor: colors.lightGreen 
         }}>
-          {/* Olympic Runner Background */}
-          <div className="um-olympic-overlay um-olympic-overlay--strong"></div>
           
           {/* Geometric corner accent */}
           <div className="um-absolute top-0 right-0 w-6 h-6 geometric-diamond" style={{ 
