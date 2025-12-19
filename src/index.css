@@ -703,6 +703,51 @@ h6 {
   background-color: #111827;
 }
 
+/* Dark mode support for form inputs */
+.dark input,
+.dark select,
+.dark textarea,
+.dark .um-field,
+.dark .munich-input {
+  background-color: #1F2937;
+  border-color: #374151;
+  color: #F9FAFB;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark input:hover,
+.dark select:hover,
+.dark textarea:hover,
+.dark .um-field:hover,
+.dark .munich-input:hover {
+  border-color: #4B5563;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus,
+.dark .um-field:focus,
+.dark .munich-input:focus {
+  border-color: var(--munich-light-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2), 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder,
+.dark .um-field::placeholder,
+.dark .munich-input::placeholder {
+  color: #9CA3AF;
+}
+
+.dark .um-label {
+  color: #F9FAFB;
+}
+
+.dark select.um-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
 /* ============================================
    Hero & Section Gradient Backgrounds
    Munich Olympic Vibrant Color System
@@ -1065,61 +1110,188 @@ h6 {
 }
 
 /* High Contrast Form Elements */
+/* ============================================
+   Modern Input Styling - 2024 Design Standards
+   Clean, accessible, with smooth interactions
+   ============================================ */
+
 input, select, textarea {
   font-family: inherit;
-  border: 2px solid var(--munich-border);
-  border-radius: var(--border-radius-geometric);
+  border: 1.5px solid var(--munich-border);
+  border-radius: 12px;
   background-color: var(--munich-white);
   color: var(--munich-black);
   font-size: 1rem;
-  padding: 0.75rem;
-  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  padding: 0.875rem 1rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+input:hover, select:hover, textarea:hover {
+  border-color: var(--munich-silver);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 input:focus, select:focus, textarea:focus {
   border-color: var(--munich-light-blue);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  outline: 3px solid var(--munich-light-blue);
-  outline-offset: 1px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), 0 2px 8px rgba(37, 99, 235, 0.15);
+  outline: none;
 }
 
 /* Enhanced focus styles for form inputs */
 input:focus-visible, select:focus-visible, textarea:focus-visible {
   border-color: var(--munich-light-blue);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  outline: 3px solid var(--munich-light-blue);
-  outline-offset: 1px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), 0 2px 8px rgba(37, 99, 235, 0.15);
+  outline: none;
 }
 
-/* Munich Form Input Classes */
+input::placeholder, textarea::placeholder {
+  color: var(--munich-silver);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+input:focus::placeholder, textarea:focus::placeholder {
+  opacity: 0.5;
+}
+
+/* Modern Form Field Class */
+.um-field {
+  font-family: var(--font-geometric);
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--munich-black);
+  background-color: var(--munich-white);
+  border: 1.5px solid var(--munich-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.um-field:hover {
+  border-color: var(--munich-light-blue);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.08);
+}
+
+.um-field:focus {
+  border-color: var(--munich-light-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(37, 99, 235, 0.12);
+  outline: none;
+}
+
+.um-field::placeholder {
+  color: var(--munich-silver);
+  opacity: 0.65;
+}
+
+.um-field:focus::placeholder {
+  opacity: 0.4;
+  transform: translateX(2px);
+}
+
+/* Textarea specific styles */
+.um-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Select dropdown enhancement */
+select.um-field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.25rem;
+  padding-right: 3rem;
+  cursor: pointer;
+}
+
+select.um-field:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* Form label styling */
+.um-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--munich-black);
+  margin-bottom: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+/* Input with icon support */
+.um-field-wrapper {
+  position: relative;
+}
+
+.um-field-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--munich-silver);
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.um-field-wrapper .um-field {
+  padding-left: 2.75rem;
+}
+
+.um-field-wrapper:focus-within .um-field-icon {
+  color: var(--munich-light-blue);
+}
+
+/* Success/Error states */
+.um-field-success {
+  border-color: var(--munich-light-green) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
+}
+
+.um-field-error {
+  border-color: var(--munich-orange) !important;
+  box-shadow: 0 0 0 3px rgba(194, 65, 12, 0.1) !important;
+}
+
+/* Munich Form Input Classes (Legacy support) */
 .munich-input {
   font-family: var(--font-geometric);
-  border: 2px solid var(--munich-border);
-  border-radius: var(--border-radius-geometric);
+  border: 1.5px solid var(--munich-border);
+  border-radius: 12px;
   background-color: var(--munich-white);
   color: var(--munich-black);
   font-size: var(--text-base);
-  padding: var(--space-4);
-  transition: all 0.3s ease;
+  padding: 1rem 1.25rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.munich-input:hover {
+  border-color: var(--munich-light-blue);
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.08);
 }
 
 .munich-input:focus {
   border-color: var(--munich-light-blue);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  outline: 3px solid var(--munich-light-blue);
-  outline-offset: 1px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(37, 99, 235, 0.12);
+  outline: none;
 }
 
 .munich-input:focus-visible {
   border-color: var(--munich-light-blue);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  outline: 3px solid var(--munich-light-blue);
-  outline-offset: 1px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(37, 99, 235, 0.12);
+  outline: none;
 }
 
 .munich-input::placeholder {
   color: var(--munich-silver);
+  opacity: 0.65;
 }
 
 /* Munich Alert Components */
