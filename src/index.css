@@ -322,6 +322,116 @@ h6 {
   opacity: 0.2;
 }
 
+/* ============================================
+   Olympic Theme Backgrounds (AVIF)
+   - Munich 1972: Iconic color gradient
+   - Sapporo 1972: Winter/Summer crossover
+   - Winter 1976: Innsbruck vibrancy
+   ============================================ */
+
+/* Base Olympic Theme Layer */
+.olympic-theme {
+  position: relative;
+  overflow: hidden;
+}
+
+.olympic-theme::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+/* Munich 1972 Theme - Primary brand theme */
+.olympic-theme--munich::before {
+  background-image: url('./assets/munichcolorgradient.avif');
+  opacity: 0.08;
+}
+
+.olympic-theme--munich-strong::before {
+  background-image: url('./assets/munichcolorgradient.avif');
+  opacity: 0.15;
+}
+
+/* Sapporo 1972 Theme - Cool, athletic vibe */
+.olympic-theme--sapporo::before {
+  background-image: url('./assets/sapporoolys.avif');
+  opacity: 0.08;
+}
+
+.olympic-theme--sapporo-strong::before {
+  background-image: url('./assets/sapporoolys.avif');
+  opacity: 0.15;
+}
+
+/* Winter 1976 Theme - Energetic, vibrant */
+.olympic-theme--winter76::before {
+  background-image: url('./assets/winter1976colors.avif');
+  opacity: 0.08;
+}
+
+.olympic-theme--winter76-strong::before {
+  background-image: url('./assets/winter1976colors.avif');
+  opacity: 0.15;
+}
+
+/* Animated Theme Transitions on Scroll */
+@keyframes theme-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+}
+
+@keyframes theme-pulse {
+  0%, 100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+.olympic-theme--animated::before {
+  animation: theme-fade-in 1s ease-out forwards;
+}
+
+.olympic-theme--pulse::before {
+  animation: theme-pulse 4s ease-in-out infinite;
+}
+
+/* Section-specific theme assignments for scroll transitions */
+.section-hero { --section-theme: 'munich'; }
+.section-calculator { --section-theme: 'sapporo'; }
+.section-training { --section-theme: 'winter76'; }
+.section-coaching { --section-theme: 'munich'; }
+.section-footer { --section-theme: 'sapporo'; }
+
+/* JPEG Fallback for older browsers (no AVIF support) */
+@supports not (background-image: url('./assets/munichcolorgradient.avif')) {
+  .olympic-theme--munich::before,
+  .olympic-theme--munich-strong::before {
+    background-image: url('./assets/olympic-runner-bg.jpg');
+  }
+  .olympic-theme--sapporo::before,
+  .olympic-theme--sapporo-strong::before {
+    background-image: url('./assets/olympic-runner-bg.jpg');
+  }
+  .olympic-theme--winter76::before,
+  .olympic-theme--winter76-strong::before {
+    background-image: url('./assets/olympic-runner-bg.jpg');
+  }
+}
+
 /* Running Pictogram Animation */
 @keyframes running-motion {
   0% {
