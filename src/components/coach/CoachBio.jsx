@@ -10,14 +10,15 @@ import PropTypes from 'prop-types';
  */
 const CoachBio = ({ colors }) => {
   const bioParagraphs = [
-    "Rob Wistrand — Head Coach, Founder, and Athlete",
-    "I was running before I knew running was something you could measure. One afternoon, my dad showed me a mechanical stopwatch. I didn't even understand what it did, only that its ticking hand moved with the stubborn precision of a tiny machine. I turned it over in my hands, felt the weight of it, clicked the button just to hear the sound.",
-    "Not long after, I asked him to mow an oval into our yard. I wanted a place to run, and I wanted to see if I could make it around that loop before the watch's hand swept all the way around. The first time I tried, the grass was still slick from the mower's path, the smell of cut clover in the air. I beat the hand. Then I wanted to do it again. And again. My parents couldn't finish a meal without me asking them to time me \"just once more.\"",
-    "The first race I remember wasn't a win but a fall—Meadows Elementary in Madison, Wisconsin, the taste of dirt in my mouth. My first victory came later, second grade, at Lake Atalanta, legs pumping like I was chasing something invisible but urgent. By fourth grade, I was eighth in the National AAU Championships; a year later, in San Antonio, I was second only to a future national class collegiate runner.",
-    "Seventh grade, I cracked five minutes for the mile—1609 meters, not the imposter 1600. Ninth grade, I was fifth at the state's largest cross-country classification and top ten at the Foot Locker freshman–sophomore race. Five state titles and a still-standing 800-meter record followed. My letter jacket ran out of space for patches.",
-    "In college, I ran for the winningest team in Division I history, under the sport's most legendary coach. Then, a career‑ending injury and illness shut it down.",
-    "I started coaching instead. State champions, national contenders, future pros. I coached with the hunger of unfinished business, the instinct that comes from knowing exactly what it feels like to chase the clock.",
-    "Running and coaching have always been the same to me—ways of testing where the line is, and then stepping over it, repeatedly. The stopwatch just made it measurable."
+    "Rob Wistrand — Head Coach, Founder, Athlete",
+    `I took my very first step and it was a run. Running is the natural state of the creature that we are. One day, my dad pulled out of a tobacco box this old mechanical stopwatch with two metal buttons at the top. My dad hit the button and I knew this loudly ticking mechanical oval had a sacred purpose. I just remember holding it, feeling how solid it was in my hands, and clicking that button over and over just to hear it tick. Something about that sound captured me at the level of my soul.`,
+    `My dad told me that the purpose was to measure out the time it took to run around a large oval track called something strange a quarter mile. He said you needed to make it around the track before the hand of the watch could make it around once. I asked if there was a man who could do the task who could fill the unforgiving minute with sixty seconds full of distance run. He laughed and said that plenty of men could do this and that he had done this task. He ran around twice at this pace. Certainly, he was my hero. Then, he told me the story of a man, who set it in his mind and then in his body that he would run around the track four times and run a full mile in less than four minutes. Roger Bannister broke that barrier. He ran the sub-4 minute mile.`,
+    `Soon after, I asked my dad if he'd mow an oval into our backyard. I wanted a track so I could see if I could race that stopwatch. I would find the stopwatch and wander around asking my parents to time me. "Time me." "Did I beat my time?" I would ask this every time.`,
+    `The first time I remember hearing, "On your marks!" was at an elementary school field day race when I was in kindergarten. I remember winning a race at a track meet in third grade and I would run four races and the long jump just to see if I could win them all. It was all just very organized play. By fourth grade, I placed eighth at the National AAU Championships. A year later in San Antonio, I placed runner-up to a kid who'd I go on to race against in college.`,
+    "In seventh grade, I broke five minutes in the mile. By ninth grade, I was fifth at our state's biggest cross-country meet and top ten at Foot Locker's freshman-sophomore race. Five state titles followed, plus an 800-meter record that still stands. I ran out of room on my letter jacket for patches.",
+    "College brought me to the winningest program in Division I history, training under one of the sport's most legendary coaches. Then it all ended. Injury and illness made that decision for me.",
+    "So, I became a coach. State champions, national contenders, athletes who went on to run professionally. I coach with the same wonder and drive that I had initially. I can see the path to get people where they want to go. That is my talent. I can see the path. I can take it. I can tell you how to take the path.",
+    "For me, running is all about that feeling where you get lost completely in the activity. Running is where you get to make peace with yourself and with God. Running is where you grow a soul. The watch just gives it a beautiful, unrelenting rhythm. It is the sound of you becoming yourself."
   ];
 
   return (
@@ -38,4 +39,3 @@ CoachBio.propTypes = {
 };
 
 export default CoachBio;
-
