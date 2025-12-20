@@ -14,7 +14,8 @@ const WelcomeFlow = ({ colors, onComplete }) => {
       description: 'Get faster at 5K with personalized training paces',
       icon: Zap,
       color: colors.lightBlue,
-      targetUsers: 'Most popular for runners under 30 minutes'
+      targetUsers: 'Most popular for runners under 30 minutes',
+      bgClass: 'um-card-runner' // Olympic runner background
     },
     {
       id: 'marathon',
@@ -22,7 +23,8 @@ const WelcomeFlow = ({ colors, onComplete }) => {
       description: 'Build endurance and pace strategy for 26.2 miles',
       icon: Target,
       color: colors.lightGreen,
-      targetUsers: 'Perfect for first-timers or PR seekers'
+      targetUsers: 'Perfect for first-timers or PR seekers',
+      bgClass: 'um-card-runner' // Olympic runner background
     },
     {
       id: 'general-fitness',
@@ -30,7 +32,8 @@ const WelcomeFlow = ({ colors, onComplete }) => {
       description: 'Improve overall running fitness and consistency',
       icon: Trophy,
       color: colors.orange,
-      targetUsers: 'Great for building a training foundation'
+      targetUsers: 'Great for building a training foundation',
+      bgClass: 'um-card-gradient' // Munich gradient background
     }
   ];
 
@@ -137,10 +140,10 @@ const WelcomeFlow = ({ colors, onComplete }) => {
                     <button
                       key={goal.id}
                       onClick={() => handleGoalSelect(goal)}
-                      className="munich-card um-text-left hover:shadow-lg transition-all group"
-                      style={{ border: `2px solid ${goal.color}20` }}
+                      className={`munich-card um-text-left hover:shadow-lg transition-all group ${goal.bgClass || ''}`}
+                      style={{ border: `2px solid ${goal.color}40` }}
                     >
-                      <div className="munich-card-body">
+                      <div className="munich-card-body relative z-10">
                         <div className="um-flex um-items-start space-x-4">
                           <div 
                             className="w-12 um-h-12 um-rounded-full flex um-items-center um-justify-center"

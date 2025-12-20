@@ -1003,14 +1003,13 @@ const RunningTrainingApp = () => {
           filter: 'blur(1px)'
         }}></div>
       </div>
-      {/* Header - Clean Glassmorphism */}
+      {/* Header - Olympic Runner Background */}
       <header
         id="navigation"
-        className="um-app-header um-relative um-overflow-hidden"
+        className="um-app-header um-hero-runner"
         aria-label="Main navigation"
       >
-        
-        <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8 um-relative um-z-10">
+        <div className="um-max-w-7xl um-mx-auto um-px-4 um-sm-px-6 um-lg-px-8">
           <div className="um-flex um-flex-col um-sm-flex-row um-justify-between um-items-center um-py-4 um-sm-py-6 um-space-y-4 um-sm-space-y-0">
             {/* Brand Logo - Enhanced Prominence */}
             <div className="um-flex um-items-center um-space-x-3">
@@ -1033,10 +1032,10 @@ const RunningTrainingApp = () => {
                   backgroundColor: colors.orange
                 }}></div>
               </div>
-              <div className="um-text-left">
+              <div className="um-text-left um-card-gradient um-p-3 um-rounded-lg">
                 <h1 className="um-text-3xl um-sm-text-4xl um-lg-text-5xl um-font-black tracking-tight leading-tight" style={{ 
                   color: colors.black,
-                  textShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                  textShadow: '0 2px 4px rgba(0,0,0,0.08)'
                 }}>
                   UNFORGIVING MINUTE
                 </h1>
@@ -1047,7 +1046,7 @@ const RunningTrainingApp = () => {
                   DISTANCE RUNNING
                 </p>
                 <div className="hidden um-sm-block um-mt-1">
-                  <div className="h-0.5 w-20 bg-gradient-to-r" style={{ 
+                  <div className="h-1 w-24 um-rounded-full" style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.lightBlue} 0%, ${colors.orange} 50%, ${colors.lightGreen} 100%)`
                   }}></div>
                 </div>

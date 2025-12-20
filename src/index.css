@@ -288,6 +288,134 @@ h6 {
   background-repeat: no-repeat;
 }
 
+/* ============================================
+   Vibrant Image Background Classes
+   Professional Munich Olympic imagery
+   ============================================ */
+
+/* Olympic Runner Hero - For headers and hero sections */
+.um-hero-runner {
+  position: relative;
+  overflow: hidden;
+}
+
+.um-hero-runner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.um-hero-runner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(30, 107, 150, 0.1) 0%, rgba(46, 139, 87, 0.1) 100%);
+  z-index: 0;
+}
+
+/* Munich Gradient - For goal/achievement sections */
+.um-hero-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.um-hero-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/munichcolorgradient.avif');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  z-index: 0;
+}
+
+/* Hurdles Dynamic - For training sections */
+.um-hero-hurdles {
+  position: relative;
+  overflow: hidden;
+}
+
+.um-hero-hurdles::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/muchenhurdles.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+/* Winter Colors - For premium/special sections */
+.um-hero-winter {
+  position: relative;
+  overflow: hidden;
+}
+
+.um-hero-winter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/winter1976colors.avif');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+/* Card with Olympic Runner background */
+.um-card-runner {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
+}
+
+.um-card-runner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/olympic-runner-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+/* Card with Munich Gradient background */
+.um-card-gradient {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
+}
+
+.um-card-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/munichcolorgradient.avif');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  z-index: 0;
+}
+
+/* Ensure content sits above backgrounds */
+.um-hero-runner > *,
+.um-hero-gradient > *,
+.um-hero-hurdles > *,
+.um-hero-winter > *,
+.um-card-runner > *,
+.um-card-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* Olympic Runner Background Overlay Variants */
 .um-olympic-overlay {
   position: absolute;

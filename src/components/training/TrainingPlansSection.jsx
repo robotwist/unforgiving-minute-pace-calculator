@@ -9,10 +9,8 @@ const TrainingPlansSection = memo(({
   setShowPlanDetails
 }) => {
   return (
-    <div className="space-y-8 olympic-theme olympic-theme--winter76"
-      style={{ position: 'relative', overflow: 'hidden' }}
-    >
-      <div className="um-text-center um-space-y-4">
+    <div className="space-y-8 um-hero-hurdles">
+      <div className="um-text-center um-space-y-4 relative z-10">
         <h2 className="um-text-4xl um-font-bold" style={{ color: colors.black }}>Coach-built Training Plans</h2>
         <p className="um-text-xl" style={{ color: colors.darkGreen }}>
           Use these as a sample of how I structure training—then apply if you want a plan built around you.

@@ -18,7 +18,7 @@ const PremiumPlansSection = ({
     }
   };
   return (
-    <div className="space-y-16 olympic-theme olympic-theme--munich" style={{ position: 'relative', overflow: 'hidden' }}>
+    <div className="space-y-16 um-hero-winter">
       <div className="um-text-center um-space-y-6 um-mb-16 relative z-10">
         <h2 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-mb-4" style={{ color: colors.black, lineHeight: '1.1' }}>
           Premium Training Plans
