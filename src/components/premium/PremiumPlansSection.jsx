@@ -19,11 +19,11 @@ const PremiumPlansSection = ({
   };
   return (
     <div className="space-y-16 um-hero-winter">
-      <div className="um-text-center um-space-y-6 um-mb-16 relative z-10">
-        <h2 className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-mb-4" style={{ color: colors.black, lineHeight: '1.1' }}>
+      <div className="um-text-center um-rhythm-lg relative z-10 um-mb-16">
+        <h2 className="um-text-3xl um-sm-text-4xl um-lg-text-5xl um-font-black um-leading-none um-tracking-tight" style={{ color: colors.black }}>
           Premium Training Plans
         </h2>
-        <p className="um-text-xl um-sm-text-2xl um-lg-text-3xl um-font-medium max-w-4xl um-mx-auto um-mb-8" style={{ color: colors.darkGreen, lineHeight: '1.4' }}>
+        <p className="um-text-lg um-sm-text-xl um-lg-text-2xl um-font-medium um-leading-relaxed max-w-3xl um-mx-auto" style={{ color: colors.darkGreen }}>
           Comprehensive, professionally-designed training programs for serious athletes
         </p>
         <a

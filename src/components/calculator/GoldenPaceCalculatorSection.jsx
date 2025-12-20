@@ -116,7 +116,7 @@ export default function GoldenPaceCalculatorSection({
           </div>
         )}
 
-        <p className="um-text-xl um-sm-text-2xl um-lg-text-3xl max-w-4xl um-mx-auto um-px-4 leading-relaxed um-font-medium um-mb-8" style={{ color: colors.black, lineHeight: '1.4' }}>
+        <p className="um-text-lg um-sm-text-xl um-lg-text-2xl max-w-3xl um-mx-auto um-px-4 um-leading-relaxed um-font-medium um-mb-8" style={{ color: colors.black }}>
           Enter a recent race time to get coach-grade training paces. These are the same inputs I use when I build personalized plans.
         </p>
 

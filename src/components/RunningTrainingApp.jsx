@@ -1032,21 +1032,20 @@ const RunningTrainingApp = () => {
                   backgroundColor: colors.orange
                 }}></div>
               </div>
-              <div className="um-text-left um-card-gradient um-p-3 um-rounded-lg">
-                <h1 className="um-text-3xl um-sm-text-4xl um-lg-text-5xl um-font-black tracking-tight leading-tight" style={{ 
+              <div className="um-text-left um-card-gradient um-p-4 um-rounded-lg">
+                <h1 className="um-text-3xl um-sm-text-4xl um-lg-text-5xl um-font-black um-tracking-tight um-leading-tight um-mb-1" style={{ 
                   color: colors.black,
                   textShadow: '0 2px 4px rgba(0,0,0,0.08)'
                 }}>
                   UNFORGIVING MINUTE
                 </h1>
-                <p className="um-text-base um-sm-text-lg um-lg-text-xl um-font-bold tracking-wide" style={{ 
-                  color: colors.lightBlue,
-                  letterSpacing: '0.1em'
+                <p className="um-text-base um-sm-text-lg um-lg-text-xl um-font-bold um-tracking-widest um-mb-2" style={{ 
+                  color: colors.lightBlue
                 }}>
                   DISTANCE RUNNING
                 </p>
-                <div className="hidden um-sm-block um-mt-1">
-                  <div className="h-1 w-24 um-rounded-full" style={{ 
+                <div className="hidden um-sm-block">
+                  <div className="h-1 w-28 um-rounded-full" style={{ 
                     backgroundImage: `linear-gradient(90deg, ${colors.lightBlue} 0%, ${colors.orange} 50%, ${colors.lightGreen} 100%)`
                   }}></div>
                 </div>
@@ -1247,14 +1246,14 @@ const RunningTrainingApp = () => {
                   <div className="um-absolute top-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightBlue }}></div>
                   <div className="um-absolute bottom-0 left-1/2 transform -translate-x-1/2 um-w-12 h-2 um-sm-w-16 sm:h-2" style={{ backgroundColor: colors.lightGreen }}></div>
                   
-                  <div className="um-relative um-z-10">
-                    <div className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-mb-4" style={{ color: colors.lightBlue, lineHeight: '1.1' }}>
+                  <div className="um-relative um-z-10 um-rhythm">
+                    <div className="um-text-4xl um-sm-text-5xl um-lg-text-6xl um-font-black um-leading-none um-tracking-tight" style={{ color: colors.lightBlue }}>
                       {goldenPace}
                     </div>
-                    <div className="um-text-xl um-sm-text-2xl um-lg-text-3xl um-font-bold um-mb-3" style={{ color: colors.black }}>
+                    <div className="um-text-xl um-sm-text-2xl um-lg-text-3xl um-font-bold um-leading-tight um-mt-4" style={{ color: colors.black }}>
                       Optimal Progress Pace
                     </div>
-                    <p className="um-text-base um-sm-text-lg um-lg-text-xl um-mt-4" style={{ color: colors.lightBlue, lineHeight: '1.5' }}>
+                    <p className="um-text-base um-sm-text-lg um-lg-text-xl um-leading-relaxed um-mt-3" style={{ color: colors.lightBlue }}>
                       The pace that drives maximum improvement when run at the right times
                     </p>
                   </div>
@@ -1276,15 +1275,15 @@ const RunningTrainingApp = () => {
                         animationDelay: `${index * 0.5}s`
                       }}></div>
                       
-                      <div className="um-relative um-z-10">
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 um-mx-auto um-mb-2" style={{ color: color }} />
-                        <h4 className="um-text-sm sm:text-md um-font-medium mb-1" style={{ color: colors.black }}>
+                      <div className="um-relative um-z-10 um-rhythm-sm">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 um-mx-auto" style={{ color: color }} />
+                        <h4 className="um-text-sm um-sm-text-base um-font-semibold um-leading-tight" style={{ color: colors.black }}>
                           {name}
                         </h4>
-                        <div className="um-text-lg um-sm-text-xl um-font-bold font-mono" style={{ color: color }}>
+                        <div className="um-text-xl um-sm-text-2xl um-font-bold um-leading-none" style={{ color: color, fontFamily: 'monospace' }}>
                           {pace}
                         </div>
-                        <p className="um-text-xs um-mt-1" style={{ color: colors.lightBlue }}>
+                        <p className="um-text-xs um-leading-normal" style={{ color: colors.lightBlue }}>
                           per mile
                         </p>
                       </div>
@@ -1305,12 +1304,12 @@ const RunningTrainingApp = () => {
                     }}></div>
                     
                     <div className="um-relative um-z-10">
-                      <div className="um-flex um-items-center um-justify-between um-mb-6">
-                        <div>
-                          <h3 className="um-text-2xl um-font-bold um-mb-2" style={{ color: colors.black }}>
+                      <div className="um-flex um-items-center um-justify-between um-mb-8">
+                        <div className="um-rhythm-sm">
+                          <h3 className="um-text-2xl um-font-bold um-leading-tight" style={{ color: colors.black }}>
                             Your Personalized Training Week
                           </h3>
-                          <p className="um-text-sm" style={{ color: colors.darkGreen }}>
+                          <p className="um-text-base um-leading-relaxed" style={{ color: colors.darkGreen }}>
                             Based on your {goldenPace} GoldenPace • Elite-tested training system
                           </p>
                         </div>
