@@ -364,14 +364,14 @@ h6 {
   opacity: 0.55;
 }
 
-/* Sapporo 1972 Theme - Cool, athletic vibe (VIBRANT) */
+/* Munich Hurdles Theme - Athletic, dynamic (VIBRANT) */
 .olympic-theme--sapporo::before {
-  background-image: url('./assets/sapporoolys.avif');
+  background-image: url('./assets/muchenhurdles.webp');
   opacity: 0.35;
 }
 
 .olympic-theme--sapporo-strong::before {
-  background-image: url('./assets/sapporoolys.avif');
+  background-image: url('./assets/muchenhurdles.webp');
   opacity: 0.55;
 }
 
