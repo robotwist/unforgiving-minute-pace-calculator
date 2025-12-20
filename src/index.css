@@ -1578,6 +1578,101 @@ a:focus-visible {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================================
+   Accessibility Text Utilities
+   Ensure all text meets WCAG AA standards
+   ============================================ */
+
+/* Primary text - highest contrast */
+.um-text-primary {
+  color: var(--munich-black) !important;
+}
+
+.dark .um-text-primary {
+  color: #F3F4F6 !important;
+}
+
+/* Secondary text - WCAG AA compliant */
+.um-text-secondary {
+  color: #4B5563 !important; /* 7:1 contrast on white */
+}
+
+.dark .um-text-secondary {
+  color: #D1D5DB !important; /* 10:1 contrast on dark */
+}
+
+/* Muted text - minimum WCAG AA compliant */
+.um-text-muted {
+  color: #6B7280 !important; /* 4.9:1 contrast on white */
+}
+
+.dark .um-text-muted {
+  color: #9CA3AF !important; /* 5.5:1 contrast on dark */
+}
+
+/* Ensure text on colored backgrounds has proper contrast */
+.um-text-on-blue {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.um-text-on-green {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.um-text-on-orange {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Ensure links are distinguishable */
+a:not(.munich-btn) {
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+a:not(.munich-btn):hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Ensure sufficient contrast for all status colors */
+.um-status-success {
+  color: #047857 !important; /* 5.1:1 contrast */
+}
+
+.um-status-warning {
+  color: #A16207 !important; /* 4.5:1 contrast */
+}
+
+.um-status-error {
+  color: #B91C1C !important; /* 5.5:1 contrast */
+}
+
+.dark .um-status-success {
+  color: #34D399 !important;
+}
+
+.dark .um-status-warning {
+  color: #FBBF24 !important;
+}
+
+.dark .um-status-error {
+  color: #F87171 !important;
+}
+
+/* Minimum font size for readability */
+.um-text-readable {
+  font-size: max(16px, 1rem);
+  line-height: 1.5;
+}
+
+/* Ensure button text is always readable */
+.munich-btn {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
 /* Print accessibility */
 @media print {
   * {
