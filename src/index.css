@@ -387,6 +387,15 @@ h6 {
   z-index: 0;
 }
 
+/* Dark mode - Olympic Runner card */
+.dark .um-card-runner {
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.98), rgba(17, 24, 39, 0.95));
+}
+
+.dark .um-card-runner::before {
+  opacity: 0.15;
+}
+
 /* Card with Munich Gradient background */
 .um-card-gradient {
   position: relative;
@@ -403,6 +412,15 @@ h6 {
   background-position: center;
   opacity: 0.12;
   z-index: 0;
+}
+
+/* Dark mode - Munich Gradient card */
+.dark .um-card-gradient {
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.98), rgba(17, 24, 39, 0.95));
+}
+
+.dark .um-card-gradient::before {
+  opacity: 0.2;
 }
 
 /* Ensure content sits above backgrounds */
