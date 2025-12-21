@@ -4,7 +4,7 @@ import { Trophy, Award, Users, Clock, TrendingUp } from 'lucide-react';
 import colors, { getAdaptiveColors } from '../data/colors';
 import useScrollTheme from '../hooks/useScrollTheme';
 import CalendlyModal from '../components/consultation/CalendlyModal';
-import Testimonials from '../components/coach/Testimonials';
+// Testimonials removed - will add back when athlete feedback is gathered
 import CoachBio from '../components/coach/CoachBio';
 import ErrorBoundary from '../components/common/ErrorBoundary';
 
@@ -185,17 +185,7 @@ const Coach = () => {
             <CoachBio colors={uiColors} />
           </div>
 
-          {/* Testimonials Card - Glassmorphism */}
-          <div
-            className={`munich-card p-8 sm:p-10 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-            style={{
-              background: `${uiColors.white}E6`,
-            }}
-          >
-            <Testimonials colors={uiColors} />
-          </div>
+          {/* Testimonials section removed - will add back when athlete feedback is gathered */}
         </div>
       </div>
 

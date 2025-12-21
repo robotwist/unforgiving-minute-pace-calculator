@@ -3117,7 +3117,7 @@ const RunningTrainingApp = () => {
                           <li>• Write 5-10 foundational articles</li>
                           <li>• Create 3-5 premium training plans</li>
                           <li>• Set up coaching intake form</li>
-                          <li>• Add testimonials and success stories</li>
+                          <li>• Gather and add athlete testimonials</li>
                         </ul>
                       </div>
                     </div>

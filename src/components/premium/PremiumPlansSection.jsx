@@ -514,56 +514,7 @@ const PremiumPlansSection = ({
         </div>
       </div>
 
-      {/* Testimonials */}
-      <div className="munich-card um-mb-16">
-        <div className="munich-card-header">
-          <h3 className="um-text-3xl um-sm-text-4xl um-font-black um-mb-2" style={{ color: colors.black, lineHeight: '1.2' }}>
-            Success Stories
-          </h3>
-        </div>
-        <div className="munich-card-body">
-          <div className="um-grid um-grid-cols-1 um-md-grid-cols-2 um-lg-grid-cols-3 um-gap-6">
-            <div className="um-text-center">
-              <div className="mb-4">
-                <div className="w-16 um-h-16 geometric-diamond um-mx-auto" style={{ backgroundColor: colors.lightBlue }}></div>
-              </div>
-              <blockquote className="um-text-base um-sm-text-lg um-mb-4 um-font-medium" style={{ color: colors.black, lineHeight: '1.6' }}>
-                "The 5K Mastery Program helped me break 20 minutes for the first time in my running career. The individual factor assessment was a game-changer."
-              </blockquote>
-              <div>
-                <div className="um-font-bold um-text-lg" style={{ color: colors.black }}>Sarah M.</div>
-                <div className="um-text-sm" style={{ color: colors.darkGreen }}>Boston, MA • 19:47 5K PR</div>
-              </div>
-            </div>
-            
-            <div className="um-text-center">
-              <div className="mb-4">
-                <div className="w-16 um-h-16 geometric-octagon um-mx-auto" style={{ backgroundColor: colors.lightGreen }}></div>
-              </div>
-              <blockquote className="um-text-base um-sm-text-lg um-mb-4 um-font-medium" style={{ color: colors.black, lineHeight: '1.6' }}>
-                "After struggling with VDOT for years, the Marathon Breakthrough plan got me to Boston with a 2:58 finish. The pacing strategy was perfect."
-              </blockquote>
-              <div>
-                <div className="um-font-bold um-text-lg" style={{ color: colors.black }}>Mike T.</div>
-                <div className="um-text-sm" style={{ color: colors.darkGreen }}>Denver, CO • 2:58:23 Boston Qualifier</div>
-              </div>
-            </div>
-            
-            <div className="um-text-center">
-              <div className="mb-4">
-                <div className="w-16 um-h-16 geometric-square um-mx-auto" style={{ backgroundColor: colors.violet }}></div>
-              </div>
-              <blockquote className="um-text-base um-sm-text-lg um-mb-4 um-font-medium" style={{ color: colors.black, lineHeight: '1.6' }}>
-                "Personal coaching transformed my running. Understanding my individual factors made all the difference in my training."
-              </blockquote>
-              <div>
-                <div className="um-font-bold" style={{ color: colors.black }}>Lisa K.</div>
-                <div className="um-text-sm" style={{ color: colors.darkGreen }}>Portland, OR • Multiple PR athlete</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Success Stories section removed - will add back when athlete feedback is gathered */}
 
       {/* How It Works Section */}
       <div className="munich-card um-mb-16" style={{ background: `linear-gradient(135deg, ${colors.lightBlue}10, ${colors.lightGreen}10)` }}>
