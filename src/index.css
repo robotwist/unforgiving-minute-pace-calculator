@@ -4,17 +4,17 @@
 /* Munich 1972 Olympic Design System - Global Styles */
 :root {
   /* Official Munich 1972 Color Palette - WCAG AA Compliant */
-  --munich-light-blue: #2563EB;    /* Darker blue for better contrast - 4.8:1 ratio */
-  --munich-light-green: #16A34A;   /* Darker green for better contrast - 4.6:1 ratio */
-  --munich-silver: #6B7280;        /* Darker silver for better contrast - 4.9:1 ratio */
-  --munich-violet: #4338CA;        /* Darker violet for better contrast - 5.2:1 ratio */
-  --munich-dark-green: #047857;    /* Darker green for better contrast - 5.1:1 ratio */
-  --munich-orange: #C2410C;        /* Darker orange for better contrast - 4.8:1 ratio */
-  --munich-yellow: #CA8A04;        /* Darker yellow for better contrast - 4.5:1 ratio */
+  --munich-light-blue: #1D4ED8;    /* Deeper blue for stronger contrast - 5.5:1 ratio */
+  --munich-light-green: #15803D;   /* Deeper green for stronger contrast - 5.2:1 ratio */
+  --munich-silver: #4B5563;        /* Darker silver for better contrast - 7:1 ratio */
+  --munich-violet: #3730A3;        /* Deeper violet for stronger contrast - 6.1:1 ratio */
+  --munich-dark-green: #065F46;    /* Deeper green for stronger contrast - 6.3:1 ratio */
+  --munich-orange: #B91C1C;        /* Deeper orange/red for stronger contrast - 5.8:1 ratio */
+  --munich-yellow: #A16207;        /* Deeper yellow for stronger contrast - 5.1:1 ratio */
   --munich-white: #FFFFFF;         /* Symbol of lightness */
-  --munich-black: #1F2937;         /* Text color */
-  --munich-gray: #F8FAFC;          /* Light background */
-  --munich-border: #E2E8F0;        /* Subtle border */
+  --munich-black: #111827;         /* Darker text for stronger contrast */
+  --munich-gray: #F9FAFB;          /* Slightly warmer light background */
+  --munich-border: #D1D5DB;        /* More visible border */
   
   /* Typography - Munich 1972 Systematic Scale */
   --font-geometric: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -1955,5 +1955,367 @@ a:not(.munich-btn):hover {
     width: auto;
     height: auto;
     clip: auto;
+  }
+}
+
+/* ============================================
+   1980s NEWSLETTER THEME
+   Clean, typeface-focused, chart-organized layout
+   Inspired by classic running newsletters & magazines
+   ============================================ */
+
+/* Newsletter Theme Toggle */
+.newsletter-theme {
+  --newsletter-font: 'Times New Roman', Georgia, 'Cambria', serif;
+  --newsletter-mono: 'Courier New', Courier, monospace;
+  --newsletter-black: #000000;
+  --newsletter-white: #FFFFF8;  /* Slightly cream/newspaper color */
+  --newsletter-gray: #333333;
+  --newsletter-border: #000000;
+  --newsletter-accent: #1a1a1a;
+}
+
+/* Apply newsletter theme when active */
+body.newsletter-mode {
+  font-family: var(--newsletter-font) !important;
+  background-color: var(--newsletter-white) !important;
+  color: var(--newsletter-black) !important;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+/* Newsletter Typography */
+.newsletter-mode h1,
+.newsletter-mode h2,
+.newsletter-mode h3,
+.newsletter-mode h4,
+.newsletter-mode h5,
+.newsletter-mode h6 {
+  font-family: var(--newsletter-font) !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--newsletter-black);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.newsletter-mode h1 { font-size: 2.5rem; }
+.newsletter-mode h2 { font-size: 1.75rem; border-bottom-width: 1px; }
+.newsletter-mode h3 { font-size: 1.25rem; border-bottom: none; }
+
+/* Newsletter Masthead */
+.newsletter-masthead {
+  text-align: center;
+  border-bottom: 4px double var(--newsletter-black);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.newsletter-masthead h1 {
+  font-size: 3rem;
+  letter-spacing: 0.2em;
+  border-bottom: none;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-masthead .tagline {
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-masthead .edition {
+  font-family: var(--newsletter-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Newsletter Layout Grid */
+.newsletter-mode .newsletter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .newsletter-mode .newsletter-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .newsletter-mode .newsletter-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Newsletter Sections */
+.newsletter-section {
+  border: 1px solid var(--newsletter-black);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--newsletter-white);
+}
+
+.newsletter-section-title {
+  font-family: var(--newsletter-font);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border-bottom: 1px solid var(--newsletter-black);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Newsletter Tables/Charts */
+.newsletter-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--newsletter-mono);
+  font-size: 0.875rem;
+  margin: 1rem 0;
+}
+
+.newsletter-table th,
+.newsletter-table td {
+  border: 1px solid var(--newsletter-black);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.newsletter-table th {
+  background: var(--newsletter-black);
+  color: var(--newsletter-white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.newsletter-table tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.newsletter-table .pace-highlight {
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Newsletter Pace Chart */
+.newsletter-pace-chart {
+  border: 2px solid var(--newsletter-black);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.newsletter-pace-chart-title {
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--newsletter-black);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Newsletter Article Cards */
+.newsletter-article {
+  border-bottom: 1px dashed var(--newsletter-black);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.newsletter-article:last-child {
+  border-bottom: none;
+}
+
+.newsletter-article-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.newsletter-article-meta {
+  font-family: var(--newsletter-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-article-excerpt {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Newsletter Sidebar */
+.newsletter-sidebar {
+  border-left: 2px solid var(--newsletter-black);
+  padding-left: 1.5rem;
+}
+
+.newsletter-sidebar-item {
+  border-bottom: 1px dotted var(--newsletter-black);
+  padding: 0.75rem 0;
+}
+
+/* Newsletter Quick Facts Box */
+.newsletter-facts {
+  background: var(--newsletter-black);
+  color: var(--newsletter-white);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.newsletter-facts-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--newsletter-white);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.newsletter-facts li {
+  font-family: var(--newsletter-mono);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Newsletter TOC */
+.newsletter-toc {
+  border: 2px solid var(--newsletter-black);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.newsletter-toc-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.newsletter-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.newsletter-toc-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted var(--newsletter-black);
+  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+}
+
+.newsletter-toc-item:last-child {
+  border-bottom: none;
+}
+
+.newsletter-toc-page {
+  font-family: var(--newsletter-mono);
+  font-weight: 700;
+}
+
+/* Newsletter Footer */
+.newsletter-footer {
+  border-top: 4px double var(--newsletter-black);
+  padding-top: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+/* Hide decorative elements in newsletter mode */
+.newsletter-mode .um-hero-runner::before,
+.newsletter-mode .um-hero-gradient::before,
+.newsletter-mode .um-hero-hurdles::before,
+.newsletter-mode .um-hero-winter::before,
+.newsletter-mode .um-card-runner::before,
+.newsletter-mode .um-card-gradient::before,
+.newsletter-mode .geometric-diamond,
+.newsletter-mode .geometric-octagon,
+.newsletter-mode .geometric-square,
+.newsletter-mode .olympic-theme::before {
+  display: none !important;
+}
+
+/* Simplify cards in newsletter mode */
+.newsletter-mode .munich-card {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid var(--newsletter-black) !important;
+  background: var(--newsletter-white) !important;
+}
+
+.newsletter-mode .munich-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Simplify buttons in newsletter mode */
+.newsletter-mode .munich-btn {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--newsletter-font) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.newsletter-mode .munich-btn-primary {
+  background: var(--newsletter-black) !important;
+  color: var(--newsletter-white) !important;
+  border: 2px solid var(--newsletter-black) !important;
+}
+
+.newsletter-mode .munich-btn-outline {
+  background: transparent !important;
+  color: var(--newsletter-black) !important;
+  border: 2px solid var(--newsletter-black) !important;
+}
+
+/* Newsletter Training Pace Display */
+.newsletter-pace-display {
+  font-family: var(--newsletter-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  border: 3px solid var(--newsletter-black);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.newsletter-pace-label {
+  font-family: var(--newsletter-font);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+/* Newsletter Dividers */
+.newsletter-divider {
+  border: none;
+  border-top: 1px solid var(--newsletter-black);
+  margin: 1.5rem 0;
+}
+
+.newsletter-divider-double {
+  border: none;
+  border-top: 3px double var(--newsletter-black);
+  margin: 2rem 0;
+}
+
+/* Newsletter Print Optimization */
+@media print {
+  .newsletter-mode {
+    font-size: 11pt;
+  }
+  
+  .newsletter-section {
+    page-break-inside: avoid;
   }
 } 

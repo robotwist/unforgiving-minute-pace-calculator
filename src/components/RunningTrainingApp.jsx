@@ -41,6 +41,10 @@ const RunningTrainingApp = () => {
     const saved = localStorage.getItem('dark_mode_enabled');
     return saved === 'true';
   });
+  const [newsletterMode, setNewsletterMode] = useState(() => {
+    const saved = localStorage.getItem('newsletter_mode_enabled');
+    return saved === 'true';
+  });
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [raceTime, setRaceTime] = useState('');
   const [raceDistance, setRaceDistance] = useState('5K');
@@ -187,6 +191,25 @@ const RunningTrainingApp = () => {
       document.body.classList.remove('dark');
     };
   }, [darkMode]);
+
+  // Apply newsletter mode class to body
+  useEffect(() => {
+    if (newsletterMode) {
+      document.body.classList.add('newsletter-mode');
+      // Newsletter mode forces light mode for readability
+      if (darkMode) {
+        setDarkMode(false);
+      }
+    } else {
+      document.body.classList.remove('newsletter-mode');
+    }
+
+    localStorage.setItem('newsletter_mode_enabled', String(newsletterMode));
+
+    return () => {
+      document.body.classList.remove('newsletter-mode');
+    };
+  }, [newsletterMode, darkMode]);
 
   // Save profile data to localStorage
   const saveProfileData = (profileData) => {
@@ -1122,8 +1145,22 @@ const RunningTrainingApp = () => {
                 
                 {/* Dark Mode Toggle */}
                 <button
+                  onClick={() => setNewsletterMode(!newsletterMode)}
+                  className="ml-2 p-2 um-rounded-full transition-all duration-300 hover:scale-110"
+                  style={{
+                    backgroundColor: newsletterMode ? colors.black : colors.gray,
+                    color: newsletterMode ? colors.white : colors.black,
+                    border: `2px solid ${colors.black}`,
+                    fontFamily: newsletterMode ? 'serif' : 'inherit'
+                  }}
+                  title={newsletterMode ? "Switch to Modern View" : "Switch to Newsletter View"}
+                  aria-label={newsletterMode ? "Switch to modern view" : "Switch to newsletter view"}
+                >
+                  <span className="um-text-sm um-font-bold">📰</span>
+                </button>
+                <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="ml-4 p-2 um-rounded-full transition-all duration-300 hover:scale-110"
+                  className="ml-2 p-2 um-rounded-full transition-all duration-300 hover:scale-110"
                   style={{
                     backgroundColor: darkMode ? colors.yellow : colors.gray,
                     color: darkMode ? colors.black : colors.lightBlue,
@@ -1166,6 +1203,19 @@ const RunningTrainingApp = () => {
                 >
                   About
                 </a>
+                <button
+                  onClick={() => setNewsletterMode(!newsletterMode)}
+                  className="p-2 um-rounded-full transition-all duration-300 hover:scale-110"
+                  style={{
+                    backgroundColor: newsletterMode ? colors.black : colors.gray,
+                    color: newsletterMode ? colors.white : colors.black,
+                    border: `2px solid ${colors.black}`
+                  }}
+                  title={newsletterMode ? "Modern View" : "Newsletter View"}
+                  aria-label={newsletterMode ? "Switch to modern view" : "Switch to newsletter view"}
+                >
+                  <span className="um-text-sm">📰</span>
+                </button>
                 <button
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 um-rounded-full transition-all duration-300 hover:scale-110"
